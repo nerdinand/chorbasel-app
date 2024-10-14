@@ -1,0 +1,45 @@
+@layer components {
+  .btn {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 15px 0;
+  }
+
+  .btn-primary {
+    @apply bg-dark-orange;
+    border: 1px solid var(--color-dark-orange);
+    color: #fff;
+    border-radius: 3px;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-light-orange);
+    border: 1px solid var(--color-light-orange);
+    color: #fff;
+  }
+
+  .btn-primary-outline {
+    color: var(--color-dark-orange);
+    border: 1px solid var(--color-dark-orange);
+    border-radius: 3px;
+  }
+
+  .btn-primary-outline:hover {
+    background-color: var(--color-light-orange);
+    color: #fff;
+    border: 1px solid var(--color-light-orange);
+  }
+
+  .btn-danger-outline {
+    color: red;
+    border: 1px solid red;
+    border-radius: 3px;
+    margin: 0;
+  }
+
+  .btn-danger-outline:hover {
+    background-color: red;
+    color: #fff;
+    border: 1px solid red;
+  }
+}

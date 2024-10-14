@@ -1,0 +1,148 @@
+@layer base {
+  html {
+    --heading-font: 'Aclonica', sans-serif;
+    --body-font: 'Open Sans', sans-serif;
+  }
+
+  html {
+    font-family: var(--body-font);
+    font-size: 18px;
+  }
+
+  h1 {
+    font-family: var(--heading-font);
+  }
+
+  h1 { 
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 1em 0 0.2em;
+  }
+
+  h2 {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: 1em 0 0.1rem;
+    text-decoration: underline 2px var(--color-primary);
+  }
+
+  h2 button {
+    text-decoration: underline 2px var(--color-primary);
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+
+  a {
+    color: var(--color-primary);
+  }
+
+  nav a {
+    color: black;
+  }
+
+  a:hover {
+    color: var(--color-dark-orange);
+  }
+
+  nav a {
+    color: #fff;
+  }
+
+  ul {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+  .unread-bg {
+    background-color: var(--color-primary-compl);
+  }
+
+  .hov-bg:hover {
+    background-color: var(--color-light-orange);
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-duration: .3s;
+  }
+
+  .line {
+    border: 0.5px solid #f3cdca;
+  }
+
+  .logo {
+    width: 200px;
+  }
+
+  .nav-logo {
+    width: 50px;
+    border-radius: 50px;
+    margin: 8px;
+  }
+
+  footer a, .direct-message a {
+    color: var(--color-light-orange)
+  }
+
+  footer a:hover, .direct-message a:hover {
+    color: var(--color-hover-orange);
+  }
+
+  .direct-message {
+    color: #fff;
+    border-radius: 10px;
+    padding: 5px 10px 8px;
+    word-break: break-word;
+  }
+
+  .my-message {
+    background-color: var(--color-primary);
+    background: linear-gradient(13deg, rgba(116,28,84,1) 46%, rgba(186,0,63,1) 98%);
+  }
+
+  .their-message {
+    background-color: var(--color-dark-violet);
+    background: linear-gradient(13deg, rgba(51,12,37,1) 46%, rgba(186,0,63,1) 98%);
+  }
+
+  .unread-message {
+    background-color: #00888f;
+    background: linear-gradient(13deg, #00888f 46%, rgb(58, 0, 186) 98%);
+  }
+
+  .small-text {
+    font-size: 0.6rem;
+  }
+
+  .symbol {
+    padding: 15px 5px 0;
+    font-size: 2rem;
+    width: 30px;
+  }
+
+  /* Trix styles fixes */
+  .trix-content .attachment--file {
+    border: none !important;
+    margin-bottom: 10px !important;
+    line-height: 1.2;
+  }
+
+  .trix-content .attachment__caption {
+    text-align: left !important;
+  }
+
+  /* Medium and large screens */
+  @media only screen and (min-width: 768px) {
+    h1 {
+      font-size: 1.6rem;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+    }
+  }
+}

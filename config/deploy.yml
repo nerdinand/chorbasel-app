@@ -15,9 +15,9 @@ servers:
 
 # Enable SSL auto certification via Let's Encrypt (and allow for multiple apps on one server).
 # Set ssl: false if using something like Cloudflare to terminate SSL (but keep host!).
-# proxy:
-#   ssl: true
-#   host: chorbasel.nerdinand.com
+proxy:
+  ssl: true
+  host: app.chorbasel.ch
 
 # Credentials for your image host.
 registry:
