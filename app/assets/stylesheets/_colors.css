@@ -1,0 +1,44 @@
+@layer base {
+  body {
+    --color-primary: #741c54;
+    --color-primary-compl: #d891be47;
+    --color-dark-orange: #A81F15;
+    --color-light-orange: #fa8751;
+    --color-hover-orange: #fd4739;
+    --color-dark-blue: #1e283d;
+    --color-dark-violet: #330C25;
+  }
+  
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+
+  .bg-primary-compl {
+    background-color: var(--color-primary-compl);
+  }
+
+  .bg-light-orange {
+    background-color: var(--color-light-orange);
+  }
+
+  .bg-dark-orange {
+    background-color: var(--color-dark-orange);
+  }
+
+  .bg-primary a:hover {
+    color: var(--color-light-orange);
+  }
+  
+  .bg-primary a:hover {
+    color: var(--color-hover-orange);
+  }
+
+  .text-primary {
+    color: var(--color-primary);
+  }
+
+  .outline-primary {
+    border: 3px solid var(--color-primary);
+  }
+}
+

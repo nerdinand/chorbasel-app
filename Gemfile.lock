@@ -381,7 +381,7 @@ DEPENDENCIES
   debug
   importmap-rails
   jbuilder
-  kamal (>= 2.0.0.rc2)
+  kamal (~> 2.2)
   propshaft
   puma (>= 5.0)
   rails (~> 8.0.0.beta1)

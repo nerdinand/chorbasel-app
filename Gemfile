@@ -26,7 +26,7 @@ gem 'solid_queue'
 gem 'bootsnap', require: false
 
 # Deploy this application anywhere as a Docker container [https://kamal-deploy.org]
-gem 'kamal', '>= 2.0.0.rc2', require: false
+gem 'kamal', '~> 2.2', require: false
 
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
 gem 'thruster', require: false
@@ -58,4 +58,4 @@ group :test do
   gem 'selenium-webdriver'
 end
 
-gem "tailwindcss-rails", "~> 2.7"
+gem 'tailwindcss-rails', '~> 2.7'
