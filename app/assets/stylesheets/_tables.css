@@ -1,20 +1,3 @@
 @layer base {
-  table {
-    font-size: 0.9em;
-    margin-top: 10px;
-  }
-
-  .top-line {
-    border-top: 1px solid gray;
-  }
-
-  tr:hover {
-    @apply bg-light-orange;
-    transition-timing-function: cubic-bezier(.4,0,.2,1);
-    transition-duration: .3s;
-  }
-
-  th, td {
-    padding: 5px 10px;
-  }
+/* TODO */
 }

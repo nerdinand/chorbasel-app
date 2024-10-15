@@ -1,0 +1,26 @@
+@layer components {
+  html {
+    @apply font-body;
+  }
+
+  h1, h2 {
+    @apply font-heading;
+  }
+
+  h1 { 
+    @apply decoration-2 underline decoration-primary;
+    @apply text-3xl;
+  }
+
+  h2 {
+    @apply text-2xl;
+  }
+
+  h3 {
+    @apply text-lg;
+  }
+
+  ul {
+    @apply list-disc pl-4;
+  }
+}
