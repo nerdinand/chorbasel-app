@@ -11,6 +11,6 @@ Rails.application.routes.draw do
   passwordless_for :users, controller: 'sessions'
 
   constraints Passwordless::Constraint.new(User) do
-    root 'dashboard#show', as: :dashboard
+    get 'dashboard' => 'dashboard#show'
   end
 end

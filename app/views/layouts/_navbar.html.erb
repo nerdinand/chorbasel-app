@@ -14,8 +14,9 @@
           <li><%= link_to t('.foo'), '/' %></li>
           <li><%= link_to t('.bar'), '/' %></li>
           <li><%= link_to t('.baz'), '/' %></li>
+          <li><%= link_to t('.logout'), users_sign_out_path, method: :delete %></li>
         <% else %>
-          <li><%= link_to t('.login'), new_auth_session_path %></li>
+          <li><%= link_to t('.login'), users_sign_in_path %></li>
         <% end %>
       </ul>
     </div>

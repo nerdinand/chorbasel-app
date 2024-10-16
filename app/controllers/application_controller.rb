@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
+  before_action :require_user!
+
   private
 
   def current_user
@@ -18,6 +20,6 @@ class ApplicationController < ActionController::Base
     return if current_user
 
     save_passwordless_redirect_location!(User)
-    redirect_to root_path, alert: 'You are not worthy!'
+    redirect_to users_sign_in_path
   end
 end
