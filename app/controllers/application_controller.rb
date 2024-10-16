@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
 
-  helper_method :current_user
+  helper_method :current_user, :logged_in?
 
   before_action :require_user!
 
@@ -21,5 +21,9 @@ class ApplicationController < ActionController::Base
 
     save_passwordless_redirect_location!(User)
     redirect_to users_sign_in_path
+  end
+
+  def logged_in?
+    current_user.present?
   end
 end
