@@ -4,13 +4,24 @@
 
 <table>
   <thead>
-    <tr><th><%= t('.email') %></th><th></th></tr>
+    <tr>
+      <th><%= t('.email') %></th>
+      <th><%= t('.roles') %></th>
+      <th></th>
+    </tr>
   </thead>
   <tbody>
     <% @users.each do |user| %>
       <tr>
         <td>
           <%= user.email %>
+        </td>
+        <td>
+          <ul>
+            <% user.roles.each do |role| %>
+              <li><%= role %></li>
+            <% end %>
+          </ul>
         </td>
         <td>
           <% if policy(user).edit? %>
