@@ -1,3 +1,13 @@
 @layer components {
-/* TODO */
+  .btn {
+    @apply inline-block px-2 py-2 mt-2
+  }
+
+  .btn-primary {
+    @apply bg-complementary-dark border-complementary-dark text-white border-solid rounded-md 
+  }
+
+  .btn-primary:hover {
+    @apply bg-complementary border-complementary
+  }
 }
