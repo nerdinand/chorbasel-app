@@ -12,5 +12,7 @@ Rails.application.routes.draw do
 
   constraints Passwordless::Constraint.new(User) do
     get 'dashboard' => 'dashboard#show'
+
+    resources :users
   end
 end

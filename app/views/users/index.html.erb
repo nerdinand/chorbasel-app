@@ -1,0 +1,23 @@
+<% if policy(User).new? %>
+  <%= link_to t('.new'), new_user_path %>
+<% end %>
+
+<table>
+  <thead>
+    <tr><th><%= t('.email') %></th><th></th></tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td>
+          <%= user.email %>
+        </td>
+        <td>
+          <% if policy(user).edit? %>
+            <%= link_to t('.edit'), edit_user_path(user) %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
