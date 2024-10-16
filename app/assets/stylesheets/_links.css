@@ -1,0 +1,13 @@
+@layer components {
+  a {
+    @apply text-primary;
+  }
+
+  a:hover {
+    @apply text-primary-dark;
+  }
+
+  nav a {
+    @apply text-white;
+  }
+}
