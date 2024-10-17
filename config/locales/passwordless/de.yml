@@ -1,0 +1,30 @@
+---
+de:
+  passwordless:
+    sessions:
+      new:
+        email:
+          label: "E-Mail-Adresse"
+          placeholder: "user@example.com"
+        submit: "Einloggen"
+      create:
+        email_sent: "Wir haben dir eine E-Mail mit einem Code geschickt."
+        not_found: "Wir konnten keinen Benutzer mit dieser E-Mail-Adresse finden."
+        error: "Es ist ein Fehler aufgetreten"
+      show:
+        token: "Code"
+        confirm: "Bestätigen"
+      errors:
+        invalid_token: "Der Code ist ungültig."
+        session_expired: "Deine Sitzung ist abgelaufen, bitte logge dich neu ein."
+        token_claimed: "Dieser Link wurde schon einmal verwendet. Bitte fordere einen neuen an."
+      destroy:
+        signed_out: "Erfolgreich ausgeloggt."
+    mailer:
+      sign_in:
+        subject: "Dein Chorbasel-App-Code ✨"
+        body: |-
+          Benutze diesen Code um dich einzuloggen: %{token}
+
+          Oder du kannst diesen magischen Link besuchen, um dich direkt einzuloggen:
+          %{magic_link}
