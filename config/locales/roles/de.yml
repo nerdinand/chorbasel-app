@@ -1,0 +1,4 @@
+de:
+  roles:
+    validation:
+      message: darf nur gültige Rollen enthalten und keine Duplikate

@@ -66,3 +66,5 @@ gem 'tailwindcss-ruby'
 gem 'passwordless', '~> 1.7'
 
 gem 'pundit', '~> 2.4'
+
+gem 'rails-i18n', '~> 7.0.0'
