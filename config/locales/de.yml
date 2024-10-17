@@ -1,0 +1,36 @@
+---
+de:
+  activerecord:
+    attributes:
+      user:
+        email: E-Mail
+        first_name: Vorname
+        last_name: Nachname
+        nick_name: Spitzname
+    models:
+      user: Benutzer
+  errors:
+    message: 'Es sind Fehler aufgetreten:'
+  layouts:
+    navbar:
+      login: Einloggen
+      logout: Ausloggen
+      users: Benutzer
+  roles:
+    validation:
+      message: darf nur gültige Rollen enthalten und keine Duplikate
+  users:
+    create:
+      success: Benutzer erfolgreich angelegt.
+    edit:
+      title: Benutzer bearbeiten
+    index:
+      edit: Bearbeiten
+      email: E-Mail
+      name: Name
+      new: Neu
+      roles: Rollen
+    new:
+      title: Neuer Benutzer
+    update:
+      success: Benutzer erfolgreich gespeichert.
