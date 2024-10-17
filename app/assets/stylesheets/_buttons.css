@@ -4,7 +4,7 @@
   }
 
   .btn-primary {
-    @apply bg-complementary-dark border-complementary-dark text-white border-solid rounded-md 
+    @apply bg-complementary-dark border-complementary-dark text-white border-solid rounded-md border-2
   }
 
   .btn-primary:hover {
