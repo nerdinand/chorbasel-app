@@ -72,4 +72,4 @@ gem 'rails-i18n', '~> 7.0.0'
 
 gem 'icalendar', '~> 2.10'
 
-gem "down", "~> 5.4"
+gem 'down', '~> 5.4'
