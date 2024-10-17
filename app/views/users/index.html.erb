@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th><%= t('.name') %></th>
       <th><%= t('.email') %></th>
       <th><%= t('.roles') %></th>
       <th></th>
@@ -13,6 +14,9 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
+        <td>
+          <%= user.full_name %>
+        </td>
         <td>
           <%= user.email %>
         </td>

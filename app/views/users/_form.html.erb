@@ -5,5 +5,21 @@
     <%= f.label :email %>
     <%= f.email_field :email %>
   </p>
+
+  <p>
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name %>
+  </p>
+
+  <p>
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %>
+  </p>
+  
+  <p>
+    <%= f.label :nick_name %>
+    <%= f.text_field :nick_name %>
+  </p>
+
   <%= f.submit class: 'btn btn-primary' %>
 <% end %>
