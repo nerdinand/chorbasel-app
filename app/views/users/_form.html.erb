@@ -1,23 +1,24 @@
+<%# i18n-tasks-use t('activerecord.models.user') %> 
 <%= render 'errors', model: @user %>
 
 <%= form_for @user do |f| %>
   <p>
-    <%= f.label :email %>
+    <%= f.label :email %> <%# i18n-tasks-use t('activerecord.attributes.user.email') %>
     <%= f.email_field :email %>
   </p>
 
   <p>
-    <%= f.label :first_name %>
+    <%= f.label :first_name %> <%# i18n-tasks-use t('activerecord.attributes.user.first_name') %> 
     <%= f.text_field :first_name %>
   </p>
 
   <p>
-    <%= f.label :last_name %>
+    <%= f.label :last_name %> <%# i18n-tasks-use t('activerecord.attributes.user.last_name') %> 
     <%= f.text_field :last_name %>
   </p>
   
   <p>
-    <%= f.label :nick_name %>
+    <%= f.label :nick_name %> <%# i18n-tasks-use t('activerecord.attributes.user.nick_name') %> 
     <%= f.text_field :nick_name %>
   </p>
 
