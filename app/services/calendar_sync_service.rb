@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CalendarImportService
+class CalendarSyncService
   def initialize
     @calendar_url = Rails.application.credentials[:calendar_url]
     @calendar_tmp_path = Rails.root.join('tmp/calendar.ics')
