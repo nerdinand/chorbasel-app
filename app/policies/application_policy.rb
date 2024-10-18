@@ -36,6 +36,12 @@ class ApplicationPolicy
     false
   end
 
+  private
+
+  def superpowers?
+    user.role.app?
+  end
+
   class Scope
     def initialize(user, scope)
       @user = user

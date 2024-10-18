@@ -14,5 +14,8 @@ Rails.application.routes.draw do
     get 'dashboard' => 'dashboard#show'
 
     resources :users
+    namespace :calendar_events do
+      resource :syncs, only: :create
+    end
   end
 end
