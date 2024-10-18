@@ -8,7 +8,20 @@ class CalendarEvent < ApplicationRecord
 
   scope :future, -> { where('starts_at > ?', Time.zone.now) }
   scope :next, -> { future.order(starts_at: :asc).limit(10) }
+
+  #     starts_at      ends_at
+  #       |             |
+  #       v             v
+  #
+  # |<-b- [----event----] -a->|
+  #
+  #             ^
+  #             |
+  #             x
+  #
+  # The event is ongoing if:      `starts_at - b < x && x < ends_at + a`
+  # Which can be reformulated as: `starts_at < x + b && x - a < ends_at`
   scope :ongoing, lambda {
-    where(ends_at: ONGOING_TIME_WINDOW_BEFORE.ago..).where(starts_at: ..ONGOING_TIME_WINDOW_AFTER.from_now)
+    where(starts_at: ..ONGOING_TIME_WINDOW_BEFORE.from_now).where(ends_at: ONGOING_TIME_WINDOW_AFTER.ago..)
   }
 end
