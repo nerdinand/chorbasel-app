@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_10_18_114713) do
+ActiveRecord::Schema[8.0].define(version: 2024_10_18_123243) do
   create_table "arask_jobs", force: :cascade do |t|
     t.string "job"
     t.datetime "execute_at"
@@ -27,7 +27,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_18_114713) do
     t.datetime "ends_at", null: false
     t.string "location"
     t.string "summary", null: false
-    t.string "description", null: false
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["starts_at"], name: "index_calendar_events_on_starts_at"
