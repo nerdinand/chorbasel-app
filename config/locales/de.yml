@@ -9,16 +9,24 @@ de:
         nick_name: Spitzname
     models:
       user: Benutzer
+  attendances:
+    create:
+      error: Fehler beim Eintragen der Anwesenheit.
+      success: Anwesenheit erfolgreich eingetragen.
   calendar_events:
     syncs:
       create:
         success: Chorkalender erfolgreich importiert.
   dashboard:
     show:
+      attendances:
+        title: Anwesenheit
       calendar:
         description: 'Hier siehst du die nächsten anstehenden Chortermine:'
         title: Kalender
       calendar_events:
+        attendance:
+          submit: Anwesenheit eintragen
         sync: Chorkalender importieren
       title: Dashboard
   errors:
