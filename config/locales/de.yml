@@ -9,6 +9,12 @@ de:
         nick_name: Spitzname
     models:
       user: Benutzer
+  dashboard:
+    show:
+      calendar:
+        description: 'Hier siehst du die nächsten anstehenden Chortermine:'
+        title: Kalender
+      title: Dashboard
   errors:
     message: 'Es sind Fehler aufgetreten:'
   layouts:

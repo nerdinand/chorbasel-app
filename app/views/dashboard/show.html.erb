@@ -1,2 +1,14 @@
-Hello, <%= current_user.full_name %>!
+<% content_for :title, t('.title') %>
 
+<h2><%= t('.calendar.title') %></h2>
+
+<p><%= t('.calendar.description') %></p>
+
+<% @calendar_events.each do |calendar_event| %>
+  <div class="my-5 border-solid border-primary border-2">
+    <div><%= simple_format calendar_event.summary %></div>
+    <div><%= time_ago_in_words(calendar_event.starts_at) %></div>
+    <div><%= simple_format calendar_event.location %></div>
+    <div><%= simple_format calendar_event.description %></div>
+  </div>
+<% end %>
