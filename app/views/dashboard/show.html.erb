@@ -12,3 +12,7 @@
     <div><%= simple_format calendar_event.description %></div>
   </div>
 <% end %>
+
+<% if policy(:calendar_syncs).create? %>
+  <%= button_to t('.calendar_events.sync'), calendar_events_syncs_path, method: :post %>
+<% end %>
