@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_10_18_123243) do
+ActiveRecord::Schema[8.0].define(version: 2024_10_18_140112) do
   create_table "arask_jobs", force: :cascade do |t|
     t.string "job"
     t.datetime "execute_at"
@@ -18,6 +18,17 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_18_123243) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["execute_at"], name: "index_arask_jobs_on_execute_at"
+  end
+
+  create_table "attendances", force: :cascade do |t|
+    t.string "status", null: false
+    t.integer "calendar_event_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["calendar_event_id", "user_id"], name: "index_attendances_on_calendar_event_id_and_user_id", unique: true
+    t.index ["calendar_event_id"], name: "index_attendances_on_calendar_event_id"
+    t.index ["user_id"], name: "index_attendances_on_user_id"
   end
 
   create_table "calendar_events", force: :cascade do |t|
@@ -59,4 +70,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_18_123243) do
     t.index "LOWER(email)", name: "index_users_on_lowercase_email", unique: true
     t.check_constraint "JSON_TYPE(roles) = 'array'", name: "users_roles_is_array"
   end
+
+  add_foreign_key "attendances", "calendar_events"
+  add_foreign_key "attendances", "users"
 end

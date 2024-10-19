@@ -17,5 +17,9 @@ Rails.application.routes.draw do
     namespace :calendar_events do
       resource :syncs, only: :create
     end
+
+    resources :calendar_events, only: [] do
+      resources :attendances, only: :create
+    end
   end
 end

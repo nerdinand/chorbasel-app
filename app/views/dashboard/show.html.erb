@@ -1,15 +1,33 @@
 <% content_for :title, t('.title') %>
 
+<% if @attendances.any? %>
+  <h2><%= t('.attendances.title') %></h2>
+
+  <% @attendances.each do |attendance| %>
+    <div>
+      <p><%= attendance.calendar_event.summary %></p>
+
+      <% if attendance.new_record? %>
+        <%= form_for [attendance.calendar_event, attendance], method: :post do |f| %>
+          <%= f.hidden_field :user_id %>g
+          <%= f.hidden_field :status %>
+          <%= f.submit t('.calendar_events.attendance.submit') %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+
 <h2><%= t('.calendar.title') %></h2>
 
 <p><%= t('.calendar.description') %></p>
 
 <% @calendar_events.each do |calendar_event| %>
   <div class="my-5 border-solid border-primary border-2">
-    <div><%= simple_format calendar_event.summary %></div>
-    <div><%= time_ago_in_words(calendar_event.starts_at) %></div>
-    <div><%= simple_format calendar_event.location %></div>
-    <div><%= simple_format calendar_event.description %></div>
+    <p><%= simple_format calendar_event.summary %></p>
+    <p><%= time_ago_in_words(calendar_event.starts_at) %></p>
+    <p><%= simple_format calendar_event.location %></p>
+    <p><%= simple_format calendar_event.description %></p>
   </div>
 <% end %>
 
