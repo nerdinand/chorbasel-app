@@ -75,3 +75,5 @@ gem 'icalendar', '~> 2.10'
 gem 'down', '~> 5.4'
 
 gem 'arask', '~> 1.2'
+
+gem "faker", "~> 3.5"
