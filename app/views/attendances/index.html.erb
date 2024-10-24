@@ -1,0 +1,24 @@
+<% content_for :title, t('.title') %>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <% @attendance_table.calendar_events.each do |calendar_event| %>
+        <th><%= calendar_event.starts_at.strftime('%d.%m.') %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @attendance_table.users.each do |user| %>
+      <tr>
+        <td><%= user.full_name %></td>
+        <% @attendance_table.calendar_events.each do |calendar_event| %>
+          <td>
+            <%= @attendance_table.attendance_for(user, calendar_event).status_emoji %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -6,6 +6,8 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validate :roles_must_be_valid
 
+  has_many :attendances, dependent: :destroy
+
   passwordless_with :email
 
   def role
@@ -16,6 +18,12 @@ class User < ApplicationRecord
     nick_name_part = ("\"#{nick_name}\"" if nick_name.present?)
 
     [first_name, nick_name_part, last_name].compact.join(' ')
+  end
+
+  def attendance_for(calendar_event)
+    attendances.find_or_initialize_by(calendar_event:) do |attendance|
+      attendance.status = Attendance::STATUS_UNKNOWN
+    end
   end
 
   private

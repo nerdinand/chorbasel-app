@@ -9,7 +9,7 @@
 
       <% if attendance.new_record? %>
         <%= form_for [attendance.calendar_event, attendance], method: :post do |f| %>
-          <%= f.hidden_field :user_id %>g
+          <%= f.hidden_field :user_id %>
           <%= f.hidden_field :status %>
           <%= f.submit t('.calendar_events.attendance.submit') %>
         <% end %>

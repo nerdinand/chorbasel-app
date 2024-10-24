@@ -9,11 +9,11 @@ de:
         nick_name: Spitzname
     models:
       user: Benutzer
-  attendances:
-    create:
-      error: Fehler beim Eintragen der Anwesenheit.
-      success: Anwesenheit erfolgreich eingetragen.
   calendar_events:
+    attendances:
+      create:
+        error: Fehler beim Eintragen der Anwesenheit.
+        success: Anwesenheit erfolgreich eingetragen.
     syncs:
       create:
         success: Chorkalender erfolgreich importiert.
@@ -36,6 +36,7 @@ de:
       login: Einloggen
       logout: Ausloggen
       users: Benutzer
+      attendances: Anwesenheiten
   roles:
     validation:
       message: darf nur gültige Rollen enthalten und keine Duplikate
@@ -45,6 +46,7 @@ de:
     edit:
       title: Benutzer bearbeiten
     index:
+      title: Benutzer
       edit: Bearbeiten
       email: E-Mail
       name: Name
@@ -54,3 +56,6 @@ de:
       title: Neuer Benutzer
     update:
       success: Benutzer erfolgreich gespeichert.
+  attendances:
+    index:
+      title: Anwesenheiten

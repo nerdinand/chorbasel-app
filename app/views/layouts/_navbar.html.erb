@@ -14,6 +14,9 @@
           <% if policy(:user).index? %>
             <li><%= link_to t('.users'), users_path %></li>
           <% end %>
+          <% if policy(:attendance).index? %>
+            <li><%= link_to t('.attendances'), attendances_path %></li>
+          <% end %>
           <li><%= link_to t('.logout'), users_sign_out_path, method: :delete %></li>
         <% else %>
           <li><%= link_to t('.login'), users_sign_in_path %></li>

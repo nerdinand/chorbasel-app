@@ -10,7 +10,7 @@ class AttendancePolicy < ApplicationPolicy
   end
 
   def index?
-    true
+    superpowers?
   end
 
   def show?

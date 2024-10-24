@@ -72,3 +72,18 @@ last_end_time_epoch = end_date.change(hour: 22).to_datetime.to_i
     location: 'Sekundarschule De Wette, De Wette-Strasse 7, 4051 Basel, Switzerland'
   )
 end
+
+Rails.logger.info 'Creating attendances...'
+
+users = User.all.to_a
+calendar_events = CalendarEvent.all.to_a
+
+1000.times do
+  user = users.sample
+  calendar_event = calendar_events.sample
+  attendance = Attendance.find_or_initialize_by(user:, calendar_event:)
+  next unless attendance.new_record?
+
+  attendance.status = Attendance::STATUSES.sample
+  attendance.save!
+end
