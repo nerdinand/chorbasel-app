@@ -15,7 +15,7 @@
         <td><%= user.full_name %></td>
         <% @attendance_table.calendar_events.each do |calendar_event| %>
           <td>
-            <%= @attendance_table.attendance_for(user, calendar_event).status_emoji %>
+            <%= @attendance_table.attendance_for(user, calendar_event)&.status_emoji %>
           </td>
         <% end %>
       </tr>
