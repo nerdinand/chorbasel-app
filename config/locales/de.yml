@@ -9,6 +9,9 @@ de:
         nick_name: Spitzname
     models:
       user: Benutzer
+  attendances:
+    index:
+      title: Anwesenheiten
   calendar_events:
     attendances:
       create:
@@ -33,34 +36,30 @@ de:
     message: 'Es sind Fehler aufgetreten:'
   layouts:
     navbar:
+      attendances: Anwesenheiten
       login: Einloggen
       logout: Ausloggen
       users: Benutzer
-      attendances: Anwesenheiten
   roles:
     validation:
       message: darf nur gültige Rollen enthalten und keine Duplikate
+  user_mailer:
+    welcome_email:
+      body: Du wurdest zur Chorbasel-App eingeladen! Du kannst dich jetzt unter <a href="https://app.chorbasel.ch">app.chorbasel.ch</a> mit der E-Mail-Adresse einloggen, an die diese E-Mail versendet wurde.
+      subject: Willkommen zur Chorbasel-App!
   users:
     create:
       success: Benutzer erfolgreich angelegt.
     edit:
       title: Benutzer bearbeiten
     index:
-      title: Benutzer
       edit: Bearbeiten
       email: E-Mail
       name: Name
       new: Neu
       roles: Rollen
+      title: Benutzer
     new:
       title: Neuer Benutzer
     update:
       success: Benutzer erfolgreich gespeichert.
-  attendances:
-    index:
-      title: Anwesenheiten
-
-  user_mailer:
-    welcome_email:
-      subject: Willkommen zur Chorbasel-App!
-      body: Du wurdest zur Chorbasel-App eingeladen! Du kannst dich jetzt unter <a href="https://app.chorbasel.ch">app.chorbasel.ch</a> mit der E-Mail-Adresse einloggen, an die diese E-Mail versendet wurde.
