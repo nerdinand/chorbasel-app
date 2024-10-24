@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class CalendarEvent < ApplicationRecord
+  NEXT_EVENTS_LIMIT = 10
+
   ONGOING_TIME_WINDOW_BEFORE = 20.minutes
   ONGOING_TIME_WINDOW_AFTER = 10.minutes
 
@@ -12,7 +14,7 @@ class CalendarEvent < ApplicationRecord
 
   scope :future, -> { where(starts_at: Time.zone.now..) }
   scope :past, -> { where(starts_at: ..Time.zone.now) }
-  scope :next, -> { future.limit(10) }
+  scope :next, -> { future.limit(NEXT_EVENTS_LIMIT) }
 
   #     starts_at      ends_at
   #       |             |
