@@ -59,3 +59,8 @@ de:
   attendances:
     index:
       title: Anwesenheiten
+
+  user_mailer:
+    welcome_email:
+      subject: Willkommen zur Chorbasel-App!
+      body: Du wurdest zur Chorbasel-App eingeladen! Du kannst dich jetzt unter <a href="https://app.chorbasel.ch">app.chorbasel.ch</a> mit der E-Mail-Adresse einloggen, an die diese E-Mail versendet wurde.

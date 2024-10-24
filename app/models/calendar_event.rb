@@ -8,9 +8,11 @@ class CalendarEvent < ApplicationRecord
 
   has_many :attendances, dependent: :destroy
 
+  default_scope -> { order(starts_at: :asc) }
+
   scope :future, -> { where(starts_at: Time.zone.now..) }
   scope :past, -> { where(starts_at: ..Time.zone.now) }
-  scope :next, -> { future.order(starts_at: :asc).limit(10) }
+  scope :next, -> { future.limit(10) }
 
   #     starts_at      ends_at
   #       |             |
