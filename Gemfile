@@ -64,7 +64,7 @@ end
 gem 'tailwindcss-rails', '~> 3.0'
 gem 'tailwindcss-ruby'
 
-gem 'passwordless', '~> 1.7'
+gem 'passwordless', '~> 1.8'
 
 gem 'pundit', '~> 2.4'
 
