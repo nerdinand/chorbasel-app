@@ -6,7 +6,7 @@ gem 'importmap-rails'
 gem 'jbuilder'
 gem 'propshaft'
 gem 'puma', '>= 5.0'
-gem 'rails', '~> 8.0.0.beta1'
+gem 'rails', '~> 8.0.0.rc1'
 gem 'sqlite3', '~> 2.1'
 gem 'stimulus-rails'
 gem 'turbo-rails'
@@ -64,7 +64,7 @@ end
 gem 'tailwindcss-rails', '~> 3.0'
 gem 'tailwindcss-ruby'
 
-gem 'passwordless', '~> 1.7'
+gem 'passwordless', '~> 1.8'
 
 gem 'pundit', '~> 2.4'
 
