@@ -3,24 +3,111 @@
 
 <%= form_for @user do |f| %>
   <p>
+    <span class="mandatory-field-indicator">*</span>
     <%= f.label :email %> <%# i18n-tasks-use t('activerecord.attributes.user.email') %>
     <%= f.email_field :email %>
+    <br>
+    <div class="field-hint"><%= t('.email.hint') %></div>
   </p>
 
   <p>
+    <span class="mandatory-field-indicator">*</span>
     <%= f.label :first_name %> <%# i18n-tasks-use t('activerecord.attributes.user.first_name') %> 
     <%= f.text_field :first_name %>
+    <br>
   </p>
 
   <p>
+    <span class="mandatory-field-indicator">*</span>
     <%= f.label :last_name %> <%# i18n-tasks-use t('activerecord.attributes.user.last_name') %> 
     <%= f.text_field :last_name %>
+    <br>
   </p>
   
   <p>
     <%= f.label :nick_name %> <%# i18n-tasks-use t('activerecord.attributes.user.nick_name') %> 
     <%= f.text_field :nick_name %>
+    <br>
+    <div class="field-hint"><%= t('.nick_name.hint') %></div>
   </p>
+
+  <div class="border-2 border-solid border-contrast">
+    <p>
+      <span class="mandatory-field-indicator">*</span>
+      <%= f.label :salutation %> <%# i18n-tasks-use t('activerecord.attributes.user.salutation') %> 
+      <%= f.text_field :salutation %>
+    </p>
+  
+    <p>
+      <span class="mandatory-field-indicator">*</span>
+      <%= f.label :street %> <%# i18n-tasks-use t('activerecord.attributes.user.street') %> 
+      <%= f.text_field :street %>
+    </p>
+  
+    <p>
+      <span class="mandatory-field-indicator">*</span>
+      <%= f.label :zip_code %> <%# i18n-tasks-use t('activerecord.attributes.user.zip_code') %> 
+      <%= f.text_field :zip_code %>
+    </p>
+  
+    <p>
+      <span class="mandatory-field-indicator">*</span>
+      <%= f.label :city %> <%# i18n-tasks-use t('activerecord.attributes.user.city') %> 
+      <%= f.text_field :city %>
+    </p>
+
+    <div class="field-hint"><%= t('.address.hint') %></div>
+  </div>
+
+  <p>
+    <span class="mandatory-field-indicator">*</span>
+    <%= f.label :phone_number %> <%# i18n-tasks-use t('activerecord.attributes.user.phone_number') %> 
+    <%= f.telephone_field :phone_number %>
+    <br>
+    <div class="field-hint"><%= t('.phone_number.hint') %></div>
+  </p>
+
+  <p>
+    <span class="mandatory-field-indicator">*</span>
+    <%= f.label :birth_date %> <%# i18n-tasks-use t('activerecord.attributes.user.birth_date') %> 
+    <%= f.date_field :birth_date %>
+    <br>
+    <div class="field-hint"><%= t('.birth_date.hint') %></div>
+  </p>
+
+  <p>
+    <span class="mandatory-field-indicator">*</span>
+    <%= f.label :register %> <%# i18n-tasks-use t('activerecord.attributes.user.register') %> 
+    <%= f.select :register, users_register_options %>
+    <br>
+    <div class="field-hint"><%= t('.register.hint') %></div>
+  </p>
+
+  <% if policy(:user).admin_edit? %>
+    <div class="border-2 border-solid border-contrast">
+      <p>
+        <%= f.label :roles %> <%# i18n-tasks-use t('activerecord.attributes.user.roles') %> 
+        <%= f.collection_check_boxes :roles, Roles.all, :value, :human_name %>
+      </p>
+
+      <p>
+        <%= f.label :status %> <%# i18n-tasks-use t('activerecord.attributes.user.status') %> 
+        <%= f.select :status, users_status_options %>
+        <br>
+      </p>
+
+      <p>
+        <%= f.label :member_since %> <%# i18n-tasks-use t('activerecord.attributes.user.member_since') %> 
+        <%= f.text_field :member_since %>
+      </p>
+
+      <p>
+        <%= f.label :remarks %> <%# i18n-tasks-use t('activerecord.attributes.user.remarks') %> 
+        <%= f.text_area :remarks %>
+      </p>
+    </div>
+  <% end %>
+
 
   <%= f.submit class: 'btn btn-primary' %>
 <% end %>

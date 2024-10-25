@@ -39,7 +39,7 @@ class ApplicationPolicy
   private
 
   def superpowers?
-    user.role.app?
+    user.roles_wrapper.app?
   end
 
   class Scope

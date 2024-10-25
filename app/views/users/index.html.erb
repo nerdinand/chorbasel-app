@@ -7,9 +7,11 @@
 <table>
   <thead>
     <tr>
+      <th><%= t('.profile_complete') %></th>
       <th><%= t('.name') %></th>
       <th><%= t('.email') %></th>
       <th><%= t('.roles') %></th>
+      <th><%= t('.status') %></th>
       <th></th>
     </tr>
   </thead>
@@ -17,17 +19,23 @@
     <% @users.each do |user| %>
       <tr>
         <td>
-          <%= user.full_name %>
+          <%= boolean_emoji(user.profile_complete?) %>
+        </td>
+        <td>
+          <%= user.display_name %>
         </td>
         <td>
           <%= user.email %>
         </td>
         <td>
           <ul>
-            <% user.roles.each do |role| %>
-              <li><%= role %></li>
+            <% user.roles_wrapper.roles.each do |role| %>
+              <li><%= role.human_name %></li>
             <% end %>
           </ul>
+        </td>
+        <td>
+          <%= user.human_status %>
         </td>
         <td>
           <% if policy(user).edit? %>
