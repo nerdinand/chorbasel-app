@@ -45,9 +45,9 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   validate :roles_must_be_valid
-  validates :phone_number, format: { with: INTERNATIONAL_PHONE_NUMBER_REGEX }
+  validates :phone_number, format: { with: INTERNATIONAL_PHONE_NUMBER_REGEX }, allow_blank: true
   validates :status, inclusion: STATUSES
-  validates :register, inclusion: REGISTERS
+  validates :register, inclusion: REGISTERS, allow_blank: true
 
   has_many :attendances, dependent: :destroy
 

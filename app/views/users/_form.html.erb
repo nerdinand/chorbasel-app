@@ -78,7 +78,7 @@
   <p>
     <span class="mandatory-field-indicator">*</span>
     <%= f.label :register %> <%# i18n-tasks-use t('activerecord.attributes.user.register') %> 
-    <%= f.select :register, users_register_options %>
+    <%= f.select :register, users_register_options, include_blank: true %>
     <br>
     <div class="field-hint"><%= t('.register.hint') %></div>
   </p>
