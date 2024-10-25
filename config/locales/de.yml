@@ -10,10 +10,13 @@ de:
     models:
       user: Benutzer
   attendances:
-    create:
-      error: Fehler beim Eintragen der Anwesenheit.
-      success: Anwesenheit erfolgreich eingetragen.
+    index:
+      title: Anwesenheiten
   calendar_events:
+    attendances:
+      create:
+        error: Fehler beim Eintragen der Anwesenheit.
+        success: Anwesenheit erfolgreich eingetragen.
     syncs:
       create:
         success: Chorkalender erfolgreich importiert.
@@ -33,12 +36,17 @@ de:
     message: 'Es sind Fehler aufgetreten:'
   layouts:
     navbar:
+      attendances: Anwesenheiten
       login: Einloggen
       logout: Ausloggen
       users: Benutzer
   roles:
     validation:
       message: darf nur gültige Rollen enthalten und keine Duplikate
+  user_mailer:
+    welcome_email:
+      body: Du wurdest zur Chorbasel-App eingeladen! Du kannst dich jetzt unter <a href="https://app.chorbasel.ch">app.chorbasel.ch</a> mit der E-Mail-Adresse einloggen, an die diese E-Mail versendet wurde.
+      subject: Willkommen zur Chorbasel-App!
   users:
     create:
       success: Benutzer erfolgreich angelegt.
@@ -50,6 +58,7 @@ de:
       name: Name
       new: Neu
       roles: Rollen
+      title: Benutzer
     new:
       title: Neuer Benutzer
     update:

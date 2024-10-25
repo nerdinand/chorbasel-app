@@ -1,5 +1,7 @@
+<% content_for :title, t('.title') %>
+
 <% if policy(User).new? %>
-  <%= link_to t('.new'), new_user_path %>
+  <%= link_to t('.new'), new_user_path, class: 'btn btn-primary' %>
 <% end %>
 
 <table>
@@ -29,7 +31,7 @@
         </td>
         <td>
           <% if policy(user).edit? %>
-            <%= link_to t('.edit'), edit_user_path(user) %>
+            <%= link_to t('.edit'), edit_user_path(user), class: 'btn btn-primary' %>
           <% end %>
         </td>
       </tr>

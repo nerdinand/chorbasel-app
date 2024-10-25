@@ -9,9 +9,9 @@
 
       <% if attendance.new_record? %>
         <%= form_for [attendance.calendar_event, attendance], method: :post do |f| %>
-          <%= f.hidden_field :user_id %>g
+          <%= f.hidden_field :user_id %>
           <%= f.hidden_field :status %>
-          <%= f.submit t('.calendar_events.attendance.submit') %>
+          <%= f.submit t('.calendar_events.attendance.submit'), class: 'btn btn-primary' %>
         <% end %>
       <% end %>
     </div>
@@ -32,5 +32,5 @@
 <% end %>
 
 <% if policy(:calendar_syncs).create? %>
-  <%= button_to t('.calendar_events.sync'), calendar_events_syncs_path, method: :post %>
+  <%= button_to t('.calendar_events.sync'), calendar_events_syncs_path, method: :post, class: 'btn btn-primary' %>
 <% end %>

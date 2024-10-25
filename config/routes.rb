@@ -14,12 +14,14 @@ Rails.application.routes.draw do
     get 'dashboard' => 'dashboard#show'
 
     resources :users
+    resources :attendances, only: :index
+
     namespace :calendar_events do
       resource :syncs, only: :create
     end
 
     resources :calendar_events, only: [] do
-      resources :attendances, only: :create
+      resources :attendances, only: :create, controller: 'calendar_events/attendances'
     end
   end
 end

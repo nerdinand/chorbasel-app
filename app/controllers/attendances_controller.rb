@@ -1,23 +1,13 @@
 # frozen_string_literal: true
 
 class AttendancesController < ApplicationController
-  def create
-    @attendance = authorize(Attendance.new(attendance_params))
-    @attendance.calendar_event_id = params[:calendar_event_id]
-    # TODO: check if this is still an ongoing event, return an error otherwise
+  PAST_EVENTS_FROM = 6.months
+  PAST_EVENTS_TO = 1.day
 
-    if @attendance.save
-      flash[:success] = t('.success')
-    else
-      flash[:error] = t('.error')
-    end
-
-    redirect_to dashboard_path
-  end
-
-  private
-
-  def attendance_params
-    params.require(:attendance).permit(:user_id, :status)
+  def index
+    users = authorize User.all
+    calendar_events = authorize CalendarEvent.past.where(starts_at: PAST_EVENTS_FROM.ago..PAST_EVENTS_TO.from_now)
+    attendances = authorize Attendance.where(user: users).where(calendar_event: calendar_events)
+    @attendance_table = AttendanceTable.new(attendances, users, calendar_events)
   end
 end

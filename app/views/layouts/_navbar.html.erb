@@ -11,7 +11,12 @@
     <div data-visibility-target='hideable' hidden class='w-full md:block md:w-auto' id='navbar-default'>
       <ul class='flex flex-col p-4 mt-4 list-none md:flex-row md:space-x-4 md:mt-0 md:text-sm md:font-medium'>
         <% if logged_in? %>
-          <li><%= link_to t('.users'), users_path %></li>
+          <% if policy(:user).index? %>
+            <li><%= link_to t('.users'), users_path %></li>
+          <% end %>
+          <% if policy(:attendance).index? %>
+            <li><%= link_to t('.attendances'), attendances_path %></li>
+          <% end %>
           <li><%= link_to t('.logout'), users_sign_out_path, method: :delete %></li>
         <% else %>
           <li><%= link_to t('.login'), users_sign_in_path %></li>
