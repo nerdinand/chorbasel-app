@@ -21,6 +21,7 @@ class UsersController < ApplicationController
       flash[:success] = t('.success')
       redirect_to users_path
     else
+      flash[:error] = t('.error')
       render :new, status: :unprocessable_entity
     end
   end
@@ -32,6 +33,7 @@ class UsersController < ApplicationController
       flash[:success] = t('.success')
       redirect_to users_path
     else
+      flash[:error] = t('.error')
       render :edit, status: :unprocessable_entity
     end
   end

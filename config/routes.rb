@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     get 'dashboard' => 'dashboard#show'
 
     resources :users
-    resources :attendances, only: :index
+    resources :attendances, only: %i[index edit new create update]
 
     namespace :calendar_events do
       resource :syncs, only: :create

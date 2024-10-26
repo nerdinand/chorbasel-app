@@ -9,13 +9,20 @@
       <% end %>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="border-r-2">
     <% @attendance_table.users.each do |user| %>
       <tr>
-        <td><%= user.full_name %></td>
+        <td class="border-r-2"><%= user.full_name %></td>
         <% @attendance_table.calendar_events.each do |calendar_event| %>
-          <td>
-            <%= @attendance_table.attendance_for(user, calendar_event)&.status_emoji %>
+          <td class="text-center">
+            <% attendance = @attendance_table.attendance_for(user, calendar_event) %>
+            <% if attendance.nil? %>
+              <%= link_to '❔', new_attendance_path(user_id: user, calendar_event_id: calendar_event) %>
+            <% else %>
+              <%= link_to edit_attendance_path(attendance) do %>
+                <%= attendance.status_emoji %>
+              <% end %>
+            <% end %>
           </td>
         <% end %>
       </tr>

@@ -2,16 +2,49 @@
 de:
   activerecord:
     attributes:
+      attendance:
+        enums:
+          status:
+            attended: Anwesend
+            excused: Entschuldigt
+            unknown: Unbekannt
+        remarks: Bemerkungen
+        status: Status
+      role:
+        enums:
+          role:
+            absences: Absenzenkoordination
+            app: App
+            choir_activities: Chor*Aktivitäten
+            choir_direction: Chor*Leitung
+            choir_image: Chor*Image
+            choir_life: Chor*Leben
+            choir_money: Chor*Chlütter
+            it: IT, Design, Website
+            media: Medienarbeit
+            sponsorships: GönnerInnen / Freunde
+            thank_you_gifts: Dankegeschenk-Koordination
       user:
         email: E-Mail
         first_name: Vorname
         last_name: Nachname
         nick_name: Spitzname
     models:
+      attendance: Anwesenheit
       user: Benutzer
   attendances:
+    create:
+      error: Fehler beim Eintragen der Anwesenheit.
+      success: Anwesenheit erfolgreich eingetragen.
+    edit:
+      title: Anwesenheit bearbeiten
     index:
       title: Anwesenheiten
+    new:
+      title: Anwesenheit eintragen
+    update:
+      error: Fehler beim Ändern der Anwesenheit.
+      success: Anwesenheit erfolgreich geändert.
   calendar_events:
     attendances:
       create:
@@ -34,6 +67,10 @@ de:
       title: Dashboard
   errors:
     message: 'Es sind Fehler aufgetreten:'
+  helpers:
+    submit:
+      attendance:
+        create: Anwesenheit eintragen
   layouts:
     navbar:
       attendances: Anwesenheiten
@@ -49,7 +86,8 @@ de:
       subject: Willkommen zur Chorbasel-App!
   users:
     create:
-      success: Benutzer erfolgreich angelegt.
+      error: Fehler beim Erstellen des Benutzers.
+      success: Benutzer erfolgreich erstellt.
     edit:
       title: Benutzer bearbeiten
     index:
@@ -62,4 +100,5 @@ de:
     new:
       title: Neuer Benutzer
     update:
-      success: Benutzer erfolgreich gespeichert.
+      error: Fehler beim Ändern des Benutzers.
+      success: Benutzer erfolgreich geändert.

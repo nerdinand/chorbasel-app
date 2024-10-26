@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_10_18_140112) do
+ActiveRecord::Schema[8.0].define(version: 2024_10_26_141159) do
   create_table "arask_jobs", force: :cascade do |t|
     t.string "job"
     t.datetime "execute_at"
@@ -26,6 +26,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_18_140112) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "remarks"
     t.index ["calendar_event_id", "user_id"], name: "index_attendances_on_calendar_event_id_and_user_id", unique: true
     t.index ["calendar_event_id"], name: "index_attendances_on_calendar_event_id"
     t.index ["user_id"], name: "index_attendances_on_user_id"
