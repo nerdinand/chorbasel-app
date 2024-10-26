@@ -73,6 +73,7 @@ de:
         create: Anwesenheit eintragen
   layouts:
     navbar:
+      dashboard: Dashboard
       attendances: Anwesenheiten
       login: Einloggen
       logout: Ausloggen

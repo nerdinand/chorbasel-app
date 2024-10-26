@@ -36,4 +36,8 @@ class Roles
   def app?
     roles.include?(ROLE_APP)
   end
+
+  def absences?
+    roles.include?(ROLE_ABSENCES)
+  end
 end
