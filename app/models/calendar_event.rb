@@ -39,4 +39,8 @@ class CalendarEvent < ApplicationRecord
   def starts_and_ends_on_same_day?
     starts_at.to_time.to_date === ends_at.to_time.to_date # rubocop:disable Style/CaseEquality
   end
+
+  def ongoing?
+    starts_at <= ONGOING_TIME_WINDOW_BEFORE.from_now && ends_at >= ONGOING_TIME_WINDOW_AFTER.ago
+  end
 end

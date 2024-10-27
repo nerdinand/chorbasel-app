@@ -15,11 +15,7 @@
       <p><%= attendance.calendar_event.summary %></p>
 
       <% if attendance.new_record? %>
-        <%= form_for [attendance.calendar_event, attendance], method: :post do |f| %>
-          <%= f.hidden_field :user_id %>
-          <%= f.hidden_field :status %>
-          <%= f.submit t('.calendar_events.attendance.submit'), class: 'btn btn-primary' %>
-        <% end %>
+        <%= button_to t('.calendar_events.attendance.submit'), calendar_event_attendance_attendance_path(attendance.calendar_event), method: :post, class: 'btn btn-primary' %> 
       <% end %>
     </div>
   <% end %>
@@ -35,6 +31,10 @@
     <p><%= time_ago_in_words(calendar_event.starts_at) %></p>
     <p><%= simple_format calendar_event.location %></p>
     <p><%= simple_format calendar_event.description %></p>
+
+    <% unless Attendance.where(calendar_event:, user: current_user).exists? %>
+      <%= link_to t('.calendar_events.attendance.new'), new_calendar_event_attendance_excuse_path(calendar_event) %>
+    <% end %>
   </div>
 <% end %>
 

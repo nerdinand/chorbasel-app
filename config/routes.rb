@@ -21,7 +21,10 @@ Rails.application.routes.draw do
     end
 
     resources :calendar_events, only: [] do
-      resources :attendances, only: :create, controller: 'calendar_events/attendances'
+      resource :attendance, only: [] do
+        resource :excuse, only: %i[new create], controller: 'calendar_events/attendances/excuses'
+        resource :attendance, only: :create, controller: 'calendar_events/attendances/attendances'
+      end
     end
   end
 end

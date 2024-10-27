@@ -9,6 +9,7 @@ class AttendancesController < ApplicationController
     calendar_events = CalendarEvent.where(starts_at: EVENTS_FROM.ago..EVENTS_TO.from_now)
     attendances = authorize Attendance.where(user: users).where(calendar_event: calendar_events)
     @attendance_table = AttendanceTable.new(attendances, users, calendar_events)
+    @excuse_requested_attendances = Attendance.excuse_requested
   end
 
   def new

@@ -7,6 +7,7 @@ de:
         enums:
           status:
             attended: Anwesend
+            excuse_requested: Entschuldigung angefragt
             excused: Entschuldigt
             unknown: Unbekannt
         remarks: Bemerkungen
@@ -66,6 +67,8 @@ de:
     edit:
       title: Anwesenheit bearbeiten
     index:
+      excuse_requested:
+        title: Zu bestätigende Abwesenheiten
       title: Anwesenheiten
     new:
       title: Anwesenheit eintragen
@@ -74,9 +77,21 @@ de:
       success: Anwesenheit erfolgreich geändert.
   calendar_events:
     attendances:
-      create:
-        error: Fehler beim Eintragen der Anwesenheit.
-        success: Anwesenheit erfolgreich eingetragen.
+      attendances:
+        create:
+          error: Dieser Termin ist abgelaufen.
+        perform_create:
+          error: Fehler beim Eintragen der Anwesenheit.
+          success: Anwesenheit erfolgreich eingetragen.
+      excuses:
+        create:
+          error: Fehler beim Erfassen der Entschuldigung.
+          remark_blank_error: Du musst die Entschuldigung ausfüllen!
+          success: Entschuldigung erfolgreich erfasst.
+        new:
+          excuse: Entschuldigung
+          submit: Entschuldigung speichern
+          title: Entschuldigung erfassen
     syncs:
       create:
         success: Chorkalender erfolgreich importiert.
@@ -89,6 +104,7 @@ de:
         title: Kalender
       calendar_events:
         attendance:
+          new: Entschuldigung erfassen
           submit: Anwesenheit eintragen
         sync: Chorkalender importieren
       profile_completeness:
