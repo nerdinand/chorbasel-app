@@ -1,5 +1,12 @@
 <% content_for :title, t('.title') %>
 
+<% unless current_user.profile_complete? %>
+  <div>
+    <%= t('.profile_completeness.message') %>
+    <%= link_to t('.profile_completeness.link'), edit_user_path(current_user) %>
+  </div>
+<% end %>
+
 <% if @attendances.any? %>
   <h2><%= t('.attendances.title') %></h2>
 

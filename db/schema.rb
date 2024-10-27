@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_10_18_140112) do
+ActiveRecord::Schema[8.0].define(version: 2024_10_25_180104) do
   create_table "arask_jobs", force: :cascade do |t|
     t.string "job"
     t.datetime "execute_at"
@@ -67,6 +67,16 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_18_140112) do
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
     t.string "nick_name"
+    t.string "salutation"
+    t.string "street"
+    t.string "zip_code"
+    t.string "city"
+    t.string "phone_number"
+    t.date "birth_date"
+    t.string "status", default: "active"
+    t.string "member_since"
+    t.string "register"
+    t.text "remarks"
     t.index "LOWER(email)", name: "index_users_on_lowercase_email", unique: true
     t.check_constraint "JSON_TYPE(roles) = 'array'", name: "users_roles_is_array"
   end

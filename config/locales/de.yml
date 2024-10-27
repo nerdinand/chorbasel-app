@@ -2,11 +2,50 @@
 de:
   activerecord:
     attributes:
+      role:
+        enums:
+          role:
+            absences: Absenzenkoordination
+            app: App
+            choir_activities: Chor*Aktivitäten
+            choir_direction: Chor*Leitung
+            choir_image: Chor*Image
+            choir_life: Chor*Leben
+            choir_money: Chor*Chlütter
+            it: IT, Design, Website
+            media: Medienarbeit
+            sponsorships: GönnerInnen / Freunde
+            thank_you_gifts: Dankegeschenk-Koordination
       user:
+        birth_date: Geburtsdatum
+        city: Ort
         email: E-Mail
+        enums:
+          register:
+            alto_1: Alt 1
+            alto_2: Alt 2
+            bass_1: Bass 1
+            bass_2: Bass 2
+            soprano_1: Sopran 1
+            soprano_2: Sopran 2
+            tenor_1: Tenor 1
+            tenor_2: Tenor 2
+          status:
+            active: Aktiv
+            inactive: Inaktiv
+            paused: Pausiert
         first_name: Vorname
         last_name: Nachname
+        member_since: Mitglied seit
         nick_name: Spitzname
+        phone_number: Telefonnummer (mobil)
+        register: Stimme
+        remarks: Bemerkungen
+        roles: Rollen
+        salutation: Anrede
+        status: Status
+        street: Strasse
+        zip_code: PLZ
     models:
       user: Benutzer
   attendances:
@@ -31,6 +70,9 @@ de:
         attendance:
           submit: Anwesenheit eintragen
         sync: Chorkalender importieren
+      profile_completeness:
+        link: Benutzerprofil vervollständigen
+        message: Dein Benutzerprofil ist unvollständig. Bitte hilf uns indem du die fehlenden Informationen einträgst.
       title: Dashboard
   errors:
     message: 'Es sind Fehler aufgetreten:'
@@ -43,6 +85,9 @@ de:
   roles:
     validation:
       message: darf nur gültige Rollen enthalten und keine Duplikate
+  sessions:
+    update:
+      success: Willkommen, %{user_name}!
   user_mailer:
     welcome_email:
       body: Du wurdest zur Chorbasel-App eingeladen! Du kannst dich jetzt unter <a href="https://app.chorbasel.ch">app.chorbasel.ch</a> mit der E-Mail-Adresse einloggen, an die diese E-Mail versendet wurde.
@@ -52,12 +97,27 @@ de:
       success: Benutzer erfolgreich angelegt.
     edit:
       title: Benutzer bearbeiten
+    form:
+      address:
+        hint: 'TODO: address hint'
+      birth_date:
+        hint: 'TODO: birth_date hint'
+      email:
+        hint: Die E-Mail-Adresse mit der du dich in der App einloggst und unter der für den Chor erreichbar bist.
+      nick_name:
+        hint: 'Optional: Wie du im und vom Chor genannt werden willst (wenn nicht mit deinem regulären Vornamen).'
+      phone_number:
+        hint: Deine Mobiltelefonnummer im internationalen Format (z.B. +41791234567)
+      register:
+        hint: Dein Stimmregister im Chor.
     index:
       edit: Bearbeiten
       email: E-Mail
       name: Name
       new: Neu
+      profile_complete: Profil vollständig?
       roles: Rollen
+      status: Status
       title: Benutzer
     new:
       title: Neuer Benutzer

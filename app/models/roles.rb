@@ -1,17 +1,31 @@
 # frozen_string_literal: true
 
+class Role
+  def initialize(role)
+    @role = role
+  end
+
+  def human_name
+    I18n.t("activerecord.attributes.role.enums.role.#{@role}")
+  end
+
+  def value
+    @role
+  end
+end
+
 class Roles
-  ROLE_CHOIR_DIRECTION = 'Chor*Leitung'
-  ROLE_CHOIR_LIFE = 'Chor*Leben'
-  ROLE_CHOIR_IMAGE = 'Chor*Image'
-  ROLE_CHOIR_MONEY = 'Chor*Chlütter'
-  ROLE_CHOIR_ACTIVITIES = 'Chor*Aktivitäten'
-  ROLE_THANK_YOU_GIFTS = 'Dankegeschenk-Koordination'
-  ROLE_SPONSORSHIPS = 'GönnerInnen / Freunde'
-  ROLE_MEDIA = 'Medienarbeit'
-  ROLE_ABSENCES = 'Absenzenkoordination'
-  ROLE_IT = 'IT, Design, Website'
-  ROLE_APP = 'App'
+  ROLE_CHOIR_DIRECTION = 'choir_direction'
+  ROLE_CHOIR_LIFE = 'choir_life'
+  ROLE_CHOIR_IMAGE = 'choir_image'
+  ROLE_CHOIR_MONEY = 'choir_money'
+  ROLE_CHOIR_ACTIVITIES = 'choir_activities'
+  ROLE_THANK_YOU_GIFTS = 'thank_you_gifts'
+  ROLE_SPONSORSHIPS = 'sponsorships'
+  ROLE_MEDIA = 'media'
+  ROLE_ABSENCES = 'absences'
+  ROLE_IT = 'it'
+  ROLE_APP = 'app'
 
   ROLES = [
     ROLE_CHOIR_DIRECTION,
@@ -27,13 +41,23 @@ class Roles
     ROLE_APP
   ].freeze
 
-  attr_reader :roles
-
   def initialize(roles)
-    @roles = roles
+    @roles = roles.map { |r| Role.new(r) }
   end
 
+  attr_reader :roles
+
   def app?
-    roles.include?(ROLE_APP)
+    roles_values.include?(ROLE_APP)
+  end
+
+  def self.all
+    ROLES.map { |r| Role.new(r) }
+  end
+
+  private
+
+  def roles_values
+    roles.map(&:value)
   end
 end

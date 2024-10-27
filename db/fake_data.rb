@@ -13,7 +13,9 @@ User.create!(
   last_name: 'Niedermann',
   nick_name: 'Ferdi',
   email: 'nerdinand@nerdinand.com',
-  roles: [Roles::ROLE_APP]
+  roles: [Roles::ROLE_APP],
+  register: User::REGISTER_BASS_2,
+  phone_number: '+41791234567'
 )
 
 User.create!(
@@ -21,14 +23,18 @@ User.create!(
   last_name: 'Harencarova',
   nick_name: 'Hanka',
   email: 'h@seionline.ch',
-  roles: [Roles::ROLE_APP]
+  roles: [Roles::ROLE_APP],
+  register: User::REGISTER_ALTO_1,
+  phone_number: '+41791234567'
 )
 
 User.create!(
   first_name: 'Fabienne',
   last_name: 'Holzer',
   email: 'fabienne@chorbasel.ch',
-  roles: [Roles::ROLE_ABSENCES]
+  roles: [Roles::ROLE_ABSENCES],
+  register: User::REGISTER_ALTO_2,
+  phone_number: '+41791234567'
 )
 
 30.times do
@@ -40,12 +46,17 @@ User.create!(
           else
             []
           end
+  register = User::REGISTERS.sample
+  phone_number = Faker::PhoneNumber.cell_phone_in_e164
+
   User.create!(
     first_name:,
     last_name:,
     nick_name:,
     email: Faker::Internet.email(name: "#{first_name} #{last_name}", domain: 'example.com'),
-    roles:
+    roles:,
+    register:,
+    phone_number:
   )
 end
 
