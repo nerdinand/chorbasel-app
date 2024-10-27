@@ -26,15 +26,14 @@
 <% end %>
 
 <h2><%= t('.calendar.title') %></h2>
-
 <p><%= t('.calendar.description') %></p>
 
 <% @calendar_events.each do |calendar_event| %>
-  <div class="my-5 border-solid border-primary border-2">
-    <p><%= simple_format calendar_event.summary %></p>
-    <p><%= time_ago_in_words(calendar_event.starts_at) %></p>
-    <p><%= simple_format calendar_event.location %></p>
-    <p><%= simple_format calendar_event.description %></p>
+  <div class='my-5 p-2 border-solid border-primary border-2 rounded bg-gray'>
+    <p class='text-xs'><%= time_ago_in_words(calendar_event.starts_at) %></p>
+    <p class='font-bold'><%=   calendar_event.summary %></p>
+    <p class='italic'><%= calendar_event.location %></p>
+    <p class='mt-2'><%= simple_format calendar_event.description %></p>
   </div>
 <% end %>
 
