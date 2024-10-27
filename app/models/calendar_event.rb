@@ -31,4 +31,12 @@ class CalendarEvent < ApplicationRecord
   scope :ongoing, lambda {
     where(starts_at: ..ONGOING_TIME_WINDOW_BEFORE.from_now).where(ends_at: ONGOING_TIME_WINDOW_AFTER.ago..)
   }
+
+  def duration
+    ActiveSupport::Duration.build(ends_at - starts_at)
+  end
+
+  def starts_and_ends_on_same_day?
+    starts_at.to_time.to_date === ends_at.to_time.to_date # rubocop:disable Style/CaseEquality
+  end
 end

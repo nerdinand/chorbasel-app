@@ -1,0 +1,26 @@
+<%# i18n-tasks-use t('activerecord.models.attendance') %> 
+<%= render 'errors', model: @attendance %>
+
+<%= form_for @attendance do |f| %>
+  <%= f.hidden_field :user_id %>
+  <%= f.hidden_field :calendar_event_id %>
+
+  <p>
+    <%= f.label :user %>: <%= @attendance.user.full_name %> <%# i18n-tasks-use t('activerecord.attributes.attendance.user') %> 
+  </p>
+  <p>
+    <%= f.label :calendar_event %>: <%= render @attendance.calendar_event %> <%# i18n-tasks-use t('activerecord.attributes.attendance.calendar_event') %> 
+  </p>
+
+  <p>
+    <%= f.label :status %> <%# i18n-tasks-use t('activerecord.attributes.attendance.status') %> 
+    <%= f.select :status, attendances_status_options %>
+  </p>
+  
+  <p>
+    <%= f.label :remarks %> <%# i18n-tasks-use t('activerecord.attributes.attendance.remarks') %> 
+    <%= f.text_area :remarks %>
+  </p>
+
+  <%= f.submit class: 'btn btn-primary' %> <%# i18n-tasks-use t('helpers.submit.attendance.create') %>
+<% end %>

@@ -2,6 +2,16 @@
 de:
   activerecord:
     attributes:
+      attendance:
+        calendar_event: Termin
+        enums:
+          status:
+            attended: Anwesend
+            excused: Entschuldigt
+            unknown: Unbekannt
+        remarks: Bemerkungen
+        status: Status
+        user: Benutzer
       role:
         enums:
           role:
@@ -47,10 +57,21 @@ de:
         street: Strasse
         zip_code: PLZ
     models:
+      attendance: Anwesenheit
       user: Benutzer
   attendances:
+    create:
+      error: Fehler beim Eintragen der Anwesenheit.
+      success: Anwesenheit erfolgreich eingetragen.
+    edit:
+      title: Anwesenheit bearbeiten
     index:
       title: Anwesenheiten
+    new:
+      title: Anwesenheit eintragen
+    update:
+      error: Fehler beim Ändern der Anwesenheit.
+      success: Anwesenheit erfolgreich geändert.
   calendar_events:
     attendances:
       create:
@@ -76,9 +97,14 @@ de:
       title: Dashboard
   errors:
     message: 'Es sind Fehler aufgetreten:'
+  helpers:
+    submit:
+      attendance:
+        create: Anwesenheit eintragen
   layouts:
     navbar:
       attendances: Anwesenheiten
+      dashboard: Dashboard
       login: Einloggen
       logout: Ausloggen
       users: Benutzer
@@ -94,7 +120,8 @@ de:
       subject: Willkommen zur Chorbasel-App!
   users:
     create:
-      success: Benutzer erfolgreich angelegt.
+      error: Fehler beim Erstellen des Benutzers.
+      success: Benutzer erfolgreich erstellt.
     edit:
       title: Benutzer bearbeiten
     form:
@@ -122,4 +149,5 @@ de:
     new:
       title: Neuer Benutzer
     update:
-      success: Benutzer erfolgreich gespeichert.
+      error: Fehler beim Ändern des Benutzers.
+      success: Benutzer erfolgreich geändert.
