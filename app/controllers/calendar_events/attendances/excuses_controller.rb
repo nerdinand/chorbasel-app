@@ -8,21 +8,32 @@ module CalendarEvents
         @attendance = authorize Attendance.new(calendar_event:)
       end
 
-      def create
+      def create # rubocop:disable Metrics/MethodLength
         @attendance = authorize Attendance.find_or_initialize_by(
           calendar_event: CalendarEvent.find(params[:calendar_event_id]),
           user: current_user
         )
 
-        if @attendance.update(attendance_params)
+        if update_attendance
           flash[:success] = t('.success')
+          redirect_to dashboard_path
         else
           flash[:error] = t('.error')
+          render :new, status: :unprocessable_entity
         end
-        redirect_to dashboard_path
       end
 
       private
+
+      def update_attendance
+        if params[:attendance][:remarks].blank?
+          @attendance.errors.add(:remarks,
+                                 t('calendar_events.attendances.excuses.create.remark_blank_error'))
+          return false
+        end
+
+        @attendance.update(attendance_params)
+      end
 
       def attendance_params
         {

@@ -84,6 +84,7 @@ de:
       excuses:
         create:
           error: Fehler beim Erfassen der Entschuldigung.
+          remark_blank_error: Du musst die Entschuldigung ausfüllen!
           success: Entschuldigung erfolgreich erfasst.
         new:
           excuse: Entschuldigung
