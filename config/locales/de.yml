@@ -3,6 +3,7 @@ de:
   activerecord:
     attributes:
       attendance:
+        calendar_event: Termin
         enums:
           status:
             attended: Anwesend
@@ -10,6 +11,7 @@ de:
             unknown: Unbekannt
         remarks: Bemerkungen
         status: Status
+        user: Benutzer
       role:
         enums:
           role:
@@ -101,8 +103,8 @@ de:
         create: Anwesenheit eintragen
   layouts:
     navbar:
-      dashboard: Dashboard
       attendances: Anwesenheiten
+      dashboard: Dashboard
       login: Einloggen
       logout: Ausloggen
       users: Benutzer

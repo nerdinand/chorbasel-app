@@ -51,6 +51,10 @@ class Roles
     roles_values.include?(ROLE_APP)
   end
 
+  def absences?
+    roles_values.include?(ROLE_ABSENCES)
+  end
+
   def self.all
     ROLES.map { |r| Role.new(r) }
   end
@@ -59,9 +63,5 @@ class Roles
 
   def roles_values
     roles.map(&:value)
-  end
-
-  def absences?
-    roles.include?(ROLE_ABSENCES)
   end
 end

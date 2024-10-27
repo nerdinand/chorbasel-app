@@ -6,6 +6,13 @@
   <%= f.hidden_field :calendar_event_id %>
 
   <p>
+    <%= f.label :user %>: <%= @attendance.user.full_name %> <%# i18n-tasks-use t('activerecord.attributes.attendance.user') %> 
+  </p>
+  <p>
+    <%= f.label :calendar_event %>: <%= render @attendance.calendar_event %> <%# i18n-tasks-use t('activerecord.attributes.attendance.calendar_event') %> 
+  </p>
+
+  <p>
     <%= f.label :status %> <%# i18n-tasks-use t('activerecord.attributes.attendance.status') %> 
     <%= f.select :status, attendances_status_options %>
   </p>
