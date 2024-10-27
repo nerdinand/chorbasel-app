@@ -68,6 +68,16 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_26_141159) do
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
     t.string "nick_name"
+    t.string "salutation"
+    t.string "street"
+    t.string "zip_code"
+    t.string "city"
+    t.string "phone_number"
+    t.date "birth_date"
+    t.string "status", default: "active"
+    t.string "member_since"
+    t.string "register"
+    t.text "remarks"
     t.index "LOWER(email)", name: "index_users_on_lowercase_email", unique: true
     t.check_constraint "JSON_TYPE(roles) = 'array'", name: "users_roles_is_array"
   end

@@ -22,6 +22,10 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
+    superpowers? || user == user_to_modify
+  end
+
+  def admin_edit?
     superpowers?
   end
 
