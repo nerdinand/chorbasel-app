@@ -67,6 +67,8 @@ de:
     edit:
       title: Anwesenheit bearbeiten
     index:
+      excuse_requested:
+        title: Zu bestätigende Abwesenheiten
       title: Anwesenheiten
     new:
       title: Anwesenheit eintragen

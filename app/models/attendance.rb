@@ -11,7 +11,9 @@ class Attendance < ApplicationRecord
   belongs_to :user
 
   validates :status, presence: true, inclusion: STATUSES
-  validates :remarks, presence: true, if: :status_excuse_requested?
+  validates :remarks, presence: true, if: :excuse_requested?
+
+  scope :excuse_requested, -> { where(status: STATUS_EXCUSE_REQUESTED) }
 
   def status_emoji
     case status
@@ -26,7 +28,7 @@ class Attendance < ApplicationRecord
     end
   end
 
-  def status_excuse_requested?
+  def excuse_requested?
     status == STATUS_EXCUSE_REQUESTED
   end
 end

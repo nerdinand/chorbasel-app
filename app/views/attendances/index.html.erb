@@ -1,5 +1,19 @@
 <% content_for :title, t('.title') %>
 
+
+<% if @excuse_requested_attendances.any? %>
+  <h2><%= t('.excuse_requested.title') %></h2>
+  <ul>
+    <% @excuse_requested_attendances.each do |attendance| %>
+      <li>
+        <%= link_to edit_attendance_path(attendance) do %>
+          <%= render attendance %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
 <table>
   <thead>
     <tr>
