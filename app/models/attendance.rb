@@ -4,7 +4,8 @@ class Attendance < ApplicationRecord
   STATUS_ATTENDED = 'attended'
   STATUS_EXCUSED = 'excused'
   STATUS_UNKNOWN = 'unknown'
-  STATUSES = [STATUS_ATTENDED, STATUS_EXCUSED, STATUS_UNKNOWN].freeze
+  STATUS_EXCUSE_REQUESTED = 'excuse_requested'
+  STATUSES = [STATUS_ATTENDED, STATUS_EXCUSED, STATUS_UNKNOWN, STATUS_EXCUSE_REQUESTED].freeze
 
   belongs_to :calendar_event
   belongs_to :user
@@ -17,6 +18,8 @@ class Attendance < ApplicationRecord
       '✅'
     when STATUS_EXCUSED
       '❌'
+    when STATUS_EXCUSE_REQUESTED
+      '❗️'
     else
       '❔'
     end
