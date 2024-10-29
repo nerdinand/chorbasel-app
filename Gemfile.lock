@@ -264,7 +264,7 @@ GEM
     rails-html-sanitizer (1.6.0)
       loofah (~> 2.21)
       nokogiri (~> 1.14)
-    rails-i18n (7.0.9)
+    rails-i18n (7.0.10)
       i18n (>= 0.7, < 2)
       railties (>= 6.0.0, < 8)
     railties (8.0.0.rc1)
@@ -431,7 +431,7 @@ DEPENDENCIES
   puma (>= 5.0)
   pundit (~> 2.4)
   rails (~> 8.0.0.rc1)
-  rails-i18n (~> 7.0.0)
+  rails-i18n (~> 7.0.10)
   rspec-rails (~> 7.0)
   rubocop-capybara
   rubocop-rails

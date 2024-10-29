@@ -68,7 +68,7 @@ gem 'passwordless', '~> 1.8'
 
 gem 'pundit', '~> 2.4'
 
-gem 'rails-i18n', '~> 7.0.0'
+gem 'rails-i18n', '~> 7.0.10'
 
 gem 'icalendar', '~> 2.10'
 
