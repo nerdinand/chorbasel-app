@@ -45,8 +45,6 @@ class Roles
     @roles = roles.map { |r| Role.new(r) }
   end
 
-  attr_reader :roles
-
   def app?
     roles_values.include?(ROLE_APP)
   end
@@ -60,6 +58,8 @@ class Roles
   end
 
   private
+
+  attr_reader :roles
 
   def roles_values
     roles.map(&:value)

@@ -1,0 +1,24 @@
+ferdi:
+  first_name: Ferdinand
+  last_name: Niedermann
+  nick_name: Ferdi
+  email: ferdi@example.com
+  roles:
+  - app
+  status: active
+  register: bass_2
+
+fabienne:
+  first_name: Fabienne
+  last_name: Holzer
+  email: fabienne@chorbasel.ch
+  roles:
+  - absences
+  status: active
+  register: alto_2
+  salutation: Frau
+  street: Example street 42
+  zip_code: '1234'
+  city: Example city
+  phone_number: '+4179123456789'
+  birth_date: 1990-01-01
