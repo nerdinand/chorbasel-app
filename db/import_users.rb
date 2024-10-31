@@ -7,7 +7,7 @@ FIRST_NAME_REGEX = /\A(?<first_name>[\w ]+)(?: \((?<nick_name>[\w ]+)\))?\z/
 Rails.logger = Logger.new($stdout)
 Rails.logger.level = Logger::INFO
 
-csv = CSV.read('220812_ChorBasel_Mitgliederliste_22_23 - Aktive.csv', headers: true)
+csv = CSV.read('storage/users.csv', headers: true)
 
 REGISTER_MAPPING = {
   nil => nil,
