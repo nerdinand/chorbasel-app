@@ -57,9 +57,9 @@ class Roles
     ROLES.map { |r| Role.new(r) }
   end
 
-  private
-
   attr_reader :roles
+
+  private
 
   def roles_values
     roles.map(&:value)
