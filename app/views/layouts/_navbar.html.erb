@@ -10,8 +10,8 @@
 
     <div data-visibility-target='hideable' hidden class='w-full md:block md:w-auto' id='navbar-default'>
       <ul class='flex flex-col p-4 mt-4 list-none md:flex-row md:space-x-4 md:mt-0 md:text-sm md:font-medium'>
-        <li><%= link_to t('.dashboard'), dashboard_path %></li>
         <% if logged_in? %>
+          <li><%= link_to t('.dashboard'), dashboard_path %></li>
           <% if policy(:user).index? %>
             <li><%= link_to t('.users'), users_path %></li>
           <% end %>
