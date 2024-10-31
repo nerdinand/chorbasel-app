@@ -79,9 +79,8 @@ de:
     attendances:
       attendances:
         create:
-          error: Dieser Termin ist abgelaufen.
-        perform_create:
           error: Fehler beim Eintragen der Anwesenheit.
+          expired_error: Dieser Termin ist abgelaufen.
           success: Anwesenheit erfolgreich eingetragen.
       excuses:
         create:

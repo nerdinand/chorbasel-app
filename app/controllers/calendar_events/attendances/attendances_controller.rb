@@ -9,7 +9,7 @@ module CalendarEvents
         if calendar_event.ongoing?
           perform_create(calendar_event)
         else
-          flash[:error] = t('.error')
+          flash[:error] = t('.expired_error')
         end
         redirect_to dashboard_path
       end
@@ -21,9 +21,9 @@ module CalendarEvents
         @attendance.calendar_event = calendar_event
 
         if @attendance.save
-          flash[:success] = t('.success')
+          flash[:success] = t('calendar_events.attendances.attendances.create.success')
         else
-          flash[:error] = t('.error')
+          flash[:error] = t('calendar_events.attendances.attendances.create.error')
         end
       end
     end
