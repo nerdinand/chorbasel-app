@@ -29,8 +29,8 @@
   <div class="my-5 border-solid border-primary border-2">
     <p class="font-bold"><%= calendar_event.summary %></p>
     <p><%= calendar_event_time_string(calendar_event) %></p>
-    <p><%= time_ago_in_words(calendar_event.starts_at) %></p>
-    <p><%= calendar_event.location %></p>
+    <p><%= time_ago_in_words(calendar_event.starts_at, scope: 'datetime.distance_in_words.in_duration') %></p>
+    <p class="mt-5"><%= calendar_event.location %></p>
     <div class="my-5">
       <%= simple_format calendar_event.description %>
     </div>
