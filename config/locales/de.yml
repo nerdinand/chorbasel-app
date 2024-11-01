@@ -159,6 +159,7 @@ de:
       dashboard: Dashboard
       login: Einloggen
       logout: Ausloggen
+      my_data: Meine Daten
       users: Benutzer
   roles:
     validation:
