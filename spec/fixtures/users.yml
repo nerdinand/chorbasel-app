@@ -1,3 +1,4 @@
+# Ferdi is an app admin
 ferdi:
   first_name: Ferdinand
   last_name: Niedermann
@@ -8,6 +9,7 @@ ferdi:
   status: active
   register: bass_2
 
+# Fabienne can handle absences
 fabienne:
   first_name: Fabienne
   last_name: H
@@ -23,6 +25,15 @@ fabienne:
   phone_number: '+4179123456789'
   birth_date: 1990-01-01
 
+phips:
+  first_name: Philippe
+  last_name: R
+  nick_name: Phips
+  email: phips@example.com
+  roles:
+  - choir_direction
+
+# Uwe is just a regular member :(
 uwe:
   first_name: Uwe
   last_name: S

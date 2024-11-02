@@ -6,7 +6,7 @@ require_relative 'log_in_helpers'
 RSpec.describe('Completing a profile') do
   fixtures :users
 
-  scenario do # rubocop:disable RSpec/ExampleLength
+  scenario do
     log_in_with_magic_link(users(:uwe))
     expect(page).to have_content(
       'Dein Benutzerprofil ist unvollständig. Bitte hilf uns indem du die fehlenden Informationen einträgst.'

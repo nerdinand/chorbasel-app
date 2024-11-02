@@ -42,6 +42,10 @@ class ApplicationPolicy
     user.roles_wrapper.app?
   end
 
+  def choir_direction?
+    user.roles_wrapper.choir_direction?
+  end
+
   class Scope
     def initialize(user, scope)
       @user = user
