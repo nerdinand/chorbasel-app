@@ -10,8 +10,8 @@ ferdi:
 
 fabienne:
   first_name: Fabienne
-  last_name: Holzer
-  email: fabienne@chorbasel.ch
+  last_name: H
+  email: fabienne@example.com
   roles:
   - absences
   status: active
@@ -22,3 +22,8 @@ fabienne:
   city: Example city
   phone_number: '+4179123456789'
   birth_date: 1990-01-01
+
+uwe:
+  first_name: Uwe
+  last_name: S
+  email: uwe@example.com

@@ -44,7 +44,7 @@ RSpec.describe User do
     end
 
     context 'when no nick_name is present' do
-      it { expect(users(:fabienne).full_name).to eq('Fabienne Holzer') }
+      it { expect(users(:fabienne).full_name).to eq('Fabienne H') }
     end
   end
 
