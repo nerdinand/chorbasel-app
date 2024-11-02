@@ -27,4 +27,6 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  get '*route' => redirect('/users/sign_in')
 end

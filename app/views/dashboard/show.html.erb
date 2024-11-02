@@ -27,10 +27,13 @@
 
 <% @calendar_events.each do |calendar_event| %>
   <div class="my-5 border-solid border-primary border-2">
-    <p><%= simple_format calendar_event.summary %></p>
-    <p><%= time_ago_in_words(calendar_event.starts_at) %></p>
-    <p><%= simple_format calendar_event.location %></p>
-    <p><%= simple_format calendar_event.description %></p>
+    <p class="font-bold"><%= calendar_event.summary %></p>
+    <p><%= calendar_event_time_string(calendar_event) %></p>
+    <p><%= time_ago_in_words(calendar_event.starts_at, scope: 'datetime.distance_in_words.in_duration') %></p>
+    <p class="mt-5"><%= calendar_event.location %></p>
+    <div class="my-5">
+      <%= simple_format calendar_event.description %>
+    </div>
 
     <% unless Attendance.where(calendar_event:, user: current_user).exists? %>
       <%= link_to t('.calendar_events.attendance.new'), new_calendar_event_attendance_excuse_path(calendar_event) %>

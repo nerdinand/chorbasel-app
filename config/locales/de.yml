@@ -79,9 +79,8 @@ de:
     attendances:
       attendances:
         create:
-          error: Dieser Termin ist abgelaufen.
-        perform_create:
           error: Fehler beim Eintragen der Anwesenheit.
+          expired_error: Dieser Termin ist abgelaufen.
           success: Anwesenheit erfolgreich eingetragen.
       excuses:
         create:
@@ -111,6 +110,43 @@ de:
         link: Benutzerprofil vervollständigen
         message: Dein Benutzerprofil ist unvollständig. Bitte hilf uns indem du die fehlenden Informationen einträgst.
       title: Dashboard
+  datetime:
+    distance_in_words:
+      in_duration:
+        about_x_hours:
+          one: in etwa einer Stunde
+          other: in etwa %{count} Stunden
+        about_x_months:
+          one: in etwa einem Monat
+          other: in etwa %{count} Monaten
+        about_x_years:
+          one: in etwa einem Jahr
+          other: in etwa %{count} Jahren
+        almost_x_years:
+          one: in fast einem Jahr
+          other: in fast %{count} Jahren
+        half_a_minute: in etwa einer halben Minute
+        less_than_x_minutes:
+          one: in weniger als einer Minute
+          other: in weniger als %{count} Minuten
+        less_than_x_seconds:
+          one: in weniger als einer Sekunde
+          other: in weniger als %{count} Sekunden
+        over_x_years:
+          one: in mehr als einem Jahr
+          other: in mehr als %{count} Jahren
+        x_days:
+          one: in einem Tag
+          other: in %{count} Tagen
+        x_minutes:
+          one: in einer Minute
+          other: in %{count} Minuten
+        x_months:
+          one: in etwa einem Monat
+          other: in %{count} Monaten
+        x_seconds:
+          one: in etwa einer Sekunde
+          other: in %{count} Sekunden
   errors:
     message: 'Es sind Fehler aufgetreten:'
   helpers:
@@ -123,6 +159,7 @@ de:
       dashboard: Dashboard
       login: Einloggen
       logout: Ausloggen
+      my_data: Meine Daten
       users: Benutzer
   roles:
     validation:

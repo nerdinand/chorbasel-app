@@ -10,7 +10,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def index?
-    superpowers?
+    user_management?
   end
 
   def show?
@@ -18,18 +18,24 @@ class UserPolicy < ApplicationPolicy
   end
 
   def create?
-    superpowers?
+    user_management?
   end
 
   def update?
-    superpowers? || user == user_to_modify
+    user_management? || user == user_to_modify
   end
 
   def admin_edit?
-    superpowers?
+    user_management?
   end
 
   def destroy?
-    superpowers?
+    user_management?
+  end
+
+  private
+
+  def user_management?
+    superpowers? || choir_direction?
   end
 end

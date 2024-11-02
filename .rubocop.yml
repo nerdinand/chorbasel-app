@@ -9,3 +9,11 @@ AllCops:
   
 Style/Documentation:
   Enabled: false
+
+RSpec/MultipleExpectations:
+  Exclude: 
+  - spec/features/**/*
+
+RSpec/ExampleLength:
+  Exclude: 
+  - spec/features/**/*

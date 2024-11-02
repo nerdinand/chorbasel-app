@@ -80,6 +80,7 @@ jobs:
           RAILS_ENV: test
           # REDIS_URL: redis://localhost:6379/0
         run: |
+          bin/rails assets:precompile
           bin/rails db:test:prepare
           bin/bundle exec rspec
 

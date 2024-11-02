@@ -2,10 +2,12 @@
 
 require 'csv'
 
+FIRST_NAME_REGEX = /\A(?<first_name>.+?)(?: \((?<nick_name>.+)\))?\z/
+
 Rails.logger = Logger.new($stdout)
 Rails.logger.level = Logger::INFO
 
-csv = CSV.read('220812_ChorBasel_Mitgliederliste_22_23 - Aktive.csv', headers: true)
+csv = CSV.read('storage/users.csv', headers: true)
 
 REGISTER_MAPPING = {
   nil => nil,
@@ -29,10 +31,13 @@ def map_register(register)
 end
 
 csv.each do |row|
+  first_name_match = row['Vorname'].match(FIRST_NAME_REGEX)
+
   attributes = {
     salutation: row['Anrede'],
     last_name: row['Name'],
-    first_name: row['Vorname'],
+    first_name: first_name_match[:first_name],
+    nick_name: first_name_match[:nick_name],
     street: row['Strasse'],
     zip_code: row['PLZ'],
     city: row['Ort'],
