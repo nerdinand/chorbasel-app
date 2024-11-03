@@ -57,6 +57,7 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
+  gem 'pundit-matchers', '~> 3.1'
   gem 'rspec-rails', '~> 7.0'
   gem 'selenium-webdriver'
 end

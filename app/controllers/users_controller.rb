@@ -40,6 +40,7 @@ class UsersController < ApplicationController
 
   private
 
+  # TODO: solve this with https://github.com/varvet/pundit?tab=readme-ov-file#strong-parameters
   def user_params
     if policy(:user).admin_edit?
       admin_user_params.tap { |p| p[:roles].reject!(&:blank?) }

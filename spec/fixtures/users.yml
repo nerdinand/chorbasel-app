@@ -38,3 +38,9 @@ uwe:
   first_name: Uwe
   last_name: S
   email: uwe@example.com
+
+# Marit is just a regular member :(
+marit:
+  first_name: Marit
+  last_name: F
+  email: marit@example.com
