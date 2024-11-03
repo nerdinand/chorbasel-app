@@ -41,6 +41,6 @@
   </div>
 <% end %>
 
-<% if policy(:calendar_syncs).create? %>
+<% if policy(:calendar_sync).create? %>
   <%= button_to t('.calendar_events.sync'), calendar_events_syncs_path, method: :post, class: 'btn btn-primary' %>
 <% end %>

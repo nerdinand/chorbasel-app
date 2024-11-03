@@ -3,7 +3,7 @@
 module CalendarEvents
   class SyncsController < ApplicationController
     def create
-      authorize :calendar_syncs, :create?
+      authorize :calendar_sync, :create?
 
       CalendarSyncJob.perform_now
 
