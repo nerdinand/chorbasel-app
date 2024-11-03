@@ -2,26 +2,23 @@
 <%= render 'errors', model: @user %>
 
 <%= form_for @user do |f| %>
-  <p>
+  <p class=flex items-end>
     <span class="mandatory-field-indicator">*</span>
     <%= f.label :email %> <%# i18n-tasks-use t('activerecord.attributes.user.email') %>
     <%= f.email_field :email %>
-    <br>
-    <div class="field-hint"><%= t('.email.hint') %></div>
   </p>
+  <p class="field-hint text-xs text-gray-700"><%= t('.email.hint') %></p>
 
   <p>
     <span class="mandatory-field-indicator">*</span>
     <%= f.label :first_name %> <%# i18n-tasks-use t('activerecord.attributes.user.first_name') %> 
     <%= f.text_field :first_name %>
-    <br>
   </p>
 
   <p>
     <span class="mandatory-field-indicator">*</span>
     <%= f.label :last_name %> <%# i18n-tasks-use t('activerecord.attributes.user.last_name') %> 
     <%= f.text_field :last_name %>
-    <br>
   </p>
   
   <p>

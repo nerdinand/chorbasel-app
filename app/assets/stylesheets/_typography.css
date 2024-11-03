@@ -8,12 +8,11 @@
   }
 
   h1 { 
-    @apply decoration-2 underline decoration-primary;
     @apply text-3xl;
   }
 
   h2 {
-    @apply text-2xl;
+    @apply text-2xl mt-2;
   }
 
   h3 {
@@ -22,5 +21,9 @@
 
   ul {
     @apply list-disc pl-4;
+  }
+
+  a {
+    @apply underline decoration-1 text-complementary;
   }
 }
