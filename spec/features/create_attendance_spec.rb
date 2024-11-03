@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require_relative 'log_in_helpers'
 
 def create_ongoing_event!
   CalendarEvent.create!(

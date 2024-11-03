@@ -5,7 +5,7 @@ module CalendarEvents
     class ExcusesController < ApplicationController
       def new
         calendar_event = CalendarEvent.find(params[:calendar_event_id])
-        @attendance = authorize Attendance.new(calendar_event:)
+        @attendance = authorize Attendance.new(calendar_event:, user: current_user)
       end
 
       def create # rubocop:disable Metrics/MethodLength
