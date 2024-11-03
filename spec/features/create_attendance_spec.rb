@@ -6,7 +6,7 @@ def create_ongoing_event!
   CalendarEvent.create!(
     starts_at: 3.days.ago,
     ends_at: 1.hour.from_now,
-    uid: 'random',
+    uid: 'random1',
     event_created_at: Time.zone.now,
     summary: 'my test event'
   )
