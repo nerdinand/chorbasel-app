@@ -7,7 +7,7 @@ def create_future_event!
   CalendarEvent.create!(
     starts_at: 1.week.from_now,
     ends_at: 1.week.from_now + 2.hours,
-    uid: 'random2',
+    uid: 'random3',
     event_created_at: Time.zone.now,
     summary: 'my future event'
   )
