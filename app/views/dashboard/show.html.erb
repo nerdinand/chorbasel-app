@@ -22,21 +22,20 @@
 <% end %>
 
 <h2><%= t('.calendar.title') %></h2>
-
 <p><%= t('.calendar.description') %></p>
 
 <% @calendar_events.each do |calendar_event| %>
-  <div class="my-5 border-solid border-primary border-2">
+  <div class="my-5 p-2 border-solid border-primary border-2 rounded bg-gray">
     <p class="font-bold"><%= calendar_event.summary %></p>
     <p><%= calendar_event_time_string(calendar_event) %></p>
-    <p><%= time_ago_in_words(calendar_event.starts_at, scope: 'datetime.distance_in_words.in_duration') %></p>
-    <p class="mt-5"><%= calendar_event.location %></p>
+    <p class="text-xs"><%= time_ago_in_words(calendar_event.starts_at, scope: 'datetime.distance_in_words.in_duration') %></p>
+    <p class="mt-5 italic"><%= calendar_event.location %></p>
     <div class="my-5">
       <%= simple_format calendar_event.description %>
     </div>
 
     <% unless Attendance.where(calendar_event:, user: current_user).exists? %>
-      <%= link_to t('.calendar_events.attendance.new'), new_calendar_event_attendance_excuse_path(calendar_event) %>
+      <%= link_to t('.calendar_events.attendance.new'), new_calendar_event_attendance_excuse_path(calendar_event), class: 'btn btn-primary' %>
     <% end %>
   </div>
 <% end %>
