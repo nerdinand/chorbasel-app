@@ -7,7 +7,7 @@ class SessionsController < Passwordless::SessionsController
   def update
     return unless super
 
-    flash[:success] = t('.success', user_name: current_user.display_name)
+    flash[:success] = t('.success', user_name: current_user&.display_name)
   end
 
   private
