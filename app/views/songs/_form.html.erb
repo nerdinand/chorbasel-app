@@ -1,4 +1,3 @@
-<%# i18n-tasks-use t('activerecord.models.song') %> 
 <%= render 'errors', model: @song %>
 
 <%= form_for @song do |f| %>
@@ -44,14 +43,14 @@
   </p>
 
   <p>
-    <%= f.label :genres %> <%# i18n-tasks-use t('activerecord.attributes.user.genres') %> 
+    <%= f.label :genres %> <%# i18n-tasks-use t('activerecord.attributes.song.genres') %> 
     <%= f.collection_check_boxes :genres, [], :value, :human_name %>
   </p>
 
   <p>
-    <%= f.label :registers %> <%# i18n-tasks-use t('activerecord.attributes.user.registers') %> 
+    <%= f.label :registers %> <%# i18n-tasks-use t('activerecord.attributes.song.registers') %> 
     <%= f.collection_check_boxes :registers, Register::Song.all, :value, :human_name %>
   </p>
 
-  <%= f.submit class: 'btn btn-primary' %>
+  <%= f.submit class: 'btn btn-primary' %>  <%# i18n-tasks-use t('helpers.submit.song.create') %> 
 <% end %>

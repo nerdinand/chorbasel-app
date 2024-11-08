@@ -61,7 +61,7 @@ module Register
       REGISTER_ALTO,
       REGISTER_TENOR,
       REGISTER_BASS
-    ]
+    ].freeze
 
     def self.all
       REGISTERS.map { |r| Register.new(r) }
