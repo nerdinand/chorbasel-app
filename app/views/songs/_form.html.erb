@@ -1,0 +1,57 @@
+<%# i18n-tasks-use t('activerecord.models.song') %> 
+<%= render 'errors', model: @song %>
+
+<%= form_for @song do |f| %>
+  <p>
+    <span class="mandatory-field-indicator">*</span>
+    <%= f.label :title %> <%# i18n-tasks-use t('activerecord.attributes.song.title') %>
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <%= f.label :composer %> <%# i18n-tasks-use t('activerecord.attributes.song.composer') %> 
+    <%= f.text_field :composer %>
+  </p>
+
+  <p>
+    <%= f.label :arranger %> <%# i18n-tasks-use t('activerecord.attributes.song.arranger') %> 
+    <%= f.text_field :arranger %>
+  </p>
+
+  <p>
+    <%= f.label :key_signature %> <%# i18n-tasks-use t('activerecord.attributes.song.key_signature') %> 
+    <%= f.text_field :key_signature %>
+  </p>
+
+  <p>
+    <%= f.label :time_signature %> <%# i18n-tasks-use t('activerecord.attributes.song.time_signature') %> 
+    <%= f.text_field :time_signature %>
+  </p>
+
+  <p>
+    <%= f.label :language %> <%# i18n-tasks-use t('activerecord.attributes.song.language') %> 
+    <%= f.text_field :language %>
+  </p>
+
+  <p>
+    <%= f.label :lyrics %> <%# i18n-tasks-use t('activerecord.attributes.song.lyrics') %> 
+    <%= f.text_area :lyrics %>
+  </p>
+
+  <p>
+    <%= f.label :repertoire %> <%# i18n-tasks-use t('activerecord.attributes.song.repertoire') %> 
+    <%= f.check_box :repertoire %>
+  </p>
+
+  <p>
+    <%= f.label :genres %> <%# i18n-tasks-use t('activerecord.attributes.user.genres') %> 
+    <%= f.collection_check_boxes :genres, [], :value, :human_name %>
+  </p>
+
+  <p>
+    <%= f.label :registers %> <%# i18n-tasks-use t('activerecord.attributes.user.registers') %> 
+    <%= f.collection_check_boxes :registers, Register::Song.all, :value, :human_name %>
+  </p>
+
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>

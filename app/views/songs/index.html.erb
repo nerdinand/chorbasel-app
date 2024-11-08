@@ -1,0 +1,50 @@
+<% content_for :title, t('.title') %>
+
+<% if policy(Song).new? %>
+  <%= link_to t('.new'), new_song_path, class: 'btn btn-primary' %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= t('activerecord.attributes.song.title') %></th>
+      <th><%= t('activerecord.attributes.song.composer') %></th>
+      <th><%= t('activerecord.attributes.song.arranger') %></th>
+      <th><%= t('activerecord.attributes.song.registers') %></th>
+      <th><%= t('activerecord.attributes.song.repertoire') %></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @songs.each do |song| %>
+      <tr>
+        <td>
+          <%= song.title %>
+        </td>
+        <td>
+          <%= song.composer %>
+        </td>
+        <td>
+          <%= song.arranger %>
+        </td>
+        <td>
+          <%= register_string(song.registers) %>
+        </td>
+        <td>
+          <%= boolean_emoji(song.repertoire?) %>
+        </td>
+        <td>
+          <% if policy(song).edit? %>
+            <%= link_to t('.edit'), edit_song_path(song), class: 'btn btn-primary' %>
+          <% end %>
+        </td>
+        <td>
+          <% if policy(song).destroy? %>
+            <%= button_to t('.destroy'), song_path(song), method: :delete, class: 'btn btn-primary' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

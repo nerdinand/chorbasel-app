@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   constraints Passwordless::Constraint.new(User) do
     get 'dashboard' => 'dashboard#show'
 
-    resources :users
+    resources :users, except: :destroy
     resources :attendances, only: %i[index edit new create update]
 
     namespace :calendar_events do
@@ -26,6 +26,8 @@ Rails.application.routes.draw do
         resource :attendance, only: :create, controller: 'calendar_events/attendances/attendances'
       end
     end
+
+    resources :songs
   end
 
   get '*route' => redirect('/users/sign_in')

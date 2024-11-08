@@ -14,7 +14,7 @@ User.create!(
   nick_name: 'Ferdi',
   email: 'nerdinand@nerdinand.com',
   roles: [Roles::ROLE_APP],
-  register: User::REGISTER_BASS_2,
+  register: Register::Singer::REGISTER_BASS_2,
   phone_number: '+41791234567'
 )
 
@@ -24,7 +24,7 @@ User.create!(
   nick_name: 'Hanka',
   email: 'h@seionline.ch',
   roles: [Roles::ROLE_APP],
-  register: User::REGISTER_ALTO_1,
+  register: Register::Singer::REGISTER_ALTO_1,
   phone_number: '+41791234567'
 )
 
@@ -33,7 +33,7 @@ User.create!(
   last_name: 'Holzer',
   email: 'fabienne@chorbasel.ch',
   roles: [Roles::ROLE_ABSENCES],
-  register: User::REGISTER_ALTO_2,
+  register: Register::Singer::REGISTER_ALTO_2,
   phone_number: '+41791234567'
 )
 
@@ -46,7 +46,7 @@ User.create!(
           else
             []
           end
-  register = User::REGISTERS.sample
+  register = Register::Singer::REGISTERS.sample
   phone_number = Faker::PhoneNumber.cell_phone_in_e164
 
   User.create!(

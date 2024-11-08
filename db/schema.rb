@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_08_174702) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_08_194001) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -86,6 +86,23 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_08_174702) do
     t.datetime "updated_at", null: false
     t.index ["authenticatable_type", "authenticatable_id"], name: "authenticatable"
     t.index ["identifier"], name: "index_passwordless_sessions_on_identifier", unique: true
+  end
+
+  create_table "songs", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "composer"
+    t.string "arranger"
+    t.text "lyrics"
+    t.string "key_signature"
+    t.string "time_signature"
+    t.string "language"
+    t.boolean "repertoire", default: false, null: false
+    t.json "genres", default: [], null: false
+    t.json "registers", default: [], null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.check_constraint "JSON_TYPE(genres) = 'array'", name: "songs_genres_is_array"
+    t.check_constraint "JSON_TYPE(registers) = 'array'", name: "songs_registers_is_array"
   end
 
   create_table "users", force: :cascade do |t|
