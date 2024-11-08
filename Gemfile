@@ -77,3 +77,5 @@ gem 'down', '~> 5.4'
 gem 'arask', '~> 1.2'
 
 gem 'faker', '~> 3.5'
+
+gem 'aws-sdk-s3', '~> 1.170', require: false
