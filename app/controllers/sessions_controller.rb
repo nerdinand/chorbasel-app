@@ -5,9 +5,15 @@ class SessionsController < Passwordless::SessionsController
   before_action :require_unauth!, only: %i[new show] # rubocop:disable Rails/LexicallyScopedActionFilter
 
   def update
-    return unless super
+    super
 
-    flash[:success] = t('.success', user_name: current_user&.display_name)
+    # A bit of a hack: we can only set our success flash message if the super
+    # call hasn't failed, e.g. because of a code that was used twice. The only
+    # way to check that, that I've figured out is to check if flash[:alert] was
+    # set.
+    return if flash[:alert].present?
+
+    flash[:success] = t('.success', user_name: current_user.display_name)
   end
 
   private
