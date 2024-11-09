@@ -13,8 +13,6 @@ amazon:
   secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
   region: eu-central-1
   bucket: chorbasel-media-<%= Rails.env %>
-  public: true
-
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:

@@ -8,4 +8,14 @@ module SongMediaHelper
   def song_media_register_options
     Register::Song::REGISTERS.map { |r| [t("activerecord.attributes.song.enums.register.#{r}"), r] }
   end
+
+  def file_icon(attachment)
+    if attachment.audio?
+      '🎵'
+    elsif attachment.content_type == 'application/pdf'
+      '📜'
+    elsif attachment.video?
+      '🎬'
+    end
+  end
 end

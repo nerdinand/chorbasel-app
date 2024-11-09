@@ -32,6 +32,6 @@ class SongMediaController < ApplicationController
   private
 
   def song_medium_params
-    params.require(:song_medium).permit(:song_id, :register, :kind)
+    params.require(:song_medium).permit(:song_id, :register, :kind, :file)
   end
 end

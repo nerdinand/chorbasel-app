@@ -14,6 +14,7 @@ class SongMedium < ApplicationRecord
   ].freeze
 
   belongs_to :song
+  has_one_attached :file
 
   validates :register, presence: true, inclusion: Register::Song::REGISTERS, if: proc { |sm|
     sm.kind == KIND_RECORDING_REGISTER
@@ -21,6 +22,7 @@ class SongMedium < ApplicationRecord
   validates :register, absence: true, if: proc { |sm| sm.kind != KIND_RECORDING_REGISTER }
   validates :kind, presence: true, inclusion: KINDS
   validates :kind, uniqueness: { scope: %i[song_id register] }
+  validates :file, presence: true
 
   def human_register
     return nil if register.blank?

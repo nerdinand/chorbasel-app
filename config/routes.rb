@@ -32,5 +32,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get '*route' => redirect('/users/sign_in')
+  get '*path' => redirect('/users/sign_in'), via: :all, constraints: lambda { |req|
+    req.path.exclude? 'rails/'
+  }
 end

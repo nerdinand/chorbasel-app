@@ -63,6 +63,7 @@ de:
             sheet_music: Notenblatt
         kind: Art
         register: Stimme
+        file: Datei
       user:
         birth_date: Geburtsdatum
         city: Ort

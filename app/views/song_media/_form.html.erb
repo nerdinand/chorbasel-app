@@ -13,6 +13,11 @@
     <%= f.select :register, song_media_register_options, include_blank: true %>
   </p>
 
+  <p>
+    <%= f.label :file %> <%# i18n-tasks-use t('activerecord.attributes.song_medium.file') %> 
+    <%= f.file_field :file %>
+  </p>
+
   <%= f.submit class: 'btn btn-primary' %>  <%# i18n-tasks-use t('helpers.submit.song_medium.create') %> 
 <% end %>
   
