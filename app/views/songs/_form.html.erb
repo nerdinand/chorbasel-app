@@ -42,10 +42,13 @@
     <%= f.check_box :repertoire %>
   </p>
 
-  <p>
-    <%= f.label :genres %> <%# i18n-tasks-use t('activerecord.attributes.song.genres') %> 
-    <%= f.collection_check_boxes :genres, [], :value, :human_name %>
-  </p>
+  <div data-controller="combobox" data-combobox-choices-value="<%= Song.all.pluck(:genres).flatten.uniq.to_json %>">
+    <p>
+      <%= f.label :genres %> <%# i18n-tasks-use t('activerecord.attributes.song.genres') %> 
+      <%= f.text_field :genres, value: @song.genres.join(', '), data: { 'combobox-target': 'textField', action: 'combobox#input' } %>
+      <ul data-combobox-target="choices"></ul>
+    </p>
+  </div>
 
   <p>
     <%= f.label :registers %> <%# i18n-tasks-use t('activerecord.attributes.song.registers') %> 
