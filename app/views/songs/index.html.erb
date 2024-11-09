@@ -20,7 +20,7 @@
     <% @songs.each do |song| %>
       <tr>
         <td>
-          <%= song.title %>
+          <%= link_to song.title, song %>
         </td>
         <td>
           <%= song.composer %>

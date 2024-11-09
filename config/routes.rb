@@ -27,7 +27,9 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :songs
+    resources :songs do
+      resources :song_media
+    end
   end
 
   get '*route' => redirect('/users/sign_in')

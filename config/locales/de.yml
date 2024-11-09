@@ -54,6 +54,15 @@ de:
         repertoire: Im Repertoire?
         time_signature: Taktbezeichnung
         title: Name
+      song_medium:
+        enums:
+          kind:
+            choreography_video: Choreo-Video
+            recording_all: Audioaufnahme (alle Stimmen)
+            recording_register: Audioaufnahme
+            sheet_music: Notenblatt
+        kind: Art
+        register: Stimme
       user:
         birth_date: Geburtsdatum
         city: Ort
@@ -182,6 +191,8 @@ de:
         create: Anwesenheit eintragen
       song:
         create: Lied erstellen
+      song_medium:
+        create: Mediendatei erstellen
   layouts:
     navbar:
       attendances: Anwesenheiten
@@ -194,6 +205,20 @@ de:
   sessions:
     update:
       success: Willkommen, %{user_name}!
+  song_media:
+    create:
+      error: Fehler beim Erstellen der Mediendatei.
+      success: Mediendatei erfolgreich erstellt.
+    destroy:
+      error: Fehler beim Löschen der Mediendatei.
+      success: Mediendatei erfolgreich gelöscht.
+    edit:
+      title: Mediendatei bearbeiten
+    new:
+      title: Neue Mediendatei
+    update:
+      error: Fehler beim Bearbeiten der Mediendatei.
+      success: Mediendatei erfolgreich bearbeitet.
   songs:
     create:
       error: Fehler beim Erstellen des Lieds.
@@ -210,6 +235,14 @@ de:
       title: Lieder
     new:
       title: Neues Lied
+    show:
+      destroy: Lied löschen
+      edit: Lied bearbeiten
+      song_media:
+        kind: Art
+        new: Neue Mediendatei
+        register: Stimme
+        title: Mediendateien
     update:
       error: Fehler beim Bearbeiten des Lieds.
       success: Lied erfolgreich bearbeitet.

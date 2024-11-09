@@ -5,6 +5,10 @@ class SongsController < ApplicationController
     @songs = authorize Song.all
   end
 
+  def show
+    @song = authorize Song.includes(:song_media).find(params[:id])
+  end
+
   def new
     @song = authorize Song.new(
       registers: Register::Song::DEFAULT_REGISTERS
