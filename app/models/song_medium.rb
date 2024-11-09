@@ -20,6 +20,7 @@ class SongMedium < ApplicationRecord
   }
   validates :register, absence: true, if: proc { |sm| sm.kind != KIND_RECORDING_REGISTER }
   validates :kind, presence: true, inclusion: KINDS
+  validates :kind, uniqueness: { scope: %i[song_id register] }
 
   def human_register
     return nil if register.blank?

@@ -216,9 +216,6 @@ de:
       title: Mediendatei bearbeiten
     new:
       title: Neue Mediendatei
-    update:
-      error: Fehler beim Bearbeiten der Mediendatei.
-      success: Mediendatei erfolgreich bearbeitet.
   songs:
     create:
       error: Fehler beim Erstellen des Lieds.
@@ -239,6 +236,7 @@ de:
       destroy: Lied löschen
       edit: Lied bearbeiten
       song_media:
+        destroy: Mediendatei löschen
         kind: Art
         new: Neue Mediendatei
         register: Stimme

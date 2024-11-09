@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     end
 
     resources :songs do
-      resources :song_media
+      resources :song_media, only: %i[new create destroy]
     end
   end
 

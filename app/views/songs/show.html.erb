@@ -72,12 +72,21 @@
 
   <% if @song.song_media.any? %>
     <table>
-      <thead><th><%= t('.song_media.kind') %></th><th><%= t('.song_media.register') %></th></thead>
+      <thead>
+        <th><%= t('.song_media.kind') %></th>
+        <th><%= t('.song_media.register') %></th>
+        <th></th>
+      </thead>
       <tbody>
         <% @song.song_media.each do |song_medium| %>
           <tr>
             <td><%= song_medium.human_kind %></td>
             <td><%= song_medium.human_register %></td>
+            <td>
+              <% if policy(song_medium).destroy? %>
+                <%= button_to t('.song_media.destroy'), song_song_medium_path(song_medium.song, song_medium), method: :delete, class: 'btn btn-primary' %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>

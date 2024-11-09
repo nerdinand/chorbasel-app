@@ -5,10 +5,6 @@ class SongMediaController < ApplicationController
     @song_medium = authorize SongMedium.new(song_id: params[:song_id])
   end
 
-  def edit
-    @song_medium = authorize SongMedium.find(params[:id])
-  end
-
   def create
     @song_medium = authorize SongMedium.new(song_medium_params)
 
@@ -18,18 +14,6 @@ class SongMediaController < ApplicationController
     else
       flash[:error] = t('.error')
       render :new, status: :unprocessable_entity
-    end
-  end
-
-  def update
-    @song_medium = authorize SongMedium.find(params[:id])
-
-    if @song_medium.update(song_medium_params)
-      flash[:success] = t('.success')
-      redirect_to song_path(@song_medium.song)
-    else
-      flash[:error] = t('.error')
-      render :edit, status: :unprocessable_entity
     end
   end
 

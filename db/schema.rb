@@ -94,6 +94,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_09_182640) do
     t.string "register"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["song_id", "kind", "register"], name: "index_song_media_on_song_id_and_kind_and_register", unique: true
   end
 
   create_table "songs", force: :cascade do |t|
