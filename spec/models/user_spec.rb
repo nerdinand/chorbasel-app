@@ -5,13 +5,18 @@ require 'rails_helper'
 RSpec.describe User do
   fixtures :users
 
-  describe 'roles_must_be_valid validation' do
+  describe 'roles validation' do
+    let(:roles_validation_error_message) do
+      %(Rollen darf nur Elemente aus ["choir_direction", "choir_life", "choir_image", "choir_money", \
+"choir_activities", "thank_you_gifts", "sponsorships", "media", "absences", "it", "app"] enthalten und keine Duplikate)
+    end
+
     context 'when roles has duplicates' do
       let(:user) { described_class.new(roles: %w[app app]) }
 
       it do
         user.validate
-        expect(user.errors.full_messages).to include('Rollen darf nur gültige Rollen enthalten und keine Duplikate')
+        expect(user.errors.full_messages).to include(roles_validation_error_message)
       end
     end
 
@@ -20,7 +25,7 @@ RSpec.describe User do
 
       it do
         user.validate
-        expect(user.errors.full_messages).to include('Rollen darf nur gültige Rollen enthalten und keine Duplikate')
+        expect(user.errors.full_messages).to include(roles_validation_error_message)
       end
     end
 
@@ -29,7 +34,7 @@ RSpec.describe User do
 
       it do
         user.validate
-        expect(user.errors.full_messages).not_to include('Rollen darf nur gültige Rollen enthalten und keine Duplikate')
+        expect(user.errors.full_messages).not_to include(roles_validation_error_message)
       end
     end
   end

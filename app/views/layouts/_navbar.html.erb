@@ -18,6 +18,9 @@
           <% if policy(:attendance).index? %>
             <li><%= link_to t('.attendances'), attendances_path %></li>
           <% end %>
+          <% if policy(:song).index? %>
+            <li><%= link_to t('.songs'), songs_path %></li>
+          <% end %>
           <li><%= link_to t('.my_data'), edit_user_path(current_user) %></li>
           <li><%= link_to t('.logout'), users_sign_out_path, method: :delete %></li>
         <% else %>
