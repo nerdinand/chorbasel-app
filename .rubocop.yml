@@ -17,3 +17,11 @@ RSpec/MultipleExpectations:
 RSpec/ExampleLength:
   Exclude: 
   - spec/features/**/*
+
+Metrics/AbcSize:
+  Exclude:
+  - db/migrate/*
+ 
+Metrics/MethodLength:
+  Exclude:
+  - db/migrate/*

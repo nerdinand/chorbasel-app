@@ -27,6 +27,43 @@ de:
             media: Medienarbeit
             sponsorships: GönnerInnen / Freunde
             thank_you_gifts: Dankegeschenk-Koordination
+      song:
+        arranger: Arrangeur:in
+        composer: Komponist:in
+        enums:
+          register:
+            alto: Alt
+            alto_1: Alt 1
+            alto_2: Alt 2
+            baritone: Bariton
+            bass: Bass
+            bass_1: Bass 1
+            bass_2: Bass 2
+            mezzo-soprano: Mezzosopran
+            soprano: Sopran
+            soprano_1: Sopran 1
+            soprano_2: Sopran 2
+            tenor: Tenor
+            tenor_1: Tenor 1
+            tenor_2: Tenor 2
+        genres: Genres
+        key_signature: Tonart
+        language: Sprache
+        lyrics: Liedtext
+        registers: Stimmen
+        repertoire: Im Repertoire?
+        time_signature: Taktbezeichnung
+        title: Name
+      song_medium:
+        enums:
+          kind:
+            choreography_video: Choreo-Video
+            recording_all: Audioaufnahme (alle Stimmen)
+            recording_register: Audioaufnahme
+            sheet_music: Notenblatt
+        file: Datei
+        kind: Art
+        register: Stimme
       user:
         birth_date: Geburtsdatum
         city: Ort
@@ -153,6 +190,10 @@ de:
     submit:
       attendance:
         create: Anwesenheit eintragen
+      song:
+        create: Lied erstellen
+      song_medium:
+        create: Mediendatei erstellen
   layouts:
     navbar:
       attendances: Anwesenheiten
@@ -160,13 +201,51 @@ de:
       login: Einloggen
       logout: Ausloggen
       my_data: Meine Daten
+      songs: Lieder
       users: Benutzer
-  roles:
-    validation:
-      message: darf nur gültige Rollen enthalten und keine Duplikate
   sessions:
     update:
       success: Willkommen, %{user_name}!
+  song_media:
+    create:
+      error: Fehler beim Erstellen der Mediendatei.
+      success: Mediendatei erfolgreich erstellt.
+    destroy:
+      error: Fehler beim Löschen der Mediendatei.
+      success: Mediendatei erfolgreich gelöscht.
+    edit:
+      title: Mediendatei bearbeiten
+    new:
+      title: Neue Mediendatei
+  songs:
+    create:
+      error: Fehler beim Erstellen des Lieds.
+      success: Lied erfolgreich erstellt.
+    destroy:
+      error: Fehler beim Löschen des Lieds.
+      success: Lied erfolgreich gelöscht.
+    edit:
+      title: Lied bearbeiten
+    index:
+      destroy: Löschen
+      edit: Bearbeiten
+      new: Neues Lied
+      title: Lieder
+    new:
+      title: Neues Lied
+    show:
+      destroy: Lied löschen
+      edit: Lied bearbeiten
+      song_media:
+        destroy: Mediendatei löschen
+        download: Herunterladen
+        kind: Art
+        new: Neue Mediendatei
+        register: Stimme
+        title: Mediendateien
+    update:
+      error: Fehler beim Bearbeiten des Lieds.
+      success: Lied erfolgreich bearbeitet.
   user_mailer:
     welcome_email:
       body: Du wurdest zur Chorbasel-App eingeladen! Du kannst dich jetzt unter <a href="https://app.chorbasel.ch">app.chorbasel.ch</a> mit der E-Mail-Adresse einloggen, an die diese E-Mail versendet wurde.
@@ -204,3 +283,6 @@ de:
     update:
       error: Fehler beim Ändern des Benutzers.
       success: Benutzer erfolgreich geändert.
+  validations:
+    array:
+      error_message: darf nur Elemente aus %{in} enthalten und keine Duplikate
