@@ -1,6 +1,6 @@
 @layer components {
   a {
-    @apply text-primary;
+    @apply text-primary underline decoration-1 text-complementary;
   }
 
   a:hover {
@@ -8,6 +8,6 @@
   }
 
   nav a {
-    @apply text-white;
+    @apply text-white no-underline;
   }
 }
