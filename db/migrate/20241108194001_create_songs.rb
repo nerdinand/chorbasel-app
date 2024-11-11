@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CreateSongs < ActiveRecord::Migration[8.0]
-  def change # rubocop:disable Metrics/MethodLength
+  def change
     create_table :songs do |t|
       t.string :title, null: false
       t.string :composer
