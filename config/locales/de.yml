@@ -258,7 +258,9 @@ de:
       title: Benutzer bearbeiten
     form:
       address:
+        title: Adresse
         hint: 'TODO: address hint'
+      admin_part: Admin
       birth_date:
         hint: 'TODO: birth_date hint'
       email:
@@ -268,7 +270,7 @@ de:
       phone_number:
         hint: Deine Mobiltelefonnummer im internationalen Format (z.B. +41791234567)
       register:
-        hint: Dein Stimmregister im Chor.
+        hint: Dein Stimmregister im Chor
     index:
       edit: Bearbeiten
       email: E-Mail
