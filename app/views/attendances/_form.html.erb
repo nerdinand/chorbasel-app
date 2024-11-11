@@ -1,26 +1,27 @@
-<%# i18n-tasks-use t('activerecord.models.attendance') %> 
+<%# i18n-tasks-use t('activerecord.models.attendance') %></p>
 <%= render 'errors', model: @attendance %>
 
 <%= form_for @attendance do |f| %>
   <%= f.hidden_field :user_id %>
   <%= f.hidden_field :calendar_event_id %>
 
-  <p>
-    <%= f.label :user %>: <%= @attendance.user.full_name %> <%# i18n-tasks-use t('activerecord.attributes.attendance.user') %> 
-  </p>
-  <p>
-    <%= f.label :calendar_event %>: <%= render 'application/calendar_event', calendar_event: @attendance.calendar_event %> <%# i18n-tasks-use t('activerecord.attributes.attendance.calendar_event') %> 
-  </p>
+  <div class='form-field'>
+    <p><%= f.label :user %>: <b><%= @attendance.user.full_name %></b> <%# i18n-tasks-use t('activerecord.attributes.attendance.user') %></p>
+  </div>
 
-  <p>
-    <%= f.label :status %> <%# i18n-tasks-use t('activerecord.attributes.attendance.status') %> 
+  <div class='form-field'>
+    <p><%= f.label :calendar_event %>: <%= render 'application/calendar_event', calendar_event: @attendance.calendar_event %> <%# i18n-tasks-use t('activerecord.attributes.attendance.calendar_event') %></p>
+  </div>
+
+  <div class='form-field'>
+    <p><%= f.label :status %> <%# i18n-tasks-use t('activerecord.attributes.attendance.status') %></p>
     <%= f.select :status, attendances_status_options %>
-  </p>
+  </div>
   
-  <p>
-    <%= f.label :remarks %> <%# i18n-tasks-use t('activerecord.attributes.attendance.remarks') %> 
+  <div class='form-field'>
+    <p><%= f.label :remarks %> <%# i18n-tasks-use t('activerecord.attributes.attendance.remarks') %></p>
     <%= f.text_area :remarks %>
-  </p>
+  </div>
 
-  <%= f.submit class: 'btn btn-primary' %> <%# i18n-tasks-use t('helpers.submit.attendance.create') %>
+  <p><%= f.submit class: 'btn btn-primary' %> <%# i18n-tasks-use t('helpers.submit.attendance.create') %></p>
 <% end %>
