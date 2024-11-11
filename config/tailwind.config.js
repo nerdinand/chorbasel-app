@@ -14,9 +14,6 @@ module.exports = {
         body: ['Open Sans'],
         heading: ['Afacad Flux']
       },
-      listStyleType: {
-        square: 'square'
-      }
     },
     colors: {
       "primary": "#4f8b8b",
