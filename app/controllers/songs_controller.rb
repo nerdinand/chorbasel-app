@@ -61,6 +61,6 @@ class SongsController < ApplicationController
     params.require(:song).permit(:title, :composer, :arranger, :lyrics, :key_signature, :time_signature, :language,
                                  :repertoire, :genres, registers: [])
           .tap { |p| p[:registers].reject!(&:blank?) }
-          .tap { |p| p[:genres] = p[:genres].split(',').map(&:strip).uniq }
+          .tap { |p| p[:genres] = p[:genres].split(',').map(&:strip).compact_blank.uniq }
   end
 end
