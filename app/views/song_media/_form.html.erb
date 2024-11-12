@@ -3,21 +3,21 @@
 <%= form_for [@song_medium.song, @song_medium] do |f| %>
   <%= f.hidden_field :song_id %>
 
-  <p>
-    <%= f.label :kind %> <%# i18n-tasks-use t('activerecord.attributes.song_medium.kind') %> 
-    <%= f.select :kind, song_media_kind_options %>
-  </p>
+  <div class='form-field'>
+    <p><%= f.label :kind %> <%# i18n-tasks-use t('activerecord.attributes.song_medium.kind') %></p>
+    <p><%= f.select :kind, song_media_kind_options %></p>
+  </div>
 
-  <p>
-    <%= f.label :register %> <%# i18n-tasks-use t('activerecord.attributes.song_medium.register') %> 
-    <%= f.select :register, song_media_register_options, include_blank: true %>
-  </p>
+  <div class='form-field'>
+    <p><%= f.label :register %> <%# i18n-tasks-use t('activerecord.attributes.song_medium.register') %></p>
+    <p><%= f.select :register, song_media_register_options, include_blank: true %></p>
+  </div>
 
-  <p>
-    <%= f.label :file %> <%# i18n-tasks-use t('activerecord.attributes.song_medium.file') %> 
-    <%= f.file_field :file %>
-  </p>
+  <div class='form-field'>
+    <p><%= f.label :file %> <%# i18n-tasks-use t('activerecord.attributes.song_medium.file') %></p>
+    <p><%= f.file_field :file %></p>
+  </div>
 
-  <%= f.submit class: 'btn btn-primary' %>  <%# i18n-tasks-use t('helpers.submit.song_medium.create') %> 
+  <p><%= f.submit class: 'btn btn-primary' %>  <%# i18n-tasks-use t('helpers.submit.song_medium.create') %></p>
 <% end %>
   
