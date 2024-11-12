@@ -79,3 +79,5 @@ gem 'arask', '~> 1.2'
 gem 'faker', '~> 3.5'
 
 gem 'aws-sdk-s3', '~> 1.170', require: false
+
+gem 'image_processing', '~> 1.13'

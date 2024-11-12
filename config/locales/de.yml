@@ -87,6 +87,7 @@ de:
         member_since: Mitglied seit
         nick_name: Spitzname
         phone_number: Telefonnummer (mobil)
+        picture: Bild
         register: Stimme
         remarks: Bemerkungen
         roles: Rollen
@@ -274,6 +275,7 @@ de:
       email: E-Mail
       name: Name
       new: Neu
+      picture: Bild
       profile_complete: Profil vollständig?
       roles: Rollen
       status: Status
