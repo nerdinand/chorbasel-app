@@ -37,6 +37,8 @@ class User < ApplicationRecord
 
   passwordless_with :email
 
+  scope :active, -> { where(status: STATUS_ACTIVE) }
+
   def roles_wrapper
     Roles.new(roles)
   end

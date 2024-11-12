@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Rails.application.routes.draw do
+Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   root 'dashboard#show'
 
   get 'up' => 'rails/health#show', as: :rails_health_check
@@ -30,6 +30,8 @@ Rails.application.routes.draw do
     resources :songs do
       resources :song_media, only: %i[new create destroy]
     end
+
+    resources :name_guesses, only: %i[new create]
   end
 
   get '*path' => redirect('/users/sign_in'), via: :all, constraints: lambda { |req|

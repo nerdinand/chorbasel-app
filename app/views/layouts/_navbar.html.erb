@@ -21,6 +21,7 @@
           <% if policy(:song).index? %>
             <li><%= link_to t('.songs'), songs_path %></li>
           <% end %>
+          <li><%= link_to t('.name_guessing'), new_name_guess_path %></li>
           <li><%= link_to t('.my_data'), edit_user_path(current_user) %></li>
           <li><%= link_to t('.logout'), users_sign_out_path, method: :delete %></li>
         <% else %>

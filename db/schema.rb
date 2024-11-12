@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_09_182640) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_12_212548) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -72,6 +72,16 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_09_182640) do
     t.datetime "updated_at", null: false
     t.index ["starts_at"], name: "index_calendar_events_on_starts_at"
     t.index ["uid"], name: "index_calendar_events_on_uid", unique: true
+  end
+
+  create_table "name_guesses", force: :cascade do |t|
+    t.integer "guesser_id"
+    t.integer "guessee_id"
+    t.boolean "correct", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guessee_id"], name: "index_name_guesses_on_guessee_id"
+    t.index ["guesser_id"], name: "index_name_guesses_on_guesser_id"
   end
 
   create_table "passwordless_sessions", force: :cascade do |t|
@@ -140,4 +150,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_09_182640) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "attendances", "calendar_events"
   add_foreign_key "attendances", "users"
+  add_foreign_key "name_guesses", "users", column: "guessee_id"
+  add_foreign_key "name_guesses", "users", column: "guesser_id"
 end
