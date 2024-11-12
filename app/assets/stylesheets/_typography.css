@@ -8,8 +8,7 @@
   }
 
   h1 { 
-    @apply decoration-2 underline decoration-primary;
-    @apply text-3xl;
+    @apply text-3xl mb-3;
   }
 
   h2 {

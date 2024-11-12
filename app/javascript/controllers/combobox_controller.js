@@ -15,7 +15,7 @@ export default class extends Controller {
   }
 
   addElement(e) {
-    let value = e.target.innerText
+    let value = e.target.id
 
     let oldValues = this.#deserializeTextFieldValue(this.textFieldTarget.value)
     let newValues = oldValues.concat(value)
@@ -39,10 +39,22 @@ export default class extends Controller {
     this.choicesTarget.innerHTML = ''
 
     valuesToBeShown.forEach(value => {
-      let listItem = document.createElement("li")
-      listItem.innerText = value
-      listItem.dataset["action"] = "click->combobox#addElement"
-      this.choicesTarget.appendChild(listItem)
+      let pTag = document.createElement("p")
+      pTag.classList.add("text-xs")
+
+      let labelTag = document.createElement("label")
+      labelTag.htmlFor = value
+
+      let checkboxTag = document.createElement("input")
+      checkboxTag.type = "checkbox"
+      checkboxTag.dataset["action"] = "combobox#addElement"
+      checkboxTag.id = value
+
+      labelTag.appendChild(checkboxTag)
+      labelTag.appendChild(document.createTextNode(value))
+
+      pTag.appendChild(labelTag)
+      this.choicesTarget.appendChild(pTag)
     });
   }
 }
