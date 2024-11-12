@@ -1,14 +1,10 @@
 @layer components {
-  input {
-    @apply border-solid !important;
-  }
-
   input, select {
     @apply rounded !important;
   }
 
   input[type="checkbox"] {
-    @apply my-0 mr-2 text-xs !important;
+    @apply mr-2 text-xs;
   }
 
   .form-field {
