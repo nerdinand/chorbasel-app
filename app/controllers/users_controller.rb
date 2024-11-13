@@ -1,8 +1,16 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  ALLOWED_ORDER_COLUMNS = %w[register first_name].freeze
+
   def index
-    @users = authorize User.order(:first_name)
+    order = params[:order] || 'first_name'
+
+    unless order.in? ALLOWED_ORDER_COLUMNS
+      render file: 'public/400.html', status: :bad_request, layout: false and return
+    end
+
+    @users = authorize User.order(order)
   end
 
   def new

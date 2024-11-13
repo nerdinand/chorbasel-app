@@ -66,4 +66,10 @@ class User < ApplicationRecord
   def human_status
     I18n.t("activerecord.attributes.user.enums.status.#{status}")
   end
+
+  def human_register
+    return nil if register.blank?
+
+    I18n.t("activerecord.attributes.user.enums.register.#{register}")
+  end
 end
