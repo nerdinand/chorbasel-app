@@ -87,6 +87,7 @@ de:
         member_since: Mitglied seit
         nick_name: Spitzname
         phone_number: Telefonnummer (mobil)
+        picture: Bild
         register: Stimme
         remarks: Bemerkungen
         roles: Rollen
@@ -190,6 +191,8 @@ de:
     submit:
       attendance:
         create: Anwesenheit eintragen
+      guess:
+        create: Raten
       song:
         create: Lied erstellen
       song_medium:
@@ -201,8 +204,17 @@ de:
       login: Einloggen
       logout: Ausloggen
       my_data: Meine Daten
+      name_guessing: Namen raten
       songs: Lieder
       users: Benutzer
+  name_guesses:
+    create:
+      correct_guess: Richtig!
+      wrong_guess: Leider falsch geraten! Das war %{name}.
+    form:
+      explanation: Wie heisst diese:r Mitsänger:in? Sowohl Vorname als auch Spitzname (wenn vorhanden) zählen.
+    new:
+      title: Namen raten
   sessions:
     update:
       success: Willkommen, %{user_name}!
@@ -277,6 +289,7 @@ de:
       email: E-Mail
       name: Name
       new: Neu
+      picture: Bild
       profile_complete: Profil vollständig?
       roles: Rollen
       status: Status

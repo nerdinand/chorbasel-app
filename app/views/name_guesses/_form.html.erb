@@ -1,0 +1,16 @@
+<p>
+  <%= t('.explanation') %>
+</p>
+
+<%= image_tag(@name_guess.guessee.picture, class: 'w-60') %>
+
+<%= form_for @name_guess do |f| %>
+  <%= f.hidden_field :guessee_id %>
+
+  <div class='form-field'>
+    <p><%= f.label :guess %></p>
+    <p><%= f.text_field :guess, autofocus: true, autocomplete: 'off' %></p>
+  </div>
+
+  <p><%= f.submit t('helpers.submit.guess.create'), class: 'btn btn-primary' %>
+<% end %>

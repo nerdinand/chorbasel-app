@@ -8,6 +8,11 @@
     <p class='field-hint'><%= t('.email.hint') %></p>
   </div>
 
+  <div class='form-field'>
+    <%= f.label :picture %> <%# i18n-tasks-use t('activerecord.attributes.user.picture') %> 
+    <%= f.file_field :picture %>
+  </div>
+
   <h2><%= t('.name') %></h2>
   <div class='form-field'>
     <p><%= f.label :first_name %> <%# i18n-tasks-use t('activerecord.attributes.user.first_name') %> *</p>

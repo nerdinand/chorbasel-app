@@ -8,6 +8,7 @@
   <thead>
     <tr>
       <th><%= t('.profile_complete') %></th>
+      <th><%= t('.picture') %></th>
       <th><%= t('.name') %></th>
       <th><%= t('.email') %></th>
       <th><%= t('.roles') %></th>
@@ -20,6 +21,11 @@
       <tr>
         <td>
           <%= boolean_emoji(user.profile_complete?) %>
+        </td>
+        <td>
+          <% if user.picture.present? %>
+            <%= image_tag(user.picture.variant(:thumb)) %>
+          <% end %>
         </td>
         <td>
           <%= user.full_name %>
