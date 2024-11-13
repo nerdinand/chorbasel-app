@@ -206,7 +206,7 @@ de:
       my_data: Meine Daten
       name_guessing: Namen raten
       songs: Lieder
-      users: Benutzer
+      users: Benutzer:innen
   name_guesses:
     create:
       correct_guess: Richtig!
