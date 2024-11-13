@@ -13,7 +13,7 @@ RSpec.describe('Completing a profile') do
     )
 
     click_on 'Benutzerprofil vervollständigen'
-    expect(page).to have_content('Benutzer bearbeiten')
+    expect(page).to have_content('Benutzer:in bearbeiten')
 
     fill_in 'Spitzname', with: 'uwu'
     fill_in 'Anrede', with: 'Herr'
@@ -23,8 +23,8 @@ RSpec.describe('Completing a profile') do
     fill_in 'Telefonnummer (mobil)', with: '+41761234567'
     fill_in 'Geburtsdatum', with: '1970-01-01'
     select 'Bass 1', from: 'Stimme'
-    click_on 'Benutzer aktualisieren'
+    click_on 'Benutzer:in aktualisieren'
 
-    expect(page).to have_content('Benutzer erfolgreich geändert.')
+    expect(page).to have_content('Benutzer:in erfolgreich geändert.')
   end
 end
