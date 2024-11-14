@@ -12,7 +12,7 @@
   }
 
   h2 {
-    @apply text-2xl mt-2;
+    @apply text-2xl mt-4;
   }
 
   h3 {

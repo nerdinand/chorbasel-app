@@ -58,7 +58,7 @@
 <% end %>
 
 <% if policy(@song).destroy? %>
-  <%= button_to t('.destroy'), song_path(@song), method: :delete, class: 'btn btn-primary' %>
+  <%= button_to t('.destroy'), song_path(@song), method: :delete, class: 'btn btn-danger' %>
 <% end %>
 
 
@@ -95,7 +95,7 @@
             </td>
             <td>
               <% if policy(song_medium).destroy? %>
-                <%= button_to t('.song_media.destroy'), song_song_medium_path(song_medium.song, song_medium), method: :delete, class: 'btn btn-primary' %>
+                <%= button_to t('.song_media.destroy'), song_song_medium_path(song_medium.song, song_medium), method: :delete, class: 'btn btn-danger' %>
               <% end %>
             </td>
           </tr>

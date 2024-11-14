@@ -15,7 +15,7 @@
     @apply bg-white
   }
 
-  tr .btn:hover {
+  tr .btn:primary {
     @apply border-primary-dark
   }
 }
