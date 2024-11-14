@@ -1,9 +1,21 @@
 @layer base {
-  td:hover {
-    @apply bg-primary
+  tr:hover {
+    @apply bg-complementary
   }
 
   tr {
     @apply border-b-2
+  }
+
+  td, th {
+    @apply p-2
+  }
+
+  th {
+    @apply bg-white
+  }
+
+  tr .btn:hover {
+    @apply border-primary-dark
   }
 }
