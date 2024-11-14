@@ -8,6 +8,7 @@ class NameGuessesController < ApplicationController
 
   def create
     guess = authorize NameGuess.new(name_guess_params.merge(guesser: current_user))
+    guess.correct = guess.correct?
 
     guess.save!
     set_flash(guess)
