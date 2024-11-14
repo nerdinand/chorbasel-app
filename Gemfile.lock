@@ -176,9 +176,6 @@ GEM
     irb (1.14.1)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
-    jbuilder (2.13.0)
-      actionview (>= 5.0.0)
-      activesupport (>= 5.0.0)
     jmespath (1.6.2)
     json (2.8.1)
     kamal (2.3.0)
@@ -453,7 +450,6 @@ DEPENDENCIES
   icalendar (~> 2.10)
   image_processing (~> 1.13)
   importmap-rails
-  jbuilder
   kamal (~> 2.2)
   letter_opener
   passwordless (~> 1.8)

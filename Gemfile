@@ -3,7 +3,6 @@
 source 'https://rubygems.org'
 
 gem 'importmap-rails'
-gem 'jbuilder'
 gem 'propshaft'
 gem 'puma', '>= 5.0'
 gem 'rails', '~> 8.0.0'

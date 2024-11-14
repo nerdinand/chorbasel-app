@@ -1,24 +1,40 @@
-# README
+# Chorbasel-App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Deployed at [app.chorbasel.ch](https://app.chorbasel.ch/). 
 
-Things you may want to cover:
+## Features
 
-* Ruby version
+* Passwordless login
+* Benutzerverwaltung
+  * Stammdatenverwaltung
+  * Berechtigungssystem
+* Absenzenmanagement
+* Liederverwaltung (inkl. Medien)
+* Namen-Ratespiel
 
-* System dependencies
+### Geplante Features
 
-* Configuration
+* Lookbook?
+* Lieder anstimmen (evtl. sogar offline verfügbar?)
+* Liederliste für Konzerte (Download aller relevanten Medien für ein Konzert für eine:n Benutzer:in)
 
-* Database creation
+## Technical stuff
 
-* Database initialization
+This is a standard Rails 8 app. We're using all the current best practices (maybe apart from RSpec instead of Minitest).
 
-* How to run the test suite
+### Dependencies
 
-* Services (job queues, cache servers, search engines, etc.)
+These are the most important non-standard dependencies of the app:
 
-* Deployment instructions
+* passwordless: For passwordless user login.
+* arask: For running tasks regularly (updating calendar_events daily from the master Google calendar).
+* tailwindcss: CSS framework.
+* pundit: For authorization of all the features through user roles.
 
-* ...
+### Deployment
+
+TODO: Write about how to deploy this thing (kamal, S3).
+
+### Scripts
+
+TODO: Describe face script, import script.
