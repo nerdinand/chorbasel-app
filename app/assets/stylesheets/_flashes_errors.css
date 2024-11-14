@@ -1,5 +1,5 @@
 .notice-box {
-  @apply my-10 p-4 border-4 rounded-md bg-opacity-50;
+  @apply my-10 p-4 border-4 rounded-md bg-opacity-40;
 }
 
 .notice {
