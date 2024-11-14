@@ -14,4 +14,8 @@
   .field-hint {
     @apply text-xs mt-1;
   }
+
+  textarea {
+    @apply w-1/2 h-60;
+  }
 }

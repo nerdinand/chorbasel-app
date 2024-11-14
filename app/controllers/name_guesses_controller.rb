@@ -19,9 +19,9 @@ class NameGuessesController < ApplicationController
 
   def set_flash(guess) # rubocop:disable Naming/AccessorMethodName
     if guess.correct?
-      flash[:success] = t('name_guesses.create.correct_guess')
+      flash.notice = t('name_guesses.create.correct_guess')
     else
-      flash[:error] = t('name_guesses.create.wrong_guess', name: name_for_flash(guess))
+      flash.alert = t('name_guesses.create.wrong_guess', name: name_for_flash(guess))
     end
   end
 

@@ -3,7 +3,7 @@ import os
 
 directory = 'chorbasel.onepage.me-1731198496943'
 
-face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt2.xml') 
+face_cascade = cv2.CascadeClassifier('lib/scripts/haarcascade_frontalface_alt2.xml') 
 
 for filename in os.listdir(directory):
   path = os.path.join(directory, filename)

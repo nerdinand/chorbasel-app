@@ -23,10 +23,10 @@ class SongsController < ApplicationController
     @song = authorize Song.new(song_params)
 
     if @song.save
-      flash[:success] = t('.success')
+      flash.notice = t('.success')
       redirect_to songs_path
     else
-      flash[:error] = t('.error')
+      flash.alert = t('.error')
       render :new, status: :unprocessable_entity
     end
   end
@@ -35,10 +35,10 @@ class SongsController < ApplicationController
     @song = authorize Song.find(params[:id])
 
     if @song.update(song_params)
-      flash[:success] = t('.success')
+      flash.notice = t('.success')
       redirect_to songs_path
     else
-      flash[:error] = t('.error')
+      flash.alert = t('.error')
       render :edit, status: :unprocessable_entity
     end
   end
@@ -47,10 +47,10 @@ class SongsController < ApplicationController
     song = authorize Song.find(params[:id])
 
     if song.destroy
-      flash[:success] = t('.success')
+      flash.notice = t('.success')
       redirect_to songs_path
     else
-      flash[:error] = t('.error')
+      flash.alert = t('.error')
       render :edit, status: :unprocessable_entity
     end
   end

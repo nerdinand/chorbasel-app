@@ -22,6 +22,8 @@ module.exports = {
       "complementary-dark": "#613757",
       "contrast": "#8b7f4f",
       "white": "white",
+      "success": "#408558",
+      "danger": "#CB444A",
     },
   },
   plugins: [

@@ -12,7 +12,7 @@ de:
             unknown: Unbekannt
         remarks: Bemerkungen
         status: Status
-        user: Benutzer
+        user: Benutzer:in
       role:
         enums:
           role:
@@ -97,7 +97,7 @@ de:
         zip_code: PLZ
     models:
       attendance: Anwesenheit
-      user: Benutzer
+      user: Benutzer:in
   attendances:
     create:
       error: Fehler beim Eintragen der Anwesenheit.
@@ -206,7 +206,7 @@ de:
       my_data: Meine Daten
       name_guessing: Namen raten
       songs: Lieder
-      users: Benutzer
+      users: Benutzer:innen
   name_guesses:
     create:
       correct_guess: Richtig!
@@ -264,10 +264,10 @@ de:
       subject: Willkommen zur Chorbasel-App!
   users:
     create:
-      error: Fehler beim Erstellen des Benutzers.
-      success: Benutzer erfolgreich erstellt.
+      error: Fehler beim Erstellen des:r Benutzer:in.
+      success: Benutzer:in erfolgreich erstellt.
     edit:
-      title: Benutzer bearbeiten
+      title: Benutzer:in bearbeiten
     form:
       address:
         hint: 'TODO: address hint'
@@ -291,14 +291,15 @@ de:
       new: Neu
       picture: Bild
       profile_complete: Profil vollständig?
+      register: Stimme
       roles: Rollen
       status: Status
-      title: Benutzer
+      title: Benutzer:innen
     new:
-      title: Neuer Benutzer
+      title: Neue:r Benutzer:in
     update:
-      error: Fehler beim Ändern des Benutzers.
-      success: Benutzer erfolgreich geändert.
+      error: Fehler beim Ändern des:r Benutzer:in.
+      success: Benutzer:in erfolgreich geändert.
   validations:
     array:
       error_message: darf nur Elemente aus %{in} enthalten und keine Duplikate

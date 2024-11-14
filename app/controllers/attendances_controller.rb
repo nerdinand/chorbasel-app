@@ -27,10 +27,10 @@ class AttendancesController < ApplicationController
     @attendance = authorize Attendance.new(attendance_params)
 
     if @attendance.save
-      flash[:success] = t('.success')
+      flash.notice = t('.success')
       redirect_to attendances_path
     else
-      flash[:error] = t('.error')
+      flash.alert = t('.error')
       render :new, status: :unprocessable_entity
     end
   end
@@ -39,10 +39,10 @@ class AttendancesController < ApplicationController
     @attendance = authorize Attendance.find(params[:id])
 
     if @attendance.update(attendance_params)
-      flash[:success] = t('.success')
+      flash.notice = t('.success')
       redirect_to attendances_path
     else
-      flash[:error] = t('.error')
+      flash.alert = t('.error')
       render :edit, status: :unprocessable_entity
     end
   end

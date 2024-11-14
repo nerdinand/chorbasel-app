@@ -13,7 +13,7 @@ class SessionsController < Passwordless::SessionsController
     # set.
     return if flash[:alert].present?
 
-    flash[:success] = t('.success', user_name: current_user.display_name)
+    flash.notice = t('.success', user_name: current_user.display_name)
   end
 
   private

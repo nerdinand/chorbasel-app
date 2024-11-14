@@ -5,7 +5,7 @@ module CalendarEvents
     class ExcusesController < ApplicationController
       def new
         calendar_event = CalendarEvent.find(params[:calendar_event_id])
-        @attendance = authorize Attendance.new(calendar_event:)
+        @attendance = authorize Attendance.new(calendar_event:, user: current_user)
       end
 
       def create # rubocop:disable Metrics/MethodLength
@@ -15,10 +15,10 @@ module CalendarEvents
         )
 
         if update_attendance
-          flash[:success] = t('.success')
+          flash.notice = t('.success')
           redirect_to dashboard_path
         else
-          flash[:error] = t('.error')
+          flash.alert = t('.error')
           render :new, status: :unprocessable_entity
         end
       end
