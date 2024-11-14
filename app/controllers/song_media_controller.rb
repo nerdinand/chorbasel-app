@@ -9,10 +9,10 @@ class SongMediaController < ApplicationController
     @song_medium = authorize SongMedium.new(song_medium_params)
 
     if @song_medium.save
-      flash[:success] = t('.success')
+      flash.notice = t('.success')
       redirect_to song_path(@song_medium.song)
     else
-      flash[:error] = t('.error')
+      flash.alert = t('.error')
       render :new, status: :unprocessable_entity
     end
   end
@@ -21,10 +21,10 @@ class SongMediaController < ApplicationController
     song_medium = authorize SongMedium.find(params[:id])
 
     if song_medium.destroy
-      flash[:success] = t('.success')
+      flash.notice = t('.success')
       redirect_to song_path(song_medium.song)
     else
-      flash[:error] = t('.error')
+      flash.alert = t('.error')
       render :edit, status: :unprocessable_entity
     end
   end

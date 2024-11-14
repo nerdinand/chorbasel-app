@@ -26,10 +26,10 @@ class UsersController < ApplicationController
 
     if @user.save
       UserMailer.with(user: @user).welcome_email.deliver_later
-      flash[:success] = t('.success')
+      flash.notice = t('.success')
       redirect_to users_path
     else
-      flash[:error] = t('.error')
+      flash.alert = t('.error')
       render :new, status: :unprocessable_entity
     end
   end
@@ -38,10 +38,10 @@ class UsersController < ApplicationController
     @user = authorize User.find(params[:id])
 
     if @user.update(user_params)
-      flash[:success] = t('.success')
+      flash.notice = t('.success')
       redirect_to update_success_redirect_path
     else
-      flash[:error] = t('.error')
+      flash.alert = t('.error')
       render :edit, status: :unprocessable_entity
     end
   end
