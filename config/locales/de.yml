@@ -188,6 +188,9 @@ de:
   errors:
     message: 'Es sind Fehler aufgetreten:'
   helpers:
+    label:
+      name_guess:
+        guess: Vorname oder Spitzname
     submit:
       attendance:
         create: Anwesenheit eintragen
