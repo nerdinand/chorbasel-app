@@ -41,7 +41,7 @@
         </td>
         <td>
           <% if policy(song).destroy? %>
-            <%= button_to t('.destroy'), song_path(song), method: :delete, class: 'btn btn-primary' %>
+            <%= button_to t('.destroy'), song_path(song), method: :delete, class: 'btn btn-danger' %>
           <% end %>
         </td>
       </tr>
