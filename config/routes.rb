@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Rails.application.routes.draw do
+Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   root 'dashboard#show'
 
   get 'up' => 'rails/health#show', as: :rails_health_check
@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   constraints Passwordless::Constraint.new(User) do
     get 'dashboard' => 'dashboard#show'
 
-    resources :users
+    resources :users, except: :destroy
     resources :attendances, only: %i[index edit new create update]
 
     namespace :calendar_events do
@@ -26,7 +26,15 @@ Rails.application.routes.draw do
         resource :attendance, only: :create, controller: 'calendar_events/attendances/attendances'
       end
     end
+
+    resources :songs do
+      resources :song_media, only: %i[new create destroy]
+    end
+
+    resources :name_guesses, only: %i[new create]
   end
 
-  get '*route' => redirect('/users/sign_in')
+  get '*path' => redirect('/users/sign_in'), via: :all, constraints: lambda { |req|
+    req.path.exclude? 'rails/'
+  }
 end

@@ -17,11 +17,13 @@ module.exports = {
     },
     colors: {
       "primary": "#4f8b8b",
-      "primary-dark": "#376161",
-      "complementary": "#8b4f7c",
-      "complementary-dark": "#613757",
-      "contrast": "#8b7f4f",
+      "primary-dark": "#10375C",
+      "complementary": "#F3C623",
+      "complementary-dark": "#EB8317",
+      "contrast": "#F4F6FF",
       "white": "white",
+      "success": "#6FE051",
+      "danger": "#CC0909",
     },
   },
   plugins: [

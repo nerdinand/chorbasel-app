@@ -41,11 +41,11 @@ class ApplicationPolicy
   private
 
   def superpowers?
-    user.roles_wrapper.app?
+    user.roles_wrapper.app? || user.roles_wrapper.choir_direction?
   end
 
-  def choir_direction?
-    user.roles_wrapper.choir_direction?
+  def choir_life?
+    user.roles_wrapper.choir_life?
   end
 
   class Scope

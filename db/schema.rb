@@ -10,7 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_10_26_141159) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_12_212548) do
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
   create_table "arask_jobs", force: :cascade do |t|
     t.string "job"
     t.datetime "execute_at"
@@ -46,6 +74,16 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_26_141159) do
     t.index ["uid"], name: "index_calendar_events_on_uid", unique: true
   end
 
+  create_table "name_guesses", force: :cascade do |t|
+    t.integer "guesser_id"
+    t.integer "guessee_id"
+    t.boolean "correct", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guessee_id"], name: "index_name_guesses_on_guessee_id"
+    t.index ["guesser_id"], name: "index_name_guesses_on_guesser_id"
+  end
+
   create_table "passwordless_sessions", force: :cascade do |t|
     t.string "authenticatable_type"
     t.integer "authenticatable_id"
@@ -58,6 +96,32 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_26_141159) do
     t.datetime "updated_at", null: false
     t.index ["authenticatable_type", "authenticatable_id"], name: "authenticatable"
     t.index ["identifier"], name: "index_passwordless_sessions_on_identifier", unique: true
+  end
+
+  create_table "song_media", force: :cascade do |t|
+    t.integer "song_id", null: false
+    t.string "kind", null: false
+    t.string "register"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["song_id", "kind", "register"], name: "index_song_media_on_song_id_and_kind_and_register", unique: true
+  end
+
+  create_table "songs", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "composer"
+    t.string "arranger"
+    t.text "lyrics"
+    t.string "key_signature"
+    t.string "time_signature"
+    t.string "language"
+    t.boolean "repertoire", default: false, null: false
+    t.json "genres", default: [], null: false
+    t.json "registers", default: [], null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.check_constraint "JSON_TYPE(genres) = 'array'", name: "songs_genres_is_array"
+    t.check_constraint "JSON_TYPE(registers) = 'array'", name: "songs_registers_is_array"
   end
 
   create_table "users", force: :cascade do |t|
@@ -82,6 +146,10 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_26_141159) do
     t.check_constraint "JSON_TYPE(roles) = 'array'", name: "users_roles_is_array"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "attendances", "calendar_events"
   add_foreign_key "attendances", "users"
+  add_foreign_key "name_guesses", "users", column: "guessee_id"
+  add_foreign_key "name_guesses", "users", column: "guesser_id"
 end

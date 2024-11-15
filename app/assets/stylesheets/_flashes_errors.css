@@ -1,0 +1,11 @@
+.notice-box {
+  @apply my-10 p-4 border-4 rounded-md bg-opacity-40 inline-block
+}
+
+.notice {
+  @apply notice-box border-success bg-success
+}
+
+.alert {
+  @apply notice-box border-danger bg-danger
+}

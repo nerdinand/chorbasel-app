@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module CalendarEventsHelper
-  DATE_FORMAT = '%d.%m.%Y'
+  DATE_FORMAT = '%A, %d.%m.%Y'
   TIME_FORMAT = '%H:%M'
   DATE_AND_TIME_FORMAT = "#{DATE_FORMAT} #{TIME_FORMAT}".freeze
 
@@ -16,18 +16,18 @@ module CalendarEventsHelper
   private
 
   def time_string_same_day(calendar_event)
-    date = calendar_event.starts_at.strftime(DATE_FORMAT)
-    start_time = calendar_event.starts_at.strftime(TIME_FORMAT)
-    end_time = calendar_event.ends_at.strftime(TIME_FORMAT)
+    date = l(calendar_event.starts_at, format: DATE_FORMAT)
+    start_time = l(calendar_event.starts_at, format: TIME_FORMAT)
+    end_time = l(calendar_event.ends_at, format: TIME_FORMAT)
 
     "#{date} #{start_time}-#{end_time} (#{humanize_duration(calendar_event.duration)})"
   end
 
   def time_string_different_day(calendar_event)
     [
-      calendar_event.starts_at.strftime(DATE_AND_TIME_FORMAT),
+      l(calendar_event.starts_at, format: DATE_AND_TIME_FORMAT),
       '-',
-      calendar_event.ends_at.strftime(DATE_AND_TIME_FORMAT),
+      l(calendar_event.ends_at, format: DATE_AND_TIME_FORMAT),
       "(#{humanize_duration(calendar_event.duration)})"
     ].join(' ')
   end

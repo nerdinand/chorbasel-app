@@ -36,6 +36,6 @@ class UserPolicy < ApplicationPolicy
   private
 
   def user_management?
-    superpowers? || choir_direction?
+    superpowers? || choir_life?
   end
 end

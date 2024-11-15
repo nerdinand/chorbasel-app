@@ -1,13 +1,17 @@
 @layer components {
   a {
-    @apply text-primary;
+    @apply text-primary-dark underline decoration-2 decoration-complementary
   }
 
   a:hover {
-    @apply text-primary-dark;
+    @apply text-primary
   }
 
   nav a {
-    @apply text-white;
+    @apply text-white no-underline
+  }
+
+  nav a:hover {
+    @apply text-primary-dark no-underline
   }
 }

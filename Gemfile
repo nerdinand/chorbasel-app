@@ -3,10 +3,9 @@
 source 'https://rubygems.org'
 
 gem 'importmap-rails'
-gem 'jbuilder'
 gem 'propshaft'
 gem 'puma', '>= 5.0'
-gem 'rails', '~> 8.0.0.rc1'
+gem 'rails', '~> 8.0.0'
 gem 'sqlite3', '~> 2.1'
 gem 'stimulus-rails'
 gem 'turbo-rails'
@@ -69,7 +68,7 @@ gem 'passwordless', '~> 1.8'
 
 gem 'pundit', '~> 2.4'
 
-gem 'rails-i18n', '~> 7.0.0'
+gem 'rails-i18n', '~> 8.0.0'
 
 gem 'icalendar', '~> 2.10'
 
@@ -78,3 +77,7 @@ gem 'down', '~> 5.4'
 gem 'arask', '~> 1.2'
 
 gem 'faker', '~> 3.5'
+
+gem 'aws-sdk-s3', '~> 1.170', require: false
+
+gem 'image_processing', '~> 1.13'

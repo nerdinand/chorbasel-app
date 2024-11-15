@@ -1,8 +1,16 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  ALLOWED_ORDER_COLUMNS = %w[register first_name].freeze
+
   def index
-    @users = authorize User.order(:first_name)
+    order = params[:order] || 'first_name'
+
+    unless order.in? ALLOWED_ORDER_COLUMNS
+      render file: 'public/400.html', status: :bad_request, layout: false and return
+    end
+
+    @users = authorize User.order(order)
   end
 
   def new
@@ -18,10 +26,10 @@ class UsersController < ApplicationController
 
     if @user.save
       UserMailer.with(user: @user).welcome_email.deliver_later
-      flash[:success] = t('.success')
+      flash.notice = t('.success')
       redirect_to users_path
     else
-      flash[:error] = t('.error')
+      flash.alert = t('.error')
       render :new, status: :unprocessable_entity
     end
   end
@@ -30,10 +38,10 @@ class UsersController < ApplicationController
     @user = authorize User.find(params[:id])
 
     if @user.update(user_params)
-      flash[:success] = t('.success')
+      flash.notice = t('.success')
       redirect_to update_success_redirect_path
     else
-      flash[:error] = t('.error')
+      flash.alert = t('.error')
       render :edit, status: :unprocessable_entity
     end
   end
@@ -51,13 +59,13 @@ class UsersController < ApplicationController
 
   def admin_user_params
     params.require(:user).permit(:email, :first_name, :last_name, :nick_name, :salutation, :street, :zip_code, :city,
-                                 :phone_number, :birth_date, :register, :status, :member_since,
+                                 :phone_number, :birth_date, :register, :picture, :status, :member_since,
                                  :remarks, roles: [])
   end
 
   def regular_user_params
     params.require(:user).permit(:email, :first_name, :last_name, :nick_name, :salutation, :street, :zip_code, :city,
-                                 :phone_number, :birth_date, :register)
+                                 :phone_number, :birth_date, :register, :picture)
   end
 
   def update_success_redirect_path

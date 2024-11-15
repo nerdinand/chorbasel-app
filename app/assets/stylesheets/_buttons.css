@@ -1,13 +1,21 @@
 @layer components {
   .btn {
-    @apply inline-block px-2 py-2 mt-2
+    @apply inline-block no-underline px-2 py-2 mt-2 text-white border-solid rounded-md border-2
   }
 
   .btn-primary {
-    @apply bg-complementary-dark border-complementary-dark text-white border-solid rounded-md border-2
+    @apply bg-primary-dark border-primary-dark
   }
 
   .btn-primary:hover {
     @apply bg-complementary border-complementary
+  }
+
+  .btn-danger {
+    @apply bg-danger border-danger
+  }
+
+  .btn-danger:hover {
+    @apply bg-complementary
   }
 }

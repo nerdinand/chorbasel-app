@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CreateCalendarEvents < ActiveRecord::Migration[8.0]
-  def change # rubocop:disable Metrics/MethodLength
+  def change
     create_table :calendar_events do |t|
       t.string :uid, null: false
       t.timestamp :event_created_at, null: false

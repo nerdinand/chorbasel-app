@@ -8,8 +8,10 @@
   <thead>
     <tr>
       <th><%= t('.profile_complete') %></th>
-      <th><%= t('.name') %></th>
+      <th><%= t('.picture') %></th>
+      <th><%= link_to t('.name'), order: :first_name %></th>
       <th><%= t('.email') %></th>
+      <th><%= link_to t('.register'), order: :register %></th>
       <th><%= t('.roles') %></th>
       <th><%= t('.status') %></th>
       <th></th>
@@ -22,10 +24,18 @@
           <%= boolean_emoji(user.profile_complete?) %>
         </td>
         <td>
+          <% if user.picture.present? %>
+            <%= image_tag(user.picture.variant(:thumb)) %>
+          <% end %>
+        </td>
+        <td>
           <%= user.full_name %>
         </td>
         <td>
           <%= user.email %>
+        </td>
+        <td>
+          <%= user.human_register %>
         </td>
         <td>
           <ul>

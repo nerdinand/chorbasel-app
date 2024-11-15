@@ -7,26 +7,6 @@ class User < ApplicationRecord
 
   STATUSES = [STATUS_ACTIVE, STATUS_PAUSED, STATUS_INACTIVE].freeze
 
-  REGISTER_SOPRANO_1 = 'soprano_1'
-  REGISTER_SOPRANO_2 = 'soprano_2'
-  REGISTER_ALTO_1 = 'alto_1'
-  REGISTER_ALTO_2 = 'alto_2'
-  REGISTER_TENOR_1 = 'tenor_1'
-  REGISTER_TENOR_2 = 'tenor_2'
-  REGISTER_BASS_1 = 'bass_1'
-  REGISTER_BASS_2 = 'bass_2'
-
-  REGISTERS = [
-    REGISTER_SOPRANO_1,
-    REGISTER_SOPRANO_2,
-    REGISTER_ALTO_1,
-    REGISTER_ALTO_2,
-    REGISTER_TENOR_1,
-    REGISTER_TENOR_2,
-    REGISTER_BASS_1,
-    REGISTER_BASS_2
-  ].freeze
-
   INTERNATIONAL_PHONE_NUMBER_REGEX = /\A\+\d{11,13}\z/
 
   PROFILE_COMPLETENESS_FIELDS = %i[
@@ -41,17 +21,23 @@ class User < ApplicationRecord
     register
   ].freeze
 
+  has_one_attached :picture do |attachable|
+    attachable.variant :thumb, resize_to_limit: [100, 100]
+  end
+
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validate :roles_must_be_valid
+  validates :roles, array: Roles::ROLES
   validates :phone_number, format: { with: INTERNATIONAL_PHONE_NUMBER_REGEX }, allow_blank: true
   validates :status, inclusion: STATUSES
-  validates :register, inclusion: REGISTERS, allow_blank: true
+  validates :register, inclusion: Register::Singer::REGISTERS, allow_blank: true
 
   has_many :attendances, dependent: :destroy
 
   passwordless_with :email
+
+  scope :active, -> { where(status: STATUS_ACTIVE) }
 
   def roles_wrapper
     Roles.new(roles)
@@ -81,11 +67,9 @@ class User < ApplicationRecord
     I18n.t("activerecord.attributes.user.enums.status.#{status}")
   end
 
-  private
+  def human_register
+    return nil if register.blank?
 
-  def roles_must_be_valid
-    return if roles.all? { |r| Roles::ROLES.include? r } && roles.uniq == roles
-
-    errors.add :roles, I18n.t('roles.validation.message')
+    I18n.t("activerecord.attributes.user.enums.register.#{register}")
   end
 end

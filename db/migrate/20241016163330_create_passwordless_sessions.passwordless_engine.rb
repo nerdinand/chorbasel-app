@@ -2,7 +2,7 @@
 
 # This migration comes from passwordless_engine (originally 20171104221735)
 class CreatePasswordlessSessions < ActiveRecord::Migration[6.0]
-  def change # rubocop:disable Metrics/MethodLength
+  def change
     create_table(:passwordless_sessions) do |t|
       t.belongs_to(
         :authenticatable,
