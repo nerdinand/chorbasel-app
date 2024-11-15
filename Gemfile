@@ -40,6 +40,7 @@ group :development, :test do
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem 'brakeman', require: false
 
+  gem 'rspec-rails', '~> 7.0'
   gem 'rubocop-capybara'
   gem 'rubocop-rails'
   gem 'rubocop-rspec_rails'
@@ -57,8 +58,8 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
   gem 'pundit-matchers', '~> 3.1'
-  gem 'rspec-rails', '~> 7.0'
   gem 'selenium-webdriver'
+  gem 'simplecov', require: false
 end
 
 gem 'tailwindcss-rails', '~> 3.0'

@@ -3,32 +3,27 @@
 require 'rails_helper'
 require_relative 'log_in_helpers'
 
-def create_upcoming_event!
-  CalendarEvent.create!(
-    starts_at: 7.days.from_now,
-    ends_at: 7.days.from_now + 2.hours,
-    uid: 'random1',
-    event_created_at: Time.zone.now,
-    summary: 'my upcoming event'
-  )
-end
-
-def create_excuse!(calendar_event, user)
-  Attendance.create!(
-    calendar_event:,
-    user:,
-    remarks: "Uwe:\n> Ich werde leider keine Lust haben.\n> Gruss Uwe",
-    status: 'excuse_requested'
-  )
-end
-
 RSpec.describe('Accepting an excuse') do
   fixtures :users
 
-  scenario do
-    event = create_upcoming_event!
-    create_excuse!(event, users(:uwe))
+  before do
+    calendar_event = CalendarEvent.create(
+      starts_at: 7.days.from_now,
+      ends_at: 7.days.from_now + 2.hours,
+      uid: 'random1',
+      event_created_at: Time.zone.now,
+      summary: 'my upcoming event'
+    )
 
+    Attendance.create(
+      calendar_event:,
+      user: users(:uwe),
+      remarks: "Uwe:\n> Ich werde leider keine Lust haben.\n> Gruss Uwe",
+      status: 'excuse_requested'
+    )
+  end
+
+  scenario do
     log_in_with_magic_link(users(:fabienne))
 
     # navbar link is not visible (probably hidden like on mobile)

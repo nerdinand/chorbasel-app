@@ -3,22 +3,20 @@
 require 'rails_helper'
 require_relative 'log_in_helpers'
 
-def create_upcoming_event!
-  CalendarEvent.create!(
-    starts_at: 7.days.from_now,
-    ends_at: 7.days.from_now + 2.hours,
-    uid: 'random1',
-    event_created_at: Time.zone.now,
-    summary: 'my upcoming event'
-  )
-end
-
 RSpec.describe('Making an excuse') do
   fixtures :users
 
-  scenario do
-    create_upcoming_event!
+  before do
+    CalendarEvent.create!(
+      starts_at: 7.days.from_now,
+      ends_at: 7.days.from_now + 2.hours,
+      uid: 'random1',
+      event_created_at: Time.zone.now,
+      summary: 'my upcoming event'
+    )
+  end
 
+  scenario do
     log_in_with_magic_link(users(:uwe))
     expect(page).to have_content('my upcoming event')
     click_on 'Entschuldigung erfassen'

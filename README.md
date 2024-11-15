@@ -31,6 +31,20 @@ These are the most important non-standard dependencies of the app:
 * tailwindcss: CSS framework.
 * pundit: For authorization of all the features through user roles.
 
+### Development
+
+We aim to have a reasonable test coverage using these kinds of specs:
+
+* features: high-level tests that simulate user interaction and test what the user can see
+* models: low-level unit tests of individual methods in model classes
+* helpers: same for helper methods
+* mailers: same for mailers
+
+Run the specs with:
+```
+bundle exec rspec
+```
+
 ### Deployment
 
 TODO: Write about how to deploy this thing (kamal, S3).

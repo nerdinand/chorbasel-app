@@ -3,22 +3,20 @@
 require 'rails_helper'
 require_relative 'log_in_helpers'
 
-def create_ongoing_event!
-  CalendarEvent.create!(
-    starts_at: 3.days.ago,
-    ends_at: 1.hour.from_now,
-    uid: 'random2',
-    event_created_at: Time.zone.now,
-    summary: 'my test event'
-  )
-end
-
 RSpec.describe('Creating an attendance') do
   fixtures :users
 
-  scenario do
-    create_ongoing_event!
+  before do
+    CalendarEvent.create!(
+      starts_at: 3.days.ago,
+      ends_at: 1.hour.from_now,
+      uid: 'random2',
+      event_created_at: Time.zone.now,
+      summary: 'my test event'
+    )
+  end
 
+  scenario do
     log_in_with_magic_link(users(:uwe))
     expect(page).to have_content('my test event')
     click_on 'Anwesenheit eintragen'
