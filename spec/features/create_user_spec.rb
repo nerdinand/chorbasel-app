@@ -5,7 +5,6 @@ require_relative 'log_in_helpers'
 
 RSpec.describe('Creating an attendance') do
   include ActiveJob::TestHelper
-  fixtures :users
 
   scenario do
     log_in_with_magic_link(users(:phips))

@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe CalendarEventPolicy do
-  fixtures :users
   subject { described_class.new(user, nil) }
 
   let(:user) { users(:ferdi) }

@@ -4,8 +4,6 @@ require 'rails_helper'
 require_relative 'log_in_helpers'
 
 RSpec.describe('Logging in and out') do
-  fixtures :users
-
   scenario 'with the code' do
     log_in_with_code(users(:uwe))
     expect(page).to have_content('Willkommen, Uwe!')

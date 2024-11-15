@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe CalendarSyncPolicy do
-  fixtures :users
   subject { described_class.new(user, nil) }
 
   context 'with a user with the app role' do

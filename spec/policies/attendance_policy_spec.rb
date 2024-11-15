@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe AttendancePolicy do
-  fixtures :users, :attendances, :calendar_events
   subject { described_class.new(user, attendance) }
 
   let(:attendance) { attendances(:uwe_choir_practice) }

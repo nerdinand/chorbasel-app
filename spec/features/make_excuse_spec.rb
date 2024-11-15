@@ -4,10 +4,8 @@ require 'rails_helper'
 require_relative 'log_in_helpers'
 
 RSpec.describe('Making an excuse') do
-  fixtures :users
-
   before do
-    CalendarEvent.create!(
+    CalendarEvent.create(
       starts_at: 7.days.from_now,
       ends_at: 7.days.from_now + 2.hours,
       uid: 'random1',

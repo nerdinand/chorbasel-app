@@ -4,10 +4,8 @@ require 'rails_helper'
 require_relative 'log_in_helpers'
 
 RSpec.describe('Creating an attendance') do
-  fixtures :users
-
   before do
-    CalendarEvent.create!(
+    CalendarEvent.create(
       starts_at: 3.days.ago,
       ends_at: 1.hour.from_now,
       uid: 'random2',
