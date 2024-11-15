@@ -57,6 +57,10 @@ class Roles
     roles_values.include?(ROLE_CHOIR_DIRECTION)
   end
 
+  def choir_life?
+    roles_values.include?(ROLE_CHOIR_LIFE)
+  end
+
   def self.all
     ROLES.map { |r| Role.new(r) }
   end

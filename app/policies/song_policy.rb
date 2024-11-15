@@ -32,6 +32,6 @@ class SongPolicy < ApplicationPolicy
   private
 
   def song_management?
-    superpowers? || choir_direction?
+    superpowers?
   end
 end
