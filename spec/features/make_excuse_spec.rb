@@ -3,28 +3,29 @@
 require 'rails_helper'
 require_relative 'log_in_helpers'
 
-def create_future_event!
+def create_upcoming_event!
   CalendarEvent.create!(
-    starts_at: 1.week.from_now,
-    ends_at: 1.week.from_now + 2.hours,
-    uid: 'random3',
+    starts_at: 7.days.from_now,
+    ends_at: 7.days.from_now + 2.hours,
+    uid: 'random1',
     event_created_at: Time.zone.now,
-    summary: 'my future event'
+    summary: 'my upcoming event'
   )
 end
 
-RSpec.describe('Creating an excuse') do
+RSpec.describe('Making an excuse') do
   fixtures :users
 
   scenario do
-    create_future_event!
+    create_upcoming_event!
 
     log_in_with_magic_link(users(:uwe))
-    expect(page).to have_content('my future event')
+    expect(page).to have_content('my upcoming event')
     click_on 'Entschuldigung erfassen'
     expect(page).to have_content('Entschuldigung erfassen')
-    fill_in 'Entschuldigung', with: 'Ich muss dann meine Katze streicheln und kann leider nicht in die Probe kommen.'
+    fill_in 'Entschuldigung', with: "Ich werde leider keine Lust haben.\nGruss Uwe"
     click_on 'Entschuldigung speichern'
     expect(page).to have_content('Entschuldigung erfolgreich erfasst.')
+    expect(page).to have_no_content('Entschuldigung erfassen')
   end
 end
