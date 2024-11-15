@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require_relative 'log_in_helpers'
+require_relative '../log_in_helpers'
 
 RSpec.describe('Creating an attendance') do
   before do

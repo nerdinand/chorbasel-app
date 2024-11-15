@@ -1,0 +1,2 @@
+male_face_blob: <%= ActiveStorage::FixtureSet.blob filename: 'male-face.png' %>
+female_face_blob: <%= ActiveStorage::FixtureSet.blob filename: 'female-face.png' %>
