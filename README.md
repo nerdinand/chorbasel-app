@@ -39,6 +39,7 @@ We aim to have a reasonable test coverage using these kinds of specs:
 * models: low-level unit tests of individual methods in model classes
 * helpers: same for helper methods
 * mailers: same for mailers
+* controllers: test individual controller actions
 
 Run the specs with:
 ```
