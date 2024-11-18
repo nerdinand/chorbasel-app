@@ -38,9 +38,10 @@ class User < ApplicationRecord
   passwordless_with :email
 
   scope :active, -> { where(status: STATUS_ACTIVE) }
+  scope :sign_in_allowed, -> { where.not(status: STATUS_INACTIVE) }
 
   def self.fetch_resource_for_passwordless(email)
-    where('lower(email) = ?', email).active.first
+    where('lower(email) = ?', email).sign_in_allowed.first
   end
 
   def roles_wrapper
