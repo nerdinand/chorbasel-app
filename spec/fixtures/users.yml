@@ -25,6 +25,7 @@ fabienne:
   phone_number: '+4179123456789'
   birth_date: 1990-01-01
 
+# Phips is a choir director
 phips:
   first_name: Philippe
   last_name: R
@@ -38,3 +39,9 @@ uwe:
   first_name: Uwe
   last_name: S
   email: uwe@example.com
+
+# Marit is just a regular member :(
+marit:
+  first_name: Marit
+  last_name: F
+  email: marit@example.com

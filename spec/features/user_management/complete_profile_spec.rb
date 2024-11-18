@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require_relative 'log_in_helpers'
+require_relative '../log_in_helpers'
 
 RSpec.describe('Completing a profile') do
-  fixtures :users
-
   scenario do
     log_in_with_magic_link(users(:uwe))
     expect(page).to have_content(

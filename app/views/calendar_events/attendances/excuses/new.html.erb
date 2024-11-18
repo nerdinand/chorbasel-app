@@ -3,14 +3,14 @@
 <%= render 'errors', model: @attendance %>
 
 <%= form_for @attendance, url: calendar_event_attendance_excuse_path(@attendance.calendar_event) do |f| %>
-  <p>
-    <%= f.label :calendar_event %>: <%= render 'application/calendar_event', calendar_event: @attendance.calendar_event %> <%# i18n-tasks-use t('activerecord.attributes.attendance.calendar_event') %> 
-  </p>
+  <div class='form-field'>
+    <p><%= f.label :calendar_event %>: <%= render 'application/calendar_event', calendar_event: @attendance.calendar_event %> <%# i18n-tasks-use t('activerecord.attributes.attendance.calendar_event') %> </p>
+  </div>
 
-  <p>
-    <%= f.label t('.excuse') %>
+  <div class='form-field'>
+    <p><%= f.label t('.excuse'), for: :attendance_remarks %></p>
     <%= f.text_area :remarks %>
-  </p>
+  </div>
 
   <%= f.submit t('.submit'), class: 'btn btn-primary' %>
 <% end %>

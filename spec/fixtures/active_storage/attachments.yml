@@ -1,0 +1,14 @@
+uwe_picture_attachment:
+  name: picture
+  record: uwe (User)
+  blob: male_face_blob
+
+marit_picture_attachment:
+  name: picture
+  record: marit (User)
+  blob: female_face_blob
+
+härlig_är_jorden_recording:
+  name: file
+  record: härlig_är_jorden_recording (SongMedium)
+  blob: recording_blob

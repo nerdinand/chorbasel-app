@@ -1,0 +1,3 @@
+male_face_blob: <%= ActiveStorage::FixtureSet.blob filename: 'male-face.png' %>
+female_face_blob: <%= ActiveStorage::FixtureSet.blob filename: 'female-face.png' %>
+recording_blob: <%= ActiveStorage::FixtureSet.blob filename: 'Amazing_Grace_-_Choir.ogg' %>

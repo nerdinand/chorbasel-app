@@ -3,8 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe User do
-  fixtures :users
-
   describe 'roles validation' do
     let(:roles_validation_error_message) do
       %(Rollen darf nur Elemente aus ["choir_direction", "choir_life", "choir_image", "choir_money", \
