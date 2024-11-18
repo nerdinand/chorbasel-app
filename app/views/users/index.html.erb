@@ -14,6 +14,7 @@
       <th><%= link_to t('.register'), order: :register %></th>
       <th><%= t('.roles') %></th>
       <th><%= t('.status') %></th>
+      <th><%= t('.sessions') %></th>
       <th></th>
     </tr>
   </thead>
@@ -46,6 +47,9 @@
         </td>
         <td>
           <%= user.human_status %>
+        </td>
+        <td>
+          <%= user.passwordless_sessions.available.count %>
         </td>
         <td>
           <% if policy(user).edit? %>
