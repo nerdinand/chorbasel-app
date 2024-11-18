@@ -6,5 +6,5 @@ class Song < ApplicationRecord
   validates :title, presence: true
   validates :repertoire, inclusion: { in: [true, false] }
 
-  validates :registers, array: Register::Song::REGISTERS
+  validates :registers, array: Register::SONG_REGISTERS
 end

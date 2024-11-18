@@ -16,7 +16,7 @@ class SongMedium < ApplicationRecord
   belongs_to :song
   has_one_attached :file
 
-  validates :register, presence: true, inclusion: Register::Song::REGISTERS, if: proc { |sm|
+  validates :register, presence: true, inclusion: Register::SONG_REGISTERS, if: proc { |sm|
     sm.kind == KIND_RECORDING_REGISTER
   }
   validates :register, absence: true, if: proc { |sm| sm.kind != KIND_RECORDING_REGISTER }
@@ -27,7 +27,7 @@ class SongMedium < ApplicationRecord
   def human_register
     return nil if register.blank?
 
-    I18n.t("activerecord.attributes.song.enums.register.#{register}")
+    Register::Register.look_up(register).human_name
   end
 
   def human_kind

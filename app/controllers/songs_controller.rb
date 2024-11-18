@@ -11,7 +11,7 @@ class SongsController < ApplicationController
 
   def new
     @song = authorize Song.new(
-      registers: Register::Song::DEFAULT_REGISTERS
+      registers: Register::CANONICAL_REGISTERS
     )
   end
 

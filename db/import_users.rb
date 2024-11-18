@@ -11,14 +11,14 @@ csv = CSV.read('storage/users.csv', headers: true)
 
 REGISTER_MAPPING = {
   nil => nil,
-  'S1' => Register::Singer::REGISTER_SOPRANO_1,
-  'S2' => Register::Singer::REGISTER_SOPRANO_2,
-  'A1' => Register::Singer::REGISTER_ALTO_1,
-  'A2' => Register::Singer::REGISTER_ALTO_2,
-  'T1' => Register::Singer::REGISTER_TENOR_1,
-  'T2' => Register::Singer::REGISTER_TENOR_2,
-  'B1' => Register::Singer::REGISTER_BASS_1,
-  'B2' => Register::Singer::REGISTER_BASS_2
+  'S1' => Register::REGISTER_SOPRANO_1,
+  'S2' => Register::REGISTER_SOPRANO_2,
+  'A1' => Register::REGISTER_ALTO_1,
+  'A2' => Register::REGISTER_ALTO_2,
+  'T1' => Register::REGISTER_TENOR_1,
+  'T2' => Register::REGISTER_TENOR_2,
+  'B1' => Register::REGISTER_BASS_1,
+  'B2' => Register::REGISTER_BASS_2
 }.freeze
 
 def map_register(register)

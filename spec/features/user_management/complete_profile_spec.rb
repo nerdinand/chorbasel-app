@@ -20,6 +20,7 @@ RSpec.describe('Completing a profile') do
     fill_in 'Ort', with: 'Musterstadt'
     fill_in 'Telefonnummer (mobil)', with: '+41761234567'
     fill_in 'Geburtsdatum', with: '1970-01-01'
+    debugger
     select 'Bass 1', from: 'Stimme'
     click_on 'Benutzer:in aktualisieren'
 

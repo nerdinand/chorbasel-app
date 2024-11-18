@@ -50,7 +50,7 @@
   <div class='form-field'>
     <p><%= f.label :registers %> <%# i18n-tasks-use t('activerecord.attributes.song.registers') %></p>
     <p>
-      <%= f.collection_check_boxes(:registers, Register::Song.all, :value, :human_name) do |box|
+      <%= f.collection_check_boxes(:registers, Register::SONG_REGISTERS, :value, :human_name) do |box|
         content_tag :p, class: 'text-xs' do
           box.label { box.check_box + box.text }
         end

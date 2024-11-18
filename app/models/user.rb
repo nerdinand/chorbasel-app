@@ -31,7 +31,7 @@ class User < ApplicationRecord
   validates :roles, array: Roles::ROLES
   validates :phone_number, format: { with: INTERNATIONAL_PHONE_NUMBER_REGEX }, allow_blank: true
   validates :status, inclusion: STATUSES
-  validates :register, inclusion: Register::Singer::REGISTERS, allow_blank: true
+  validates :register, inclusion: Register::SINGER_REGISTERS, allow_blank: true
 
   has_many :attendances, dependent: :destroy
 
@@ -70,6 +70,6 @@ class User < ApplicationRecord
   def human_register
     return nil if register.blank?
 
-    I18n.t("activerecord.attributes.user.enums.register.#{register}")
+    Register::Register.look_up(register).human_name
   end
 end

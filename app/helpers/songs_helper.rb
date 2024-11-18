@@ -2,7 +2,8 @@
 
 module SongsHelper
   def register_string(registers)
-    return 'SATB' if registers == Register::Song::DEFAULT_REGISTERS
+    debugger
+    return 'SATB' if registers == Register::CANONICAL_REGISTERS
 
     registers.map { |r| t("activerecord.attributes.song.enums.register.#{r}") }.join(', ')
   end

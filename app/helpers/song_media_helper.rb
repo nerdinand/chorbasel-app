@@ -6,7 +6,7 @@ module SongMediaHelper
   end
 
   def song_media_register_options
-    Register::Song::REGISTERS.map { |r| [t("activerecord.attributes.song.enums.register.#{r}"), r] }
+    Register::SONG_REGISTERS.map { |r| [t("activerecord.attributes.song.enums.register.#{r}"), r] }
   end
 
   def file_icon(attachment)
