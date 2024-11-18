@@ -296,6 +296,7 @@ de:
       profile_complete: Profil vollständig?
       register: Stimme
       roles: Rollen
+      sessions: Sessions
       status: Status
       title: Benutzer:innen
     new:

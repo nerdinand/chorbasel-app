@@ -14,6 +14,9 @@
       <th><%= link_to t('.register'), order: :register %></th>
       <th><%= t('.roles') %></th>
       <th><%= t('.status') %></th>
+      <% if current_user.roles_wrapper.app? %>
+        <th><%= t('.sessions') %></th>
+      <% end %>
       <th></th>
     </tr>
   </thead>
@@ -47,6 +50,11 @@
         <td>
           <%= user.human_status %>
         </td>
+        <% if current_user.roles_wrapper.app? %>
+          <td>
+            <%= user.passwordless_sessions.available.count %>
+          </td>
+        <% end %>
         <td>
           <% if policy(user).edit? %>
             <%= link_to t('.edit'), edit_user_path(user), class: 'btn btn-primary' %>
