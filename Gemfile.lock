@@ -79,16 +79,16 @@ GEM
       rails (>= 5.0)
     ast (2.4.2)
     aws-eventstream (1.3.0)
-    aws-partitions (1.1009.0)
+    aws-partitions (1.1011.0)
     aws-sdk-core (3.213.0)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.992.0)
       aws-sigv4 (~> 1.9)
       jmespath (~> 1, >= 1.6.1)
-    aws-sdk-kms (1.95.0)
+    aws-sdk-kms (1.96.0)
       aws-sdk-core (~> 3, >= 3.210.0)
       aws-sigv4 (~> 1.5)
-    aws-sdk-s3 (1.171.0)
+    aws-sdk-s3 (1.172.0)
       aws-sdk-core (~> 3, >= 3.210.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.5)
@@ -387,12 +387,12 @@ GEM
       fugit (~> 1.11.0)
       railties (>= 7.1)
       thor (~> 1.3.1)
-    sqlite3 (2.2.0-aarch64-linux-gnu)
-    sqlite3 (2.2.0-arm-linux-gnu)
-    sqlite3 (2.2.0-arm64-darwin)
-    sqlite3 (2.2.0-x86-linux-gnu)
-    sqlite3 (2.2.0-x86_64-darwin)
-    sqlite3 (2.2.0-x86_64-linux-gnu)
+    sqlite3 (2.3.0-aarch64-linux-gnu)
+    sqlite3 (2.3.0-arm-linux-gnu)
+    sqlite3 (2.3.0-arm64-darwin)
+    sqlite3 (2.3.0-x86-linux-gnu)
+    sqlite3 (2.3.0-x86_64-darwin)
+    sqlite3 (2.3.0-x86_64-linux-gnu)
     sshkit (1.23.2)
       base64
       net-scp (>= 1.1.2)
@@ -451,7 +451,7 @@ PLATFORMS
 
 DEPENDENCIES
   arask (~> 1.2)
-  aws-sdk-s3 (~> 1.171)
+  aws-sdk-s3 (~> 1.172)
   bootsnap
   brakeman
   capybara
@@ -480,7 +480,7 @@ DEPENDENCIES
   solid_cable
   solid_cache
   solid_queue
-  sqlite3 (~> 2.1)
+  sqlite3 (~> 2.3)
   stimulus-rails
   tailwindcss-rails (~> 3.0)
   tailwindcss-ruby
