@@ -42,10 +42,10 @@ class CalendarEvent < ApplicationRecord
 
   def category
     @category ||= case summary
-                  when /konzert/i
-                    CATEGORY_CONCERT
                   when /probe/i
                     CATEGORY_PRACTICE
+                  when /konzert/i
+                    CATEGORY_CONCERT
                   else
                     CATEGORY_OTHER
                   end
