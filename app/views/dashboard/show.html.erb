@@ -25,7 +25,7 @@
 <p><%= t('.calendar.description') %></p>
 
 <% @calendar_events.each do |calendar_event| %>
-  <div class="my-5 p-2 border-solid border-primary border-2 rounded bg-gray">
+  <div class="my-5 p-2 border-solid border-primary border-2 rounded bg-gray <%= 'bg-complementary bg-opacity-30' if calendar_event.concert? %>">
     <p class="font-bold"><%= calendar_event.summary %></p>
     <p><%= calendar_event_time_string(calendar_event) %></p>
     <p class="text-xs"><%= time_ago_in_words(calendar_event.starts_at, scope: 'datetime.distance_in_words.in_duration') %></p>

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AttendancesController < ApplicationController
-  EVENTS_FROM = 3.months
+  EVENTS_FROM = 1.month
   EVENTS_TO = 2.months
 
   def index
