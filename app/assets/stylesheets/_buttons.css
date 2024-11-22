@@ -7,7 +7,11 @@
     @apply bg-primary-dark border-primary-dark
   }
 
-  .btn-primary:hover {
+  .btn-secondary {
+    @apply bg-complementary-dark border-complementary-dark
+  }
+
+  .btn-primary:hover, .btn-secondary:hover {
     @apply bg-complementary border-complementary
   }
 
