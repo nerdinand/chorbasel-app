@@ -15,6 +15,16 @@
 <% end %>
 
 <table>
+  <colgroup>
+    <col />
+    <% @attendance_table.calendar_events.each do |calendar_event| %>
+      <% if calendar_event.concert? %>
+        <col class="bg-complementary" />
+      <% else %>
+        <col />
+      <% end %>
+    <% end %>
+  </colgroup>
   <thead>
     <tr>
       <th></th>

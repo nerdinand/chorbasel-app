@@ -6,6 +6,10 @@ class CalendarEvent < ApplicationRecord
   ONGOING_TIME_WINDOW_BEFORE = 20.minutes
   ONGOING_TIME_WINDOW_AFTER = 10.minutes
 
+  CATEGORY_CONCERT = 'concert'
+  CATEGORY_PRACTICE = 'practice'
+  CATEGORY_OTHER = 'other'
+
   validates :uid, :event_created_at, :starts_at, :ends_at, :summary, presence: true
 
   has_many :attendances, dependent: :destroy
@@ -31,6 +35,21 @@ class CalendarEvent < ApplicationRecord
   scope :ongoing, lambda {
     where(starts_at: ..ONGOING_TIME_WINDOW_BEFORE.from_now).where(ends_at: ONGOING_TIME_WINDOW_AFTER.ago..)
   }
+
+  def concert?
+    category == CATEGORY_CONCERT
+  end
+
+  def category
+    @category ||= case summary
+                  when /konzert/i
+                    CATEGORY_CONCERT
+                  when /probe/i
+                    CATEGORY_PRACTICE
+                  else
+                    CATEGORY_OTHER
+                  end
+  end
 
   def duration
     ActiveSupport::Duration.build(ends_at - starts_at)
