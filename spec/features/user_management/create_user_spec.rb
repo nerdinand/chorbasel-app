@@ -21,7 +21,7 @@ RSpec.describe('Creating an attendance') do
       click_on 'Benutzer:in erstellen'
     end
 
-    expect(page).to have_content('Benutzer:in erfolgreich erstellt.')
+    expect(page).to have_content('Benutzer:in erfolgreich erstellt und Einladungsemail verschickt!')
 
     email = ActionMailer::Base.deliveries.last
     expect(email.body.to_s).to eq(
