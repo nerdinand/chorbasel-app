@@ -1,9 +1,11 @@
 <footer class="text-center">
   <% if logged_in? %>
     <%= link_to t('.feedback'), new_feedback_path %>
-    <br>
-    Chorbasel-App <%= app_version %>,
-    Ruby <%= RUBY_VERSION %>, 
-    Rails <%= Rails.version %>
+    <% if current_user.roles_wrapper.app? %>
+      <br>
+      Chorbasel-App <%= app_version %>,
+      Ruby <%= RUBY_VERSION %>, 
+      Rails <%= Rails.version %>
+    <% end %>
   <% end %>
 </footer>
