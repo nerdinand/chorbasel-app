@@ -1,10 +1,10 @@
-uwe_picture_attachment:
-  name: picture
+uwe_face_picture_attachment:
+  name: face_picture
   record: uwe (User)
   blob: male_face_blob
 
-marit_picture_attachment:
-  name: picture
+marit_face_picture_attachment:
+  name: face_picture
   record: marit (User)
   blob: female_face_blob
 

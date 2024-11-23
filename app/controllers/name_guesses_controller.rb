@@ -2,8 +2,8 @@
 
 class NameGuessesController < ApplicationController
   def new
-    random_user_with_picture = User.active.joins(:picture_attachment).sample
-    @name_guess = authorize NameGuess.new(guessee: random_user_with_picture)
+    random_user_with_face_picture = User.active.joins(:face_picture_attachment).sample
+    @name_guess = authorize NameGuess.new(guessee: random_user_with_face_picture)
   end
 
   def create
