@@ -1,0 +1,11 @@
+<% content_for :title, t('.title') %>
+
+<h2><%= t('.subtitle') %></h2>
+
+<div class="flex flex-row flex-wrap gap-4 justify-center mt-4">
+  <% @users.each do |user| %>
+    <div class="w-full md:w-1/4">
+      <%= image_tag(user.profile_picture) %>
+    </div>
+  <% end %>
+</div>

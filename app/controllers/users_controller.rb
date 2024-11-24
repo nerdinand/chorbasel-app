@@ -59,13 +59,13 @@ class UsersController < ApplicationController
 
   def admin_user_params
     params.require(:user).permit(:email, :first_name, :last_name, :nick_name, :salutation, :street, :zip_code, :city,
-                                 :phone_number, :birth_date, :register, :picture, :status, :member_since,
-                                 :remarks, roles: [])
+                                 :phone_number, :birth_date, :register, :face_picture, :profile_picture, :status,
+                                 :member_since, :remarks, roles: [])
   end
 
   def regular_user_params
     params.require(:user).permit(:email, :first_name, :last_name, :nick_name, :salutation, :street, :zip_code, :city,
-                                 :phone_number, :birth_date, :register, :picture)
+                                 :phone_number, :birth_date, :register, :face_picture, :profile_picture)
   end
 
   def update_success_redirect_path

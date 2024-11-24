@@ -34,6 +34,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     resources :name_guesses, only: %i[new create]
 
     resources :feedbacks, only: %i[new create]
+
+    resources :profiles, only: :index
   end
 
   get '*path' => redirect('/users/sign_in'), via: :all, constraints: lambda { |req|

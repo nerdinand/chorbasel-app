@@ -82,12 +82,13 @@ de:
             active: Aktiv
             inactive: Inaktiv
             paused: Pausiert
+        face_picture: Bild (nur Gesicht, fürs Namen raten)
         first_name: Vorname
         last_name: Nachname
         member_since: Mitglied seit
         nick_name: Spitzname
         phone_number: Telefonnummer (mobil)
-        picture: Bild
+        profile_picture: Bild (mit Name, fürs Lookbook)
         register: Stimme
         remarks: Bemerkungen
         roles: Rollen
@@ -223,6 +224,7 @@ de:
       logout: Ausloggen
       my_data: Meine Daten
       name_guessing: Namen raten
+      profiles: Lookbook
       songs: Lieder
       users: Benutzer:innen
   name_guesses:
@@ -233,6 +235,10 @@ de:
       explanation: Wie heisst diese:r Mitsänger:in? Sowohl Vorname als auch Spitzname (wenn vorhanden) zählen.
     new:
       title: Namen raten
+  profiles:
+    index:
+      subtitle: Wer singt alles im Chor?
+      title: Lookbook
   sessions:
     update:
       success: Willkommen, %{user_name}!
@@ -305,9 +311,9 @@ de:
     index:
       edit: Bearbeiten
       email: E-Mail
+      face_picture: Bild
       name: Name
       new: Neu
-      picture: Bild
       profile_complete: Profil vollständig?
       register: Stimme
       roles: Rollen

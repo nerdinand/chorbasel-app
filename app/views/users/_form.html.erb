@@ -9,8 +9,13 @@
   </div>
 
   <div class='form-field'>
-    <%= f.label :picture %> <%# i18n-tasks-use t('activerecord.attributes.user.picture') %> 
-    <%= f.file_field :picture %>
+    <%= f.label :face_picture %> <%# i18n-tasks-use t('activerecord.attributes.user.face_picture') %> 
+    <%= f.file_field :face_picture %>
+  </div>
+
+  <div class='form-field'>
+    <%= f.label :profile_picture %> <%# i18n-tasks-use t('activerecord.attributes.user.profile_picture') %> 
+    <%= f.file_field :profile_picture %>
   </div>
 
   <h2><%= t('.name') %></h2>

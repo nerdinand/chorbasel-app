@@ -2,7 +2,7 @@
   <%= t('.explanation') %>
 </p>
 
-<%= image_tag(@name_guess.guessee.picture, class: 'w-60') %>
+<%= image_tag(@name_guess.guessee.face_picture, class: 'w-60') %>
 
 <%= form_for @name_guess do |f| %>
   <%= f.hidden_field :guessee_id %>
