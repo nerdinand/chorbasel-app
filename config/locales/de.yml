@@ -301,11 +301,15 @@ de:
         hint: 'TODO: birth_date hint'
       email:
         hint: Die E-Mail-Adresse mit der du dich in der App einloggst und unter der für den Chor erreichbar bist.
+      face_picture:
+        not_set_yet_notice: Bisher noch kein Bild hochgeladen.
       name: Name
       nick_name:
         hint: 'Optional: Wie du im und vom Chor genannt werden willst (wenn nicht mit deinem regulären Vornamen).'
       phone_number:
         hint: Deine Mobiltelefonnummer im internationalen Format (z.B. +41791234567)
+      profile_picture:
+        not_set_yet_notice: Bisher noch kein Bild hochgeladen.
       register:
         hint: Dein Stimmregister im Chor
     index:
