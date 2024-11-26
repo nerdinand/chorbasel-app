@@ -9,13 +9,31 @@
   </div>
 
   <div class='form-field'>
-    <%= f.label :face_picture %> <%# i18n-tasks-use t('activerecord.attributes.user.face_picture') %> 
-    <%= f.file_field :face_picture %>
+    <%= f.label :face_picture do |label_text| %> <%# i18n-tasks-use t('activerecord.attributes.user.face_picture') %>
+      <%= label_text %>
+      <p>
+        <% if @user.face_picture.present? %>
+          <%= image_tag(@user.face_picture.variant(:thumb)) %>
+        <% else %>
+          <%= t('.face_picture.not_set_yet_notice') %>
+        <% end %>
+      </p>
+      <%= f.file_field :face_picture %>
+    <% end %>
   </div>
 
   <div class='form-field'>
-    <%= f.label :profile_picture %> <%# i18n-tasks-use t('activerecord.attributes.user.profile_picture') %> 
-    <%= f.file_field :profile_picture %>
+    <%= f.label :profile_picture do |label_text| %> <%# i18n-tasks-use t('activerecord.attributes.user.profile_picture') %>
+      <%= label_text %>
+      <p>
+        <% if @user.profile_picture.present? %>
+          <%= image_tag(@user.profile_picture.variant(:medium)) %>
+        <% else %>
+          <%= t('.profile_picture.not_set_yet_notice') %>
+        <% end %>
+      </p>
+      <%= f.file_field :profile_picture %>
+    <% end %>
   </div>
 
   <h2><%= t('.name') %></h2>
