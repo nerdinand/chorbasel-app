@@ -226,6 +226,7 @@ de:
       name_guessing: Namen raten
       profiles: Lookbook
       songs: Lieder
+      statistics: Statistiken
       users: Benutzer:innen
   name_guesses:
     create:
@@ -282,6 +283,11 @@ de:
     update:
       error: Fehler beim Bearbeiten des Lieds.
       success: Lied erfolgreich bearbeitet.
+  statistics:
+    index:
+      name_guesses:
+        title: Namen raten
+      title: Statistiken
   user_mailer:
     welcome_email:
       body: Du wurdest zur Chorbasel-App eingeladen! Du kannst dich jetzt unter <a href="https://app.chorbasel.ch">app.chorbasel.ch</a> mit der E-Mail-Adresse einloggen, an die diese E-Mail versendet wurde.

@@ -1,9 +1,4 @@
 <% content_for :title, t('.title') %>
 
-<h2><%= t('.name_guesses') %></h2>
-
-<h3><%= t('.name_guesses.correct_counts') %></h3>
-<%= column_chart @correct_counts %>
-
-<h3><%= t('.name_guesses.incorrect_counts') %></h3>
-<%= column_chart @incorrect_counts %>
+<h2><%= t('.name_guesses.title') %></h2>
+<%= column_chart @name_guess_counts %>
