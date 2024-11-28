@@ -2,6 +2,7 @@
 
 class StatisticsController < ApplicationController
   def index
+    authorize :statistics, :index?
     min_date = NameGuess.pluck('min(date(created_at))').flatten.map { |d| Date.parse d }.first
     date_range = (min_date..Time.zone.today).to_a
     correct_counts = name_guess_counts(date_range, true)

@@ -23,7 +23,7 @@
           <% end %>
           <li><%= link_to t('.name_guessing'), new_name_guess_path %></li>
           <li><%= link_to t('.profiles'), profiles_path %></li>
-          <% if current_user.roles_wrapper.app? %>
+          <% if policy(:statistics).index? %>
             <li><%= link_to t('.statistics'), statistics_path %></li>
           <% end %>
           <li><%= link_to t('.my_data'), edit_user_path(current_user) %></li>
