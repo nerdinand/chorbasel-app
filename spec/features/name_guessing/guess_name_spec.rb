@@ -10,7 +10,7 @@ RSpec.describe('Guessing names') do
 
   scenario 'making a wrong guess' do
     log_in_with_magic_link(users(:uwe))
-    click_on 'Namen raten', visible: false
+    click_on 'Namen raten'
     expect(page).to have_content('Namen raten')
     fill_in 'Vorname oder Spitzname',	with: 'Foo'
     click_on 'Raten'
@@ -19,7 +19,7 @@ RSpec.describe('Guessing names') do
 
   scenario 'making a correct guess' do
     log_in_with_magic_link(users(:uwe))
-    click_on 'Namen raten', visible: false
+    click_on 'Namen raten'
     expect(page).to have_content('Namen raten')
     fill_in 'Vorname oder Spitzname',	with: 'Marit'
     click_on 'Raten'

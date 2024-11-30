@@ -24,8 +24,7 @@ RSpec.describe('Accepting an excuse') do
   scenario do
     log_in_with_magic_link(users(:fabienne))
 
-    # navbar link is not visible (probably hidden like on mobile)
-    click_on 'Anwesenheiten', visible: false
+    click_on 'Anwesenheiten'
 
     expect(page).to have_content('Zu bestätigende Abwesenheiten')
     expect(page).to have_content('Uwe my upcoming event')
