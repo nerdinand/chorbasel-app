@@ -6,7 +6,7 @@ require_relative '../log_in_helpers'
 RSpec.describe('Creating a song') do
   scenario do
     log_in_with_magic_link(users(:phips))
-    click_on 'Lieder', visible: false
+    click_on 'Lieder'
     expect(page).to have_content('Lieder')
     click_on 'Neues Lied'
     expect(page).to have_content('Neues Lied')
