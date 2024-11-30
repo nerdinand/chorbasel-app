@@ -21,6 +21,16 @@
   <% end %>
 <% end %>
 
+<h2><%= t('.upcoming_birthdays.title') %></h2>
+<p><%= t('.upcoming_birthdays.description') %></p>
+<ul>
+  <% @upcoming_birthdays.each do |ub| %>
+    <li>
+      <%= l ub[:next_birthday] %>: <b><%= ub[:user].display_name %></b>
+    </li>
+  <% end %>
+</ul>
+
 <h2><%= t('.calendar.title') %></h2>
 <p><%= t('.calendar.description') %></p>
 

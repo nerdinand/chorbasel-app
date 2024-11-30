@@ -149,6 +149,9 @@ de:
         link: Benutzerprofil vervollständigen
         message: Dein Benutzerprofil ist unvollständig. Bitte hilf uns indem du die fehlenden Informationen einträgst.
       title: Dashboard
+      upcoming_birthdays:
+        description: Diese Mitsänger:innen haben bald Geburtstag!
+        title: Geburtstage
   datetime:
     distance_in_words:
       in_duration:
