@@ -1,37 +1,101 @@
-<nav class='bg-primary text-white fixed top-0 z-10 w-full'>
-  <div data-controller='visibility' class='container flex justify-between flex-wrap mx-auto'>
-    <div>
-      <%= link_to image_tag(logo_path, class: 'w-12 my-2 mx-4'), root_path %>
+<%
+navbar_links = []
+
+if logged_in?
+  navbar_links = [[t('.dashboard'), dashboard_path]]
+
+  if policy(:user).index?
+    navbar_links << [t('.users'), users_path]
+  end
+
+  if policy(:attendance).index?
+    navbar_links << [t('.attendances'), attendances_path]
+  end
+
+  if policy(:song).index?
+    navbar_links << [t('.songs'), songs_path]
+  end
+
+  navbar_links << [t('.name_guessing'), new_name_guess_path]
+  navbar_links << [t('.profiles'), profiles_path]
+
+  if policy(:statistics).index?
+    navbar_links << [t('.statistics'), statistics_path]
+  end
+end
+%>
+
+<nav class="bg-primary" data-controller='visibility'>
+  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="relative flex h-16 items-center justify-between" >
+      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+        <!-- Mobile menu button-->
+        <button data-action='visibility#toggleTargets' type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+          <span class="absolute -inset-0.5"></span>
+          <span class="sr-only">Open main menu</span>
+          <!--
+            Icon when menu is closed.
+
+            Menu open: "hidden", Menu closed: "block"
+          -->
+          <svg data-visibility-target='hideable' class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+          <!--
+            Icon when menu is open.
+
+            Menu open: "block", Menu closed: "hidden"
+          -->
+          <svg data-visibility-target='hideable' hidden class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+        <div class="flex shrink-0 items-center">
+          <%= link_to image_tag(logo_path, class: 'h-8 w-auto'), root_path %>
+        </div>
+        <div class="hidden sm:ml-6 sm:block">
+          <div class="flex space-x-4">
+            <% navbar_links.each do |text, path| %>
+              <%= link_to text, path, class: 'rounded-md bg-primary px-3 py-2 text-sm font-medium text-white' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <% if logged_in? %>
+        <div data-controller='visibility' class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          <!-- Profile dropdown -->
+          <div class="relative ml-3">
+            <div>
+              <button type="button" data-action='visibility#toggleTargets' class="relative flex rounded-full bg-primary text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                <span class="absolute -inset-1.5"></span>
+                <span class="sr-only">Open user menu</span>
+                <% if current_user.face_picture.present? %>
+                  <%= image_tag current_user.face_picture.variant(:thumb), class: "size-8 rounded-full" %>
+                <% else %>
+                  <span class="size-8 rounded-full align-middle text-lg text-white bg-complementary"><%= current_user.display_name.first %></span>
+                <% end %>
+              </button>
+            </div>
+
+            <div data-visibility-target='hideable' hidden class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+              <%= link_to t('.my_data'), edit_user_path(current_user), class: 'block px-4 py-2 text-sm text-primary', role: 'menuitem', tabindex: '-1' %>
+              <%= link_to t('.logout'), users_sign_out_path, method: :delete, class: 'block px-4 py-2 text-sm text-primary', role: 'menuitem', tabindex: '-1' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
+  </div>
 
-    <button id='navbar-button' data-action='visibility#toggleTargets' type='button' class='inline-flex justify-end p-2 ml-3 text-sm md:hidden focus:outline-none focus:ring-gray-200' aria-controls='navbar-default' aria-expanded='false'>
-      <svg class='w-6 h-6' aria-hidden='true' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' d='M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z' clip-rule='evenodd'></path></svg>
-    </button>
-
-    <div data-visibility-target='hideable' hidden class='w-full md:block md:w-auto' id='navbar-default'>
-      <ul class='flex flex-col p-4 mt-4 list-none md:flex-row md:space-x-4 md:mt-0 md:text-sm md:font-medium'>
-        <% if logged_in? %>
-          <li><%= link_to t('.dashboard'), dashboard_path %></li>
-          <% if policy(:user).index? %>
-            <li><%= link_to t('.users'), users_path %></li>
-          <% end %>
-          <% if policy(:attendance).index? %>
-            <li><%= link_to t('.attendances'), attendances_path %></li>
-          <% end %>
-          <% if policy(:song).index? %>
-            <li><%= link_to t('.songs'), songs_path %></li>
-          <% end %>
-          <li><%= link_to t('.name_guessing'), new_name_guess_path %></li>
-          <li><%= link_to t('.profiles'), profiles_path %></li>
-          <% if policy(:statistics).index? %>
-            <li><%= link_to t('.statistics'), statistics_path %></li>
-          <% end %>
-          <li><%= link_to t('.my_data'), edit_user_path(current_user) %></li>
-          <li><%= link_to t('.logout'), users_sign_out_path, method: :delete %></li>
-        <% else %>
-          <li><%= link_to t('.login'), users_sign_in_path %></li>
-        <% end %>
-      </ul>
+  <!-- Mobile menu, show/hide based on menu state. -->
+  <div data-visibility-target='hideable' hidden class="sm:hidden" id="mobile-menu">
+    <div class="space-y-1 px-2 pb-3 pt-2">
+      <% navbar_links.each do |text, path| %>
+        <%= link_to text, path, class: 'block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-primary hover:text-white' %>
+      <% end %>
     </div>
   </div>
 </nav>
