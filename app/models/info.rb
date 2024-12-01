@@ -10,5 +10,5 @@ class Info < ApplicationRecord
 
   scope :newest, -> { order(updated_at: :desc) }
   scope :active, -> { where(active: true) }
-  scope :newest_active, -> { active.newest.first }
+  scope :newest_active, -> { active.newest }
 end

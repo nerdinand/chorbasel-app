@@ -26,7 +26,7 @@ LIMIT 5;
       end
     end
     @upcoming_birthdays = upcoming_birthdays
-    @info = Info.newest_active
+    @info = Info.newest_active.first
   end
 
   private
