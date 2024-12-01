@@ -20,7 +20,9 @@ class AttendancesController < ApplicationController
   end
 
   def edit
-    @attendance = authorize Attendance.find(params[:id])
+    @attendance = authorize(Attendance.find(params[:id])).tap do |attendance|
+      attendance.status = Attendance::STATUS_EXCUSED
+    end
   end
 
   def create
