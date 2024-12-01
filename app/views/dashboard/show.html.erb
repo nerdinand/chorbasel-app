@@ -1,5 +1,14 @@
 <% content_for :title, t('.title') %>
 
+<% if @info.present? %>
+  <div class="<%= @info.kind %>">
+    <p>
+      <b><%= @info.title %></b>
+    </p>
+    <%= @info.description %>
+  </div>
+<% end %>
+
 <% unless current_user.profile_complete? %>
   <div>
     <%= t('.profile_completeness.message') %>
