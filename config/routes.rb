@@ -39,7 +39,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
     resources :statistics, only: :index
 
-    resources :infos, only: %i[index new create edit update]
+    resources :infos, except: %i[destroy show]
   end
 
   get '*path' => redirect('/users/sign_in'), via: :all, constraints: lambda { |req|
