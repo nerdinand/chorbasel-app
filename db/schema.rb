@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_23_200738) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_01_080814) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -72,6 +72,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_23_200738) do
     t.datetime "updated_at", null: false
     t.index ["starts_at"], name: "index_calendar_events_on_starts_at"
     t.index ["uid"], name: "index_calendar_events_on_uid", unique: true
+  end
+
+  create_table "infos", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description", null: false
+    t.string "kind", null: false
+    t.boolean "active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "name_guesses", force: :cascade do |t|
