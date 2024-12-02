@@ -14,7 +14,7 @@
   </ul>
 <% end %>
 
-<table>
+<table class="w-full">
   <colgroup>
     <col />
     <% @attendance_table.calendar_events.each do |calendar_event| %>
@@ -25,7 +25,7 @@
       <% end %>
     <% end %>
   </colgroup>
-  <thead>
+  <thead class="sticky top-0">
     <tr>
       <th></th>
       <% @attendance_table.calendar_events.each do |calendar_event| %>

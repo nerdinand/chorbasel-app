@@ -4,8 +4,8 @@
   <%= link_to t('.new'), new_song_path, class: 'btn btn-primary' %>
 <% end %>
 
-<table>
-  <thead>
+<table class="w-full">
+  <thead class="sticky top-0">
     <tr>
       <th><%= t('activerecord.attributes.song.title') %></th>
       <th><%= t('activerecord.attributes.song.composer') %></th>
