@@ -1,7 +1,7 @@
 import cv2 
 import os
 
-directory = 'chorbasel.onepage.me-1731198496943'
+directory = 'lookbook-scrape'
 
 face_cascade = cv2.CascadeClassifier('lib/scripts/haarcascade_frontalface_alt2.xml') 
 
@@ -47,7 +47,7 @@ for filename in os.listdir(directory):
 
     face = img[min_y:max_y, min_x:max_x]
     # print(min_y, max_y, min_x, max_x)
-    cv2.imwrite(f"{filename}-face-{i}.jpg", face)
+    cv2.imwrite(f"face/{filename}-face-{i}.jpg", face)
 
   if i == 0:
     print(f"No face found in {filename}")
