@@ -7,15 +7,15 @@
   </div>
 <% end %>
 
-<% if @attendances.any? %>
+<% if @ongoing_attendances.any? %>
   <h2><%= t('.attendances.title') %></h2>
 
-  <% @attendances.each do |attendance| %>
+  <% @ongoing_attendances.each do |ongoing_attendance| %>
     <div>
-      <p><%= attendance.calendar_event.summary %></p>
+      <p><%= ongoing_attendance.calendar_event.summary %></p>
 
-      <% if attendance.new_record? %>
-        <%= button_to t('.calendar_events.attendance.submit'), calendar_event_attendance_attendance_path(attendance.calendar_event), method: :post, class: 'btn btn-secondary' %> 
+      <% if ongoing_attendance.new_record? %>
+        <%= button_to t('.calendar_events.attendance.submit'), calendar_event_attendance_attendance_path(ongoing_attendance.calendar_event), method: :post, class: 'btn btn-secondary' %> 
       <% end %>
     </div>
   <% end %>
