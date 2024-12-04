@@ -13,4 +13,8 @@ class AttendanceTable
   def attendance_for(user, calendar_event)
     @index["#{user.id}-#{calendar_event.id}"]&.first
   end
+
+  def to_partial_path
+    'attendance_table'
+  end
 end

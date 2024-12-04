@@ -14,42 +14,4 @@
   </ul>
 <% end %>
 
-<table class="w-full">
-  <colgroup>
-    <col />
-    <% @attendance_table.calendar_events.each do |calendar_event| %>
-      <% if calendar_event.concert? %>
-        <col class="bg-complementary bg-opacity-30" />
-      <% else %>
-        <col />
-      <% end %>
-    <% end %>
-  </colgroup>
-  <thead class="sticky top-0">
-    <tr>
-      <th></th>
-      <% @attendance_table.calendar_events.each do |calendar_event| %>
-        <th><%= calendar_event.starts_at.strftime('%d.%m.') %></th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody class="border-r-2">
-    <% @attendance_table.users.each do |user| %>
-      <tr>
-        <td class="border-r-2"><%= user.full_name %></td>
-        <% @attendance_table.calendar_events.each do |calendar_event| %>
-          <td class="text-center">
-            <% attendance = @attendance_table.attendance_for(user, calendar_event) %>
-            <% if attendance.nil? %>
-              <%= link_to '❔', new_attendance_path(user_id: user, calendar_event_id: calendar_event) %>
-            <% else %>
-              <%= link_to edit_attendance_path(attendance) do %>
-                <%= attendance.status_emoji %>
-              <% end %>
-            <% end %>
-          </td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render @attendance_table %>

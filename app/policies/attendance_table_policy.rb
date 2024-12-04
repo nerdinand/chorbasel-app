@@ -3,7 +3,7 @@
 class AttendanceTablePolicy < ApplicationPolicy
   attr_reader :user, :attendance_table
 
-  delegate :index?, to: :attendance_policy
+  delegate :index?, :show?, to: :attendance_policy
 
   def initialize(user, attendance_table)
     super

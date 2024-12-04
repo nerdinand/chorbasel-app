@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class DashboardController < ApplicationController
+  include AttendanceTableBuilder
+
   UPCOMING_BIRTHDAYS_QUERY = "
 SELECT
   id,
@@ -26,6 +28,7 @@ LIMIT 5;
       end
     end
     @upcoming_birthdays = upcoming_birthdays
+    @attendance_table = authorize AttendancesController.build_attendance_table([current_user])
   end
 
   private
