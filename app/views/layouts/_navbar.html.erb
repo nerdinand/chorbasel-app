@@ -22,6 +22,10 @@ if logged_in?
   if policy(:statistics).index?
     navbar_links << [t('.statistics'), statistics_path]
   end
+
+  if policy(:info).new?
+    navbar_links << [t('.infos'), infos_path]
+  end
 end
 %>
 

@@ -29,6 +29,7 @@ LIMIT 5;
     end
     @upcoming_birthdays = upcoming_birthdays
     @attendance_table = authorize AttendancesController.build_attendance_table([current_user])
+    @info = Info.newest_active.first
   end
 
   private

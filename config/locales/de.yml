@@ -13,6 +13,15 @@ de:
         remarks: Bemerkungen
         status: Status
         user: Benutzer:in
+      info:
+        active: Aktiv
+        description: Nachricht
+        enums:
+          kind:
+            alert: Warnung
+            notice: Notiz
+        kind: Art
+        title: Titel
       role:
         enums:
           role:
@@ -217,12 +226,31 @@ de:
         create: Lied erstellen
       song_medium:
         create: Mediendatei erstellen
+  infos:
+    create:
+      error: Fehler beim Erstellen der Info
+      success: Info erfolgreich erstellt
+    edit:
+      title: Info bearbeiten
+    index:
+      active: Aktiv
+      description: Nachricht
+      edit: Bearbeiten
+      kind: Art
+      new: Neue Info
+      title: Infos
+    new:
+      title: Neue Info
+    update:
+      error: Fehler beim Bearbeiten der Info
+      success: Info erfolgreich bearbeitet
   layouts:
     footer:
       feedback: Feedback
     navbar:
       attendances: Anwesenheiten
       dashboard: Dashboard
+      infos: Infos
       logout: Ausloggen
       my_data: Meine Daten
       name_guessing: Namen raten
