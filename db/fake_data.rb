@@ -96,5 +96,6 @@ calendar_events = CalendarEvent.all.to_a
   next unless attendance.new_record?
 
   attendance.status = Attendance::STATUSES.sample
+  attendance.remarks = Faker::Lorem.sentence
   attendance.save!
 end
