@@ -2,10 +2,10 @@
 
 <h2><%= t('.subtitle') %></h2>
 
-<div class="flex flex-row flex-wrap gap-4 justify-center mt-4">
+<div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-4">
   <% @users.each do |user| %>
-    <div class="w-full md:w-1/4">
-      <%= image_tag(user.profile_picture) %>
+    <div class="w-full aspect-[200/323] overflow-hidden relative">
+      <%= image_tag user.profile_picture, class: "w-full h-full object-cover object-bottom" %>
     </div>
   <% end %>
 </div>
