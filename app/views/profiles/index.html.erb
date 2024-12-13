@@ -4,8 +4,12 @@
 
 <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-4">
   <% @users.each do |user| %>
-    <div class="w-full aspect-[200/323] overflow-hidden relative">
+    <div class="w-full aspect-[200/323] relative">
       <%= image_tag user.profile_picture, class: "w-full h-full object-cover object-bottom" %>
+      <p class="flex justify-between mt-2 items-center">
+        <span class="font-semibold text-xl"><%= user.first_name + ' ' + user.last_name %></span>
+        <span class="leading-none rounded bg-primary text-white text-sm px-2 py-1"><%= user.register.split("_").map(&:capitalize).join(" ") %></span>
+      </p>
     </div>
   <% end %>
 </div>
