@@ -27,7 +27,9 @@ LIMIT 5;
     end
     info = Info.newest_active.first
 
-    @home = Home.new(calendar_events, attendances, upcoming_birthdays, info)
+    attendance_table = AttendanceTable.new([current_user], current_user)
+
+    @home = Home.new(calendar_events, attendances, upcoming_birthdays, info, attendance_table)
   end
 
   private

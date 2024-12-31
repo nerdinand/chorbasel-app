@@ -1,12 +1,14 @@
 <% content_for :title, t('.title') %>
 
-<% if @home.has_info? %>
+<% if @home.info? %>
   <%= render @home.info %>
 <% end %>
 
 <%= render partial: 'profile_completeness' %>
 
-<% if @home.has_attendances? %>
+<%= render partial: 'attendance_table', locals: { attendance_table: @home.attendance_table } %>
+
+<% if @home.attendances? %>
   <%= render partial: 'attendances', locals: { attendances: @home.attendances } %>
 <% end %>
 
