@@ -16,7 +16,7 @@ module CalendarEvents
 
         if update_attendance
           flash.notice = t('.success')
-          redirect_to dashboard_path
+          redirect_to home_path
         else
           flash.alert = t('.error')
           render :new, status: :unprocessable_entity

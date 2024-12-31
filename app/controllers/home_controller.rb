@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class DashboardController < ApplicationController
+class HomeController < ApplicationController
   UPCOMING_BIRTHDAYS_QUERY = "
 SELECT
   id,

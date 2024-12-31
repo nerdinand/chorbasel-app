@@ -11,7 +11,7 @@ module CalendarEvents
         else
           flash.alert = t('.expired_error')
         end
-        redirect_to dashboard_path
+        redirect_to home_path
       end
 
       private

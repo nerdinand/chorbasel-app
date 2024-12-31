@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
-  root 'dashboard#show'
+  root 'home#show'
 
   get 'up' => 'rails/health#show', as: :rails_health_check
 
@@ -11,7 +11,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   passwordless_for :users, controller: 'sessions'
 
   constraints Passwordless::Constraint.new(User) do
-    get 'dashboard' => 'dashboard#show'
+    get 'home' => 'home#show'
 
     resources :users, except: :destroy
     resources :attendances, only: %i[index edit new create update] do

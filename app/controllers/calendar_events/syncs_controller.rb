@@ -8,7 +8,7 @@ module CalendarEvents
       CalendarSyncJob.perform_now
 
       flash.notice = t('.success')
-      redirect_to dashboard_path
+      redirect_to home_path
     end
   end
 end

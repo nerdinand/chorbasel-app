@@ -72,7 +72,7 @@ class UsersController < ApplicationController
     if policy(:user).index?
       users_path
     else
-      dashboard_path
+      home_path
     end
   end
 end

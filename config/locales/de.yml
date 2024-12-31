@@ -149,25 +149,6 @@ de:
     syncs:
       create:
         success: Chorkalender erfolgreich importiert.
-  dashboard:
-    show:
-      attendances:
-        title: Anwesenheit
-      calendar:
-        description: 'Hier siehst du die nächsten anstehenden Chortermine:'
-        title: Kalender
-      calendar_events:
-        attendance:
-          new: Entschuldigung erfassen
-          submit: Anwesenheit eintragen
-        sync: Chorkalender importieren
-      profile_completeness:
-        link: Benutzerprofil vervollständigen
-        message: Dein Benutzerprofil ist unvollständig. Bitte hilf uns indem du die fehlenden Informationen einträgst.
-      title: Dashboard
-      upcoming_birthdays:
-        description: Diese Mitsänger:innen haben bald Geburtstag!
-        title: Geburtstage
   datetime:
     distance_in_words:
       in_duration:
@@ -233,6 +214,25 @@ de:
         create: Lied erstellen
       song_medium:
         create: Mediendatei erstellen
+  home:
+    show:
+      attendances:
+        title: Anwesenheit
+      calendar:
+        description: 'Hier siehst du die nächsten anstehenden Chortermine:'
+        title: Kalender
+      calendar_events:
+        attendance:
+          new: Entschuldigung erfassen
+          submit: Anwesenheit eintragen
+        sync: Chorkalender importieren
+      profile_completeness:
+        link: Benutzerprofil vervollständigen
+        message: Dein Benutzerprofil ist unvollständig. Bitte hilf uns indem du die fehlenden Informationen einträgst.
+      title: Home
+      upcoming_birthdays:
+        description: Diese Mitsänger:innen haben bald Geburtstag!
+        title: Geburtstage
   infos:
     create:
       error: Fehler beim Erstellen der Info
@@ -256,7 +256,7 @@ de:
       feedback: Feedback
     navbar:
       attendances: Anwesenheiten
-      dashboard: Dashboard
+      home: Home
       infos: Infos
       logout: Ausloggen
       my_data: Meine Daten

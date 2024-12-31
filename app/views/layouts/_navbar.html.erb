@@ -2,7 +2,7 @@
 navbar_links = []
 
 if logged_in?
-  navbar_links = [[t('.dashboard'), dashboard_path]]
+  navbar_links = [[t('.home'), home_path]]
 
   if policy(:user).index?
     navbar_links << [t('.users'), users_path]
