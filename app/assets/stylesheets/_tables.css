@@ -12,7 +12,7 @@
   }
 
   th {
-    @apply bg-white
+    @apply bg-white sticky top-0
   }
 
   tr .btn-primary:hover {

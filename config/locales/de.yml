@@ -1,5 +1,9 @@
 ---
 de:
+  acceptances:
+    create:
+      error: Fehler beim Annehmen der Entschuldigung.
+      success: Entschuldigung erfolgreich angenommen.
   activerecord:
     attributes:
       attendance:
@@ -114,6 +118,9 @@ de:
       success: Anwesenheit erfolgreich eingetragen.
     edit:
       title: Anwesenheit bearbeiten
+    form:
+      acceptance:
+        create: Entschuldigung annehmen
     index:
       excuse_requested:
         title: Zu bestätigende Abwesenheiten

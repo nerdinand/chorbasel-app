@@ -14,7 +14,9 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     get 'dashboard' => 'dashboard#show'
 
     resources :users, except: :destroy
-    resources :attendances, only: %i[index edit new create update]
+    resources :attendances, only: %i[index edit new create update] do
+      resource :acceptance, only: %i[create]
+    end
 
     namespace :calendar_events do
       resource :syncs, only: :create
