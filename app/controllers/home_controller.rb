@@ -19,14 +19,15 @@ LIMIT 5;
 "
 
   def show
-    @calendar_events = CalendarEvent.next
-    @attendances = CalendarEvent.ongoing.map do |calendar_event|
+    calendar_events = CalendarEvent.next
+    attendances = CalendarEvent.ongoing.map do |calendar_event|
       Attendance.find_or_initialize_by(user: current_user, calendar_event:).tap do |attendance|
         attendance.status = Attendance::STATUS_ATTENDED
       end
     end
-    @upcoming_birthdays = upcoming_birthdays
-    @info = Info.newest_active.first
+    info = Info.newest_active.first
+
+    @home = Home.new(calendar_events, attendances, upcoming_birthdays, info)
   end
 
   private

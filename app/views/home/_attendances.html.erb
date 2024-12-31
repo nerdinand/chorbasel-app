@@ -1,0 +1,11 @@
+<h2><%= t('.title') %></h2>
+
+<% attendances.each do |attendance| %>
+  <div>
+    <p><%= attendance.calendar_event.summary %></p>
+
+    <% if attendance.new_record? %>
+      <%= button_to t('.submit'), calendar_event_attendance_attendance_path(attendance.calendar_event), method: :post, class: 'btn btn-secondary' %> 
+    <% end %>
+  </div>
+<% end %>

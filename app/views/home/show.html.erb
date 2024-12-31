@@ -1,64 +1,14 @@
 <% content_for :title, t('.title') %>
 
-<% if @info.present? %>
-  <div class="<%= @info.kind %>">
-    <p>
-      <b><%= @info.title %></b>
-    </p>
-    <%= @info.description %>
-  </div>
+<% if @home.has_info? %>
+  <%= render @home.info %>
 <% end %>
 
-<% unless current_user.profile_complete? %>
-  <div>
-    <%= t('.profile_completeness.message') %>
-    <%= link_to t('.profile_completeness.link'), edit_user_path(current_user) %>
-  </div>
+<%= render partial: 'profile_completeness' %>
+
+<% if @home.has_attendances? %>
+  <%= render partial: 'attendances', locals: { attendances: @home.attendances } %>
 <% end %>
 
-<% if @attendances.any? %>
-  <h2><%= t('.attendances.title') %></h2>
-
-  <% @attendances.each do |attendance| %>
-    <div>
-      <p><%= attendance.calendar_event.summary %></p>
-
-      <% if attendance.new_record? %>
-        <%= button_to t('.calendar_events.attendance.submit'), calendar_event_attendance_attendance_path(attendance.calendar_event), method: :post, class: 'btn btn-secondary' %> 
-      <% end %>
-    </div>
-  <% end %>
-<% end %>
-
-<h2><%= t('.upcoming_birthdays.title') %></h2>
-<p><%= t('.upcoming_birthdays.description') %></p>
-<ul>
-  <% @upcoming_birthdays.each do |ub| %>
-    <li>
-      <%= l ub[:next_birthday] %>: <b><%= ub[:user].display_name %></b>
-    </li>
-  <% end %>
-</ul>
-
-<h2><%= t('.calendar.title') %></h2>
-<p><%= t('.calendar.description') %></p>
-
-<% @calendar_events.each do |calendar_event| %>
-  <div class="my-5 p-2 border-solid border-primary border-2 rounded bg-gray <%= 'bg-complementary bg-opacity-30' if calendar_event.concert? %>">
-    <p class="font-bold"><%= calendar_event.summary %></p>
-    <p><%= calendar_event_time_string(calendar_event) %></p>
-    <p class="text-xs"><%= time_ago_in_words(calendar_event.starts_at, scope: 'datetime.distance_in_words.in_duration') %></p>
-    <p class="mt-5 italic"><%= calendar_event.location %></p>
-    <div class="my-5 break-all">
-      <%= simple_format calendar_event.description %>
-    </div>
-
-    <% unless Attendance.where(calendar_event:, user: current_user).exists? %>
-      <%= link_to t('.calendar_events.attendance.new'), new_calendar_event_attendance_excuse_path(calendar_event), class: 'btn btn-primary' %>
-    <% end %>
-  </div>
-<% end %>
-
-<% if policy(:calendar_sync).create? %>
-  <%= button_to t('.calendar_events.sync'), calendar_events_syncs_path, method: :post, class: 'btn btn-primary' %>
-<% end %>
+<%= render partial: 'upcoming_birthdays', locals: {upcoming_birthdays: @home.upcoming_birthdays} %>
+<%= render partial: 'calendar', locals: {calendar_events: @home.calendar_events} %>

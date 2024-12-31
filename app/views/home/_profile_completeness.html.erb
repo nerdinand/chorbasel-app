@@ -1,0 +1,6 @@
+<% unless current_user.profile_complete? %>
+  <div>
+    <%= t('.message') %>
+    <%= link_to t('.link'), edit_user_path(current_user) %>
+  </div>
+<% end %>

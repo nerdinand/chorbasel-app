@@ -215,24 +215,23 @@ de:
       song_medium:
         create: Mediendatei erstellen
   home:
+    attendances:
+      submit: Anwesenheit eintragen
+      title: Anwesenheit
+    calendar:
+      attendance:
+        new: Entschuldigung erfassen
+      description: 'Hier siehst du die nächsten anstehenden Chortermine:'
+      sync: Chorkalender importieren
+      title: Kalender
+    profile_completeness:
+      link: Benutzerprofil vervollständigen
+      message: Dein Benutzerprofil ist unvollständig. Bitte hilf uns indem du die fehlenden Informationen einträgst.
     show:
-      attendances:
-        title: Anwesenheit
-      calendar:
-        description: 'Hier siehst du die nächsten anstehenden Chortermine:'
-        title: Kalender
-      calendar_events:
-        attendance:
-          new: Entschuldigung erfassen
-          submit: Anwesenheit eintragen
-        sync: Chorkalender importieren
-      profile_completeness:
-        link: Benutzerprofil vervollständigen
-        message: Dein Benutzerprofil ist unvollständig. Bitte hilf uns indem du die fehlenden Informationen einträgst.
       title: Home
-      upcoming_birthdays:
-        description: Diese Mitsänger:innen haben bald Geburtstag!
-        title: Geburtstage
+    upcoming_birthdays:
+      description: Diese Mitsänger:innen haben bald Geburtstag!
+      title: Geburtstage
   infos:
     create:
       error: Fehler beim Erstellen der Info

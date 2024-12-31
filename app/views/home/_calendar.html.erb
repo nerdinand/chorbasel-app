@@ -1,0 +1,22 @@
+<h2><%= t('.title') %></h2>
+<p><%= t('.description') %></p>
+
+<% calendar_events.each do |calendar_event| %>
+  <div class="my-5 p-2 border-solid border-primary border-2 rounded bg-gray <%= 'bg-complementary bg-opacity-30' if calendar_event.concert? %>">
+    <p class="font-bold"><%= calendar_event.summary %></p>
+    <p><%= calendar_event_time_string(calendar_event) %></p>
+    <p class="text-xs"><%= time_ago_in_words(calendar_event.starts_at, scope: 'datetime.distance_in_words.in_duration') %></p>
+    <p class="mt-5 italic"><%= calendar_event.location %></p>
+    <div class="my-5 break-all">
+      <%= simple_format calendar_event.description %>
+    </div>
+
+    <% unless Attendance.where(calendar_event:, user: current_user).exists? %>
+      <%= link_to t('.attendance.new'), new_calendar_event_attendance_excuse_path(calendar_event), class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+<% end %>
+
+<% if policy(:calendar_sync).create? %>
+  <%= button_to t('.sync'), calendar_events_syncs_path, method: :post, class: 'btn btn-primary' %>
+<% end %>

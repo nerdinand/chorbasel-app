@@ -1,0 +1,9 @@
+<h2><%= t('.title') %></h2>
+<p><%= t('.description') %></p>
+<ul>
+  <% upcoming_birthdays.each do |ub| %>
+    <li>
+      <%= l ub[:next_birthday] %>: <b><%= ub[:user].display_name %></b>
+    </li>
+  <% end %>
+</ul>
