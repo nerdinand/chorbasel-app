@@ -14,4 +14,8 @@
   nav a:hover {
     @apply text-primary-dark no-underline
   }
+
+  footer a {
+    @apply text-complementary
+  }
 }
