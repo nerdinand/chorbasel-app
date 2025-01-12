@@ -1,4 +1,4 @@
-<footer class="text-center">
+<footer class="text-center p-4 bg-primary-dark text-white">
   <% if logged_in? %>
     <%= link_to t('.feedback'), new_feedback_path %>
     <% if current_user.roles_wrapper.app? %>

@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 class StatisticsController < ApplicationController
+  NAME_GUESSES_TIMESPAN = 2.weeks
+
   def index
     authorize :statistics, :index?
-    min_date = NameGuess.pluck('min(date(created_at))').flatten.map { |d| Date.parse d }.first
+    min_date = NAME_GUESSES_TIMESPAN.ago.to_date
     date_range = (min_date..Time.zone.today).to_a
     correct_counts = name_guess_counts(date_range, true)
     incorrect_counts = name_guess_counts(date_range, false)
@@ -16,7 +18,12 @@ class StatisticsController < ApplicationController
   private
 
   def name_guess_counts(date_range, correct)
-    date_range.index_with(0).merge(NameGuess.where(correct:)
-              .group('date(created_at)').count.transform_keys { |k| Date.parse(k) })
+    date_range.index_with(0).merge(
+      NameGuess.where(correct:)
+              .where('date(created_at) >= ?', date_range.first)
+              .group('date(created_at)')
+              .count
+              .transform_keys { |k| Date.parse(k) }
+    )
   end
 end
