@@ -25,7 +25,7 @@ gem 'solid_queue'
 gem 'bootsnap', require: false
 
 # Deploy this application anywhere as a Docker container [https://kamal-deploy.org]
-gem 'kamal', '~> 2.2', require: false
+gem 'kamal', '~> 2.5', require: false
 
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
 gem 'thruster', require: false
@@ -62,7 +62,7 @@ group :test do
   gem 'simplecov', require: false
 end
 
-gem 'tailwindcss-rails', '~> 3.0'
+gem 'tailwindcss-rails', '~> 4.0'
 gem 'tailwindcss-ruby'
 
 gem 'passwordless', '~> 1.8'
@@ -79,7 +79,7 @@ gem 'arask', '~> 1.2'
 
 gem 'faker', '~> 3.5'
 
-gem 'aws-sdk-s3', '~> 1.176', require: false
+gem 'aws-sdk-s3', '~> 1.180', require: false
 
 gem 'image_processing', '~> 1.13'
 
