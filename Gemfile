@@ -40,7 +40,7 @@ group :development, :test do
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem 'brakeman', require: false
 
-  gem 'rspec-rails', '~> 7.0'
+  gem 'rspec-rails', '~> 7.1'
   gem 'rubocop-capybara'
   gem 'rubocop-rails'
   gem 'rubocop-rspec_rails'
@@ -50,14 +50,14 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'web-console'
 
-  gem 'i18n-tasks', '~> 1.0.14'
+  gem 'i18n-tasks', '~> 1.0.15'
   gem 'letter_opener'
 end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
-  gem 'pundit-matchers', '~> 3.1'
+  gem 'pundit-matchers', '~> 4.0'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
 end
