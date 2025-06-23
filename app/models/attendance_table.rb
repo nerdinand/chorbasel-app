@@ -6,17 +6,31 @@ class AttendanceTable
 
   def initialize(users, current_user)
     @users = users
+    @current_user = current_user
 
-    @calendar_events = CalendarEvent.where(starts_at: EVENTS_FROM.ago..EVENTS_TO.from_now)
-    attendances = Attendance.where(user: users).where(calendar_event: calendar_events)
-    raise Pundit::NotAuthorizedError unless AttendancePolicy.new(current_user, attendances).index?
-
-    @index = attendances.group_by { |a| "#{a.user_id}-#{a.calendar_event_id}" }
+    raise Pundit::NotAuthorizedError unless AttendancePolicy.new(current_user, attendances).show?
   end
 
-  attr_reader :users, :calendar_events
+  attr_reader :users
 
   def attendance_for(user, calendar_event)
-    @index["#{user.id}-#{calendar_event.id}"]&.first
+    index[key(user.id, calendar_event.id)]&.first
+  end
+
+  def calendar_events
+    @calendar_events ||= CalendarEvent.where(starts_at: EVENTS_FROM.ago..EVENTS_TO.from_now)
+  end
+
+  def attendances
+    attendance_scope = AttendancePolicy::Scope.new(@current_user, Attendance).resolve
+    @attendances ||= attendance_scope.where(calendar_event: calendar_events)
+  end
+
+  def index
+    @index ||= attendances.group_by { |a| key(a.user_id, a.calendar_event_id) }
+  end
+
+  def key(user_id, calendar_event_id)
+    "#{user_id}-#{calendar_event_id}"
   end
 end

@@ -3,6 +3,16 @@
 class AttendancePolicy < ApplicationPolicy
   attr_reader :user, :attendance
 
+  class Scope < ApplicationPolicy::Scope
+    def resolve
+      if superpowers? || user.roles_wrapper.absences?
+        scope.all
+      else
+        scope.where(user: user)
+      end
+    end
+  end
+
   def initialize(user, attendance)
     super
     @user = user

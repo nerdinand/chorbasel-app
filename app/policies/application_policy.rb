@@ -60,6 +60,10 @@ class ApplicationPolicy
       raise NoMethodError, "You must define #resolve in #{self.class}"
     end
 
+    def superpowers?
+      user.roles_wrapper.app? || user.roles_wrapper.choir_direction?
+    end
+
     private
 
     attr_reader :user, :scope

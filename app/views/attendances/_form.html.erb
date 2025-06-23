@@ -9,8 +9,10 @@
   <p><%= label_tag t('activerecord.attributes.attendance.calendar_event') %>: <%= render 'application/calendar_event', calendar_event: @attendance.calendar_event %></p>
 </div>
 
-<%= form_for @attendance, url: attendance_acceptance_path(@attendance), method: :post do |f| %>
-  <%= f.submit t('.acceptance.create'), class: 'btn btn-secondary' %>
+<% if @attendance.persisted? && @attendance.excuse_requested? %>
+  <%= form_for @attendance, url: attendance_acceptance_path(@attendance), method: :post do |f| %>
+    <%= f.submit t('.acceptance.create'), class: 'btn btn-secondary' %>
+  <% end %>
 <% end %>
 
 <%= form_for @attendance do |f| %>
