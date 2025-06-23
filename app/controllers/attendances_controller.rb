@@ -50,6 +50,6 @@ class AttendancesController < ApplicationController
   private
 
   def attendance_params
-    params.require(:attendance).permit(:user_id, :calendar_event_id, :status, :remarks)
+    params.expect(attendance: %i[user_id calendar_event_id status remarks])
   end
 end

@@ -21,6 +21,6 @@ class FeedbacksController < ApplicationController
   private
 
   def feedback_params
-    params.require(:feedback).permit(:message, :anonymous).merge(user_id: current_user.id)
+    params.expect(feedback: %i[message anonymous]).merge(user_id: current_user.id)
   end
 end
