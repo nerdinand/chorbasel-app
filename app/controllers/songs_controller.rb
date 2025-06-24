@@ -58,8 +58,8 @@ class SongsController < ApplicationController
   private
 
   def song_params
-    params.require(:song).permit(:title, :composer, :arranger, :lyrics, :key_signature, :time_signature, :language,
-                                 :repertoire, :genres, registers: [])
+    params.expect(song: [:title, :composer, :arranger, :lyrics, :key_signature, :time_signature, :language,
+                         :repertoire, :genres, { registers: [] }])
           .tap { |p| p[:registers].reject!(&:blank?) }
           .tap { |p| p[:genres] = p[:genres].split(',').map(&:strip).compact_blank.uniq }
   end
