@@ -7,10 +7,12 @@
     <div class="w-full aspect-[200/323] relative">
       <%= image_tag user.profile_picture, class: "w-full h-full object-cover object-bottom" %>
       <div class="flex flex-col gap-2 mt-2">
-        <p class="absolute rounded-md top-2 left-2 bg-primary border-2 border-white font-semibold text-white text-sm px-2 py-1 flex items-center">
-          <img class="mr-1" src="<%= image_path "music-note.svg" %>"/>
-          <span><%= user.human_register %></span>
-        </p>
+        <% if user.human_register.present? %>
+          <p class="absolute rounded-md top-2 left-2 bg-primary border-2 border-white font-semibold text-white text-sm px-2 py-1 flex items-center">
+            <img class="mr-1" src="<%= image_path "music-note.svg" %>"/>
+            <span><%= user.human_register %></span>
+          </p>
+        <% end %>
         <p class="font-semibold text-lg leading-tight"><%= user.full_name %></p>
       </div>
     </div>
