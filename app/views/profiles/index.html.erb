@@ -9,8 +9,7 @@
       <div class="flex flex-col gap-2 mt-2">
         <p class="absolute rounded-md top-2 left-2 bg-primary border-2 border-white font-semibold text-white text-sm px-2 py-1 flex items-center">
           <img class="mr-1" src="<%= image_path "music-note.svg" %>"/>
-          <span class="   ">
-            <%= user.human_register.split("_").map(&:capitalize).join(" ") %></span>
+          <span><%= user.human_register %></span>
         </p>
         <p class="font-semibold text-lg leading-tight"><%= user.full_name %></p>
       </div>
