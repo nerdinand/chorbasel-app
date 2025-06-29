@@ -40,6 +40,6 @@ class InfosController < ApplicationController
   private
 
   def info_params
-    params.require(:info).permit(:title, :description, :kind, :active)
+    params.expect(info: %i[title description kind active])
   end
 end

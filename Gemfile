@@ -5,8 +5,8 @@ source 'https://rubygems.org'
 gem 'importmap-rails'
 gem 'propshaft'
 gem 'puma', '>= 5.0'
-gem 'rails', '~> 8.0.0'
-gem 'sqlite3', '~> 2.4'
+gem 'rails', '~> 8.0'
+gem 'sqlite3', '~> 2.7'
 gem 'stimulus-rails'
 gem 'turbo-rails'
 
@@ -17,9 +17,9 @@ gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[windows jruby]
 
 # Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
-gem 'solid_cable'
-gem 'solid_cache'
-gem 'solid_queue'
+gem 'solid_cable', '~> 3.0'
+gem 'solid_cache', '~> 1.0'
+gem 'solid_queue', '~> 1.1'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
@@ -40,7 +40,7 @@ group :development, :test do
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem 'brakeman', require: false
 
-  gem 'rspec-rails', '~> 7.0'
+  gem 'rspec-rails', '~> 8.0'
   gem 'rubocop-capybara'
   gem 'rubocop-rails'
   gem 'rubocop-rspec_rails'
@@ -57,13 +57,13 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
-  gem 'pundit-matchers', '~> 3.1'
+  gem 'pundit-matchers', '~> 4.0'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
 end
 
-gem 'tailwindcss-rails', '~> 3.0'
-gem 'tailwindcss-ruby'
+gem 'tailwindcss-rails', '= 3.1.0'
+gem 'tailwindcss-ruby', '= 3.4.17'
 
 gem 'passwordless', '~> 1.8'
 
@@ -83,4 +83,4 @@ gem 'aws-sdk-s3', '~> 1.176', require: false
 
 gem 'image_processing', '~> 1.13'
 
-gem 'chartkick', '~> 5.1'
+gem 'chartkick', '~> 5.2'

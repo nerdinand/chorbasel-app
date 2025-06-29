@@ -33,6 +33,6 @@ class NameGuessesController < ApplicationController
   end
 
   def name_guess_params
-    params.require(:name_guess).permit(:guessee_id, :guess)
+    params.expect(name_guess: %i[guessee_id guess])
   end
 end
