@@ -62,8 +62,8 @@ group :test do
   gem 'simplecov', require: false
 end
 
-gem 'tailwindcss-rails', '= 3.1.0'
-gem 'tailwindcss-ruby', '= 3.4.17'
+gem 'tailwindcss-rails', '4.2.3'
+gem 'tailwindcss-ruby', '4.1.10'
 
 gem 'passwordless', '~> 1.8'
 
