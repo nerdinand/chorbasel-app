@@ -62,8 +62,8 @@ group :test do
   gem 'simplecov', require: false
 end
 
-gem 'tailwindcss-rails', '= 3.1.0'
-gem 'tailwindcss-ruby', '= 3.4.17'
+gem 'tailwindcss-rails', '4.2.3'
+gem 'tailwindcss-ruby', '4.1.11'
 
 gem 'passwordless', '~> 1.8'
 
@@ -79,7 +79,7 @@ gem 'arask', '~> 1.2'
 
 gem 'faker', '~> 3.5'
 
-gem 'aws-sdk-s3', '~> 1.176', require: false
+gem 'aws-sdk-s3', '~> 1.192', require: false
 
 gem 'image_processing', '~> 1.13'
 
