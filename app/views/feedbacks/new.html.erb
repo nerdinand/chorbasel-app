@@ -5,12 +5,12 @@
 <p><%= t('.description') %></p>
 
 <%= form_for @feedback do |f| %>
-  <div class='form-field'>
+  <div class="form-field">
     <p><%= f.label t('.message'), for: :feedback_message %></p>
     <%= f.text_area :message %>
   </div>
 
-  <div class='form-field'>
+  <div class="form-field">
     <p><%= f.label t('.anonymous'), for: :feedback_anonymous %></p>
     <%= f.check_box :anonymous %>
   </div>
