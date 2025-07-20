@@ -5,20 +5,20 @@
   <%= f.hidden_field :user_id %>
   <%= f.hidden_field :calendar_event_id %>
 
-  <div class='form-field'>
+  <div class="form-field">
     <p><%= f.label :user %>: <b><%= @attendance.user.full_name %></b> <%# i18n-tasks-use t('activerecord.attributes.attendance.user') %></p>
   </div>
 
-  <div class='form-field'>
+  <div class="form-field">
     <p><%= f.label :calendar_event %>: <%= render 'application/calendar_event', calendar_event: @attendance.calendar_event %> <%# i18n-tasks-use t('activerecord.attributes.attendance.calendar_event') %></p>
   </div>
 
-  <div class='form-field'>
+  <div class="form-field">
     <p><%= f.label :status %> <%# i18n-tasks-use t('activerecord.attributes.attendance.status') %></p>
     <%= f.select :status, attendances_status_options %>
   </div>
   
-  <div class='form-field'>
+  <div class="form-field">
     <p><%= f.label :remarks %> <%# i18n-tasks-use t('activerecord.attributes.attendance.remarks') %></p>
     <%= f.text_area :remarks %>
   </div>

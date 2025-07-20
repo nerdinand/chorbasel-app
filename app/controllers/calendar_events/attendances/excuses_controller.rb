@@ -23,6 +23,20 @@ module CalendarEvents
         end
       end
 
+      def accept
+        @attendance = authorize Attendance.find(params[:excuse_id])
+
+        @attendance.accept!
+
+        if @attendance.save
+          flash.notice = t('.success')
+          redirect_to attendances_path
+        else
+          flash.alert = t('.error')
+          render :edit, status: :unprocessable_entity
+        end
+      end
+
       private
 
       def update_attendance

@@ -2,7 +2,7 @@
 
 <%= render 'errors', model: @attendance %>
 
-<%= form_for @attendance, url: calendar_event_attendance_excuse_path(@attendance.calendar_event) do |f| %>
+<%= form_for @attendance, url: calendar_event_attendance_excuses_path(@attendance.calendar_event) do |f| %>
   <div class="form-field">
     <p><%= f.label :calendar_event %>: <%= render 'application/calendar_event', calendar_event: @attendance.calendar_event %> <%# i18n-tasks-use t('activerecord.attributes.attendance.calendar_event') %> </p>
   </div>
