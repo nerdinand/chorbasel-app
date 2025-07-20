@@ -1,14 +1,14 @@
-<%# i18n-tasks-use t('activerecord.models.user') %></p>
-<%= render 'errors', model: @user %>
+<%# i18n-tasks-use t('activerecord.models.user') %>
+<%= render "errors", model: @user %>
 
 <%= form_for @user do |f| %>
-  <div class='form-field'>
+  <div class="form-field">
     <p><%= f.label :email %> <%# i18n-tasks-use t('activerecord.attributes.user.email') %> *</p>
     <p><%= f.email_field :email %></p>
-    <p class='field-hint'><%= t('.email.hint') %></p>
+    <p class="field-hint"><%= t('.email.hint') %></p>
   </div>
 
-  <div class='form-field'>
+  <div class="form-field">
     <%= f.label :face_picture do |label_text| %> <%# i18n-tasks-use t('activerecord.attributes.user.face_picture') %>
       <%= label_text %>
       <p>
@@ -22,7 +22,7 @@
     <% end %>
   </div>
 
-  <div class='form-field'>
+  <div class="form-field">
     <%= f.label :profile_picture do |label_text| %> <%# i18n-tasks-use t('activerecord.attributes.user.profile_picture') %>
       <%= label_text %>
       <p>
@@ -37,91 +37,91 @@
   </div>
 
   <h2><%= t('.name') %></h2>
-  <div class='form-field'>
+  <div class="form-field">
     <p><%= f.label :first_name %> <%# i18n-tasks-use t('activerecord.attributes.user.first_name') %> *</p>
     <p><%= f.text_field :first_name %></p>
   </div>
 
-  <div class='form-field'>
+  <div class="form-field">
     <p><%= f.label :last_name %> <%# i18n-tasks-use t('activerecord.attributes.user.last_name') %> *</p>
     <p><%= f.text_field :last_name %></p>
   </div>
   
-  <div class='form-field'>
+  <div class="form-field">
     <p><%= f.label :nick_name %> <%# i18n-tasks-use t('activerecord.attributes.user.nick_name') %></p>
     <p><%= f.text_field :nick_name %></p>
-    <p class='field-hint'><%= t('.nick_name.hint') %></p>
+    <p class="field-hint"><%= t('.nick_name.hint') %></p>
   </div>
 
   <h2><%= t('.address.title') %></h2>
-  <p class='field-hint mb-2'><%= t('.address.hint') %></p>
+  <p class="field-hint mb-2"><%= t('.address.hint') %></p>
 
-  <div class='form-field'>
+  <div class="form-field">
     <p><%= f.label :salutation %> <%# i18n-tasks-use t('activerecord.attributes.user.salutation') %> *</p>
     <p><%= f.text_field :salutation %></p>
   </div>
 
-  <div class='form-field'>
+  <div class="form-field">
     <p><%= f.label :street %> <%# i18n-tasks-use t('activerecord.attributes.user.street') %> *</p>
     <p><%= f.text_field :street %></p>
   </div>
 
-  <div class='form-field'>
+  <div class="form-field">
     <p><%= f.label :zip_code %> <%# i18n-tasks-use t('activerecord.attributes.user.zip_code') %> *</p>
     <p><%= f.text_field :zip_code %></p>
   </div>
 
-  <div class='form-field'>
+  <div class="form-field">
     <p><%= f.label :city %> <%# i18n-tasks-use t('activerecord.attributes.user.city') %> *</p>
     <p><%= f.text_field :city %></p>
   </div>
 
-  <div class='form-field'>
+  <div class="form-field">
     <p><%= f.label :phone_number %> <%# i18n-tasks-use t('activerecord.attributes.user.phone_number') %> *</p>
     <p><%= f.telephone_field :phone_number %></p>
-    <p class='field-hint'><%= t('.phone_number.hint') %></p>
+    <p class="field-hint"><%= t('.phone_number.hint') %></p>
   </div>
 
-  <div class='form-field'>
+  <div class="form-field">
     <p><%= f.label :birth_date %> <%# i18n-tasks-use t('activerecord.attributes.user.birth_date') %> *</p>
     <p><%= f.date_field :birth_date %></p>
-    <p class='field-hint'><%= t('.birth_date.hint') %></p>
+    <p class="field-hint"><%= t('.birth_date.hint') %></p>
   </div>
 
-  <div class='form-field'>
+  <div class="form-field">
     <p><%= f.label :register %> <%# i18n-tasks-use t('activerecord.attributes.user.register') %> *</p>
-    <p><%= f.select :register, users_register_options, include_blank: true %><p>
-    <p class='field-hint'><%= t('.register.hint') %></p>
+    <p><%= f.select :register, users_register_options, include_blank: true %></p>
+    <p class="field-hint"><%= t('.register.hint') %></p>
   </div>
 
   <% if policy(:user).admin_edit? %>
     <h2><%= t('.admin_part') %></h2>
-    <div class='form-field'>
+    <div class="form-field">
       <p><%= f.label :roles %> <%# i18n-tasks-use t('activerecord.attributes.user.roles') %></p>
       <p>
         <%= f.collection_check_boxes(:roles, Roles.all, :value, :human_name) do |box|
-          content_tag :p, class: 'text-xs' do
+          content_tag :p, class: "text-xs" do
             box.label { box.check_box + box.text }
           end
         end %>
       </p>
     </div>
 
-    <div class='form-field'>
+    <div class="form-field">
       <p><%= f.label :status %> <%# i18n-tasks-use t('activerecord.attributes.user.status') %></p>
       <p><%= f.select :status, users_status_options %></p>
     </div>
 
-    <div class='form-field'>
+    <div class="form-field">
       <p><%= f.label :member_since %> <%# i18n-tasks-use t('activerecord.attributes.user.member_since') %></p>
       <p><%= f.text_field :member_since %></p>
     </div>
 
-    <div class='form-field'>
-      <p><%= f.label :remarks %> <%# i18n-tasks-use t('activerecord.attributes.user.remarks') %></div>
+    <div class="form-field">
+      <p><%= f.label :remarks %> <%# i18n-tasks-use t('activerecord.attributes.user.remarks') %></p>
       <p><%= f.text_area :remarks %></p>
-    </p>
+    </div>
   <% end %>
 
-  <%= f.submit class: 'btn btn-primary' %>
+  <%= f.submit class: "btn btn-primary" %>
 <% end %>

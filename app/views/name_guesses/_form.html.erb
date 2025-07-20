@@ -1,4 +1,4 @@
-<p class='mb-4'>
+<p class="mb-4">
   <%= t('.explanation') %>
 </p>
 
@@ -7,10 +7,10 @@
 <%= form_for @name_guess do |f| %>
   <%= f.hidden_field :guessee_id %>
 
-  <div class='form-field mt-4'>
-    <p><%= f.label :guess %></p> <%# i18n-tasks-use t('helpers.label.name_guess.guess') %></p>
+  <div class="form-field mt-4">
+    <p><%= f.label :guess %></p> <%# i18n-tasks-use t('helpers.label.name_guess.guess') %>
     <p><%= f.text_field :guess, autofocus: true, autocomplete: 'off' %></p>
   </div>
 
-  <p><%= f.submit t('helpers.submit.guess.create'), class: 'btn btn-primary' %>
+  <p><%= f.submit t('helpers.submit.guess.create'), class: 'btn btn-primary' %></p>
 <% end %>

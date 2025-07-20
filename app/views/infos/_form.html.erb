@@ -1,25 +1,25 @@
 <%= render 'errors', model: @info %>
 
 <%= form_for @info do |f| %>
-  <div class='form-field'>
+  <div class="form-field">
     <p><%= f.label :title %> <%# i18n-tasks-use t('activerecord.attributes.info.title') %> *</p>
     <p><%= f.text_field :title %></p>
   </div>
 
-  <div class='form-field'>
+  <div class="form-field">
     <p><%= f.label :description %> <%# i18n-tasks-use t('activerecord.attributes.info.description') %> *</p>
     <p><%= f.text_field :description %></p>
   </div>
 
-  <div class='form-field'>
+  <div class="form-field">
     <p><%= f.label :kind %> <%# i18n-tasks-use t('activerecord.attributes.info.kind') %></p>
     <%= f.select :kind, infos_kind_options %>
   </div>
 
-  <div class='form-field'>
+  <div class="form-field">
     <p><%= f.label :active %> <%# i18n-tasks-use t('activerecord.attributes.info.active') %></p>
     <p><%= f.check_box :active %></p>
   </div>
 
-  <p><%= f.submit class: 'btn btn-primary' %>
+  <p><%= f.submit class: 'btn btn-primary' %></p>
 <% end %>
