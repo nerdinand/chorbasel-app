@@ -18,10 +18,10 @@
   <colgroup>
     <col />
     <% @attendance_table.calendar_events.each do |calendar_event| %>
-      <% if calendar_event.concert? %>
-        <col class="bg-complementary bg-opacity-30" />
-      <% else %>
+      <% if calendar_event.practice? %>
         <col />
+      <% else %>
+        <col class="bg-complementary bg-opacity-30" />
       <% end %>
     <% end %>
   </colgroup>
