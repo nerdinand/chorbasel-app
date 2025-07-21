@@ -10,7 +10,7 @@ class AttendancePolicy < ApplicationPolicy
   end
 
   def index?
-    superpowers? || user.roles_wrapper.absences?
+    managing?
   end
 
   def show?
@@ -18,20 +18,24 @@ class AttendancePolicy < ApplicationPolicy
   end
 
   def create?
-    modification_allowed?
+    managing? || attendance.user == user
   end
 
   def update?
-    modification_allowed?
+    managing?
   end
 
   def destroy?
-    modification_allowed?
+    managing?
+  end
+
+  def accept?
+    managing?
   end
 
   private
 
-  def modification_allowed?
-    superpowers? || user.roles_wrapper.absences? || attendance.user == user
+  def managing?
+    superpowers? || user.roles_wrapper.absences?
   end
 end

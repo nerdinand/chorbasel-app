@@ -1,3 +1,7 @@
 <% content_for :title, t('.title') %>
 
 <%= render 'form' %>
+
+<% if policy(@attendance).accept? %>
+  <p><%= button_to t('.accept_excuse'), calendar_event_attendance_excuse_accept_path(@attendance.calendar_event, @attendance), {class: 'btn btn-secondary'} %></p>
+<% end %>

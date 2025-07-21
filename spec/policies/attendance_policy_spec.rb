@@ -22,7 +22,7 @@ RSpec.describe AttendancePolicy do
   context 'with a user with no roles for their own attendance' do
     let(:user) { users(:uwe) }
 
-    it { is_expected.to forbid_only_actions(:index) }
+    it { is_expected.to forbid_only_actions(:index, :accept, :destroy, :edit, :update) }
   end
 
   context "with a user with no roles for an attendance that isn't theirs" do

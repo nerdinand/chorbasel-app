@@ -31,4 +31,8 @@ class Attendance < ApplicationRecord
   def excuse_requested?
     status == STATUS_EXCUSE_REQUESTED
   end
+
+  def accept!
+    self.status = STATUS_EXCUSED
+  end
 end

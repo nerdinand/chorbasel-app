@@ -113,6 +113,7 @@ de:
       error: Fehler beim Eintragen der Anwesenheit.
       success: Anwesenheit erfolgreich eingetragen.
     edit:
+      accept_excuse: Entschuldigung akzeptieren
       title: Anwesenheit bearbeiten
     index:
       excuse_requested:
@@ -131,6 +132,9 @@ de:
           expired_error: Dieser Termin ist abgelaufen.
           success: Anwesenheit erfolgreich eingetragen.
       excuses:
+        accept:
+          error: Fehler beim Akzeptieren der Entschuldigung.
+          success: Entschuldigung erfolgreich akzeptiert.
         create:
           error: Fehler beim Erfassen der Entschuldigung.
           remark_blank_error: Du musst die Entschuldigung ausfüllen!

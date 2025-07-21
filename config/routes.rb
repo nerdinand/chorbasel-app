@@ -22,7 +22,9 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
     resources :calendar_events, only: [] do
       resource :attendance, only: [] do
-        resource :excuse, only: %i[new create], controller: 'calendar_events/attendances/excuses'
+        resources :excuses, only: %i[new create], controller: 'calendar_events/attendances/excuses' do
+          post :accept
+        end
         resource :attendance, only: :create, controller: 'calendar_events/attendances/attendances'
       end
     end
