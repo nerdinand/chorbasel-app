@@ -36,8 +36,8 @@ class CalendarEvent < ApplicationRecord
     where(starts_at: ..ONGOING_TIME_WINDOW_BEFORE.from_now).where(ends_at: ONGOING_TIME_WINDOW_AFTER.ago..)
   }
 
-  def concert?
-    category == CATEGORY_CONCERT
+  def practice?
+    category == CATEGORY_PRACTICE
   end
 
   def category
