@@ -43,6 +43,7 @@ class User < ApplicationRecord
 
   scope :active, -> { where(status: STATUS_ACTIVE) }
   scope :sign_in_allowed, -> { where.not(status: STATUS_INACTIVE) }
+  scope :ordered_by_register, -> { in_order_of(:register, Register::Singer::REGISTERS + [nil]) }
 
   def self.fetch_resource_for_passwordless(email)
     where('lower(email) = ?', email).sign_in_allowed.first
@@ -74,6 +75,10 @@ class User < ApplicationRecord
 
   def human_status
     I18n.t("activerecord.attributes.user.enums.status.#{status}")
+  end
+
+  def register_object
+    Register::Singer.new(register)
   end
 
   def human_register

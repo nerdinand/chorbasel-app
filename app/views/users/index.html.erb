@@ -22,7 +22,7 @@
   </thead>
   <tbody>
     <% @users.each do |user| %>
-      <tr>
+      <tr class="register-<%= user.register_object.canonical_register %>">
         <td>
           <%= boolean_emoji(user.profile_complete?) %>
         </td>

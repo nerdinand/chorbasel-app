@@ -5,7 +5,7 @@ class AttendancesController < ApplicationController
   EVENTS_TO = 2.months
 
   def index
-    users = User.all
+    users = User.ordered_by_register
     calendar_events = CalendarEvent.where(starts_at: EVENTS_FROM.ago..EVENTS_TO.from_now)
     attendances = authorize Attendance.where(user: users).where(calendar_event: calendar_events)
     @attendance_table = AttendanceTable.new(attendances, users, calendar_events)
@@ -45,6 +45,28 @@ class AttendancesController < ApplicationController
       flash.alert = t('.error')
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def quick_create
+    @attendance = authorize Attendance.new(attendance_params)
+
+    if @attendance.save
+      flash.notice = t('.success')
+    else
+      flash.alert = t('.error')
+    end
+    redirect_to @attendance.calendar_event
+  end
+
+  def quick_update
+    @attendance = authorize Attendance.find(params[:id])
+
+    if @attendance.update(attendance_params)
+      flash.notice = t('.success')
+    else
+      flash.alert = t('.error')
+    end
+    redirect_to @attendance.calendar_event
   end
 
   private

@@ -13,6 +13,14 @@ module CalendarEventsHelper
     end
   end
 
+  def time_ago_in_words_in_or_ago(time)
+    if time.future?
+      time_ago_in_words(time, scope: 'datetime.distance_in_words.in_duration')
+    else
+      time_ago_in_words(time, scope: 'datetime.distance_in_words.ago_duration')
+    end
+  end
+
   private
 
   def time_string_same_day(calendar_event)

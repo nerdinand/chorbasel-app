@@ -84,3 +84,5 @@ gem 'aws-sdk-s3', '~> 1.194', require: false
 gem 'image_processing', '~> 1.13'
 
 gem 'chartkick', '~> 5.2'
+
+gem 'tabler_icons', '~> 0.1.1'

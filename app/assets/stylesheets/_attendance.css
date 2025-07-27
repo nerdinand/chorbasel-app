@@ -1,0 +1,19 @@
+.attendance-status-icon {
+  @apply inline align-[sub]
+}
+
+.attendance-status-icon-attended {
+  @apply bg-success
+}
+
+.attendance-status-icon-excused {
+  @apply bg-danger
+}
+
+.attendance-status-icon-excuse-requested {
+  @apply bg-complementary-dark
+}
+
+.form-inline {
+  @apply inline mx-1
+}

@@ -1,0 +1,47 @@
+<div class="float-right">
+  <% previous_event = @calendar_event.previous %>
+  <%= link_to_if previous_event.present?, t('.previous'), previous_event %>
+  <% next_event = @calendar_event.next %>
+  <%= link_to_if next_event.present?, t('.next'), next_event %>
+</div>
+
+<% content_for :title, @calendar_event.summary %>
+
+<%= render @calendar_event %>
+
+<% @calendar_event.attendance_statuses.each do |status, attendances| %>
+  <h2><%= icon_for_status(status) %> <%= I18n.t("activerecord.attributes.attendance.enums.status.#{status}") %></h2>
+
+  <table>
+    <tbody>
+      <% attendances.sort_by { |a| a.user.register_object }.each do |attendance| %>
+        <tr class="register-<%= attendance.user.register_object.canonical_register %>">
+          <td>
+            <% if attendance.new_record? %>
+              <%= link_to attendance.user.full_name, new_attendance_path(user_id: attendance.user, calendar_event_id: @calendar_event) %>
+            <% else %>
+              <%= link_to attendance.user.full_name, edit_attendance_path(attendance) %>
+            <% end %>
+          </td>
+          <% if status.in? [Attendance::STATUS_EXCUSE_REQUESTED, Attendance::STATUS_UNKNOWN] %>
+            <td>
+              <% url = attendance.new_record? ? quick_create_attendance_path : attendance_quick_update_path(attendance) %>
+
+              <% [Attendance::STATUS_ATTENDED, Attendance::STATUS_EXCUSED].each do |new_status| %>
+                <%= form_for attendance, url:, html: {class: 'form-inline'} do |f| %>
+                  <%= f.hidden_field :user_id %>
+                  <%= f.hidden_field :calendar_event_id %>
+                  <%= f.hidden_field :status, value: new_status %>
+                  <%= button_tag do %>
+                    <%= icon_for_status(new_status) %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
