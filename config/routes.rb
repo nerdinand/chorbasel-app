@@ -15,7 +15,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
     resources :users, except: :destroy
     resources :attendances, only: %i[index edit new create update] do
-      put :quick_update
+      patch :quick_update
     end
 
     resource :attendance do
