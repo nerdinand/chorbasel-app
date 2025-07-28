@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       render file: 'public/400.html', status: :bad_request, layout: false and return
     end
 
-    @users = authorize User.order(order)
+    @users = authorize(order == 'register' ? User.ordered_by_register : User.order(order))
   end
 
   def new

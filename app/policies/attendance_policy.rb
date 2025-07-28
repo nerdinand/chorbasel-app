@@ -33,6 +33,14 @@ class AttendancePolicy < ApplicationPolicy
     managing?
   end
 
+  def quick_create?
+    managing?
+  end
+
+  def quick_update?
+    managing?
+  end
+
   private
 
   def managing?

@@ -426,6 +426,7 @@ GEM
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
     stringio (3.1.7)
+    tabler_icons (0.1.1)
     tailwindcss-rails (3.1.0)
       railties (>= 7.0.0)
       tailwindcss-ruby
@@ -510,6 +511,7 @@ DEPENDENCIES
   solid_queue (~> 1.2)
   sqlite3 (~> 2.7)
   stimulus-rails
+  tabler_icons (~> 0.1.1)
   tailwindcss-rails (= 3.1.0)
   tailwindcss-ruby (= 3.4.17)
   thruster

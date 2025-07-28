@@ -10,17 +10,23 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
   passwordless_for :users, controller: 'sessions'
 
-  constraints Passwordless::Constraint.new(User) do
+  constraints Passwordless::Constraint.new(User) do # rubocop:disable Metrics/BlockLength
     get 'dashboard' => 'dashboard#show'
 
     resources :users, except: :destroy
-    resources :attendances, only: %i[index edit new create update]
+    resources :attendances, only: %i[index edit new create update] do
+      put :quick_update
+    end
+
+    resource :attendance do
+      post :quick_create
+    end
 
     namespace :calendar_events do
       resource :syncs, only: :create
     end
 
-    resources :calendar_events, only: [] do
+    resources :calendar_events, only: [:show] do
       resource :attendance, only: [] do
         resources :excuses, only: %i[new create], controller: 'calendar_events/attendances/excuses' do
           post :accept

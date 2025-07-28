@@ -5,6 +5,9 @@
 @import url("_tables.css");
 @import url("_typography.css");
 
+@import url("_attendance.css");
+@import url("_user.css");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -16,8 +16,10 @@ class CalendarEvent < ApplicationRecord
 
   default_scope -> { order(starts_at: :asc) }
 
-  scope :future, -> { where(starts_at: Time.zone.now..) }
-  scope :past, -> { where(starts_at: ..Time.zone.now) }
+  scope :after, ->(time) { where('starts_at > ?', time) }
+  scope :before, ->(time) { where(starts_at: ...time) }
+  scope :future, -> { after(Time.zone.now) }
+  scope :past, -> { before(Time.zone.now) }
   scope :next, -> { future.limit(NEXT_EVENTS_LIMIT) }
 
   #     starts_at      ends_at
@@ -35,6 +37,24 @@ class CalendarEvent < ApplicationRecord
   scope :ongoing, lambda {
     where(starts_at: ..ONGOING_TIME_WINDOW_BEFORE.from_now).where(ends_at: ONGOING_TIME_WINDOW_AFTER.ago..)
   }
+
+  def attendance_statuses
+    status_hash = Attendance::STATUSES.index_with do |status|
+      attendances.where(status:)
+    end
+    status_hash[Attendance::STATUS_UNKNOWN] += (User.active - status_hash.values.reduce(&:+).map(&:user)).map do |user|
+      Attendance.new(user:, calendar_event: self)
+    end
+    status_hash
+  end
+
+  def previous
+    CalendarEvent.before(starts_at).last
+  end
+
+  def next
+    CalendarEvent.after(starts_at).first
+  end
 
   def practice?
     category == CATEGORY_PRACTICE

@@ -45,13 +45,16 @@
 
 <% @calendar_events.each do |calendar_event| %>
   <div class="my-5 p-2 border-solid border-primary border-2 rounded bg-gray <%= 'bg-complementary bg-opacity-30' unless calendar_event.practice? %>">
-    <p class="font-bold"><%= calendar_event.summary %></p>
-    <p><%= calendar_event_time_string(calendar_event) %></p>
-    <p class="text-xs"><%= time_ago_in_words(calendar_event.starts_at, scope: 'datetime.distance_in_words.in_duration') %></p>
-    <p class="mt-5 italic"><%= calendar_event.location %></p>
-    <div class="my-5 break-all">
-      <%= simple_format calendar_event.description %>
-    </div>
+    <p class="font-bold">
+      <% if policy(Attendance).index? %>
+        <%= link_to calendar_event do %>
+          <%= calendar_event.summary %>
+        <% end %>
+      <% else %>
+        <%= calendar_event.summary %>
+      <% end %>
+    </p>
+    <%= render calendar_event %>
 
     <% unless Attendance.where(calendar_event:, user: current_user).exists? %>
       <%= link_to t('.calendar_events.attendance.new'), new_calendar_event_attendance_excuse_path(calendar_event), class: 'btn btn-primary' %>

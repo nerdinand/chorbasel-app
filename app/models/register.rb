@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 module Register
-  module Singer
+  class Singer
+    include Comparable
+
     REGISTER_SOPRANO_1 = 'soprano_1'
     REGISTER_SOPRANO_2 = 'soprano_2'
     REGISTER_ALTO_1 = 'alto_1'
@@ -19,8 +21,25 @@ module Register
       REGISTER_TENOR_1,
       REGISTER_TENOR_2,
       REGISTER_BASS_1,
-      REGISTER_BASS_2
+      REGISTER_BASS_2,
+      nil
     ].freeze
+
+    def initialize(register)
+      @register = register
+    end
+
+    attr_reader :register
+
+    def canonical_register
+      return nil if @register.nil?
+
+      @register.split('_').first
+    end
+
+    def <=>(other)
+      REGISTERS.index(register.presence) <=> REGISTERS.index(other.register.presence)
+    end
   end
 
   module Song
