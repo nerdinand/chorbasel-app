@@ -29,8 +29,10 @@
 
               <% [Attendance::STATUS_ATTENDED, Attendance::STATUS_EXCUSED].each do |new_status| %>
                 <%= form_for attendance, url:, html: {class: 'form-inline'} do |f| %>
-                  <%= f.hidden_field :user_id %>
-                  <%= f.hidden_field :calendar_event_id %>
+                  <% if attendance.new_record? %>
+                    <%= f.hidden_field :user_id %>
+                    <%= f.hidden_field :calendar_event_id %>
+                  <% end %>
                   <%= f.hidden_field :status, value: new_status %>
                   <%= button_tag do %>
                     <%= icon_for_status(new_status) %>

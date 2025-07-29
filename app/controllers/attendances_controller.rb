@@ -59,7 +59,7 @@ class AttendancesController < ApplicationController
   end
 
   def quick_update
-    @attendance = authorize Attendance.find(params[:id])
+    @attendance = authorize Attendance.find(params[:attendance_id])
 
     if @attendance.update(attendance_params)
       flash.notice = t('.success')
