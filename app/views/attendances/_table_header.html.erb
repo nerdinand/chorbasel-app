@@ -1,0 +1,8 @@
+<thead>
+  <tr>
+    <th></th>
+    <% attendance_table.calendar_events.each do |calendar_event| %>
+      <th class="<%= calendar_event.practice? ? '' : 'bg-complementary bg-opacity-30' %>"><%= calendar_event.starts_at.strftime('%d.%m.') %></th>
+    <% end %>
+  </tr>
+</thead>
