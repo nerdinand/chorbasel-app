@@ -1,5 +1,13 @@
 <% content_for :title, t('.title') %>
 
+<div class="float-right">
+  <%= link_to @attendance_pagination.previous_params, class: 'no-underline' do %>
+    <%= tabler_icon 'arrow_left', classes: ['inline', 'align-[sub]'] %>
+  <% end %>
+  <%= link_to @attendance_pagination.next_params, class: 'no-underline' do %>
+    <%= tabler_icon 'arrow_right', classes: ['inline', 'align-[sub]'] %>
+  <% end %>
+</div>
 
 <% if @excuse_requested_attendances.any? %>
   <h2><%= t('.excuse_requested.title') %></h2>
@@ -17,25 +25,27 @@
 <table>
   <%= render 'table_header', attendance_table: @attendance_table %>
   <% @attendance_table.canonical_register_users.each do |register, users| %>
-    <tbody class="border-r-2">
-      <% users.each do |user| %>
-        <tr class="register-<%= user.register_object.canonical_register %>">
-          <td class="border-r-2"><%= user.full_name %></td>
-          <% @attendance_table.calendar_events.each do |calendar_event| %>
-            <td class="text-center">
-              <% attendance = @attendance_table.attendance_for(user, calendar_event) %>
-              <% if attendance.nil? %>
-                <%= link_to icon_for_status(Attendance::STATUS_UNKNOWN), new_attendance_path(user_id: user, calendar_event_id: calendar_event) %>
-              <% else %>
-                <%= link_to edit_attendance_path(attendance) do %>
-                  <%= icon_for_status(attendance.status) %>
+    <% if users.any? %>
+      <tbody class="border-r-2">
+        <% users.each do |user| %>
+          <tr class="register-<%= user.register_object.canonical_register %>">
+            <td class="border-r-2"><%= user.full_name %></td>
+            <% @attendance_table.calendar_events.each do |calendar_event| %>
+              <td class="text-center">
+                <% attendance = @attendance_table.attendance_for(user, calendar_event) %>
+                <% if attendance.nil? %>
+                  <%= link_to icon_for_status(Attendance::STATUS_UNKNOWN), new_attendance_path(user_id: user, calendar_event_id: calendar_event) %>
+                <% else %>
+                  <%= link_to edit_attendance_path(attendance) do %>
+                    <%= icon_for_status(attendance.status) %>
+                  <% end %>
                 <% end %>
-              <% end %>
-            </td>
-          <% end %>
-        </tr>
-      <% end %>
-    </tbody>
-    <%= render 'table_header', attendance_table: @attendance_table %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+      <%= render 'table_header', attendance_table: @attendance_table %>
+    <% end %>
   <% end %>
 </table>
