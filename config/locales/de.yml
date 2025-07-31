@@ -295,6 +295,9 @@ de:
   layouts:
     footer:
       feedback: Feedback
+      google_drive: Google Drive
+      infopoint: Infopoint
+      website: Website
     navbar:
       attendances: Anwesenheiten
       dashboard: Dashboard
