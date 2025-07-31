@@ -8,8 +8,7 @@
       <%= image_tag user.profile_picture, class: "w-full h-full object-cover object-bottom" %>
       <div class="flex flex-col gap-2 mt-2">
         <% if user.human_register.present? %>
-          <p class="absolute rounded-md top-2 left-2 bg-primary border-2 border-white font-semibold text-white text-sm px-2 py-1 flex items-center">
-            <img alt="" class="mr-1" src="<%= image_path "music-note.svg" %>"/>
+          <p class="absolute rounded-md top-2 left-2 register-<%= user.register_object.canonical_register %> border-2 border-white font-semibold text-sm px-2 py-1 flex items-center">
             <span><%= user.human_register %></span>
           </p>
         <% end %>
