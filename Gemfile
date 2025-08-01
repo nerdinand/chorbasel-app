@@ -86,3 +86,5 @@ gem 'image_processing', '~> 1.13'
 gem 'chartkick', '~> 5.2'
 
 gem 'tabler_icons', '~> 0.1.1'
+
+gem 'spreadsheet_architect', '~> 5.1'

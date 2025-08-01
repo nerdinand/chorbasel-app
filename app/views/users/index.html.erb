@@ -4,6 +4,10 @@
   <%= link_to t('.new'), new_user_path, class: 'btn btn-primary' %>
 <% end %>
 
+<%= link_to({format: :xlsx}, {class: 'float-right'}) do %>
+  <%= tabler_icon 'file_spreadsheet', classes: ['inline'] %> <%= t('.excel_export') %>
+<% end %>
+
 <table>
   <thead>
     <tr>
