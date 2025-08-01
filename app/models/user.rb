@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  include SpreadsheetArchitect
+
   STATUS_ACTIVE = 'active'
   STATUS_PAUSED = 'paused'
   STATUS_INACTIVE = 'inactive'

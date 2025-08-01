@@ -11,6 +11,11 @@ class UsersController < ApplicationController
     end
 
     @users = authorize(order == 'register' ? User.ordered_by_register : User.order(order))
+
+    respond_to do |format|
+      format.html
+      format.xlsx { render xlsx: @users }
+    end
   end
 
   def new
