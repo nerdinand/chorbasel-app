@@ -28,7 +28,7 @@
     <% if users.any? %>
       <tbody class="border-r-2">
         <% users.each do |user| %>
-          <tr class="register-<%= user.register_object.canonical_register %>">
+          <tr class="register-<%= user.canonical_register %>">
             <td class="border-r-2"><%= user.full_name %></td>
             <% @attendance_table.calendar_events.each do |calendar_event| %>
               <td class="text-center">

@@ -6,9 +6,8 @@ class CalendarEvent < ApplicationRecord
   ONGOING_TIME_WINDOW_BEFORE = 20.minutes
   ONGOING_TIME_WINDOW_AFTER = 10.minutes
 
-  CATEGORY_CONCERT = 'concert'
-  CATEGORY_PRACTICE = 'practice'
-  CATEGORY_OTHER = 'other'
+  PRACTICE_KEYWORD = 'probe'
+  CONCERT_KEYWORD = 'konzert'
 
   validates :uid, :event_created_at, :starts_at, :ends_at, :summary, presence: true
 
@@ -38,6 +37,9 @@ class CalendarEvent < ApplicationRecord
     where(starts_at: ..ONGOING_TIME_WINDOW_BEFORE.from_now).where(ends_at: ONGOING_TIME_WINDOW_AFTER.ago..)
   }
 
+  scope :practice, -> { where('summary like ?', "%#{PRACTICE_KEYWORD}%") }
+  scope :concert, -> { where('summary like ?', "%#{CONCERT_KEYWORD}%") }
+
   def attendance_statuses
     status_hash = Attendance::STATUSES.index_with do |status|
       attendances.where(status:)
@@ -57,18 +59,11 @@ class CalendarEvent < ApplicationRecord
   end
 
   def practice?
-    category == CATEGORY_PRACTICE
+    summary.downcase.include? PRACTICE_KEYWORD
   end
 
-  def category
-    @category ||= case summary
-                  when /probe/i
-                    CATEGORY_PRACTICE
-                  when /konzert/i
-                    CATEGORY_CONCERT
-                  else
-                    CATEGORY_OTHER
-                  end
+  def concert?
+    summary.downcase.include? CONCERT_KEYWORD
   end
 
   def duration
@@ -81,5 +76,9 @@ class CalendarEvent < ApplicationRecord
 
   def ongoing?
     starts_at <= ONGOING_TIME_WINDOW_BEFORE.from_now && ends_at >= ONGOING_TIME_WINDOW_AFTER.ago
+  end
+
+  def date
+    starts_at.strftime('%d.%m.')
   end
 end
