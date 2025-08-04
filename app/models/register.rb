@@ -25,17 +25,34 @@ module Register
       nil
     ].freeze
 
+    REGISTER_SOPRANO = 'soprano'
+    REGISTER_ALTO = 'alto'
+    REGISTER_TENOR = 'tenor'
+    REGISTER_BASS = 'bass'
+
+    CANONICAL_REGISTERS = [
+      REGISTER_SOPRANO,
+      REGISTER_ALTO,
+      REGISTER_TENOR,
+      REGISTER_BASS
+    ].freeze
+
+    REGISTER_TO_CANONICAL_REGISTER = {
+      REGISTER_SOPRANO_1 => REGISTER_SOPRANO,
+      REGISTER_SOPRANO_2 => REGISTER_SOPRANO,
+      REGISTER_ALTO_1 => REGISTER_ALTO,
+      REGISTER_ALTO_2 => REGISTER_ALTO,
+      REGISTER_TENOR_1 => REGISTER_TENOR,
+      REGISTER_TENOR_2 => REGISTER_TENOR,
+      REGISTER_BASS_1 => REGISTER_BASS,
+      REGISTER_BASS_2 => REGISTER_BASS
+    }.freeze
+
     def initialize(register)
       @register = register
     end
 
     attr_reader :register
-
-    def canonical_register
-      return nil if @register.nil?
-
-      @register.split('_').first
-    end
 
     def <=>(other)
       REGISTERS.index(register.presence) <=> REGISTERS.index(other.register.presence)

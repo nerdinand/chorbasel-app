@@ -15,7 +15,7 @@
   <table>
     <tbody>
       <% attendances.sort_by { |a| a.user.register_object }.each do |attendance| %>
-        <tr class="register-<%= attendance.user.register_object.canonical_register %>">
+        <tr class="register-<%= attendance.user.canonical_register %>">
           <td>
             <% if attendance.new_record? %>
               <%= link_to attendance.user.full_name, new_attendance_path(user_id: attendance.user, calendar_event_id: @calendar_event) %>

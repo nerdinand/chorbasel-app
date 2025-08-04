@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_01_080814) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_03_190151) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -151,6 +151,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_01_080814) do
     t.string "member_since"
     t.string "register"
     t.text "remarks"
+    t.string "canonical_register"
     t.index "LOWER(email)", name: "index_users_on_lowercase_email", unique: true
     t.check_constraint "JSON_TYPE(roles) = 'array'", name: "users_roles_is_array"
   end

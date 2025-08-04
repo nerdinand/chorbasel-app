@@ -3,6 +3,8 @@
 class User < ApplicationRecord
   include SpreadsheetArchitect
 
+  before_save :set_canonical_register
+
   STATUS_ACTIVE = 'active'
   STATUS_PAUSED = 'paused'
   STATUS_INACTIVE = 'inactive'
@@ -38,6 +40,7 @@ class User < ApplicationRecord
   validates :phone_number, format: { with: INTERNATIONAL_PHONE_NUMBER_REGEX }, allow_blank: true
   validates :status, inclusion: STATUSES
   validates :register, inclusion: Register::Singer::REGISTERS, allow_blank: true
+  validates :canonical_register, inclusion: Register::Singer::CANONICAL_REGISTERS, allow_blank: true
 
   has_many :attendances, dependent: :destroy
 
@@ -91,5 +94,9 @@ class User < ApplicationRecord
 
   def birth_date_this_year
     birth_date.change(year: Time.zone.today.year)
+  end
+
+  def set_canonical_register
+    self.canonical_register = Register::Singer::REGISTER_TO_CANONICAL_REGISTER[register]
   end
 end

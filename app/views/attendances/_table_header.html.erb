@@ -3,7 +3,7 @@
     <th></th>
     <% attendance_table.calendar_events.each do |calendar_event| %>
       <th class="<%= calendar_event.practice? ? '' : 'bg-complementary bg-opacity-30' %>">
-        <%= link_to calendar_event.starts_at.strftime('%d.%m.'), calendar_event %>
+        <%= link_to calendar_event.date, calendar_event %>
       </th>
     <% end %>
   </tr>
