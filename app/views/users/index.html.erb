@@ -13,7 +13,8 @@
     <tr>
       <th><%= t('.profile_complete') %></th>
       <th><%= t('.face_picture') %></th>
-      <th><%= link_to t('.name'), order: :first_name %></th>
+      <th><%= link_to t('.first_name'), order: :first_name %></th>
+      <th><%= link_to t('.last_name'), order: :last_name %></th>
       <th><%= t('.email') %></th>
       <th><%= link_to t('.register'), order: :register %></th>
       <th><%= t('.roles') %></th>
@@ -36,7 +37,10 @@
           <% end %>
         </td>
         <td>
-          <%= user.full_name %>
+          <%= user.first_name %>
+        </td>
+        <td>
+          <%= user.last_name %>
         </td>
         <td>
           <%= user.email %>
