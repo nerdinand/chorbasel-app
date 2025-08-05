@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  ALLOWED_ORDER_COLUMNS = %w[register first_name].freeze
+  ALLOWED_ORDER_COLUMNS = %w[register first_name last_name].freeze
 
   def index
     order = params[:order] || 'first_name'
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       render file: 'public/400.html', status: :bad_request, layout: false and return
     end
 
-    @users = authorize(order == 'register' ? User.ordered_by_register : User.order(order))
+    @users = authorize(order == 'register' ? User.ordered_by_register : User.order("#{order} COLLATE NOCASE"))
 
     respond_to do |format|
       format.html

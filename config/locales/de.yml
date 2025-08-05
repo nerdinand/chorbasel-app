@@ -410,7 +410,8 @@ de:
       email: E-Mail
       excel_export: Excel-Export
       face_picture: Bild
-      name: Name
+      first_name: Vorname
+      last_name: Nachname
       new: Neu
       profile_complete: Profil vollständig?
       register: Stimme
