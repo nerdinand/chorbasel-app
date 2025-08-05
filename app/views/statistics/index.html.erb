@@ -13,7 +13,7 @@
       <tr>
         <th scope="row"><%= t(".#{r}") %></th>
         <% @attendance_tally_table.calendar_events.each do |ce| %>
-          <td><%= number_to_percentage @attendance_tally_table.register_percentages(ce)[r] %></td>
+          <td><%= number_to_percentage @attendance_tally_table.register_percentages(ce)[r], precision: 0 %></td>
         <% end %>
       </tr>
     <% end %>
@@ -21,7 +21,7 @@
   <tfoot>
     <th scope="row"><%= t('.total') %></th>
     <% @attendance_tally_table.calendar_events.each do |ce| %>
-      <td><%= number_to_percentage @attendance_tally_table.total_percentage(ce) %></td>
+      <td><%= number_to_percentage @attendance_tally_table.total_percentage(ce), precision: 0 %></td>
     <% end %>
   </tfoot>
 </table>
