@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_03_190151) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_05_193438) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -133,6 +133,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_03_190151) do
     t.check_constraint "JSON_TYPE(registers) = 'array'", name: "songs_registers_is_array"
   end
 
+  create_table "user_statuses", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "status"
+    t.string "note"
+    t.date "from_date"
+    t.date "to_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.datetime "created_at", null: false
@@ -147,7 +157,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_03_190151) do
     t.string "city"
     t.string "phone_number"
     t.date "birth_date"
-    t.string "status", default: "active"
     t.string "member_since"
     t.string "register"
     t.text "remarks"

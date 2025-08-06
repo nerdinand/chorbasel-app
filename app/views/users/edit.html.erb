@@ -1,3 +1,47 @@
 <% content_for :title, t('.title') %>
 
 <%= render 'form' %>
+
+<h2><%= t('.user_statuses.title') %></h2>
+
+<% if policy(UserStatus).new? %>
+  <%= link_to t('.new'), new_user_user_status_path(@user), class: 'btn btn-primary' %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= t('.status') %></th>
+      <th><%= t('.note') %></th>
+      <th><%= t('.from_date') %></th>
+      <th><%= t('.to_date') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user.user_statuses.order(from_date: :desc).each do |user_status| %>
+      <tr>
+        <td>
+          <%= user_status.status %>
+        </td>
+        <td>
+          <%= user_status.note %>
+        </td>
+        <td>
+          <%= user_status.from_date %>
+        </td>
+        <td>
+          <%= user_status.to_date %>
+        </td>
+        <td>
+          <% if policy(user_status).edit? %>
+            <%= link_to t('.edit'), edit_user_user_status_path(user_status.user, user_status), class: 'btn btn-primary' %>
+          <% end %>
+          <% if policy(user_status).destroy? %>
+            <%= button_to t('.destroy'), user_user_status_path(user_status.user, user_status), method: :delete, class: 'btn btn-danger' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

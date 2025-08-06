@@ -13,7 +13,10 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   constraints Passwordless::Constraint.new(User) do # rubocop:disable Metrics/BlockLength
     get 'dashboard' => 'dashboard#show'
 
-    resources :users, except: :destroy
+    resources :users, except: :destroy do
+      resources :user_statuses, except: %i[index show]
+    end
+
     resources :attendances, only: %i[index edit new create update] do
       patch :quick_update
     end

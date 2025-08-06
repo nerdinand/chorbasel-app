@@ -109,7 +109,7 @@
 
     <div class="form-field">
       <p><%= f.label :status %> <%# i18n-tasks-use t('activerecord.attributes.user.status') %></p>
-      <p><%= f.select :status, users_status_options %></p>
+      <p><%= @user.status %></p>
     </div>
 
     <div class="form-field">

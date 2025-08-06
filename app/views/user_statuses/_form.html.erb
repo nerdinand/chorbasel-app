@@ -1,0 +1,27 @@
+<%= render 'errors', model: @user_status %>
+
+<%= form_for [@user_status.user, @user_status] do |f| %>
+  <%= f.hidden_field :user_id %>
+
+  <div class="form-field">
+    <p><%= f.label :status %>  <%# i18n-tasks-use t('activerecord.attributes.user_status.status') %></p>
+    <p><%= f.select :status, users_status_options %></p>
+  </div>
+
+  <div class="form-field">
+    <p><%= f.label :from_date %>  <%# i18n-tasks-use t('activerecord.attributes.user_status.from_date') %></p>
+    <p><%= f.date_field :from_date %></p>
+  </div>
+
+  <div class="form-field">
+    <p><%= f.label :to_date %>  <%# i18n-tasks-use t('activerecord.attributes.user_status.to_date') %></p>
+    <p><%= f.date_field :to_date %></p>
+  </div>
+
+  <div class="form-field">
+    <p><%= f.label :note %>  <%# i18n-tasks-use t('activerecord.attributes.user_status.note') %></p>
+    <p><%= f.text_area :note %></p>
+  </div>
+
+  <p><%= f.submit class: 'btn btn-primary' %> <%# i18n-tasks-use t('helpers.submit.user_status.create') %></p>
+<% end %>

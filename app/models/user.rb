@@ -5,12 +5,6 @@ class User < ApplicationRecord
 
   before_save :set_canonical_register
 
-  STATUS_ACTIVE = 'active'
-  STATUS_PAUSED = 'paused'
-  STATUS_INACTIVE = 'inactive'
-
-  STATUSES = [STATUS_ACTIVE, STATUS_PAUSED, STATUS_INACTIVE].freeze
-
   INTERNATIONAL_PHONE_NUMBER_REGEX = /\A\+\d{11,13}\z/
 
   PROFILE_COMPLETENESS_FIELDS = %i[
@@ -38,16 +32,18 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :roles, array: Roles::ROLES
   validates :phone_number, format: { with: INTERNATIONAL_PHONE_NUMBER_REGEX }, allow_blank: true
-  validates :status, inclusion: STATUSES
   validates :register, inclusion: Register::Singer::REGISTERS, allow_blank: true
   validates :canonical_register, inclusion: Register::Singer::CANONICAL_REGISTERS, allow_blank: true
 
   has_many :attendances, dependent: :destroy
+  has_many :user_statuses, dependent: :destroy
 
   passwordless_with :email
 
-  scope :active, -> { where(status: STATUS_ACTIVE) }
-  scope :sign_in_allowed, -> { where.not(status: STATUS_INACTIVE) }
+  scope :active, -> { joins(:user_statuses).where(user_statuses: { status: UserStatus::STATUS_ACTIVE, to_date: nil }) }
+  scope :sign_in_allowed, lambda {
+    joins(:user_statuses).where('user_statuses.to_date IS NULL AND user_statuses.status != ?', UserStatus::STATUS_INACTIVE)
+  }
   scope :ordered_by_register, -> { in_order_of(:register, Register::Singer::REGISTERS + [nil]) }
 
   def self.fetch_resource_for_passwordless(email)
@@ -98,5 +94,12 @@ class User < ApplicationRecord
 
   def set_canonical_register
     self.canonical_register = Register::Singer::REGISTER_TO_CANONICAL_REGISTER[register]
+  end
+
+  def status
+    today = Time.zone.today
+    user_statuses.where(
+      '(from_date <= ? AND to_date >= ?) OR (to_date is NULL)', today, today
+    ).order(from_date: :desc).first.try(:status)
   end
 end
