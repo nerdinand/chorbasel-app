@@ -41,4 +41,8 @@ class UserStatus < ApplicationRecord
   def date_range
     from_date..to_date
   end
+
+  def human_status
+    I18n.t("activerecord.attributes.user_status.enums.status.#{status}")
+  end
 end

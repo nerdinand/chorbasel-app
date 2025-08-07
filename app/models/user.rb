@@ -46,6 +46,9 @@ class User < ApplicationRecord
   }
   scope :ordered_by_register, -> { in_order_of(:register, Register::Singer::REGISTERS + [nil]) }
 
+  accepts_nested_attributes_for :user_statuses
+  delegate :human_status, to: :status
+
   def self.fetch_resource_for_passwordless(email)
     where('lower(email) = ?', email).sign_in_allowed.first
   end
@@ -74,10 +77,6 @@ class User < ApplicationRecord
     PROFILE_COMPLETENESS_FIELDS.all? { |f| send(f).present? }
   end
 
-  def human_status
-    I18n.t("activerecord.attributes.user.enums.status.#{status}")
-  end
-
   def register_object
     Register::Singer.new(register)
   end
@@ -100,6 +99,6 @@ class User < ApplicationRecord
     today = Time.zone.today
     user_statuses.where(
       '(from_date <= ? AND to_date >= ?) OR (to_date is NULL)', today, today
-    ).order(from_date: :desc).first.try(:status)
+    ).order(from_date: :desc).first
   end
 end
