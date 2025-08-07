@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class UserPolicy < ApplicationPolicy
-  attr_reader :user, :user_to_modify
-
   def initialize(user, user_to_modify)
     super
     @user = user
     @user_to_modify = user_to_modify
   end
+
+  attr_reader :user, :user_to_modify
 
   def index?
     user_management?
