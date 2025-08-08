@@ -13,7 +13,7 @@ class CreateUserStatuses < ActiveRecord::Migration[8.0]
     end
 
     User.find_each do |u|
-      u.user_statuses.create!(status: u.status, from_date: Time.zone.today)
+      u.user_statuses.create!(status: u.attributes['status'], from_date: Time.zone.today)
     end
 
     remove_column :users, :status, :string, default: 'active'
