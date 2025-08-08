@@ -11,7 +11,9 @@ class AttendanceTallyTable
   def initialize(calendar_events)
     @calendar_events = calendar_events
 
-    @register_counts = User.active.group(:canonical_register).count
+    @register_counts = calendar_events.index_with do |ce|
+      User.active_at_time(ce.starts_at).group(:canonical_register).count
+    end
 
     @tallies = calendar_events.index_with do |ce|
       ce.attendances.joins(:user).group('users.canonical_register').count
@@ -26,12 +28,12 @@ class AttendanceTallyTable
 
   def register_percentages(calendar_event)
     registers.index_with do |r|
-      100 * @tallies[calendar_event][r].to_f / @register_counts[r]
+      100 * @tallies[calendar_event][r].to_f / @register_counts[calendar_event][r]
     end
   end
 
   def total_percentage(calendar_event)
-    100 * @tallies[calendar_event].sum(&:last).to_f / @register_counts.sum(&:last)
+    100 * @tallies[calendar_event].sum(&:last).to_f / @register_counts[calendar_event].sum(&:last)
   end
 
   def chart_data
