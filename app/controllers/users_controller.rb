@@ -23,11 +23,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = authorize User.find(params[:id])
+    @user = authorize User.includes(:user_statuses).find(params[:id])
   end
 
   def create
-    @user = authorize User.new(user_params)
+    @user = create_user
 
     if @user.save
       UserMailer.with(user: @user).welcome_email.deliver_later
@@ -79,5 +79,16 @@ class UsersController < ApplicationController
     else
       dashboard_path
     end
+  end
+
+  def create_user
+    authorize User.new(
+      user_params.merge(
+        user_statuses_attributes: [
+          { status: UserStatus::STATUS_ACTIVE,
+            from_date: Time.zone.today }
+        ]
+      )
+    )
   end
 end

@@ -6,7 +6,6 @@ ferdi:
   email: ferdi@example.com
   roles:
   - app
-  status: active
   register: bass_2
 
 # Fabienne can handle absences
@@ -16,7 +15,6 @@ fabienne:
   email: fabienne@example.com
   roles:
   - absences
-  status: active
   register: alto_2
   salutation: Frau
   street: Example street 42

@@ -1,0 +1,24 @@
+ferdi:
+  user: ferdi
+  status: active
+  from_date: 2025-01-01
+
+fabienne:
+  user: fabienne
+  status: active
+  from_date: 2025-01-01
+
+phips:
+  user: phips
+  status: active
+  from_date: 2025-01-01
+
+uwe:
+  user: uwe
+  status: active
+  from_date: 2025-01-01
+
+marit:
+  user: marit
+  status: active
+  from_date: 2025-01-01

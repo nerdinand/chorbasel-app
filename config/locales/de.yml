@@ -87,10 +87,6 @@ de:
             soprano_2: Sopran 2
             tenor_1: Tenor 1
             tenor_2: Tenor 2
-          status:
-            active: Aktiv
-            inactive: Inaktiv
-            paused: Pausiert
         face_picture: Bild (nur Gesicht, fürs Namen raten)
         first_name: Vorname
         last_name: Nachname
@@ -105,6 +101,16 @@ de:
         status: Status
         street: Strasse
         zip_code: PLZ
+      user_status:
+        enums:
+          status:
+            active: Aktiv
+            inactive: Inaktiv
+            paused: Pausiert
+        from_date: Startdatum
+        note: Notiz
+        status: Status
+        to_date: Enddatum
     models:
       attendance: Anwesenheit
       user: Benutzer:in
@@ -274,6 +280,9 @@ de:
         create: Lied erstellen
       song_medium:
         create: Mediendatei erstellen
+      user_status:
+        create: Benutzerstatus erfassen
+        update: Benutzerstatus ändern
   infos:
     create:
       error: Fehler beim Erstellen der Info
@@ -379,12 +388,33 @@ de:
     welcome_email:
       body: Du wurdest zur Chorbasel-App eingeladen! Du kannst dich jetzt unter <a href="https://app.chorbasel.ch">app.chorbasel.ch</a> mit der E-Mail-Adresse einloggen, an die diese E-Mail versendet wurde.
       subject: Willkommen zur Chorbasel-App!
+  user_statuses:
+    create:
+      error: Fehler beim Erstellen des Benutzerstatus.
+      success: Benutzerstatus erfolgreich erstellt.
+    destroy:
+      error: Fehler beim Löschen des Benutzerstatus.
+      success: Benutzerstatus erfolgreich gelöscht.
+    edit:
+      title: Benutzerstatus bearbeiten
+    new:
+      title: Neuer Benutzerstatus
+    update:
+      error: Fehler beim Bearbeiten des Benutzerstatus.
+      success: Benutzerstatus erfolgreich bearbeitet.
+    user_statuses_overlap_validator:
+      error: Unerlaubte Überlappung der Benutzerstatus-Einträge.
   users:
     create:
       error: Fehler beim Erstellen des:r Benutzer:in.
       success: Benutzer:in erfolgreich erstellt und Einladungsemail verschickt!
     edit:
       title: Benutzer:in bearbeiten
+      user_statuses:
+        destroy: Löschen
+        edit: Bearbeiten
+        new: Neuer Benutzerstatus
+        title: Benutzerstatus-Einträge
     form:
       address:
         hint: 'TODO: address hint'
@@ -412,7 +442,7 @@ de:
       face_picture: Bild
       first_name: Vorname
       last_name: Nachname
-      new: Neu
+      new: Neuer Benutzer
       profile_complete: Profil vollständig?
       register: Stimme
       roles: Rollen

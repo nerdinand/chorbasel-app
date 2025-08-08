@@ -1,28 +1,20 @@
 # frozen_string_literal: true
 
-class UserPolicy < ApplicationPolicy
-  def initialize(user, user_to_modify)
+class UserStatusPolicy < ApplicationPolicy
+  def initialize(user, user_status)
     super
     @user = user
-    @user_to_modify = user_to_modify
+    @user_status = user_status
   end
 
-  attr_reader :user, :user_to_modify
-
-  def index?
-    user_management?
-  end
-
-  def show?
-    true
-  end
+  attr_reader :user, :user_status
 
   def create?
     user_management?
   end
 
   def update?
-    user_management? || user == user_to_modify
+    user_management?
   end
 
   def admin_edit?

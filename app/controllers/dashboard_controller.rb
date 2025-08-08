@@ -3,7 +3,7 @@
 class DashboardController < ApplicationController
   UPCOMING_BIRTHDAYS_QUERY = "
 SELECT
-  id,
+  users.id,
   -- Calculate the next occurrence of the birthday in the current year or the next year
   CASE
     WHEN strftime('%m-%d', birth_date) >= strftime('%m-%d', 'now') THEN
@@ -13,7 +13,11 @@ SELECT
   END AS next_birthday
 FROM
   users
-WHERE status == 'active' AND birth_date IS NOT NULL
+JOIN user_statuses ON users.id = user_statuses.user_id
+WHERE
+  user_statuses.status == 'active'
+  AND user_statuses.to_date IS NULL
+  AND users.birth_date IS NOT NULL
 ORDER BY next_birthday ASC
 LIMIT 5;
 "

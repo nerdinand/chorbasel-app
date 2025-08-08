@@ -4,8 +4,4 @@ module UsersHelper
   def users_register_options
     Register::Singer::REGISTERS.map { |r| [t("activerecord.attributes.user.enums.register.#{r}"), r] }
   end
-
-  def users_status_options
-    User::STATUSES.map { |r| [t("activerecord.attributes.user.enums.status.#{r}"), r] }
-  end
 end
