@@ -255,7 +255,7 @@ de:
   errors:
     message: 'Es sind Fehler aufgetreten:'
   feedback_mailer:
-    feedback_email:
+    mail_params:
       subject: Chorbasel-App Feedback
   feedbacks:
     create:

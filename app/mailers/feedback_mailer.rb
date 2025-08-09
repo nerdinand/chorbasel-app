@@ -3,6 +3,14 @@
 class FeedbackMailer < ApplicationMailer
   def feedback_email
     @feedback = Feedback.new(params[:feedback])
-    mail(to: 'app@chorbasel.ch', subject: t('.subject'))
+    mail(mail_params)
+  end
+
+  private
+
+  def mail_params
+    params = { to: 'app@chorbasel.ch', subject: t('.subject') }
+    params[:from] = @feedback.user_email if @feedback.user_email.present?
+    params
   end
 end
