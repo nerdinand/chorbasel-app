@@ -98,7 +98,6 @@ de:
         remarks: Bemerkungen
         roles: Rollen
         salutation: Anrede
-        status: Status
         street: Strasse
         zip_code: PLZ
       user_status:
@@ -440,6 +439,11 @@ de:
       email: E-Mail
       excel_export: Excel-Export
       face_picture: Bild
+      filter:
+        active: Aktiv
+        all: Alle
+        inactive: Inaktiv
+        paused: Pausiert
       first_name: Vorname
       last_name: Nachname
       new: Neuer Benutzer

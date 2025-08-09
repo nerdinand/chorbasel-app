@@ -12,7 +12,7 @@ class AttendanceTallyTable
     @calendar_events = calendar_events
 
     @register_counts = calendar_events.index_with do |ce|
-      User.active_at_time(ce.starts_at).group(:canonical_register).count
+      User.user_status_at_time(UserStatus::STATUS_ACTIVE, ce.starts_at).group(:canonical_register).count
     end
 
     @tallies = calendar_events.index_with do |ce|
