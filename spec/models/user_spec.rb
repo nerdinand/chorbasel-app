@@ -72,6 +72,6 @@ RSpec.describe User do
   end
 
   describe '#human_status' do
-    it { expect(users(:ferdi).human_status).to eq('Aktiv') }
+    it { expect(users(:ferdi).current_human_status).to eq('Aktiv') }
   end
 end

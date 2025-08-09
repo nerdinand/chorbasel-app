@@ -47,16 +47,12 @@ class User < ApplicationRecord
   scope :user_status_at_time, lambda { |status, time|
     where(id: UserStatus.with_status(status).valid_at_time(time).select(:user_id))
   }
-  scope :sign_in_allowed, lambda {
-    joins(:user_statuses).where('user_statuses.to_date IS NULL AND user_statuses.status != ?', UserStatus::STATUS_INACTIVE)
-  }
   scope :ordered_by_register, -> { in_order_of(:register, Register::Singer::REGISTERS + [nil]) }
 
   accepts_nested_attributes_for :user_statuses
-  delegate :human_status, to: :status
 
   def self.fetch_resource_for_passwordless(email)
-    where('lower(email) = ?', email).sign_in_allowed.first
+    User.active.or(User.inactive).where('lower(email) = ?', email).first
   end
 
   def roles_wrapper
@@ -101,10 +97,11 @@ class User < ApplicationRecord
     self.canonical_register = Register::Singer::REGISTER_TO_CANONICAL_REGISTER[register]
   end
 
-  def status
-    today = Time.zone.today
-    user_statuses.where(
-      '(from_date <= ? AND to_date >= ?) OR (to_date is NULL)', today, today
-    ).order(from_date: :desc).first
+  def current_status
+    user_statuses.valid_at_time(Time.zone.today).first
+  end
+
+  def current_human_status
+    current_status.try(:human_status) || I18n.t('activerecord.attributes.user_status.enums.status.inactive')
   end
 end
