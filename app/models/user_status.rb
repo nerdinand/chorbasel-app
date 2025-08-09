@@ -30,6 +30,11 @@ class UserStatus < ApplicationRecord
 
   validates_with UserStatusesOverlapValidator
 
+  scope :valid_at_time, lambda { |time|
+    where('user_statuses.to_date IS NULL OR (? BETWEEN user_statuses.from_date AND user_statuses.to_date)', time)
+  }
+  scope :active, -> { where(status: UserStatus::STATUS_ACTIVE) }
+
   def overlap?(user_status)
     return true if self == user_status
 
