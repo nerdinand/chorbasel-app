@@ -4,8 +4,12 @@
   <%= link_to t('.new'), new_user_path, class: 'btn btn-primary' %>
 <% end %>
 
-<%= link_to({format: :xlsx}, {class: 'float-right'}) do %>
+<%= link_to(params.slice(*UsersController::QUERY_PARAMS).merge(format: :xlsx).permit!, {class: 'float-right'}) do %>
   <%= tabler_icon 'file_spreadsheet', classes: ['inline'] %> <%= t('.excel_export') %>
+<% end %>
+
+<% UsersController::QUERY_PARAM_FILTER_VALUES.each do |value| %>
+  <%= link_to value, params.slice(*UsersController::QUERY_PARAMS).merge(filter: value).permit! %>
 <% end %>
 
 <table>
