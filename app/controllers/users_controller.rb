@@ -22,11 +22,10 @@ class UsersController < ApplicationController # rubocop:disable Metrics/ClassLen
                                QUERY_PARAM_FILTER_PAUSED, QUERY_PARAM_FILTER_ALL].freeze
 
   def index
-    filter = sanitize_filter or (render_bad_request and return)
-    order = sanitize_order or (render_bad_request and return)
+    filter = params[:filter] = sanitize_filter or (render_bad_request and return)
+    order = params[:order] = sanitize_order or (render_bad_request and return)
 
-    users = authorize(apply_filter(filter))
-    @users = apply_order(users, order)
+    @users = authorize(apply_order(apply_filter(filter), order))
 
     respond_to do |format|
       format.html

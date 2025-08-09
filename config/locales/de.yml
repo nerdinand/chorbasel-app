@@ -449,6 +449,11 @@ de:
       sessions: Sessions
       status: Status
       title: Benutzer:innen
+      filter:
+        active: Aktiv
+        inactive: Inaktiv
+        paused: Pausiert
+        all: Alle
     new:
       title: Neue:r Benutzer:in
     update:

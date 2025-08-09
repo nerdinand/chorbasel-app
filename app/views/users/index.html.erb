@@ -4,23 +4,27 @@
   <%= link_to t('.new'), new_user_path, class: 'btn btn-primary' %>
 <% end %>
 
-<%= link_to(params.slice(*UsersController::QUERY_PARAMS).merge(format: :xlsx).permit!, {class: 'float-right'}) do %>
+<%= link_to(request.query_parameters.merge(format: :xlsx), {class: 'float-right'}) do %>
   <%= tabler_icon 'file_spreadsheet', classes: ['inline'] %> <%= t('.excel_export') %>
 <% end %>
 
-<% UsersController::QUERY_PARAM_FILTER_VALUES.each do |value| %>
-  <%= link_to value, params.slice(*UsersController::QUERY_PARAMS).merge(filter: value).permit! %>
-<% end %>
+<p>
+  <% UsersController::QUERY_PARAM_FILTER_VALUES.each do |value| %>
+    <%= link_to_if(params[:filter] != value, t(".filter.#{value}"), request.query_parameters.merge(filter: value), {class: 'mr-2'}) do %>
+      <b class="mr-2"><%= t(".filter.#{value}") %></b>
+    <% end %>
+  <% end %>
+</p>
 
 <table>
   <thead>
     <tr>
       <th><%= t('.profile_complete') %></th>
       <th><%= t('.face_picture') %></th>
-      <th><%= link_to t('.first_name'), order: :first_name %></th>
-      <th><%= link_to t('.last_name'), order: :last_name %></th>
+      <th><%= link_to t('.first_name'), request.query_parameters.merge(order: :first_name) %></th>
+      <th><%= link_to t('.last_name'), request.query_parameters.merge(order: :last_name) %></th>
       <th><%= t('.email') %></th>
-      <th><%= link_to t('.register'), order: :register %></th>
+      <th><%= link_to t('.register'), request.query_parameters.merge(order: :register) %></th>
       <th><%= t('.roles') %></th>
       <th><%= t('.status') %></th>
       <% if current_user.roles_wrapper.app? %>
