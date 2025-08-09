@@ -1,5 +1,5 @@
 <thead>
-  <tr>
+  <tr class="sticky top-0">
     <th></th>
     <% attendance_table.calendar_events.each do |calendar_event| %>
       <th class="<%= calendar_event.practice? ? '' : 'bg-complementary bg-opacity-30' %>">
