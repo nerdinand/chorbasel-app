@@ -32,13 +32,18 @@
             <td class="border-r-2"><%= user.full_name %></td>
             <% @attendance_table.calendar_events.each do |calendar_event| %>
               <td class="text-center">
-                <% attendance = @attendance_table.attendance_for(user, calendar_event) %>
-                <% if attendance.nil? %>
-                  <%= link_to icon_for_status(Attendance::STATUS_UNKNOWN), new_attendance_path(user_id: user, calendar_event_id: calendar_event) %>
-                <% else %>
-                  <%= link_to edit_attendance_path(attendance) do %>
-                    <%= icon_for_status(attendance.status) %>
+                <% user_status = @attendance_table.user_status_for(user, calendar_event) %>
+                <% if user_status.try(:active?) %>
+                  <% attendance = @attendance_table.attendance_for(user, calendar_event) %>
+                  <% if attendance.nil? %>
+                    <%= link_to icon_for_status(Attendance::STATUS_UNKNOWN), new_attendance_path(user_id: user, calendar_event_id: calendar_event) %>
+                  <% else %>
+                    <%= link_to edit_attendance_path(attendance) do %>
+                      <%= icon_for_status(attendance.status) %>
+                    <% end %>
                   <% end %>
+                <% else %>
+                  <%= icon_for_user_status(user_status.try(:status)) %>
                 <% end %>
               </td>
             <% end %>

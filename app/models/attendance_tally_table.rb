@@ -28,7 +28,7 @@ class AttendanceTallyTable
 
   def register_percentages(calendar_event)
     registers.index_with do |r|
-      100 * @tallies[calendar_event][r].to_f / @register_counts[calendar_event][r]
+      100 * @tallies[calendar_event][r].to_f / (@register_counts[calendar_event][r] || 0)
     end
   end
 

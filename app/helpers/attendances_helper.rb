@@ -14,6 +14,6 @@ module AttendancesHelper
 
   def icon_for_status(status)
     tabler_icon(STATUS_ICON_MAP[status],
-                classes: ['attendance-status-icon', "attendance-status-icon-#{status}"])
+                classes: ['status-icon', "attendance-status-icon-#{status}"])
   end
 end

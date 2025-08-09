@@ -1,25 +1,7 @@
 # frozen_string_literal: true
 
-class UsersController < ApplicationController # rubocop:disable Metrics/ClassLength
-  QUERY_PARAM_ORDER = :order
-  QUERY_PARAM_FILTER = :filter
-
-  QUERY_PARAMS = [QUERY_PARAM_ORDER, QUERY_PARAM_FILTER].freeze
-
-  QUERY_PARAM_ORDER_REGISTER = 'register'
-  QUERY_PARAM_ORDER_FIRST_NAME = 'first_name'
-  QUERY_PARAM_ORDER_LAST_NAME = 'last_name'
-
-  QUERY_PARAM_ORDER_VALUES = [QUERY_PARAM_ORDER_REGISTER, QUERY_PARAM_ORDER_FIRST_NAME,
-                              QUERY_PARAM_ORDER_LAST_NAME].freeze
-
-  QUERY_PARAM_FILTER_ACTIVE = 'active'
-  QUERY_PARAM_FILTER_INACTIVE = 'inactive'
-  QUERY_PARAM_FILTER_PAUSED = 'paused'
-  QUERY_PARAM_FILTER_ALL = 'all'
-
-  QUERY_PARAM_FILTER_VALUES = [QUERY_PARAM_FILTER_ACTIVE, QUERY_PARAM_FILTER_INACTIVE,
-                               QUERY_PARAM_FILTER_PAUSED, QUERY_PARAM_FILTER_ALL].freeze
+class UsersController < ApplicationController
+  include UsersQueryParams
 
   def index
     filter = params[:filter] = sanitize_filter or (render_bad_request and return)

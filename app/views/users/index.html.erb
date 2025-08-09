@@ -10,8 +10,12 @@
 
 <p>
   <% UsersController::QUERY_PARAM_FILTER_VALUES.each do |value| %>
-    <%= link_to_if(params[:filter] != value, t(".filter.#{value}"), request.query_parameters.merge(filter: value), {class: 'mr-2'}) do %>
-      <b class="mr-2"><%= t(".filter.#{value}") %></b>
+    <% if params[:filter] != value %>
+      <%= link_to request.query_parameters.merge(filter: value), {class: 'mr-2'} do %>
+        <%= icon_for_user_filter(value) %><%= t(".filter.#{value}") %>
+      <% end %>
+    <% else %>
+      <b class="mr-2"><%= icon_for_user_filter(value) %><%= t(".filter.#{value}") %></b>
     <% end %>
   <% end %>
 </p>
@@ -64,7 +68,8 @@
           </ul>
         </td>
         <td>
-          <%= user.human_status %>
+          <%= icon_for_user_status(user.current_status.try(:status)) %>
+          <%= user.current_human_status %>
         </td>
         <% if current_user.roles_wrapper.app? %>
           <td>

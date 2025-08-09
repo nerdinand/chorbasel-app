@@ -1,7 +1,3 @@
-.attendance-status-icon {
-  @apply inline align-[sub]
-}
-
 .attendance-status-icon-attended {
   @apply bg-success
 }

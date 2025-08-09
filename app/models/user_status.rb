@@ -31,10 +31,18 @@ class UserStatus < ApplicationRecord
   validates_with UserStatusesOverlapValidator
 
   scope :valid_at_time, lambda { |time|
-    where('user_statuses.to_date IS NULL OR (? BETWEEN user_statuses.from_date AND user_statuses.to_date)', time)
+    where('
+      (user_statuses.from_date < ? AND ? < user_statuses.to_date)
+      OR (user_statuses.from_date < ? AND user_statuses.to_date IS NULL)
+      OR (user_statuses.from_date IS NULL AND ? < user_statuses.to_date)
+    ', time, time, time, time)
   }
   scope :active, -> { with_status(UserStatus::STATUS_ACTIVE) }
   scope :with_status, ->(status) { where(status:) }
+
+  def active?
+    status == STATUS_ACTIVE
+  end
 
   def overlap?(user_status)
     return true if self == user_status
