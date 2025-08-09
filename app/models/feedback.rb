@@ -20,4 +20,12 @@ class Feedback
       user.full_name
     end
   end
+
+  def user_email
+    if anonymous == '1'
+      nil
+    else
+      user.email
+    end
+  end
 end
