@@ -1,16 +1,31 @@
 # frozen_string_literal: true
 
-class UsersController < ApplicationController
-  ALLOWED_ORDER_COLUMNS = %w[register first_name last_name].freeze
+class UsersController < ApplicationController # rubocop:disable Metrics/ClassLength
+  QUERY_PARAM_ORDER = :order
+  QUERY_PARAM_FILTER = :filter
+
+  QUERY_PARAMS = [QUERY_PARAM_ORDER, QUERY_PARAM_FILTER].freeze
+
+  QUERY_PARAM_ORDER_REGISTER = 'register'
+  QUERY_PARAM_ORDER_FIRST_NAME = 'first_name'
+  QUERY_PARAM_ORDER_LAST_NAME = 'last_name'
+
+  QUERY_PARAM_ORDER_VALUES = [QUERY_PARAM_ORDER_REGISTER, QUERY_PARAM_ORDER_FIRST_NAME,
+                              QUERY_PARAM_ORDER_LAST_NAME].freeze
+
+  QUERY_PARAM_FILTER_ACTIVE = 'active'
+  QUERY_PARAM_FILTER_INACTIVE = 'inactive'
+  QUERY_PARAM_FILTER_PAUSED = 'paused'
+  QUERY_PARAM_FILTER_ALL = 'all'
+
+  QUERY_PARAM_FILTER_VALUES = [QUERY_PARAM_FILTER_ACTIVE, QUERY_PARAM_FILTER_INACTIVE,
+                               QUERY_PARAM_FILTER_PAUSED, QUERY_PARAM_FILTER_ALL].freeze
 
   def index
-    order = params[:order] || 'first_name'
+    filter = params[:filter] = sanitize_filter or (render_bad_request and return)
+    order = params[:order] = sanitize_order or (render_bad_request and return)
 
-    unless order.in? ALLOWED_ORDER_COLUMNS
-      render file: 'public/400.html', status: :bad_request, layout: false and return
-    end
-
-    @users = authorize(order == 'register' ? User.ordered_by_register : User.order("#{order} COLLATE NOCASE"))
+    @users = authorize(apply_order(apply_filter(filter), order))
 
     respond_to do |format|
       format.html
@@ -52,6 +67,40 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def sanitize_order
+    order = params[QUERY_PARAM_ORDER]
+
+    return QUERY_PARAM_ORDER_FIRST_NAME if order.blank?
+    return nil unless order.in? QUERY_PARAM_ORDER_VALUES
+
+    order
+  end
+
+  def sanitize_filter
+    filter = params[QUERY_PARAM_FILTER]
+
+    return QUERY_PARAM_FILTER_ACTIVE if filter.blank?
+    return nil unless filter.in? QUERY_PARAM_FILTER_VALUES
+
+    filter
+  end
+
+  def apply_filter(filter)
+    if filter == QUERY_PARAM_FILTER_ALL
+      User.all
+    else
+      User.user_status_now(filter)
+    end
+  end
+
+  def apply_order(users, order)
+    order == QUERY_PARAM_ORDER_REGISTER ? users.ordered_by_register : users.order("#{order} COLLATE NOCASE")
+  end
+
+  def render_bad_request
+    render file: 'public/400.html', status: :bad_request, layout: false
+  end
 
   # TODO: solve this with https://github.com/varvet/pundit?tab=readme-ov-file#strong-parameters
   def user_params

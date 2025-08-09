@@ -40,9 +40,12 @@ class User < ApplicationRecord
 
   passwordless_with :email
 
-  scope :active, -> { active_at_time(Time.zone.now) }
-  scope :active_at_time, lambda { |time|
-    where(id: UserStatus.active.valid_at_time(time).select(:user_id))
+  scope :active, -> { user_status_now(UserStatus::STATUS_ACTIVE) }
+  scope :inactive, -> { user_status_now(UserStatus::STATUS_INACTIVE) }
+  scope :paused, -> { user_status_now(UserStatus::STATUS_PAUSED) }
+  scope :user_status_now, ->(status) { user_status_at_time(status, Time.zone.now) }
+  scope :user_status_at_time, lambda { |status, time|
+    where(id: UserStatus.with_status(status).valid_at_time(time).select(:user_id))
   }
   scope :sign_in_allowed, lambda {
     joins(:user_statuses).where('user_statuses.to_date IS NULL AND user_statuses.status != ?', UserStatus::STATUS_INACTIVE)
