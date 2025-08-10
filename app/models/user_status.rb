@@ -37,7 +37,8 @@ class UserStatus < ApplicationRecord
       OR (user_statuses.from_date IS NULL AND ? < user_statuses.to_date)
     ', time, time, time, time)
   }
-  scope :active, -> { with_status(UserStatus::STATUS_ACTIVE) }
+  scope :active, -> { with_status(STATUS_ACTIVE) }
+  scope :not_inactive, -> { with_status(STATUSES - [STATUS_INACTIVE]) }
   scope :with_status, ->(status) { where(status:) }
 
   def active?
