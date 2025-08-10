@@ -35,7 +35,7 @@
 <ul>
   <% @upcoming_birthdays.each do |ub| %>
     <li>
-      <%= l ub[:next_birthday] %>: <b><%= ub[:user].display_name %></b>
+      <%= l ub[:next_birthday] %>: <b><%= ub[:user].full_name %></b>
     </li>
   <% end %>
 </ul>

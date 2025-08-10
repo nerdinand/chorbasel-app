@@ -52,9 +52,7 @@ module CalendarEvents
       def attendance_params
         {
           status: Attendance::STATUS_EXCUSE_REQUESTED,
-          remarks: "#{current_user.display_name}:\n" + params[:attendance][:remarks].lines.map do |line|
-            "> #{line}"
-          end.join
+          remarks: params[:attendance][:remarks]
         }
       end
     end
