@@ -33,9 +33,9 @@
 <h2><%= t('.upcoming_birthdays.title') %></h2>
 <p><%= t('.upcoming_birthdays.description') %></p>
 <ul>
-  <% @upcoming_birthdays.each do |ub| %>
+  <% @upcoming_birthdays.each do |user, next_birthday| %>
     <li>
-      <%= l ub[:next_birthday] %>: <b><%= ub[:user].full_name %></b>
+      <%= l next_birthday %>: <b><%= user.full_name %></b>
     </li>
   <% end %>
 </ul>
