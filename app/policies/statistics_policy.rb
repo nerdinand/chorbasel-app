@@ -9,6 +9,6 @@ class StatisticsPolicy < ApplicationPolicy
   end
 
   def index?
-    user.roles_wrapper.app? || user.roles_wrapper.choir_direction?
+    user.roles_wrapper.app? || user.roles_wrapper.choir_direction? || app.roles_wrapper.absences?
   end
 end
