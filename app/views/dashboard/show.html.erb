@@ -16,10 +16,10 @@
   </div>
 <% end %>
 
-<% if @attendances.any? %>
+<% if @ongoing_attendances.any? %>
   <h2><%= t('.attendances.title') %></h2>
 
-  <% @attendances.each do |attendance| %>
+  <% @ongoing_attendances.each do |attendance| %>
     <div>
       <p><%= attendance.calendar_event.summary %></p>
 
@@ -41,9 +41,39 @@
 </ul>
 
 <h2><%= t('.calendar.title') %></h2>
+
+<table>
+  <thead>
+    <tr>
+      <% @calendar_events.each do |calendar_event| %>
+        <th class="<%= calendar_event.practice? ? '' : 'bg-complementary bg-opacity-30' %>">
+          <%= link_to calendar_event.date, calendar_event %>
+        </th>
+      <% end %>
+    </tr>
+  </thead>
+  
+  <tbody class="border-r-2">
+    <tr>
+      <% @calendar_events.each do |calendar_event| %>
+        <td class="text-center">
+          <% attendance = calendar_event.attendances.where(user: current_user).first %>
+          <% if attendance.nil? %>
+            <%= link_to icon_for_status(Attendance::STATUS_UNKNOWN), new_attendance_path(user_id: current_user, calendar_event_id: calendar_event) %>
+          <% else %>
+            <%= link_to edit_attendance_path(attendance) do %>
+              <%= icon_for_status(attendance.status) %>
+            <% end %>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+
 <p><%= t('.calendar.description') %></p>
 
-<% @calendar_events.each do |calendar_event| %>
+<% @upcoming_calendar_events.each do |calendar_event| %>
   <div class="my-5 p-2 border-solid border-primary border-2 rounded bg-gray <%= 'bg-complementary bg-opacity-30' unless calendar_event.practice? %>">
     <p class="font-bold">
       <% if policy(Attendance).index? %>

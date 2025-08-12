@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
 class DashboardController < ApplicationController
+  EVENTS_FROM = 1.month
+  EVENTS_TO = 2.months
+
   def show
-    @calendar_events = CalendarEvent.next
-    @attendances = CalendarEvent.ongoing.map do |calendar_event|
+    @calendar_events = CalendarEvent.where(starts_at: EVENTS_FROM.ago..EVENTS_TO.from_now)
+    @upcoming_calendar_events = CalendarEvent.next
+    @ongoing_attendances = CalendarEvent.ongoing.map do |calendar_event|
       Attendance.find_or_initialize_by(user: current_user, calendar_event:).tap do |attendance|
         attendance.status = Attendance::STATUS_ATTENDED
       end
