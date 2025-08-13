@@ -29,7 +29,7 @@
       <tbody class="border-r-2">
         <% users.each do |user| %>
           <tr class="register-<%= user.canonical_register %>">
-            <td class="border-r-2"><%= user.full_name %></td>
+            <td class="border-x-2 sticky left-0 register-<%= user.canonical_register %>"><%= user.full_name %></td>
             <% @attendance_table.calendar_events.each do |calendar_event| %>
               <td class="text-center">
                 <% user_status = @attendance_table.user_status_for(user, calendar_event) %>
