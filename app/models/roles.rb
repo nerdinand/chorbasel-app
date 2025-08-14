@@ -61,6 +61,10 @@ class Roles
     roles_values.include?(ROLE_CHOIR_LIFE)
   end
 
+  def choir_money?
+    roles_values.include?(Roles::ROLE_CHOIR_MONEY)
+  end
+
   def self.all
     ROLES.map { |r| Role.new(r) }
   end
