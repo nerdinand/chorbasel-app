@@ -132,6 +132,8 @@ de:
     quick_update:
       error: Fehler beim Ändern der Anwesenheit.
       success: Anwesenheit erfolgreich geändert.
+    table_header:
+      name: Name
     update:
       error: Fehler beim Ändern der Anwesenheit.
       success: Anwesenheit erfolgreich geändert.
