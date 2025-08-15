@@ -48,6 +48,10 @@ class ApplicationPolicy
     user.roles_wrapper.choir_life?
   end
 
+  def choir_money?
+    user.roles_wrapper.choir_money?
+  end
+
   class Scope
     def initialize(user, scope)
       raise Pundit::NotAuthorizedError, 'must be logged in' unless user
