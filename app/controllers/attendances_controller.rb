@@ -3,10 +3,7 @@
 class AttendancesController < ApplicationController
   def index
     @attendance_pagination = AttendancePagination.new(params[:from], params[:to])
-    users = User.ordered_by_register
-    calendar_events = CalendarEvent.where(starts_at: @attendance_pagination.current_range)
-    attendances = authorize Attendance.where(user: users).where(calendar_event: calendar_events)
-    @attendance_table = AttendanceTable.new(attendances, users, calendar_events)
+    @attendance_table = build_attendance_table
     @excuse_requested_attendances = Attendance.excuse_requested
   end
 
@@ -68,6 +65,17 @@ class AttendancesController < ApplicationController
   end
 
   private
+
+  def build_attendance_table
+    calendar_events = CalendarEvent.where(starts_at: @attendance_pagination.current_range)
+    users = User.ordered_by_register.user_status_during_time(
+      UserStatus::STATUS_ACTIVE,
+      calendar_events.first.starts_at,
+      calendar_events.last.starts_at
+    )
+    attendances = authorize Attendance.where(user: users).where(calendar_event: calendar_events)
+    AttendanceTable.new(attendances, users, calendar_events)
+  end
 
   def attendance_params
     params.expect(attendance: %i[user_id calendar_event_id status remarks])

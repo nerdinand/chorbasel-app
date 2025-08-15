@@ -10,7 +10,7 @@ class UserPolicy < ApplicationPolicy
   attr_reader :user, :user_to_modify
 
   def index?
-    user_management?
+    user_management? || choir_money?
   end
 
   def show?

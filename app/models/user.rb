@@ -48,6 +48,9 @@ class User < ApplicationRecord
     where(id: UserStatus.with_status(status).valid_at_time(time).select(:user_id))
   }
   scope :ordered_by_register, -> { in_order_of(:register, Register::Singer::REGISTERS + [nil]) }
+  scope :user_status_during_time, lambda { |status, from_time, to_time|
+    where(id: UserStatus.with_status(status).valid_during_time(from_time, to_time).select(:user_id))
+  }
 
   accepts_nested_attributes_for :user_statuses
 
