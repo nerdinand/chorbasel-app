@@ -83,4 +83,6 @@ class CalendarEvent < ApplicationRecord
   def date
     starts_at.strftime('%d.%m.')
   end
+
+  delegate :future?, to: :starts_at
 end

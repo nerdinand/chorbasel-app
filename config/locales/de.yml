@@ -167,7 +167,6 @@ de:
       attendances:
         title: Anwesenheit
       calendar:
-        description: 'Hier siehst du die nächsten anstehenden Chortermine:'
         title: Kalender
       calendar_events:
         attendance:

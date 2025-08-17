@@ -14,7 +14,7 @@ class CalendarEventPolicy < ApplicationPolicy
   end
 
   def show?
-    true
+    managing?
   end
 
   def create?
@@ -27,5 +27,11 @@ class CalendarEventPolicy < ApplicationPolicy
 
   def destroy?
     false
+  end
+
+  private
+
+  def managing?
+    superpowers? || user.roles_wrapper.absences?
   end
 end

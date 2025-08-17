@@ -18,7 +18,7 @@ class AttendancePolicy < ApplicationPolicy
   end
 
   def create?
-    managing? || attendance.user == user
+    managing? || (attendance.user == user && attendance.calendar_event.future?)
   end
 
   def update?

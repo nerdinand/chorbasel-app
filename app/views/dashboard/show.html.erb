@@ -47,7 +47,7 @@
     <tr>
       <% @calendar_events.each do |calendar_event| %>
         <th class="<%= calendar_event.practice? ? '' : 'bg-complementary bg-opacity-30' %>">
-          <%= link_to calendar_event.date, calendar_event %>
+          <%= link_to_if policy(calendar_event).show?, calendar_event.date, calendar_event %>
         </th>
       <% end %>
     </tr>
@@ -57,11 +57,17 @@
     <tr>
       <% @calendar_events.each do |calendar_event| %>
         <td class="text-center">
-          <% attendance = calendar_event.attendances.where(user: current_user).first %>
-          <% if attendance.nil? %>
-            <%= link_to icon_for_status(Attendance::STATUS_UNKNOWN), new_attendance_path(user_id: current_user, calendar_event_id: calendar_event) %>
+          <% attendance = calendar_event.attendances.find_or_initialize_by(user: current_user) %>
+          <% if attendance.new_record? %>
+            <% if policy(attendance).new? %>
+              <%= link_to icon_for_status(Attendance::STATUS_UNKNOWN), new_calendar_event_attendance_excuse_path(calendar_event) %>
+            <% else %>
+              <%= icon_for_status(Attendance::STATUS_UNKNOWN) %>
+            <% end %>
           <% else %>
-            <%= link_to edit_attendance_path(attendance) do %>
+            <% if policy(attendance).edit? %>
+              <%= link_to icon_for_status(attendance.status), edit_attendance_path(attendance) %>
+            <% else %>
               <%= icon_for_status(attendance.status) %>
             <% end %>
           <% end %>
@@ -70,8 +76,6 @@
     </tr>
   </tbody>
 </table>
-
-<p><%= t('.calendar.description') %></p>
 
 <% @upcoming_calendar_events.each do |calendar_event| %>
   <div class="my-5 p-2 border-solid border-primary border-2 rounded bg-gray <%= 'bg-complementary bg-opacity-30' unless calendar_event.practice? %>">
