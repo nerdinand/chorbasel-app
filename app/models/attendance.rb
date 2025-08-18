@@ -14,6 +14,7 @@ class Attendance < ApplicationRecord
   validates :remarks, presence: true, if: :excuse_requested?
 
   scope :excuse_requested, -> { where(status: STATUS_EXCUSE_REQUESTED) }
+  scope :attended, -> { where(status: STATUS_ATTENDED) }
 
   def excuse_requested?
     status == STATUS_EXCUSE_REQUESTED
