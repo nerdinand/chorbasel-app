@@ -16,7 +16,7 @@ class AttendanceTallyTable
     end
 
     @tallies = calendar_events.index_with do |ce|
-      ce.attendances.joins(:user).group('users.canonical_register').count
+      ce.attendances.attended.joins(:user).group('users.canonical_register').count
     end
   end
 
