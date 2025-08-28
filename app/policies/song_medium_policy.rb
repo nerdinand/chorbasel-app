@@ -32,6 +32,6 @@ class SongMediumPolicy < ApplicationPolicy
   private
 
   def song_management?
-    superpowers?
+    superpowers? || super
   end
 end
