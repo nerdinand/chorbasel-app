@@ -3,8 +3,8 @@
 class CalendarEvent < ApplicationRecord
   NEXT_EVENTS_LIMIT = 10
 
-  ONGOING_TIME_WINDOW_BEFORE = 20.minutes
-  ONGOING_TIME_WINDOW_AFTER = 10.minutes
+  ONGOING_TIME_WINDOW_BEFORE = 30.minutes
+  ONGOING_TIME_WINDOW_AFTER = 30.minutes
 
   PRACTICE_KEYWORD = 'probe'
   CONCERT_KEYWORD = 'konzert'

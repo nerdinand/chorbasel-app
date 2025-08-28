@@ -26,6 +26,7 @@ class Roles
   ROLE_ABSENCES = 'absences'
   ROLE_IT = 'it'
   ROLE_APP = 'app'
+  ROLE_SONG_MANAGEMENT = 'song_management'
 
   ROLES = [
     ROLE_CHOIR_DIRECTION,
@@ -38,7 +39,8 @@ class Roles
     ROLE_MEDIA,
     ROLE_ABSENCES,
     ROLE_IT,
-    ROLE_APP
+    ROLE_APP,
+    ROLE_SONG_MANAGEMENT
   ].freeze
 
   def initialize(roles)
@@ -62,7 +64,11 @@ class Roles
   end
 
   def choir_money?
-    roles_values.include?(Roles::ROLE_CHOIR_MONEY)
+    roles_values.include?(ROLE_CHOIR_MONEY)
+  end
+
+  def song_management?
+    roles_values.include?(ROLE_SONG_MANAGEMENT)
   end
 
   def self.all

@@ -6,7 +6,8 @@ RSpec.describe User do
   describe 'roles validation' do
     let(:roles_validation_error_message) do
       %(Rollen darf nur Elemente aus ["choir_direction", "choir_life", "choir_image", "choir_money", \
-"choir_activities", "thank_you_gifts", "sponsorships", "media", "absences", "it", "app"] enthalten und keine Duplikate)
+"choir_activities", "thank_you_gifts", "sponsorships", "media", "absences", "it", "app", "song_management"] \
+enthalten und keine Duplikate)
     end
 
     context 'when roles has duplicates' do
