@@ -212,6 +212,41 @@ GEM
     letter_opener (1.10.0)
       launchy (>= 2.2, < 4)
     lint_roller (1.1.0)
+    litestream (0.14.0)
+      actionpack (>= 7.0)
+      actionview (>= 7.0)
+      activejob (>= 7.0)
+      activesupport (>= 7.0)
+      railties (>= 7.0)
+      sqlite3
+    litestream (0.14.0-aarch64-linux)
+      actionpack (>= 7.0)
+      actionview (>= 7.0)
+      activejob (>= 7.0)
+      activesupport (>= 7.0)
+      railties (>= 7.0)
+      sqlite3
+    litestream (0.14.0-arm64-darwin)
+      actionpack (>= 7.0)
+      actionview (>= 7.0)
+      activejob (>= 7.0)
+      activesupport (>= 7.0)
+      railties (>= 7.0)
+      sqlite3
+    litestream (0.14.0-x86_64-darwin)
+      actionpack (>= 7.0)
+      actionview (>= 7.0)
+      activejob (>= 7.0)
+      activesupport (>= 7.0)
+      railties (>= 7.0)
+      sqlite3
+    litestream (0.14.0-x86_64-linux)
+      actionpack (>= 7.0)
+      actionview (>= 7.0)
+      activejob (>= 7.0)
+      activesupport (>= 7.0)
+      railties (>= 7.0)
+      sqlite3
     logger (1.7.0)
     loofah (2.24.1)
       crass (~> 1.0.2)
@@ -508,6 +543,7 @@ DEPENDENCIES
   importmap-rails
   kamal (~> 2.2)
   letter_opener
+  litestream (~> 0.14.0)
   passwordless (~> 1.8)
   propshaft
   puma (>= 5.0)
