@@ -24,9 +24,9 @@ hetzner_object_storage:
 
 media:
   service: Mirror
-  primary: amazon
+  primary: hetzner_object_storage
   mirrors:
-    - hetzner_object_storage
+    - amazon
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:
