@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CalendarEvent < ApplicationRecord
-  NEXT_EVENTS_LIMIT = 10
+  NEXT_EVENTS_LIMIT = 6
 
   ONGOING_TIME_WINDOW_BEFORE = 30.minutes
   ONGOING_TIME_WINDOW_AFTER = 30.minutes
@@ -78,6 +78,10 @@ class CalendarEvent < ApplicationRecord
 
   def ongoing?
     starts_at <= ONGOING_TIME_WINDOW_BEFORE.from_now && ends_at >= ONGOING_TIME_WINDOW_AFTER.ago
+  end
+
+  def past?
+    starts_at.before? Time.zone.now
   end
 
   def date

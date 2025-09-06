@@ -17,6 +17,7 @@
 <% end %>
 
 <h2><%= t('.upcoming_birthdays.title') %></h2>
+
 <p><%= t('.upcoming_birthdays.description') %></p>
 <ul>
   <% @upcoming_birthdays.each do |user, next_birthday| %>
@@ -43,20 +44,7 @@
     <tr>
       <% @calendar_events.each do |calendar_event| %>
         <td class="text-center">
-          <% attendance = calendar_event.attendances.find_or_initialize_by(user: current_user) %>
-          <% if attendance.new_record? %>
-            <% if policy(attendance).new? %>
-              <%= link_to icon_for_status(Attendance::STATUS_UNKNOWN), new_calendar_event_attendance_excuse_path(calendar_event) %>
-            <% else %>
-              <%= icon_for_status(Attendance::STATUS_UNKNOWN) %>
-            <% end %>
-          <% else %>
-            <% if policy(attendance).edit? %>
-              <%= link_to icon_for_status(attendance.status), edit_attendance_path(attendance) %>
-            <% else %>
-              <%= icon_for_status(attendance.status) %>
-            <% end %>
-          <% end %>
+          <%= attendance_action_symbol(calendar_event) %>
         </td>
       <% end %>
     </tr>
@@ -76,18 +64,7 @@
     </p>
     <%= render calendar_event %>
 
-    <% attendance = calendar_event.attendances.find_or_initialize_by(user: current_user) %>
-
-    <% if attendance.new_record? %>
-      <% if AttendanceRestrictionCheck.new(current_user, calendar_event).can_create_signup? %>
-        <%= button_to t('.calendar_events.attendance.submit'), calendar_event_attendance_attendance_path(attendance.calendar_event), method: :post, class: 'btn btn-secondary' %> 
-      <% else %>
-        <%= link_to t('.calendar_events.attendance.new'), new_calendar_event_attendance_excuse_path(calendar_event), class: 'btn btn-primary' %>
-      <% end %>
-    <% else %>
-      <%= icon_for_status(attendance.status) %>
-      <%= t(".attendance_status.#{attendance.status}") %>
-    <% end %>
+    <%= attendance_action_or_status(calendar_event) %>
   </div>
 <% end %>
 
