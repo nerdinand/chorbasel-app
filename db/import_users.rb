@@ -41,7 +41,7 @@ csv.each do |row|
     street: row['Strasse'],
     zip_code: row['PLZ'],
     city: row['Ort'],
-    phone_number: row['Tel_M']&.gsub(/[^\+\d]/, '').presence,
+    phone_number: row['Tel_M']&.gsub(/[^+\d]/, '').presence,
     email: row['EMail'],
     birth_date: row['Geburtstag'],
     status: :active,
