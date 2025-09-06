@@ -36,7 +36,8 @@ module AttendancesHelper
       button_to t('dashboard.show.calendar_events.attendance.submit'),
                 calendar_event_attendance_attendance_path(calendar_event), method: :post, class: 'btn btn-secondary'
     else
-      link_to t('dashboard.show.calendar_events.attendance.new'), new_calendar_event_attendance_excuse_path(calendar_event),
+      link_to t('dashboard.show.calendar_events.attendance.new'),
+              new_calendar_event_attendance_excuse_path(calendar_event),
               class: 'btn btn-primary'
     end
   end

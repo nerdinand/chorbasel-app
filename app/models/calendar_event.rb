@@ -80,13 +80,11 @@ class CalendarEvent < ApplicationRecord
     starts_at <= ONGOING_TIME_WINDOW_BEFORE.from_now && ends_at >= ONGOING_TIME_WINDOW_AFTER.ago
   end
 
-  def past?
-    starts_at.before? Time.zone.now
-  end
-
   def date
     starts_at.strftime('%d.%m.')
   end
 
+  delegate :today?, to: :starts_at
   delegate :future?, to: :starts_at
+  delegate :past?, to: :starts_at
 end

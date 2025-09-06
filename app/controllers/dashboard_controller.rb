@@ -5,7 +5,8 @@ class DashboardController < ApplicationController
   EVENTS_TO = 2.months
 
   def show
-    @calendar_events = CalendarEvent.where(starts_at: EVENTS_FROM.ago..EVENTS_TO.from_now)
+    @attendance_pagination = AttendancePagination.new(params[:from], params[:to])
+    @calendar_events = CalendarEvent.where(starts_at: @attendance_pagination.current_range)
     @upcoming_calendar_events = CalendarEvent.next
     @upcoming_birthdays = upcoming_birthdays
     @info = Info.newest_active.first
