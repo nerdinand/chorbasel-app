@@ -27,6 +27,10 @@ class AttendanceRestrictionCheck
     SUCCESS_RESULT
   end
 
+  def can_create_signup?
+    can_create_signup.success?
+  end
+
   private
 
   attr_reader :user, :calendar_event

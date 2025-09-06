@@ -7,11 +7,6 @@ class DashboardController < ApplicationController
   def show
     @calendar_events = CalendarEvent.where(starts_at: EVENTS_FROM.ago..EVENTS_TO.from_now)
     @upcoming_calendar_events = CalendarEvent.next
-    @ongoing_attendances = CalendarEvent.ongoing.map do |calendar_event|
-      Attendance.find_or_initialize_by(user: current_user, calendar_event:).tap do |attendance|
-        attendance.status = Attendance::STATUS_ATTENDED
-      end
-    end
     @upcoming_birthdays = upcoming_birthdays
     @info = Info.newest_active.first
   end

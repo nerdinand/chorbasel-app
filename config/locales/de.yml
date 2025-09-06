@@ -165,8 +165,11 @@ de:
         success: Chorkalender erfolgreich importiert.
   dashboard:
     show:
-      attendances:
-        title: Anwesenheit
+      attendance_status:
+        attended: Du bist anwesend.
+        excuse_requested: Du hast eine Entschuldigung erfasst.
+        excused: Du bist entschuldigt.
+        unknown: Dein Anwesenheitsstatus ist unbekannt.
       calendar:
         title: Kalender
       calendar_events:
