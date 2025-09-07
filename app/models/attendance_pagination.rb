@@ -5,7 +5,7 @@ class AttendancePagination
   EVENTS_TO = 2.months
   INTERVAL = EVENTS_FROM + EVENTS_TO
 
-  def initialize(from, to)
+  def initialize(from = nil, to = nil)
     @from = from.present? ? Date.parse(from) : EVENTS_FROM.ago.to_date
     @to = to.present? ? Date.parse(to) : EVENTS_TO.from_now.to_date
   end

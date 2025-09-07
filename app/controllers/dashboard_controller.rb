@@ -1,13 +1,19 @@
 # frozen_string_literal: true
 
 class DashboardController < ApplicationController
+  PAST_EVENTS_COUNT = 5
+
   EVENTS_FROM = 1.month
   EVENTS_TO = 2.months
 
   def show
-    @attendance_pagination = AttendancePagination.new(params[:from], params[:to])
-    @calendar_events = CalendarEvent.where(starts_at: @attendance_pagination.current_range)
-    @upcoming_calendar_events = CalendarEvent.next
+    @calendar_events = if params[:load_past] == 'true'
+                         CalendarEvent.past.last(PAST_EVENTS_COUNT) + CalendarEvent.next
+                       else
+                         CalendarEvent.next
+                       end
+
+    @overview_calendar_events = CalendarEvent.where(starts_at: AttendancePagination.new.current_range)
     @upcoming_birthdays = upcoming_birthdays
     @info = Info.newest_active.first
   end

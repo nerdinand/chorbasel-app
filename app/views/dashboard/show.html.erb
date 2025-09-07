@@ -29,19 +29,10 @@
 
 <h2><%= t('.calendar.title') %></h2>
 
-<div class="float-right">
-  <%= link_to @attendance_pagination.previous_params, class: 'no-underline' do %>
-    <%= tabler_icon 'arrow_left', classes: ['inline', 'align-[sub]'] %>
-  <% end %>
-  <%= link_to @attendance_pagination.next_params, class: 'no-underline' do %>
-    <%= tabler_icon 'arrow_right', classes: ['inline', 'align-[sub]'] %>
-  <% end %>
-</div>
-
 <table>
   <thead>
     <tr>
-      <% @calendar_events.each do |calendar_event| %>
+      <% @overview_calendar_events.each do |calendar_event| %>
         <th class="<%= calendar_event_color_class(calendar_event) %>">
           <%= link_to_if policy(calendar_event).show?, calendar_event.date, calendar_event %>
         </th>
@@ -51,7 +42,7 @@
   
   <tbody class="border-r-2">
     <tr>
-      <% @calendar_events.each do |calendar_event| %>
+      <% @overview_calendar_events.each do |calendar_event| %>
         <td class="text-center">
           <%= attendance_action_symbol(calendar_event) %>
         </td>
@@ -60,8 +51,14 @@
   </tbody>
 </table>
 
-<% @upcoming_calendar_events.each do |calendar_event| %>
-  <div class="my-5 p-2 border-solid border-primary border-2 rounded bg-gray <%= 'bg-complementary bg-opacity-30' unless calendar_event.practice? %>">
+<% if params[:load_past] != 'true' %>
+  <div class="mt-10">
+    <%= link_to t('.load_past'), {load_past: true} %>
+  </div>
+<% end %>
+
+<% @calendar_events.each do |calendar_event| %>
+  <div class="my-5 p-2 border-solid border-primary border-2 rounded bg-gray <%= calendar_event_color_class(calendar_event) %>">
     <p class="font-bold">
       <% if policy(Attendance).index? %>
         <%= link_to calendar_event do %>

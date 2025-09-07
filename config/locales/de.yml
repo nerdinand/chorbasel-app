@@ -177,6 +177,7 @@ de:
           new: Entschuldigung erfassen
           submit: Anwesenheit eintragen
         sync: Chorkalender importieren
+      load_past: Vergangene Termine laden
       profile_completeness:
         link: Benutzerprofil vervollständigen
         message: Dein Benutzerprofil ist unvollständig. Bitte hilf uns indem du die fehlenden Informationen einträgst.
