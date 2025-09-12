@@ -37,21 +37,21 @@
 
 <p>
   <b><%= t('activerecord.attributes.song.genres') %></b>
-  <ul>
-    <% @song.genres.each do |genre| %>
-      <li><%= genre %></li>
-    <% end %>
-  </ul>
 </p>
+<ul>
+  <% @song.genres.each do |genre| %>
+    <li><%= genre %></li>
+  <% end %>
+</ul>
 
 <p>
   <b><%= t('activerecord.attributes.song.registers') %></b>
-  <ul>
-    <% @song.registers.each do |register| %>
-      <li><%= t("activerecord.attributes.song.enums.register.#{register}") %></li>
-    <% end %>
-  </ul>
 </p>
+<ul>
+  <% @song.registers.each do |register| %>
+    <li><%= t("activerecord.attributes.song.enums.register.#{register}") %></li>
+  <% end %>
+</ul>
 
 <% if policy(@song).edit? %>
   <%= link_to t('.edit'), edit_song_path(@song), class: 'btn btn-primary' %>
