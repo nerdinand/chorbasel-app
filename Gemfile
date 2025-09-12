@@ -90,5 +90,3 @@ gem 'tabler_icons', '~> 0.1.1'
 gem 'spreadsheet_architect', '~> 5.1'
 
 gem 'litestream', '~> 0.14.0'
-
-gem 'reactionview', '~> 0.1.1'
