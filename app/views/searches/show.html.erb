@@ -1,0 +1,15 @@
+<% content_for :title, t('.title') %>
+
+<%= render 'search_form' %>
+
+<% if @songs.empty? %>
+  <div class="alert">
+    <%= t('.no_results_error', query: params[:search][:query]) %>
+  </div>
+<% else %>
+  <ul>
+    <% @songs.each do |song| %>
+      <li><%= link_to song.title, song %></li>
+    <% end %>
+  </ul>
+<% end %>
