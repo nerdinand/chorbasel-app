@@ -11,24 +11,28 @@
     <p><%= f.text_field :composer %></p>
   </div>
 
-  <div class="form-field">
+  <div class="form-field" data-controller="single-choice-combobox" data-single-choice-combobox-empty-label-value="<%= t('stimulus.single_choice_combobox.empty_label') %>" data-single-choice-combobox-choices-value="<%= Song.all.pluck(:arranger).flatten.uniq.to_json %>">
     <p><%= f.label :arranger %> <%# i18n-tasks-use t('activerecord.attributes.song.arranger') %></p>
-    <p><%= f.text_field :arranger %></p>
+    <%= f.text_field :arranger, value: @song.arranger, data: { 'single-choice-combobox-target': 'textField', action: 'single-choice-combobox#input' }, class: 'mb-2' %>
+    <div data-single-choice-combobox-target="choices" class="mb-2"></div>
   </div>
 
-  <div class="form-field">
+  <div class="form-field" data-controller="single-choice-combobox" data-single-choice-combobox-empty-label-value="<%= t('stimulus.single_choice_combobox.empty_label') %>" data-single-choice-combobox-choices-value="<%= Song.all.pluck(:key_signature).flatten.uniq.to_json %>">
     <p><%= f.label :key_signature %> <%# i18n-tasks-use t('activerecord.attributes.song.key_signature') %></p>
-    <p><%= f.text_field :key_signature %></p>
+    <%= f.text_field :key_signature, value: @song.key_signature, data: { 'single-choice-combobox-target': 'textField', action: 'single-choice-combobox#input' }, class: 'mb-2' %>
+    <div data-single-choice-combobox-target="choices" class="mb-2"></div>
   </div>
 
-  <div class="form-field">
+  <div class="form-field" data-controller="single-choice-combobox" data-single-choice-combobox-empty-label-value="<%= t('stimulus.single_choice_combobox.empty_label') %>" data-single-choice-combobox-choices-value="<%= Song.all.pluck(:time_signature).flatten.uniq.to_json %>">
     <p><%= f.label :time_signature %> <%# i18n-tasks-use t('activerecord.attributes.song.time_signature') %></p>
-    <p><%= f.text_field :time_signature %></p>
+    <%= f.text_field :time_signature, value: @song.time_signature, data: { 'single-choice-combobox-target': 'textField', action: 'single-choice-combobox#input' }, class: 'mb-2' %>
+    <div data-single-choice-combobox-target="choices" class="mb-2"></div>
   </div>
 
-  <div class="form-field">
+  <div class="form-field" data-controller="single-choice-combobox" data-single-choice-combobox-empty-label-value="<%= t('stimulus.single_choice_combobox.empty_label') %>" data-single-choice-combobox-choices-value="<%= Song.all.pluck(:language).flatten.uniq.to_json %>">
     <p><%= f.label :language %> <%# i18n-tasks-use t('activerecord.attributes.song.language') %></p>
-    <p><%= f.text_field :language %></p>
+    <%= f.text_field :language, value: @song.language, data: { 'single-choice-combobox-target': 'textField', action: 'single-choice-combobox#input' }, class: 'mb-2' %>
+    <div data-single-choice-combobox-target="choices" class="mb-2"></div>
   </div>
 
   <div class="form-field">
