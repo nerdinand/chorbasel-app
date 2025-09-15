@@ -114,6 +114,10 @@ de:
     models:
       attendance: Anwesenheit
       user: Benutzer:in
+  application:
+    search_form:
+      query_placeholder: Suche
+      submit: Suchen
   attendances:
     create:
       error: Fehler beim Eintragen der Anwesenheit.
@@ -335,6 +339,10 @@ de:
     index:
       subtitle: Wer singt alles im Chor?
       title: Lookbook
+  searches:
+    show:
+      no_results_error: Keine Suchresultate für "%{query}".
+      title: Suche
   sessions:
     update:
       success: Willkommen, %{user_name}!
@@ -389,6 +397,9 @@ de:
       tenor: Tenor
       title: Statistiken
       total: Total
+  stimulus:
+    single_choice_combobox:
+      empty_label: "(Leer)"
   user_mailer:
     welcome_email:
       body: Du wurdest zur Chorbasel-App eingeladen! Du kannst dich jetzt unter <a href="https://app.chorbasel.ch">app.chorbasel.ch</a> mit der E-Mail-Adresse einloggen, an die diese E-Mail versendet wurde.

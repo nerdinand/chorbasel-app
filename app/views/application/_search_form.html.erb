@@ -1,0 +1,4 @@
+<%= form_for :search, url: search_path, method: :get do |f| %>
+  <%= f.text_field :query, placeholder: t('.query_placeholder'), value: params.dig(:search, :query) %>
+  <%= f.submit t('.submit'), class: 'btn btn-primary' %>
+<% end %>

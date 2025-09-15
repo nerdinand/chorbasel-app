@@ -67,7 +67,7 @@ gem 'tailwindcss-ruby', '= 3.4.17'
 
 gem 'passwordless', '~> 1.8'
 
-gem 'pundit', '~> 2.4'
+gem 'pundit', '~> 2.5'
 
 gem 'rails-i18n', '~> 8.0.2'
 
@@ -79,7 +79,7 @@ gem 'arask', '~> 1.2'
 
 gem 'faker', '~> 3.5'
 
-gem 'aws-sdk-s3', '~> 1.198', require: false
+gem 'aws-sdk-s3', '~> 1.199', require: false
 
 gem 'image_processing', '~> 1.13'
 
@@ -90,5 +90,3 @@ gem 'tabler_icons', '~> 0.1.1'
 gem 'spreadsheet_architect', '~> 5.1'
 
 gem 'litestream', '~> 0.14.0'
-
-gem 'reactionview', '~> 0.1.0'
