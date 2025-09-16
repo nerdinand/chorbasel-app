@@ -20,20 +20,22 @@ end
 SUCCESS_RESULT = AttendanceRestrictionCheckResult.new(true)
 
 class AttendanceRestrictionCheck
+  PAST_SIGNUPS_THRESHOLD = 10.days
+
   def initialize(user, calendar_event)
     @user = user
     @calendar_event = calendar_event
   end
 
   def can_create_signup
-    return AttendanceRestrictionCheckResult.error_result(:expired_error) unless calendar_event.ongoing?
+    return AttendanceRestrictionCheckResult.error_result(:expired_error) unless any_event_ongoing?
 
     SUCCESS_RESULT
   end
 
   def can_create_excuse
     return AttendanceRestrictionCheckResult.error_result(:past_calendar_event_error) if calendar_event.past?
-    return AttendanceRestrictionCheckResult.error_result(:already_present_error) if attendance.new_record?
+    return AttendanceRestrictionCheckResult.error_result(:already_present_error) if attendance.persisted?
 
     SUCCESS_RESULT
   end
@@ -55,6 +57,11 @@ class AttendanceRestrictionCheck
   end
 
   private
+
+  def any_event_ongoing?
+    calendar_event.ongoing? ||
+      (CalendarEvent.ongoing.any? && calendar_event.past? && calendar_event.starts_at > PAST_SIGNUPS_THRESHOLD.ago)
+  end
 
   attr_reader :user, :calendar_event
 end

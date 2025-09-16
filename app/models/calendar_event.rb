@@ -18,7 +18,8 @@ class CalendarEvent < ApplicationRecord
   scope :after, ->(time) { where('starts_at > ?', time) }
   scope :before, ->(time) { where(starts_at: ...time) }
   scope :future, -> { after(Time.zone.now) }
-  scope :past, -> { before(Time.zone.now) }
+  scope :past, -> { before(ONGOING_TIME_WINDOW_AFTER.ago) }
+  scope :past_n, ->(n) { past.last(n) }
   scope :next, -> { ongoing.or(CalendarEvent.future).limit(NEXT_EVENTS_LIMIT) }
 
   #     starts_at      ends_at

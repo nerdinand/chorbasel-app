@@ -8,7 +8,7 @@ class DashboardController < ApplicationController
 
   def show
     @calendar_events = if params[:load_past] == 'true'
-                         CalendarEvent.past.last(PAST_EVENTS_COUNT) + CalendarEvent.next
+                         CalendarEvent.past_n(PAST_EVENTS_COUNT) + CalendarEvent.next
                        else
                          CalendarEvent.next
                        end
