@@ -56,6 +56,8 @@ class AttendanceRestrictionCheck
     @attendance = attendance
   end
 
+  attr_reader :calendar_event
+
   private
 
   def any_event_ongoing?
@@ -63,5 +65,5 @@ class AttendanceRestrictionCheck
       (CalendarEvent.ongoing.any? && calendar_event.past? && calendar_event.starts_at > PAST_SIGNUPS_THRESHOLD.ago)
   end
 
-  attr_reader :user, :calendar_event
+  attr_reader :user
 end
