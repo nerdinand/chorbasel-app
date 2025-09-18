@@ -6,10 +6,12 @@ module CalendarEvents
       def create
         calendar_event = CalendarEvent.find(params[:calendar_event_id])
 
-        if calendar_event.ongoing?
+        result = AttendanceRestrictionCheck.new(current_user, calendar_event).can_create_signup
+
+        if result.success?
           perform_create(calendar_event)
         else
-          flash.alert = t('.expired_error')
+          flash.alert = t(".#{result.error_symbol}")
         end
         redirect_to dashboard_path
       end

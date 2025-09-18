@@ -21,6 +21,13 @@ module CalendarEventsHelper
     end
   end
 
+  def calendar_event_color_class(calendar_event)
+    return 'bg-primary bg-opacity-30' if calendar_event.today?
+    return '' if calendar_event.practice?
+
+    'bg-complementary bg-opacity-30'
+  end
+
   private
 
   def time_string_same_day(calendar_event)

@@ -1,0 +1,13 @@
+<% attendance = attendance_check.attendance %>
+<% calendar_event = attendance_check.calendar_event %>
+
+<%= icon_for_status(attendance.status) %>
+<%= t("dashboard.show.attendance_status.#{attendance.status}") %>
+
+<br>
+
+<% if attendance_check.can_create_signup? %>
+  <%= button_to t('dashboard.show.calendar_events.attendance.submit'), calendar_event_attendance_attendance_path(calendar_event), method: :post, class: 'btn btn-secondary' %>
+<% elsif attendance_check.can_create_excuse? %>
+  <%= link_to t('dashboard.show.calendar_events.attendance.new'), new_calendar_event_attendance_excuse_path(calendar_event), class: 'btn btn-primary' %>
+<% end %>

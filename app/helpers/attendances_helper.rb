@@ -16,4 +16,8 @@ module AttendancesHelper
     tabler_icon(STATUS_ICON_MAP[status],
                 classes: ['status-icon', "attendance-status-icon-#{status}"])
   end
+
+  def attendance_action_symbol(calendar_event)
+    icon_for_status(AttendanceRestrictionCheck.new(current_user, calendar_event).attendance.status)
+  end
 end

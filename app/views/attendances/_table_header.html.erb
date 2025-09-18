@@ -2,7 +2,7 @@
   <tr class="sticky top-0 z-10">
     <th><%= t('.name') %></th>
     <% attendance_table.calendar_events.each do |calendar_event| %>
-      <th class="<%= calendar_event.practice? ? '' : 'bg-complementary bg-opacity-30' %>">
+      <th class="<%= calendar_event_color_class(calendar_event) %>">
         <%= link_to calendar_event.date, calendar_event %>
       </th>
     <% end %>

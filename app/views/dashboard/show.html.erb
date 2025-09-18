@@ -18,21 +18,8 @@
 
 <%= render 'search_form' %>
 
-<% if @attendances.any? %>
-  <h2><%= t('.attendances.title') %></h2>
-
-  <% @attendances.each do |attendance| %>
-    <div>
-      <p><%= attendance.calendar_event.summary %></p>
-
-      <% if attendance.new_record? %>
-        <%= button_to t('.calendar_events.attendance.submit'), calendar_event_attendance_attendance_path(attendance.calendar_event), method: :post, class: 'btn btn-secondary' %> 
-      <% end %>
-    </div>
-  <% end %>
-<% end %>
-
 <h2><%= t('.upcoming_birthdays.title') %></h2>
+
 <p><%= t('.upcoming_birthdays.description') %></p>
 <ul>
   <% @upcoming_birthdays.each do |user, next_birthday| %>
@@ -43,10 +30,37 @@
 </ul>
 
 <h2><%= t('.calendar.title') %></h2>
-<p><%= t('.calendar.description') %></p>
+
+<table>
+  <thead>
+    <tr>
+      <% @overview_calendar_events.each do |calendar_event| %>
+        <th class="<%= calendar_event_color_class(calendar_event) %>">
+          <%= link_to_if policy(calendar_event).show?, calendar_event.date, calendar_event %>
+        </th>
+      <% end %>
+    </tr>
+  </thead>
+  
+  <tbody class="border-r-2">
+    <tr>
+      <% @overview_calendar_events.each do |calendar_event| %>
+        <td class="text-center">
+          <%= attendance_action_symbol(calendar_event) %>
+        </td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+
+<% if params[:load_past] != 'true' %>
+  <div class="mt-10">
+    <%= link_to t('.load_past'), {load_past: true} %>
+  </div>
+<% end %>
 
 <% @calendar_events.each do |calendar_event| %>
-  <div class="my-5 p-2 border-solid border-primary border-2 rounded bg-gray <%= 'bg-complementary bg-opacity-30' unless calendar_event.practice? %>">
+  <div class="my-5 p-2 border-solid border-primary border-2 rounded bg-gray <%= calendar_event_color_class(calendar_event) %>">
     <p class="font-bold">
       <% if policy(Attendance).index? %>
         <%= link_to calendar_event do %>
@@ -58,9 +72,7 @@
     </p>
     <%= render calendar_event %>
 
-    <% unless Attendance.where(calendar_event:, user: current_user).exists? %>
-      <%= link_to t('.calendar_events.attendance.new'), new_calendar_event_attendance_excuse_path(calendar_event), class: 'btn btn-primary' %>
-    <% end %>
+    <%= render 'attendance_status_and_action', attendance_check: @attendance_checks[calendar_event] %>
   </div>
 <% end %>
 

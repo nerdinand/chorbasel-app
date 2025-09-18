@@ -169,16 +169,19 @@ de:
         success: Chorkalender erfolgreich importiert.
   dashboard:
     show:
-      attendances:
-        title: Anwesenheit
+      attendance_status:
+        attended: Du bist anwesend.
+        excuse_requested: Du hast eine Entschuldigung erfasst.
+        excused: Du bist entschuldigt.
+        unknown: Dein Anwesenheitsstatus ist unbekannt.
       calendar:
-        description: 'Hier siehst du die nächsten anstehenden Chortermine:'
         title: Kalender
       calendar_events:
         attendance:
           new: Entschuldigung erfassen
           submit: Anwesenheit eintragen
         sync: Chorkalender importieren
+      load_past: Vergangene Termine laden
       profile_completeness:
         link: Benutzerprofil vervollständigen
         message: Dein Benutzerprofil ist unvollständig. Bitte hilf uns indem du die fehlenden Informationen einträgst.

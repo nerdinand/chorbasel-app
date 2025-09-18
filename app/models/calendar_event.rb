@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CalendarEvent < ApplicationRecord
-  NEXT_EVENTS_LIMIT = 10
+  NEXT_EVENTS_LIMIT = 6
 
   ONGOING_TIME_WINDOW_BEFORE = 30.minutes
   ONGOING_TIME_WINDOW_AFTER = 30.minutes
@@ -18,8 +18,9 @@ class CalendarEvent < ApplicationRecord
   scope :after, ->(time) { where('starts_at > ?', time) }
   scope :before, ->(time) { where(starts_at: ...time) }
   scope :future, -> { after(Time.zone.now) }
-  scope :past, -> { before(Time.zone.now) }
-  scope :next, -> { future.limit(NEXT_EVENTS_LIMIT) }
+  scope :past, -> { before(ONGOING_TIME_WINDOW_AFTER.ago) }
+  scope :past_n, ->(n) { past.last(n) }
+  scope :next, -> { ongoing.or(CalendarEvent.future).limit(NEXT_EVENTS_LIMIT) }
 
   #     starts_at      ends_at
   #       |             |
@@ -83,4 +84,8 @@ class CalendarEvent < ApplicationRecord
   def date
     starts_at.strftime('%d.%m.')
   end
+
+  delegate :today?, to: :starts_at
+  delegate :future?, to: :starts_at
+  delegate :past?, to: :starts_at
 end
