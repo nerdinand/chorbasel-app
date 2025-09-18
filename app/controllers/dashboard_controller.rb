@@ -3,9 +3,6 @@
 class DashboardController < ApplicationController
   PAST_EVENTS_COUNT = 5
 
-  EVENTS_FROM = 1.month
-  EVENTS_TO = 2.months
-
   def show
     @calendar_events = if params[:load_past] == 'true'
                          CalendarEvent.past_n(PAST_EVENTS_COUNT) + CalendarEvent.next

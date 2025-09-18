@@ -29,6 +29,7 @@ class AttendanceRestrictionCheck
 
   def can_create_signup
     return AttendanceRestrictionCheckResult.error_result(:expired_error) unless any_event_ongoing?
+    return AttendanceRestrictionCheckResult.error_result(:already_present_error) if attendance.persisted?
 
     SUCCESS_RESULT
   end
