@@ -1,0 +1,10 @@
+<%= render 'errors', model: @song_list %>
+
+<%= form_for @song_list do |f| %>
+  <div class="form-field">
+    <p><%= f.label :name %> <%# i18n-tasks-use t('activerecord.attributes.song_list.name') %> *</p>
+    <p><%= f.text_field :name %></p>
+  </div>
+
+  <p><%= f.submit class: 'btn btn-primary' %>  <%# i18n-tasks-use t('helpers.submit.song_list.create') %></p>
+<% end %>

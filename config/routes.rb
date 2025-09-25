@@ -38,6 +38,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       end
     end
 
+    resources :song_lists
+
     resources :songs do
       resources :song_media, only: %i[new create destroy]
     end

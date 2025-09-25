@@ -12,6 +12,7 @@ class CalendarEvent < ApplicationRecord
   validates :uid, :event_created_at, :starts_at, :ends_at, :summary, presence: true
 
   has_many :attendances, dependent: :destroy
+  has_one :song_list, dependent: :nullify
 
   default_scope -> { order(starts_at: :asc) }
 

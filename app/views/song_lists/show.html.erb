@@ -1,0 +1,15 @@
+<% content_for :title, @song_list.name %>
+
+<% if policy(SongListItem, @song_list).new? %>
+  <%= link_to t('.new'), new_song_list_item_path(@song_list), class: 'btn btn-primary' %>
+<% end %>
+
+<table>
+  <tbody>
+    <% @song_list.song_list_items.each do |song_list_item| %>
+      <tr>
+        <td><%= song_list_item.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
