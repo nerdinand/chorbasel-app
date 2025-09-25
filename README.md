@@ -1,4 +1,4 @@
-# Chorbasel-App
+# ChorBasel-App
 
 Deployed at [app.chorbasel.ch](https://app.chorbasel.ch/). 
 
