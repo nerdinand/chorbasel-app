@@ -25,8 +25,8 @@ RSpec.describe('Creating an attendance') do
 
     email = ActionMailer::Base.deliveries.last
     expect(email.body.to_s).to eq(
-      "Du wurdest zur Chorbasel-App eingeladen! Du kannst dich jetzt unter <a href=\"https://app.chorbasel.ch\">\
-app.chorbasel.ch</a> mit der E-Mail-Adresse einloggen, an die diese E-Mail versendet wurde.\n"
+      "Du wurdest zur ChorBasel-App eingeladen! Du kannst dich jetzt unter https://app.chorbasel.ch mit der \
+E-Mail-Adresse einloggen, an die diese E-Mail versendet wurde.\n"
     )
     expect(email.from).to eq(['app@chorbasel.ch'])
     expect(email.to).to eq(['user@example.com'])
