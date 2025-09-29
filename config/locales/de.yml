@@ -407,7 +407,7 @@ de:
       empty_label: "(Leer)"
   user_mailer:
     welcome_email:
-      body: "Du wurdest zur ChorBasel-App eingeladen! Du kannst dich jetzt unter https://app.chorbasel.ch mit der E-Mail-Adresse einloggen, an die diese E-Mail versendet wurde. Die Bedienungsanleitung für die App findest du hier: %{user_manual_url}"
+      body: 'Du wurdest zur ChorBasel-App eingeladen! Du kannst dich jetzt unter https://app.chorbasel.ch mit der E-Mail-Adresse einloggen, an die diese E-Mail versendet wurde. Die Bedienungsanleitung für die App findest du hier: %{user_manual_url}'
       subject: Willkommen zur ChorBasel-App!
   user_statuses:
     create:
