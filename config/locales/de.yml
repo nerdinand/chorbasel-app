@@ -265,7 +265,7 @@ de:
     message: 'Es sind Fehler aufgetreten:'
   feedback_mailer:
     mail_params:
-      subject: Chorbasel-App Feedback
+      subject: ChorBasel-App Feedback
   feedbacks:
     create:
       error: Fehler beim Abschicken des Feedbacks.
@@ -402,8 +402,8 @@ de:
       empty_label: "(Leer)"
   user_mailer:
     welcome_email:
-      body: Du wurdest zur Chorbasel-App eingeladen! Du kannst dich jetzt unter <a href="https://app.chorbasel.ch">app.chorbasel.ch</a> mit der E-Mail-Adresse einloggen, an die diese E-Mail versendet wurde.
-      subject: Willkommen zur Chorbasel-App!
+      body: Du wurdest zur ChorBasel-App eingeladen! Du kannst dich jetzt unter https://app.chorbasel.ch mit der E-Mail-Adresse einloggen, an die diese E-Mail versendet wurde.
+      subject: Willkommen zur ChorBasel-App!
   user_statuses:
     create:
       error: Fehler beim Erstellen des Benutzerstatus.
