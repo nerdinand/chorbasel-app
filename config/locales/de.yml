@@ -263,9 +263,13 @@ de:
           other: in %{count} Sekunden
   errors:
     message: 'Es sind Fehler aufgetreten:'
+  external_links:
+    google_drive: https://drive.google.com/drive/folders/1UJbsLxK1bay0F4SDSoltsYidwMPAxVyF
+    infopoint: https://sites.google.com/chorbasel.ch/infopoint/home
+    user_manual: https://github.com/nerdinand/chorbasel-app/blob/main/doc/bedienungsanleitung.md
+    website: https://chorbasel.ch
   feedback_mailer:
-    mail_params:
-      subject: ChorBasel-App Feedback
+    subject: ChorBasel-App Feedback
   feedbacks:
     create:
       error: Fehler beim Abschicken des Feedbacks.
@@ -315,6 +319,7 @@ de:
       feedback: Feedback
       google_drive: Google Drive
       infopoint: Infopoint
+      user_manual: Bedienungsanleitung
       website: Website
     navbar:
       attendances: Anwesenheiten
@@ -402,7 +407,7 @@ de:
       empty_label: "(Leer)"
   user_mailer:
     welcome_email:
-      body: Du wurdest zur ChorBasel-App eingeladen! Du kannst dich jetzt unter https://app.chorbasel.ch mit der E-Mail-Adresse einloggen, an die diese E-Mail versendet wurde.
+      body: "Du wurdest zur ChorBasel-App eingeladen! Du kannst dich jetzt unter https://app.chorbasel.ch mit der E-Mail-Adresse einloggen, an die diese E-Mail versendet wurde. Die Bedienungsanleitung für die App findest du hier: %{user_manual_url}"
       subject: Willkommen zur ChorBasel-App!
   user_statuses:
     create:
