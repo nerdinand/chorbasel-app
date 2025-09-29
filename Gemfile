@@ -71,7 +71,7 @@ gem 'pundit', '~> 2.5'
 
 gem 'rails-i18n', '~> 8.0.2'
 
-gem 'icalendar', '~> 2.10'
+gem 'icalendar', '~> 2.12'
 
 gem 'down', '~> 5.4'
 
