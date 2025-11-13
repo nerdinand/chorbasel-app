@@ -6,7 +6,7 @@ gem 'importmap-rails'
 gem 'propshaft'
 gem 'puma', '>= 5.0'
 gem 'rails', '~> 8.1'
-gem 'sqlite3', '~> 2.7'
+gem 'sqlite3', '~> 2.8'
 gem 'stimulus-rails'
 gem 'turbo-rails'
 
@@ -79,7 +79,7 @@ gem 'arask', '~> 1.2'
 
 gem 'faker', '~> 3.5'
 
-gem 'aws-sdk-s3', '~> 1.202', require: false
+gem 'aws-sdk-s3', '~> 1.203', require: false
 
 gem 'image_processing', '~> 1.13'
 
