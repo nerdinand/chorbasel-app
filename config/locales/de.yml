@@ -401,11 +401,12 @@ de:
       soprano: Sopran
       tenor: Tenor
       timestamp_tallies:
-        created: erstellt
-        modified: verändert
         title: Datensätze
       title: Statistiken
       total: Total
+    timestamp_tallies:
+      created: erstellt
+      modified: verändert
   stimulus:
     single_choice_combobox:
       empty_label: "(Leer)"

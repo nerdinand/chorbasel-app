@@ -43,8 +43,8 @@ class StatisticsController < ApplicationController
 
   def timestamp_tallies
     [
-      { name: t('.timestamp_tallies.created'), data: timestamp_tally(CREATED_AT_TIMESPAN, 'created_at') },
-      { name: t('.timestamp_tallies.modified'), data: timestamp_tally(UPDATED_AT_TIMESPAN, 'updated_at') }
+      { name: t('.created'), data: timestamp_tally(CREATED_AT_TIMESPAN, 'created_at') },
+      { name: t('.modified'), data: timestamp_tally(UPDATED_AT_TIMESPAN, 'updated_at') }
     ]
   end
 
