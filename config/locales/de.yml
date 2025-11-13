@@ -400,6 +400,10 @@ de:
         title: Namen raten
       soprano: Sopran
       tenor: Tenor
+      timestamp_tallies:
+        created: erstellt
+        modified: verändert
+        title: Datensätze
       title: Statistiken
       total: Total
   stimulus:

@@ -1,6 +1,7 @@
 <% content_for :title, t('.title') %>
 
 <h2><%= t('.attendance_tally') %></h2>
+
 <table>
   <thead>
     <th></th>
@@ -13,7 +14,9 @@
       <tr>
         <th scope="row"><%= t(".#{r}") %></th>
         <% @attendance_tally_table.calendar_events.each do |ce| %>
-          <td><%= number_to_percentage @attendance_tally_table.register_percentages(ce)[r], precision: 0 %></td>
+          <td>
+            <%= number_to_percentage @attendance_tally_table.register_percentages(ce)[r], precision: 0 %>
+          </td>
         <% end %>
       </tr>
     <% end %>
@@ -21,7 +24,9 @@
   <tfoot>
     <th scope="row"><%= t('.total') %></th>
     <% @attendance_tally_table.calendar_events.each do |ce| %>
-      <td><%= number_to_percentage @attendance_tally_table.total_percentage(ce), precision: 0 %></td>
+      <td>
+        <%= number_to_percentage @attendance_tally_table.total_percentage(ce), precision: 0 %>
+      </td>
     <% end %>
   </tfoot>
 </table>
@@ -29,4 +34,9 @@
 <%= line_chart @attendance_tally_table.chart_data %>
 
 <h2><%= t('.name_guesses.title') %></h2>
+
 <%= column_chart @name_guess_counts %>
+
+<h2><%= t('.timestamp_tallies.title') %></h2>
+
+<%= column_chart @timestamp_tallies %>
