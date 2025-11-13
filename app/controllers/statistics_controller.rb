@@ -5,7 +5,8 @@ class StatisticsController < ApplicationController
   CREATED_AT_TIMESPAN = UPDATED_AT_TIMESPAN = 1.month
   LAST_N_CALENDAR_EVENTS = 5
   TABLES_WITH_TIMESTAMPS = ActiveRecord::Base.connection.tables - %w[schema_migrations active_storage_variant_records
-                                                                     active_storage_attachments active_storage_blobs]
+                                                                     active_storage_attachments active_storage_blobs
+                                                                     _litestream_lock _litestream_seq]
 
   def index
     authorize :statistics, :index?
@@ -43,8 +44,8 @@ class StatisticsController < ApplicationController
 
   def timestamp_tallies
     [
-      { name: t('.created'), data: timestamp_tally(CREATED_AT_TIMESPAN, 'created_at') },
-      { name: t('.modified'), data: timestamp_tally(UPDATED_AT_TIMESPAN, 'updated_at') }
+      { name: t('statistics.timestamp_tallies.created'), data: timestamp_tally(CREATED_AT_TIMESPAN, 'created_at') },
+      { name: t('statistics.timestamp_tallies.modified'), data: timestamp_tally(UPDATED_AT_TIMESPAN, 'updated_at') }
     ]
   end
 
