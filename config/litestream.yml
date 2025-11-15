@@ -13,7 +13,7 @@ dbs:
   - path: storage/production.sqlite3
     replicas:
       - type: s3
-        bucket: chorbasel-db-backup-production
+        bucket: chorbasel-app-db-backup-production
         endpoint: nbg1.your-objectstorage.com
         path: production.sqlite3
         access-key-id: $LITESTREAM_ACCESS_KEY_ID
@@ -22,7 +22,7 @@ dbs:
   - path: storage/production_cache.sqlite3
     replicas:
       - type: s3
-        bucket: chorbasel-db-backup-production
+        bucket: chorbasel-app-db-backup-production
         endpoint: nbg1.your-objectstorage.com
         path: production_cache.sqlite3
         access-key-id: $LITESTREAM_ACCESS_KEY_ID
@@ -31,7 +31,7 @@ dbs:
   - path: storage/production_queue.sqlite3
     replicas:
       - type: s3
-        bucket: chorbasel-db-backup-production
+        bucket: chorbasel-app-db-backup-production
         endpoint: nbg1.your-objectstorage.com
         path: production_queue.sqlite3
         access-key-id: $LITESTREAM_ACCESS_KEY_ID
@@ -40,7 +40,7 @@ dbs:
   - path: storage/production_cable.sqlite3
     replicas:
       - type: s3
-        bucket: chorbasel-db-backup-production
+        bucket: chorbasel-app-db-backup-production
         endpoint: nbg1.your-objectstorage.com
         path: production_cable.sqlite3
         access-key-id: $LITESTREAM_ACCESS_KEY_ID

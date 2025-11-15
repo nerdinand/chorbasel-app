@@ -12,7 +12,7 @@ hetzner_object_storage:
   access_key_id: <%= Rails.application.credentials.dig(:hetzner_object_storage, :access_key_id) %>
   secret_access_key: <%= Rails.application.credentials.dig(:hetzner_object_storage, :secret_access_key) %>
   region: nbg1
-  bucket: chorbasel-media-<%= Rails.env %>
+  bucket: chorbasel-app-media-<%= Rails.env %>
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:
