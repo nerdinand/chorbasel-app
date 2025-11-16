@@ -2,6 +2,14 @@
 de:
   activerecord:
     attributes:
+      song_list:
+        name: Name
+        status: Status
+        enums:
+          status:
+            in_preparation: In Vorbereitung
+            active: Aktiv
+            archived: Archiviert
       attendance:
         calendar_event: Termin
         enums:

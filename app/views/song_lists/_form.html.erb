@@ -2,9 +2,31 @@
 
 <%= form_for @song_list do |f| %>
   <div class="form-field">
-    <p><%= f.label :name %> <%# i18n-tasks-use t('activerecord.attributes.song_list.name') %> *</p>
+    <p>
+      <%= f.label :name %>
+      <%# i18n-tasks-use t('activerecord.attributes.song_list.name') %> *
+    </p>
     <p><%= f.text_field :name %></p>
   </div>
 
-  <p><%= f.submit class: 'btn btn-primary' %>  <%# i18n-tasks-use t('helpers.submit.song_list.create') %></p>
+  <div class="form-field">
+    <p>
+      <%= f.label :status %>
+      <%# i18n-tasks-use t('activerecord.attributes.song_list.status') %> *
+    </p>
+    <%= f.select :status, song_list_status_options %>
+  </div>
+
+  <div class="form-field">
+    <p>
+      <%= f.label :calendar_event %>
+      <%# i18n-tasks-use t('activerecord.attributes.song_list.calendar_event') %>
+    </p>
+    <%= f.select :calendar_event_id, song_list_calendar_event_options, include_blank: true %>
+  </div>
+
+  <p>
+    <%= f.submit class: 'btn btn-primary' %>
+    <%# i18n-tasks-use t('helpers.submit.song_list.create') %>
+  </p>
 <% end %>

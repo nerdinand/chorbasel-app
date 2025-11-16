@@ -1,6 +1,17 @@
 <p><%= calendar_event_time_string(calendar_event) %></p>
-<p class="text-xs"><%= time_ago_in_words_in_or_ago(calendar_event.starts_at) %></p>
+
+<p class="text-xs">
+  <%= time_ago_in_words_in_or_ago(calendar_event.starts_at) %>
+</p>
+
+<% if calendar_event.song_lists.active.any? %>
+  <% calendar_event.song_lists.each do |song_list| %>
+    <p><%= link_to song_list.name, song_list %></p>
+  <% end %>
+<% end %>
+
 <p class="mt-5 italic"><%= calendar_event.location %></p>
+
 <div class="my-5 break-all">
   <%= simple_format calendar_event.description %>
 </div>

@@ -3,6 +3,25 @@
 class SongListPolicy < ApplicationPolicy
   attr_reader :user, :song_list
 
+  class Scope
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
+    end
+
+    def resolve
+      if user.roles_wrapper.app? || user.roles_wrapper.choir_direction?
+        scope.all
+      else
+        scope.active
+      end
+    end
+
+    private
+
+    attr_reader :user, :scope
+  end
+
   def initialize(user, song_list)
     super
     @user = user

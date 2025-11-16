@@ -2,11 +2,11 @@
 
 class SongListsController < ApplicationController
   def index
-    @song_lists = authorize SongList.all
+    @song_lists = policy_scope(SongList)
   end
 
   def show
-    @song_list = authorize SongList.includes(:song_list_items).find(params[:id])
+    @song_list = policy_scope(SongList).includes(:song_list_items).find(params[:id])
   end
 
   def new
@@ -42,9 +42,9 @@ class SongListsController < ApplicationController
   end
 
   def destroy
-    song = authorize SongList.find(params[:id])
+    song_list = authorize SongList.find(params[:id])
 
-    if song.destroy
+    if song_list.destroy
       flash.notice = t('.success')
       redirect_to song_lists_path
     else
@@ -56,6 +56,6 @@ class SongListsController < ApplicationController
   private
 
   def song_list_params
-    params.expect(song_list: [:name])
+    params.expect(song_list: %i[name status calendar_event_id])
   end
 end
