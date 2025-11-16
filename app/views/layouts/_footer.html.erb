@@ -1,13 +1,14 @@
 <footer class="text-center p-4 bg-primary-dark text-white">
   <% if logged_in? %>
+    <%= link_to t('.user_manual'), t('external_links.user_manual'), target: "_blank" %>
     <%= link_to t('.feedback'), new_feedback_path %>
-    <%= link_to t('.website'), 'https://chorbasel.ch', target: "_blank" %>
-    <%= link_to t('.infopoint'), 'https://sites.google.com/chorbasel.ch/infopoint/home', target: "_blank" %>
-    <%= link_to t('.google_drive'), 'https://drive.google.com/drive/folders/1UJbsLxK1bay0F4SDSoltsYidwMPAxVyF', target: "_blank" %>
+    <%= link_to t('.website'), t('external_links.website'), target: "_blank" %>
+    <%= link_to t('.infopoint'), t('external_links.infopoint'), target: "_blank" %>
+    <%= link_to t('.google_drive'), t('external_links.google_drive'), target: "_blank" %>
     
     <% if current_user.roles_wrapper.app? %>
       <br>
-      Chorbasel-App <%= app_version %>,
+      ChorBasel-App <%= app_version %>,
       Ruby <%= RUBY_VERSION %>, 
       Rails <%= Rails.version %>
     <% end %>

@@ -22,7 +22,7 @@ de:
         signed_out: "Erfolgreich ausgeloggt."
     mailer:
       sign_in:
-        subject: "Dein Chorbasel-App-Code ✨"
+        subject: "Dein ChorBasel-App-Code ✨"
         body: |-
           Benutze diesen Code um dich einzuloggen: %{token}
 

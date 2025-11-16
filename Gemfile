@@ -5,8 +5,8 @@ source 'https://rubygems.org'
 gem 'importmap-rails'
 gem 'propshaft'
 gem 'puma', '>= 5.0'
-gem 'rails', '~> 8.0'
-gem 'sqlite3', '~> 2.7'
+gem 'rails', '~> 8.1'
+gem 'sqlite3', '~> 2.8'
 gem 'stimulus-rails'
 gem 'turbo-rails'
 
@@ -25,7 +25,7 @@ gem 'solid_queue', '~> 1.2'
 gem 'bootsnap', require: false
 
 # Deploy this application anywhere as a Docker container [https://kamal-deploy.org]
-gem 'kamal', '~> 2.2', require: false
+gem 'kamal', '~> 2.8', require: false
 
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
 gem 'thruster', require: false
@@ -71,7 +71,7 @@ gem 'pundit', '~> 2.5'
 
 gem 'rails-i18n', '~> 8.0.2'
 
-gem 'icalendar', '~> 2.10'
+gem 'icalendar', '~> 2.12'
 
 gem 'down', '~> 5.4'
 
@@ -79,7 +79,7 @@ gem 'arask', '~> 1.2'
 
 gem 'faker', '~> 3.5'
 
-gem 'aws-sdk-s3', '~> 1.199', require: false
+gem 'aws-sdk-s3', '~> 1.203', require: false
 
 gem 'image_processing', '~> 1.13'
 

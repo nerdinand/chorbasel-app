@@ -9,7 +9,7 @@ class FeedbackMailer < ApplicationMailer
   private
 
   def mail_params
-    params = { to: 'app@chorbasel.ch', subject: t('.subject') }
+    params = { to: 'app@chorbasel.ch', subject: t('feedback_mailer.subject') }
     params[:from] = @feedback.user_email if @feedback.user_email.present?
     params
   end
