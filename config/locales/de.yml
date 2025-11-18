@@ -304,10 +304,13 @@ de:
         create: Raten
       song:
         create: Lied erstellen
+        update: Lied ändern
       song_list:
-        create: Liste erstellen
+        create: Liederliste erstellen
+        update: Liederliste ändern
       song_list_item:
         create: Listeneintrag erstellen
+        update: Listeneintrag ändern
       song_medium:
         create: Mediendatei erstellen
       user_status:
