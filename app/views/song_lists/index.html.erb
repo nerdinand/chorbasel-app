@@ -1,0 +1,44 @@
+<% content_for :title, t('.title') %>
+
+<p><%= link_to t('.all_songs'), songs_path %></p>
+
+<% if policy(SongList).new? %>
+  <%= link_to t('.new'), new_song_list_path, class: 'btn btn-primary' %>
+<% end %>
+
+<table>
+  <thead>
+    <tr class="sticky top-0">
+      <th><%= t('activerecord.attributes.song_list.name') %></th>
+      <th><%= t('activerecord.attributes.song_list.calendar_event') %></th>
+      <% if policy(SongList).edit? %>
+        <th><%= t('activerecord.attributes.song_list.status') %></th>
+      <% end %>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @song_lists.each do |song_list| %>
+      <tr>
+        <td><%= link_to song_list.name, song_list %></td>
+        <td><%= song_list.calendar_event.summary %></td>
+        <% if policy(song_list).edit? %>
+          <td>
+            <%= t("activerecord.attributes.song_list.enums.status.#{song_list.status}") %>
+          </td>
+        <% end %>
+        <td>
+          <% if policy(song_list).edit? %>
+            <%= link_to t('.edit'), edit_song_list_path(song_list), class: 'btn btn-primary' %>
+          <% end %>
+        </td>
+        <td>
+          <% if policy(song_list).destroy? %>
+            <%= button_to t('.destroy'), song_list_path(song_list), method: :delete, class: 'btn btn-danger' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

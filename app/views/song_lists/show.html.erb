@@ -1,0 +1,56 @@
+<% content_for :title, @song_list.name %>
+
+<% if policy(SongListItem).new? %>
+  <%= link_to t('.new'), new_song_list_song_list_item_path(@song_list), class: 'btn btn-primary' %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th><%= t('.name') %></th>
+      <th><%= t('.notes') %></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody
+    data-controller="sortable"
+    data-sortable-animation-value="150"
+    data-sortable-resource-name-value="song_list_item"
+  >
+    <% @song_list.song_list_items.order(:position).each.with_index do |song_list_item, index| %>
+      <tr
+        data-sortable-update-url="<%= song_list_song_list_item_path(song_list_item.song_list, song_list_item) %>"
+      >
+        <td>
+          <%= tabler_icon :arrows_move_vertical, classes: ['cursor-move'] %>
+        </td>
+        <td><%= index + 1 %></td>
+        <td>
+          <% if song_list_item.song? %>
+            <%= link_to song_list_item.song do %>
+              <%= song_list_item_icon(song_list_item) %>
+              <%= song_list_item.display_name %>
+            <% end %>
+          <% else %>
+            <%= song_list_item_icon(song_list_item) %>
+            <%= song_list_item.display_name %>
+          <% end %>
+        </td>
+        <td><%= song_list_item.notes %></td>
+        <td>
+          <% if policy(song_list_item).edit? %>
+            <%= link_to t('.edit'), edit_song_list_song_list_item_path(song_list_item.song_list, song_list_item), class: 'btn btn-primary' %>
+          <% end %>
+        </td>
+        <td>
+          <% if policy(song_list_item).destroy? %>
+            <%= button_to t('.destroy'), song_list_song_list_item_path(song_list_item.song_list, song_list_item), method: :delete, class: 'btn btn-danger' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

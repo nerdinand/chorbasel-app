@@ -303,6 +303,9 @@ GEM
     passwordless (1.8.1)
       bcrypt (>= 3.1.11)
       rails (>= 5.1.4)
+    positioning (0.4.7)
+      activerecord (>= 6.1)
+      activesupport (>= 6.1)
     pp (0.6.3)
       prettyprint
     prettyprint (0.2.0)
@@ -551,6 +554,7 @@ DEPENDENCIES
   letter_opener
   litestream (~> 0.14.0)
   passwordless (~> 1.8)
+  positioning (~> 0.4.7)
   propshaft
   puma (>= 5.0)
   pundit (~> 2.5)

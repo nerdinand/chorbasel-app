@@ -12,8 +12,8 @@ if logged_in?
     navbar_links << [t('.attendances'), attendances_path]
   end
 
-  if policy(:song).index?
-    navbar_links << [t('.songs'), songs_path]
+  if policy(:song_list).index?
+    navbar_links << [t('.song_lists'), song_lists_path]
   end
 
   navbar_links << [t('.name_guessing'), new_name_guess_path]
