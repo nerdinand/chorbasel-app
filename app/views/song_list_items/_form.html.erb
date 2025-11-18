@@ -8,7 +8,10 @@
       <%= f.label :name %>
       <%# i18n-tasks-use t('activerecord.attributes.song_list_item.name') %>
     </p>
+
     <p><%= f.text_field :name %></p>
+
+    <p class="field-hint"><%= t('.name.hint') %></p>
   </div>
 
   <div class="form-field">
@@ -16,7 +19,9 @@
       <%= f.label :song %>
       <%# i18n-tasks-use t('activerecord.attributes.song_list_item.song') %>
     </p>
+
     <%= f.select :song_id, song_list_item_song_options, include_blank: true %>
+    <p class="field-hint"><%= t('.song.hint') %></p>
   </div>
 
   <div class="form-field">

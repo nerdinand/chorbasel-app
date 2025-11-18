@@ -11,4 +11,8 @@ class SongListItem < ApplicationRecord
 
     song.title if song.present?
   end
+
+  def song?
+    song.present?
+  end
 end

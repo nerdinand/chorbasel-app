@@ -2,14 +2,6 @@
 de:
   activerecord:
     attributes:
-      song_list:
-        name: Name
-        status: Status
-        enums:
-          status:
-            in_preparation: In Vorbereitung
-            active: Aktiv
-            archived: Archiviert
       attendance:
         calendar_event: Termin
         enums:
@@ -72,6 +64,19 @@ de:
         repertoire: Im Repertoire?
         time_signature: Taktbezeichnung
         title: Name
+      song_list:
+        calendar_event: Kalender-Termin
+        enums:
+          status:
+            active: Aktiv
+            archived: Archiviert
+            in_preparation: In Vorbereitung
+        name: Name
+        status: Status
+      song_list_item:
+        name: Name
+        notes: Notizen
+        song: Lied
       song_medium:
         enums:
           kind:
@@ -299,6 +304,10 @@ de:
         create: Raten
       song:
         create: Lied erstellen
+      song_list:
+        create: Liste erstellen
+      song_list_item:
+        create: Listeneintrag erstellen
       song_medium:
         create: Mediendatei erstellen
       user_status:
@@ -359,6 +368,56 @@ de:
   sessions:
     update:
       success: Willkommen, %{user_name}!
+  song_list_items:
+    create:
+      error: Fehler beim Erstellen des Listeneintrags.
+      success: Listeneintrag erfolgreich erstellt.
+    destroy:
+      error: Fehler beim Löschen des Listeneintrags.
+      success: Listeneintrag erfolgreich gelöscht.
+    edit:
+      title: Listeneintrag bearbeiten
+    form:
+      name:
+        hint: Wird angezeigt, wenn kein Lied ausgewählt ist.
+      song:
+        hint: Das Lied, auf das sich dieser Eintrag bezieht. Ohne Lied kann der Eintrag als Platzhalter dienen, z.B. für eine Pause im Programm oder eine Umstellung der Formation.
+    new:
+      title: Listeneintrag erstellen
+    update:
+      error: Fehler beim Bearbeiten des Listeneintrags.
+      success: Listeneintrag erfolgreich bearbeitet.
+  song_lists:
+    create:
+      error: Fehler beim Erstellen der Liederliste.
+      success: Liederliste erfolgreich erstellt.
+    destroy:
+      error: Fehler beim Löschen der Liederliste.
+      success: Liederliste erfolgreich gelöscht.
+    edit:
+      title: Liederliste bearbeiten
+    form:
+      calendar_event:
+        hint: Kalendertermin auf den sich die Liste bezieht. Unter diesem Kalendertermin wird die Liste auch auf dem Dashboard angezeigt.
+      status:
+        hint: Nur aktive Liederlisten werden allen Benutzer:innen angezeigt.
+    index:
+      all_songs: Alle Lieder
+      destroy: Löschen
+      edit: Bearbeiten
+      new: Neue Liederliste
+      title: Liederlisten
+    new:
+      title: Neue Liederliste
+    show:
+      destroy: Löschen
+      edit: Bearbeiten
+      name: Name
+      new: Neuer Listeneintrag
+      notes: Notiz
+    update:
+      error: Fehler beim Bearbeiten der Liederliste.
+      success: Liederliste erfolgreich bearbeitet.
   song_media:
     create:
       error: Fehler beim Erstellen der Mediendatei.

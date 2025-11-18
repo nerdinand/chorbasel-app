@@ -14,7 +14,9 @@
       <%= f.label :status %>
       <%# i18n-tasks-use t('activerecord.attributes.song_list.status') %> *
     </p>
+
     <%= f.select :status, song_list_status_options %>
+    <p class="field-hint"><%= t('.status.hint') %></p>
   </div>
 
   <div class="form-field">
@@ -22,7 +24,9 @@
       <%= f.label :calendar_event %>
       <%# i18n-tasks-use t('activerecord.attributes.song_list.calendar_event') %>
     </p>
+
     <%= f.select :calendar_event_id, song_list_calendar_event_options, include_blank: true %>
+    <p class="field-hint"><%= t('.calendar_event.hint') %></p>
   </div>
 
   <p>

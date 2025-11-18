@@ -56,6 +56,6 @@ class SongListItemsController < ApplicationController
   private
 
   def song_list_item_params
-    params.expect(song_list_item: %i[name notes song_list_id song_id])
+    params.expect(song_list_item: %i[name notes song_list_id song_id position])
   end
 end
