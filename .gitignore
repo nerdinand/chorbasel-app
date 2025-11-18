@@ -38,3 +38,4 @@ config/registry-token
 !/app/assets/builds/.keep
 .DS_Store
 coverage
+erd.pdf

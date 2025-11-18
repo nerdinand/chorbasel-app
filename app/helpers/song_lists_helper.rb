@@ -6,6 +6,6 @@ module SongListsHelper
   end
 
   def song_list_calendar_event_options
-    CalendarEvent.future.map { |ce| ["#{ce.full_date} #{ce.summary}", ce.id] }
+    CalendarEvent.future.map { |ce| [ce.date_and_summary, ce.id] }
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_09_18_204716) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_18_194124) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -107,6 +107,15 @@ ActiveRecord::Schema[8.1].define(version: 2025_09_18_204716) do
     t.index ["identifier"], name: "index_passwordless_sessions_on_identifier", unique: true
   end
 
+  create_table "programs", force: :cascade do |t|
+    t.integer "calendar_event_id", null: false
+    t.datetime "created_at", null: false
+    t.integer "song_list_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["calendar_event_id"], name: "index_programs_on_calendar_event_id"
+    t.index ["song_list_id"], name: "index_programs_on_song_list_id"
+  end
+
   create_table "song_list_items", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name", null: false
@@ -121,12 +130,10 @@ ActiveRecord::Schema[8.1].define(version: 2025_09_18_204716) do
   end
 
   create_table "song_lists", force: :cascade do |t|
-    t.integer "calendar_event_id"
     t.datetime "created_at", null: false
     t.string "name"
     t.string "status"
     t.datetime "updated_at", null: false
-    t.index ["calendar_event_id"], name: "index_song_lists_on_calendar_event_id"
   end
 
   create_table "song_media", force: :cascade do |t|

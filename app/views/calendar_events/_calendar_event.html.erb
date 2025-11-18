@@ -6,7 +6,10 @@
 
 <% if calendar_event.song_lists.active.any? %>
   <% calendar_event.song_lists.each do |song_list| %>
-    <p><%= link_to song_list.name, song_list %></p>
+    <p class="mt-5">
+      <%= tabler_icon :playlist, classes: ['status-icon'] %>
+      <%= link_to song_list.name, song_list %>
+    </p>
   <% end %>
 <% end %>
 

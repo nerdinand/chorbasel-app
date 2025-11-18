@@ -1,0 +1,42 @@
+<h2><%= t('.programs.title') %></h2>
+
+<% if @song_list.programs.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th><%= t('.date_and_summary') %></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @song_list.programs.each do |program| %>
+        <tr>
+          <td><%= program.calendar_event.date_and_summary %></td>
+
+          <td>
+            <% if policy(program).destroy? %>
+              <%= button_to t('.destroy'), song_list_program_path(program.song_list, program), method: :delete, class: 'btn btn-danger' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= form_for [@song_list, @program], html: {class: 'mt-5'} do |f| %>
+  <%= f.hidden_field :song_list_id %>
+
+  <div class="form-field">
+    <p><%= f.label :calendar_event_id, t('.calendar_event_id') %></p>
+
+    <%= f.select :calendar_event_id, song_list_calendar_event_options, include_blank: true %>
+
+    <p class="field-hint"><%= t('.calendar_event.hint') %></p>
+  </div>
+
+  <p><%= f.submit class: 'btn btn-primary' %></p>
+
+  <%# i18n-tasks-use t('helpers.submit.program.create') %>
+<% end %>

@@ -65,7 +65,6 @@ de:
         time_signature: Taktbezeichnung
         title: Name
       song_list:
-        calendar_event: Kalender-Termin
         enums:
           status:
             active: Aktiv
@@ -302,6 +301,8 @@ de:
         create: Anwesenheit eintragen
       guess:
         create: Raten
+      program:
+        create: Zuordnung erstellen
       song:
         create: Lied erstellen
         update: Lied ändern
@@ -364,6 +365,13 @@ de:
     index:
       subtitle: Wer singt alles im Chor?
       title: Lookbook
+  programs:
+    create:
+      error: Fehler beim Erstellen der Kalendereintrag-Zuordnung.
+      success: Kalendereintrag-Zuordnung erfolgreich erstellt.
+    destroy:
+      error: Fehler beim Löschen der Kalendereintrag-Zuordnung.
+      success: Kalendereintrag-Zuordnung erfolgreich gelöscht.
   searches:
     show:
       no_results_error: Keine Suchresultate für "%{query}".
@@ -400,8 +408,6 @@ de:
     edit:
       title: Liederliste bearbeiten
     form:
-      calendar_event:
-        hint: Kalendertermin auf den sich die Liste bezieht. Unter diesem Kalendertermin wird die Liste auch auf dem Dashboard angezeigt.
       status:
         hint: Nur aktive Liederlisten werden allen Benutzer:innen angezeigt.
     index:
@@ -409,9 +415,19 @@ de:
       destroy: Löschen
       edit: Bearbeiten
       new: Neue Liederliste
+      song_list:
+        calendar_events: Kalendereinträge
       title: Liederlisten
     new:
       title: Neue Liederliste
+    program_form:
+      calendar_event:
+        hint: Kalendertermin auf den sich die Liste bezieht. Unter diesem Kalendertermin wird die Liste auch auf dem Dashboard angezeigt.
+      calendar_event_id: Kalendereintrag
+      date_and_summary: Kalendereinträge
+      destroy: Kalendereintrag-Zuordnung löschen
+      programs:
+        title: Kalendereintrag-Zuordnungen
     show:
       destroy: Löschen
       edit: Bearbeiten

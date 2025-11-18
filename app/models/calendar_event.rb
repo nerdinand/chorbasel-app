@@ -12,7 +12,8 @@ class CalendarEvent < ApplicationRecord
   validates :uid, :event_created_at, :starts_at, :ends_at, :summary, presence: true
 
   has_many :attendances, dependent: :destroy
-  has_many :song_lists, dependent: :nullify
+  has_many :programs, dependent: :destroy
+  has_many :song_lists, through: :programs
 
   default_scope -> { order(starts_at: :asc) }
 
@@ -86,8 +87,8 @@ class CalendarEvent < ApplicationRecord
     starts_at.strftime('%d.%m.')
   end
 
-  def full_date
-    starts_at.strftime('%d.%m.%Y')
+  def date_and_summary
+    [starts_at.strftime('%d.%m.%Y'), summary].compact.join(' ')
   end
 
   delegate :today?, to: :starts_at

@@ -52,6 +52,7 @@ group :development do
 
   gem 'i18n-tasks', '~> 1.0.14'
   gem 'letter_opener'
+  gem 'rails-erd', '~> 1.7'
 end
 
 group :test do

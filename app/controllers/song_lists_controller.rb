@@ -15,6 +15,7 @@ class SongListsController < ApplicationController
 
   def edit
     @song_list = authorize SongList.find(params[:id])
+    @program = authorize Program.new(song_list: @song_list)
   end
 
   def create
