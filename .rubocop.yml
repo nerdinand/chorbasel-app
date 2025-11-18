@@ -25,3 +25,7 @@ Metrics/AbcSize:
 Metrics/MethodLength:
   Exclude:
   - db/migrate/*
+
+Style/StringLiterals:
+  Exclude:
+  - config/importmap.rb

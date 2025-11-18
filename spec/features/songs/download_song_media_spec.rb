@@ -7,6 +7,8 @@ RSpec.describe('Downloading song media') do
   scenario do
     log_in_with_magic_link(users(:uwe))
     click_on 'Lieder'
+    expect(page).to have_content('Liederlisten')
+    click_on 'Alle Lieder'
     expect(page).to have_content('Lieder')
     click_on 'Härlig är jorden'
     expect(page).to have_content('Härlig är jorden')
