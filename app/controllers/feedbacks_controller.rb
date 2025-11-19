@@ -14,7 +14,7 @@ class FeedbacksController < ApplicationController
       redirect_to root_path
     else
       flash.alert = t('.error')
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 

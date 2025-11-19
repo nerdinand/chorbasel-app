@@ -27,7 +27,7 @@ class SongsController < ApplicationController
       redirect_to songs_path
     else
       flash.alert = t('.error')
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -39,7 +39,7 @@ class SongsController < ApplicationController
       redirect_to songs_path
     else
       flash.alert = t('.error')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
@@ -51,7 +51,7 @@ class SongsController < ApplicationController
       redirect_to songs_path
     else
       flash.alert = t('.error')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

@@ -17,7 +17,7 @@ class UserStatusesController < ApplicationController
       redirect_to edit_user_path(@user_status.user)
     else
       flash.alert = t('.error')
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -29,7 +29,7 @@ class UserStatusesController < ApplicationController
       redirect_to edit_user_path(@user_status.user)
     else
       flash.alert = t('.error')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

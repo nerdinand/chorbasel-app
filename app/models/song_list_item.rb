@@ -9,7 +9,7 @@ class SongListItem < ApplicationRecord
   def display_name
     return name if name.present?
 
-    song.title if song.present?
+    song.presence&.title
   end
 
   def song?
