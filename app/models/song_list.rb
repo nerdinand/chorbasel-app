@@ -7,7 +7,8 @@ class SongList < ApplicationRecord
 
   enum :status, { in_preparation: 'in_preparation', active: 'active', archived: 'archived' }, default: :in_preparation
 
-  belongs_to :calendar_event, optional: true
+  has_many :programs, dependent: :destroy
+  has_many :calendar_events, through: :programs
 
   def next_order_number
     (song_list_items.pluck(:order).max || 0) + 1
