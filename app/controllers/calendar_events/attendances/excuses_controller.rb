@@ -22,7 +22,7 @@ module CalendarEvents
           perform_create(calendar_event)
         else
           flash.alert = t(".#{result.error_symbol}")
-          render :new, status: :unprocessable_entity
+          render :new, status: :unprocessable_content
         end
       end
 
@@ -36,7 +36,7 @@ module CalendarEvents
           redirect_to attendances_path
         else
           flash.alert = t('.error')
-          render :edit, status: :unprocessable_entity
+          render :edit, status: :unprocessable_content
         end
       end
 
@@ -53,7 +53,7 @@ module CalendarEvents
           redirect_to dashboard_path
         else
           flash.alert = t('calendar_events.attendances.excuses.create.error')
-          render :new, status: :unprocessable_entity
+          render :new, status: :unprocessable_content
         end
       end
 

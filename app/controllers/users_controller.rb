@@ -32,7 +32,7 @@ class UsersController < ApplicationController
       redirect_to users_path
     else
       flash.alert = t('.error')
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
       redirect_to update_success_redirect_path
     else
       flash.alert = t('.error')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

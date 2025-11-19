@@ -13,7 +13,7 @@ class SongMediaController < ApplicationController
       redirect_to song_path(@song_medium.song)
     else
       flash.alert = t('.error')
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -25,7 +25,7 @@ class SongMediaController < ApplicationController
       redirect_to song_path(song_medium.song)
     else
       flash.alert = t('.error')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
