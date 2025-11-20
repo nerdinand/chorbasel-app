@@ -1,0 +1,15 @@
+<td><%= index + 1 %></td>
+
+<td>
+  <% if song_list_item.song? %>
+    <%= link_to song_list_item.song do %>
+      <%= song_list_item_icon(song_list_item) %>
+      <%= song_list_item.display_name %>
+    <% end %>
+  <% else %>
+    <%= song_list_item_icon(song_list_item) %>
+    <%= song_list_item.display_name %>
+  <% end %>
+</td>
+
+<td><%= song_list_item.notes %></td>
