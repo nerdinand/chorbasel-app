@@ -5,12 +5,14 @@ class SongMedium < ApplicationRecord
   KIND_RECORDING_ALL = 'recording_all'
   KIND_RECORDING_REGISTER = 'recording_register'
   KIND_CHOREOGRAPHY_VIDEO = 'choreography_video'
+  KIND_MEI = 'mei'
 
   KINDS = [
     KIND_SHEET_MUSIC,
     KIND_RECORDING_ALL,
     KIND_RECORDING_REGISTER,
-    KIND_CHOREOGRAPHY_VIDEO
+    KIND_CHOREOGRAPHY_VIDEO,
+    KIND_MEI
   ].freeze
 
   belongs_to :song

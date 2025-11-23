@@ -35,18 +35,16 @@
   <%= boolean_emoji @song.repertoire %>
 </p>
 
-<p>
-  <b><%= t('activerecord.attributes.song.genres') %></b>
-</p>
+<p><b><%= t('activerecord.attributes.song.genres') %></b></p>
+
 <ul>
   <% @song.genres.each do |genre| %>
     <li><%= genre %></li>
   <% end %>
 </ul>
 
-<p>
-  <b><%= t('activerecord.attributes.song.registers') %></b>
-</p>
+<p><b><%= t('activerecord.attributes.song.registers') %></b></p>
+
 <ul>
   <% @song.registers.each do |register| %>
     <li><%= t("activerecord.attributes.song.enums.register.#{register}") %></li>
@@ -61,14 +59,11 @@
   <%= button_to t('.destroy'), song_path(@song), method: :delete, class: 'btn btn-danger' %>
 <% end %>
 
-
 <% if @song.song_media.any? || policy(:song_medium).create? %>
   <h2><%= t('.song_media.title') %></h2>
-
   <% if policy(:song_medium).create? %>
     <%= link_to t('.song_media.new'), new_song_song_medium_path(@song), class: 'btn btn-primary' %>
   <% end %>
-
   <% if @song.song_media.any? %>
     <table>
       <thead>
@@ -79,20 +74,28 @@
         <th></th>
         <th></th>
       </thead>
+
       <tbody>
         <% @song.song_media.each do |song_medium| %>
           <tr>
             <td><%= file_icon(song_medium.file) %></td>
-            <td><%= song_medium.human_kind %></td>
+
+            <td>
+              <%= link_to song_medium.human_kind, song_song_medium_path(@song, song_medium) %>
+            </td>
+
             <td><%= song_medium.human_register %></td>
+
             <td>
               <% if song_medium.file.audio? %>
                 <%= audio_tag url_for(song_medium.file), controls: true, preload: 'none' %>
               <% end %>
             </td>
+
             <td>
               <%= link_to t('.song_media.download'), rails_blob_path(song_medium.file, disposition: 'attachment') %>
             </td>
+
             <td>
               <% if policy(song_medium).destroy? %>
                 <%= button_to t('.song_media.destroy'), song_song_medium_path(song_medium.song, song_medium), method: :delete, class: 'btn btn-danger' %>

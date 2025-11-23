@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class SongMediaController < ApplicationController
+  def show
+    @song_medium = authorize SongMedium.find(params[:id])
+  end
+
   def new
     @song_medium = authorize SongMedium.new(song_id: params[:song_id])
   end
