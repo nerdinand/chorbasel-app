@@ -70,7 +70,7 @@ gem 'passwordless', '~> 1.8'
 
 gem 'pundit', '~> 2.5'
 
-gem 'rails-i18n', '~> 8.0.2'
+gem 'rails-i18n', '~> 8.1.0'
 
 gem 'icalendar', '~> 2.12'
 
@@ -80,7 +80,7 @@ gem 'arask', '~> 1.2'
 
 gem 'faker', '~> 3.5'
 
-gem 'aws-sdk-s3', '~> 1.204', require: false
+gem 'aws-sdk-s3', '~> 1.205', require: false
 
 gem 'image_processing', '~> 1.13'
 
