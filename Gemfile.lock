@@ -197,7 +197,7 @@ GEM
       reline (>= 0.4.2)
     jmespath (1.6.2)
     json (2.16.0)
-    kamal (2.8.2)
+    kamal (2.9.0)
       activesupport (>= 7.0)
       base64 (~> 0.2)
       bcrypt_pbkdf (~> 1.0)
@@ -559,7 +559,7 @@ DEPENDENCIES
   icalendar (~> 2.12)
   image_processing (~> 1.13)
   importmap-rails
-  kamal (~> 2.8)
+  kamal (~> 2.9)
   letter_opener
   litestream (~> 0.14.0)
   passwordless (~> 1.8)
