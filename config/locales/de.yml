@@ -529,11 +529,8 @@ de:
         title: Benutzerstatus-Einträge
     form:
       address:
-        hint: 'TODO: address hint'
         title: Adresse
       admin_part: Admin
-      birth_date:
-        hint: 'TODO: birth_date hint'
       email:
         hint: Die E-Mail-Adresse mit der du dich in der App einloggst und unter der für den Chor erreichbar bist.
       face_picture:
