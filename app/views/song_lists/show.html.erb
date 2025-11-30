@@ -27,6 +27,7 @@
       data-controller="sortable"
       data-sortable-animation-value="150"
       data-sortable-resource-name-value="song_list_item"
+      data-sortable-handle-value=".handle"
     <% end %>
   >
     <% @song_list.song_list_items.order(:position).each.with_index do |song_list_item, index| %>
@@ -35,7 +36,7 @@
           data-sortable-update-url="<%= song_list_song_list_item_path(song_list_item.song_list, song_list_item) %>"
         >
           <td>
-            <%= tabler_icon :arrows_move_vertical, classes: ['cursor-move'] %>
+            <%= tabler_icon :arrows_move_vertical, classes: ['cursor-move', 'handle'] %>
           </td>
 
           <%= render 'data_cells', song_list_item: song_list_item, index: index %>
