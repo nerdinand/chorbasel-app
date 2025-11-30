@@ -6,73 +6,107 @@
 <div id="notation"></div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", (event) => {
-    verovio.module.onRuntimeInitialized = () => {
-      toolkit = new verovio.toolkit()
-      toolkit.setOptions({
-        pageWidth: document.body.clientWidth,
-        pageHeight: document.body.clientHeight,
-        scaleToPageSize: true,
-        header: 'none',
-        footer: 'none',
-        lyricSize: 3,
-        lyricWordSpace: 2,
-      })
+  var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay('notation', {
+    disableCursor: false,
+    followCursor: true,
+  });
 
-      let currentPage = 1;
+  var loadPromise = osmd.load("<%= url_for(@song_medium.file) %>");
 
-      const playMIDIHandler = function () {
-        // Get the MIDI file from the Verovio toolkit
-        let base64midi = toolkit.renderToMIDI();
-        // Add the data URL prefixes describing the content
-        let midiString = 'data:audio/midi;base64,' + base64midi;
-        // Pass it to play to MIDIjs
-        MIDIjs.play(midiString);
-      }
+  loadPromise.then(function(){
+    osmd.render();
+    var cursor = osmd.cursor;
+    cursor.show();
+    cursor.next();
 
-      const stopMIDIHandler = function () {
-        MIDIjs.stop();
-      }
-
-      const midiHightlightingHandler = function (event) {
-        // Remove the attribute 'playing' of all notes previously playing
-        let playingNotes = document.querySelectorAll('g.note.playing');
-        for (let playingNote of playingNotes) playingNote.classList.remove("playing");
-
-        // Get elements at a time in milliseconds (time from the player is in seconds)
-        let currentElements = toolkit.getElementsAtTime(event.time * 1000);
-
-        if (currentElements.page == 0) return;
-
-        if (currentElements.page != currentPage) {
-          currentPage = currentElements.page;
-          document.getElementById("notation").innerHTML = toolkit.renderToSVG(currentPage);
-        }
-
-        // Get all notes playing and set the class
-        for (note of currentElements.notes) {
-          let noteElement = document.getElementById(note);
-          if (noteElement) noteElement.classList.add("playing");
-        }
-      }
-
-      document.getElementById("playMIDI").addEventListener("click", playMIDIHandler);
-      document.getElementById("stopMIDI").addEventListener("click", stopMIDIHandler);
-
-      MIDIjs.player_callback = midiHightlightingHandler;
-
-      fetch("<%= url_for(@song_medium.file) %>")
-      .then( (response) => response.text() )
-      .then( (meiXML) => {
-        let svg = toolkit.renderData(meiXML, {});
-        document.getElementById("notation").innerHTML = svg;
-      })
-      // .then( response => response.arrayBuffer() )
-      // .then( data => {
-      //   let meiXML = toolkit.loadZipDataBuffer(data)
-      //   let svg = toolkit.renderData(meiXML, {})
-      //   document.getElementById("notation").innerHTML = svg
-      // })
-    }
+    const cursorVoiceEntry = cursor.Iterator.CurrentVoiceEntries[0];
+    const baseNote = cursorVoiceEntry.Notes[0];
+    console.log("Stem direction of VoiceEntry under Cursor: " + cursorVoiceEntry.StemDirection);
+    console.log("base note of Voice Entry at second cursor position: " + baseNote.Pitch.ToString());
   });
 </script>
+
+<!--
+  <div
+  class="relative left-1/2 w-dvw max-w-none -translate-x-1/2"
+  data-controller="score"
+  data-score-url-value
+  ></div>
+-->
+
+<!-- 
+  <div id="notation" class="relative left-1/2 w-dvw max-w-none -translate-x-1/2"></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", (event) => {
+      verovio.module.onRuntimeInitialized = () => {
+        toolkit = new verovio.toolkit()
+        toolkit.setOptions({
+          pageWidth: document.body.clientWidth,
+          pageHeight: document.body.clientHeight,
+          scale: 90,
+          svgViewBox: true,
+          // scaleToPageSize: true,
+          header: 'none',
+          footer: 'none',
+          lyricSize: 3,
+          lyricWordSpace: 2,
+        })
+
+        let currentPage = 1;
+
+        const playMIDIHandler = function () {
+          // Get the MIDI file from the Verovio toolkit
+          let base64midi = toolkit.renderToMIDI();
+          // Add the data URL prefixes describing the content
+          let midiString = 'data:audio/midi;base64,' + base64midi;
+          // Pass it to play to MIDIjs
+          MIDIjs.play(midiString);
+        }
+
+        const stopMIDIHandler = function () {
+          MIDIjs.stop();
+        }
+
+        const midiHightlightingHandler = function (event) {
+          // Remove the attribute 'playing' of all notes previously playing
+          let playingNotes = document.querySelectorAll('g.note.playing');
+          for (let playingNote of playingNotes) playingNote.classList.remove("playing");
+
+          // Get elements at a time in milliseconds (time from the player is in seconds)
+          let currentElements = toolkit.getElementsAtTime(event.time * 1000);
+
+          if (currentElements.page == 0) return;
+
+          if (currentElements.page != currentPage) {
+            currentPage = currentElements.page;
+            document.getElementById("notation").innerHTML = toolkit.renderToSVG(currentPage);
+          }
+
+          // Get all notes playing and set the class
+          for (note of currentElements.notes) {
+            let noteElement = document.getElementById(note);
+            if (noteElement) noteElement.classList.add("playing");
+          }
+        }
+
+        document.getElementById("playMIDI").addEventListener("click", playMIDIHandler);
+        document.getElementById("stopMIDI").addEventListener("click", stopMIDIHandler);
+
+        MIDIjs.player_callback = midiHightlightingHandler;
+
+        fetch("<%= url_for(@song_medium.file) %>")
+        .then( (response) => response.text() )
+        .then( (meiXML) => {
+          let svg = toolkit.renderData(meiXML, {});
+          document.getElementById("notation").innerHTML = svg;
+        })
+        // .then( response => response.arrayBuffer() )
+        // .then( data => {
+        //   let meiXML = toolkit.loadZipDataBuffer(data)
+        //   let svg = toolkit.renderData(meiXML, {})
+        //   document.getElementById("notation").innerHTML = svg
+        // })
+      }
+    });
+  </script>-->
