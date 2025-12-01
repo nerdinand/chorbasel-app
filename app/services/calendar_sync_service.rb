@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class CalendarSyncService
-  def initialize
-    @calendar_url = Rails.application.credentials[:calendar_url]
+  def initialize(calendar_url)
+    @calendar_url = calendar_url
     @calendar_tmp_path = Rails.root.join('tmp/calendar.ics')
     @created_count = 0
     @updated_count = 0
