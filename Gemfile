@@ -80,7 +80,7 @@ gem 'arask', '~> 1.2'
 
 gem 'faker', '~> 3.5'
 
-gem 'aws-sdk-s3', '~> 1.205', require: false
+gem 'aws-sdk-s3', '~> 1.206', require: false
 
 gem 'image_processing', '~> 1.13'
 
