@@ -19,6 +19,6 @@ class NameGuess < ApplicationRecord
   end
 
   def remove_diacritics(string)
-    string.unicode_normalize(:nfkd).encode('ASCII', replace: '')
+    string.unicode_normalize(:nfkd).encode('ASCII', replace: '').rstrip
   end
 end

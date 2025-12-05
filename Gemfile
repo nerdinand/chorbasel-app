@@ -25,7 +25,7 @@ gem 'solid_queue', '~> 1.2'
 gem 'bootsnap', require: false
 
 # Deploy this application anywhere as a Docker container [https://kamal-deploy.org]
-gem 'kamal', '~> 2.8', require: false
+gem 'kamal', '~> 2.9', require: false
 
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
 gem 'thruster', require: false
@@ -50,7 +50,7 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'web-console'
 
-  gem 'i18n-tasks', '~> 1.1.0'
+  gem 'i18n-tasks', '~> 1.1.2'
   gem 'letter_opener'
   gem 'rails-erd', '~> 1.7'
 end
@@ -70,7 +70,7 @@ gem 'passwordless', '~> 1.8'
 
 gem 'pundit', '~> 2.5'
 
-gem 'rails-i18n', '~> 8.0.2'
+gem 'rails-i18n', '~> 8.1.0'
 
 gem 'icalendar', '~> 2.12'
 
@@ -80,7 +80,7 @@ gem 'arask', '~> 1.2'
 
 gem 'faker', '~> 3.5'
 
-gem 'aws-sdk-s3', '~> 1.203', require: false
+gem 'aws-sdk-s3', '~> 1.205', require: false
 
 gem 'image_processing', '~> 1.13'
 
