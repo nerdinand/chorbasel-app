@@ -4,8 +4,8 @@
   <%= link_to t('.new'), new_song_path, class: 'btn btn-primary' %>
 <% end %>
 
-<%= form_with url: songs_path, method: :get, local: true do |form| %>
-  <%= form.select :song, ["Language", "is repertoire", "genre", "register", "time signature", "arranger"] %>
+<%= form_with url: songs_path, method: :get do |form| %>
+  <%= form.select :language, ["English", "German"] %>
   <%= submit_tag 'Apply' %>
 <% end %>
 

@@ -2,7 +2,7 @@
 
 class SongsController < ApplicationController
   def index
-    @songs = authorize Song.all
+    @songs = authorize Song.where(language: params[:language])
   end
 
   def show
