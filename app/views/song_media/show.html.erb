@@ -3,7 +3,15 @@
 <button id="playMIDI">Play</button>
 <button id="stopMIDI">Stop</button>
 
-<div data-controller="score"></div>
+<% if (recording = @song_medium.song.song_media.recording.first) %>
+  <%= audio_tag url_for(recording.file), controls: true, preload: 'none' %>
+<% end %>
+
+<style>
+  g.note.playing {
+    fill: crimson;
+  }
+</style>
 
 <div id="notation" class="relative left-1/2 w-dvw max-w-none -translate-x-1/2"></div>
 
