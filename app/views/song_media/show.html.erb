@@ -12,16 +12,16 @@
     verovio.module.onRuntimeInitialized = () => {
       toolkit = new verovio.toolkit()
       toolkit.setOptions({
-        // pageWidth: document.body.clientWidth,
-        // pageHeight: document.body.clientHeight,
-        scale: 80,
+        pageWidth: document.body.clientWidth,
+        pageHeight: 100,
+        scale: 50,
         svgViewBox: true,
         scaleToPageSize: true,
         header: 'none',
         footer: 'none',
         lyricSize: 3,
         lyricWordSpace: 2,
-        // adjustPageHeight: true,
+        adjustPageHeight: true,
         adjustPageWidth: true,
       })
 
