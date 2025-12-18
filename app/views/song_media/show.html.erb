@@ -1,14 +1,11 @@
 <% content_for :title, @song_medium.song.title %>
 
-<button id="playMIDI">Play</button>
-<button id="stopMIDI">Stop</button>
-
 <% if (recording = @song_medium.song.song_media.recording.first) %>
-  <%= audio_tag url_for(recording.file), controls: true, preload: 'none' %>
+  <%= audio_tag url_for(recording.file), controls: true, preload: 'none', id: 'recording-player', style: 'width: 100%' %>
 <% end %>
 
 <style>
-  g.note.playing {
+  .playing {
     fill: crimson;
   }
 </style>
@@ -16,6 +13,87 @@
 <div id="notation" class="relative left-1/2 w-dvw max-w-none -translate-x-1/2"></div>
 
 <script>
+  function buildMeasureList() {
+    i = 1
+    lastMeasureId = null
+    measures = []
+    while(true) {
+      elements = toolkit.getElementsAtTime(i)
+      currentMeasureId = elements.measure
+
+      if (currentMeasureId === undefined) {
+        break
+      }
+
+      if (currentMeasureId != lastMeasureId) {
+        lastMeasureId = currentMeasureId
+        measures.push([currentMeasureId, elements.page])
+      }
+      i += 500
+    }
+
+    document.measureList = measures
+  }
+
+  document.secondsToMeasureNumberMap = [
+    [0.0, 1], // first measure
+    [2.733038, 2],
+    [4.919296, 1],
+    [7.248955, 2],
+    [9.206111, 3],
+    [51.912, 22],
+    [54.663843, 3],
+    [99.730816, 23],
+    [118.077809, 31],
+    [172.431, 54]  // last measure
+  ]
+
+  function getMeasure(recordingTime) {
+    biggerIndex = document.secondsToMeasureNumberMap.findIndex((e) => e[0] > recordingTime)
+
+    if (biggerIndex == -1) {
+      return Math.max(...document.secondsToMeasureNumberMap.map(e => e[1]))
+    }
+
+    smallerIndex = biggerIndex - 1
+
+    biggerMeasureNumber = document.secondsToMeasureNumberMap[biggerIndex][1]
+    smallerMeasureNumber = document.secondsToMeasureNumberMap[smallerIndex][1]
+
+    if (biggerMeasureNumber <= smallerMeasureNumber) {
+      console.log("detected repetition!")
+      return
+    }
+
+    biggerTime = document.secondsToMeasureNumberMap[biggerIndex][0]
+    smallerTime = document.secondsToMeasureNumberMap[smallerIndex][0]
+
+    sectionLength = biggerTime - smallerTime
+    measuresLength = biggerMeasureNumber - smallerMeasureNumber 
+    return smallerMeasureNumber + parseInt(((recordingTime - smallerTime) * measuresLength) / sectionLength)
+  }
+
+  function showMeasure(measure) {
+    let playingMeasures = document.querySelectorAll('.playing');
+    for (let playingMeasure of playingMeasures) playingMeasure.classList.remove("playing");
+    measureListEntry = document.measureList[measure - 1]
+    playingMeasure = document.getElementById(measureListEntry[0])
+
+    if (playingMeasure === null) {
+      document.getElementById("notation").innerHTML = toolkit.renderToSVG(measureListEntry[1]);
+      playingMeasure = document.getElementById(measureListEntry[0])
+    }
+
+    playingMeasure.classList.add("playing")
+  }
+  
+  var delayInMilliseconds = 200;
+
+  function updatePlayingMeasure() {
+    showMeasure(getMeasure(document.getElementById("recording-player").currentTime))
+    setTimeout(updatePlayingMeasure, delayInMilliseconds)
+  }
+
   document.addEventListener("DOMContentLoaded", (event) => {
     verovio.module.onRuntimeInitialized = () => {
       toolkit = new verovio.toolkit()
@@ -70,8 +148,12 @@
         }
       }
 
-      document.getElementById("playMIDI").addEventListener("click", playMIDIHandler);
-      document.getElementById("stopMIDI").addEventListener("click", stopMIDIHandler);
+      const seekedHandler = function (event) {
+        showMeasure(getMeasure(event.target.currentTime))
+      }
+
+      document.getElementById("recording-player").addEventListener("seeked", seekedHandler)
+      document.getElementById("recording-player").addEventListener("pause", seekedHandler)
 
       MIDIjs.player_callback = midiHightlightingHandler;
 
@@ -80,6 +162,10 @@
       .then( (meiXML) => {
         let svg = toolkit.renderData(meiXML, {});
         document.getElementById("notation").innerHTML = svg;
+      })
+      .then(buildMeasureList)
+      .then(() => {
+        setTimeout(updatePlayingMeasure, delayInMilliseconds)
       })
       // .then( response => response.arrayBuffer() )
       // .then( data => {
