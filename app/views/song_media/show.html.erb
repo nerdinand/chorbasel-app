@@ -36,16 +36,21 @@
   }
 
   document.secondsToMeasureNumberMap = [
-    [0.0, 1], // first measure
-    [2.733038, 2],
-    [4.919296, 1],
-    [7.248955, 2],
-    [9.206111, 3],
-    [51.912, 22],
-    [54.663843, 3],
-    [99.730816, 23],
-    [118.077809, 31],
-    [172.431, 54]  // last measure
+    // bass intro
+    [0.0,         1], // first measure
+    [2.535,       2],
+    // repetition
+    [4.737,       1],
+    [9.164,       3],
+    // SAT joins in (first verse)
+    [51.912,      22],
+    // repetition: second verse
+    [54.478,      3],
+    [108.899,     27],
+    // bridge
+    [117.924,     31],
+    [136.081,     39],
+    [171.507,     55],  // last measure
   ]
 
   function getMeasure(recordingTime) {
@@ -57,20 +62,23 @@
 
     smallerIndex = biggerIndex - 1
 
-    biggerMeasureNumber = document.secondsToMeasureNumberMap[biggerIndex][1]
-    smallerMeasureNumber = document.secondsToMeasureNumberMap[smallerIndex][1]
+    nextMeasureNumber = document.secondsToMeasureNumberMap[biggerIndex][1]
+    previousMeasureNumber = document.secondsToMeasureNumberMap[smallerIndex][1]
 
-    if (biggerMeasureNumber <= smallerMeasureNumber) {
-      console.log("detected repetition!")
-      return
+    if (nextMeasureNumber - previousMeasureNumber <= 1 || nextMeasureNumber <= previousMeasureNumber) {
+      // Either next measure is just one bigger or the same as the current, 
+      // or we going to a repetition in the next measure: Either way, no interpolation needed!
+      return previousMeasureNumber
     }
 
     biggerTime = document.secondsToMeasureNumberMap[biggerIndex][0]
     smallerTime = document.secondsToMeasureNumberMap[smallerIndex][0]
 
-    sectionLength = biggerTime - smallerTime
-    measuresLength = biggerMeasureNumber - smallerMeasureNumber 
-    return smallerMeasureNumber + parseInt(((recordingTime - smallerTime) * measuresLength) / sectionLength)
+    sectionTimeLength = biggerTime - smallerTime
+    sectionMeasuresLength = nextMeasureNumber - previousMeasureNumber
+    currentTimeInSection = recordingTime - smallerTime
+    currentMeasureInSection = parseInt((currentTimeInSection * sectionMeasuresLength) / sectionTimeLength)
+    return previousMeasureNumber + currentMeasureInSection
   }
 
   function showMeasure(measure) {
@@ -111,51 +119,17 @@
         adjustPageWidth: true,
       })
 
-      let currentPage = 1;
-
-      const playMIDIHandler = function () {
-        // Get the MIDI file from the Verovio toolkit
-        let base64midi = toolkit.renderToMIDI();
-        // Add the data URL prefixes describing the content
-        let midiString = 'data:audio/midi;base64,' + base64midi;
-        // Pass it to play to MIDIjs
-        MIDIjs.play(midiString);
-      }
-
-      const stopMIDIHandler = function () {
-        MIDIjs.stop();
-      }
-
-      const midiHightlightingHandler = function (event) {
-        // Remove the attribute 'playing' of all notes previously playing
-        let playingNotes = document.querySelectorAll('g.note.playing');
-        for (let playingNote of playingNotes) playingNote.classList.remove("playing");
-
-        // Get elements at a time in milliseconds (time from the player is in seconds)
-        let currentElements = toolkit.getElementsAtTime(event.time * 1000);
-
-        if (currentElements.page == 0) return;
-
-        if (currentElements.page != currentPage) {
-          currentPage = currentElements.page;
-          document.getElementById("notation").innerHTML = toolkit.renderToSVG(currentPage);
-        }
-
-        // Get all notes playing and set the class
-        for (note of currentElements.notes) {
-          let noteElement = document.getElementById(note);
-          if (noteElement) noteElement.classList.add("playing");
-        }
-      }
+      document.getElementById("notation").innerHTML = toolkit.renderToSVG(1);
 
       const seekedHandler = function (event) {
-        showMeasure(getMeasure(event.target.currentTime))
+        time = event.target.currentTime
+        measure = getMeasure(time)
+        console.log(time, measure)
+        showMeasure(measure)
       }
 
       document.getElementById("recording-player").addEventListener("seeked", seekedHandler)
       document.getElementById("recording-player").addEventListener("pause", seekedHandler)
-
-      MIDIjs.player_callback = midiHightlightingHandler;
 
       fetch("<%= url_for(@song_medium.file) %>")
       .then( (response) => response.text() )
