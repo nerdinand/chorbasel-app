@@ -64,7 +64,7 @@ group :test do
 end
 
 gem 'tailwindcss-rails', '= 3.1.0'
-gem 'tailwindcss-ruby', '= 3.4.17'
+gem 'tailwindcss-ruby', '3.4.19'
 
 gem 'passwordless', '~> 1.8'
 
