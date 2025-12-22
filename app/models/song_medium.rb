@@ -13,7 +13,7 @@ class SongMedium < ApplicationRecord
     KIND_CHOREOGRAPHY_VIDEO
   ].freeze
 
-  belongs_to :song
+  belongs_to :song, touch: true # when a SongMedium changes, its Song changes too
   has_one_attached :file
 
   validates :register, presence: true, inclusion: Register::Song::REGISTERS, if: proc { |sm|

@@ -2,6 +2,7 @@
 
 class SongList < ApplicationRecord
   has_many :song_list_items, dependent: :destroy
+  has_many :song_media_bundle_downloads, dependent: :destroy
 
   validates :name, presence: true
 
@@ -12,5 +13,9 @@ class SongList < ApplicationRecord
 
   def next_order_number
     (song_list_items.pluck(:order).max || 0) + 1
+  end
+
+  def last_updated_at
+    song_list_items.pluck(:updated_at).union(song_list_items.joins(:song).pluck('songs.updated_at')).max
   end
 end
