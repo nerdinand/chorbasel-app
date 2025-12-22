@@ -100,6 +100,12 @@ class User < ApplicationRecord
     self.canonical_register = Register::Singer::REGISTER_TO_CANONICAL_REGISTER[register]
   end
 
+  def human_canonical_register
+    return nil if canonical_register.blank?
+
+    I18n.t("activerecord.attributes.user.enums.canonical_register.#{canonical_register}")
+  end
+
   def current_status
     user_statuses.valid_at_time(Time.zone.today).first
   end
