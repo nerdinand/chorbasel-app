@@ -5,8 +5,8 @@
 <% end %>
 
 <%= form_with url: songs_path, method: :get do |form| %>
-  <%= form.select :language, ["English", "German"] %>
-  <%= submit_tag 'Apply' %>
+  <%= form.select :language, ["English", "German"], { include_blank: true } %>
+  <%= submit_tag 'Apply', class: 'btn btn-primary' %>
 <% end %>
 
 <table>
