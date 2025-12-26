@@ -15,26 +15,6 @@
   <%= simple_format @song.lyrics, class: 'mb-3' %>
 </p>
 
-<p>
-  <b><%= t('activerecord.attributes.song.key_signature') %></b>
-  <%= @song.key_signature %>
-</p>
-
-<p>
-  <b><%= t('activerecord.attributes.song.time_signature') %></b>
-  <%= @song.time_signature %>
-</p>
-
-<p>
-  <b><%= t('activerecord.attributes.song.language') %></b>
-  <%= @song.language %>
-</p>
-
-<p>
-  <b><%= t('activerecord.attributes.song.repertoire') %></b>
-  <%= boolean_emoji @song.repertoire %>
-</p>
-
 <p><b><%= t('activerecord.attributes.song.genres') %></b></p>
 
 <ul>
@@ -105,5 +85,15 @@
         <% end %>
       </tbody>
     </table>
+  <% end %>
+<% end %>
+
+<% if @song.score.present? %>
+  <% if policy(@song.score).edit? %>
+    <%= link_to t('.score.edit'), edit_song_score_path(@song), class: 'btn btn-primary' %>
+  <% end %>
+<% else %>
+  <% if policy(Score.new).create? %>
+    <%= link_to t('.score.new'), new_song_score_path(@song), class: 'btn btn-primary' %>
   <% end %>
 <% end %>

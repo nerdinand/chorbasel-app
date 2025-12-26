@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_18_194124) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_26_143328) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -114,6 +114,14 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_18_194124) do
     t.datetime "updated_at", null: false
     t.index ["calendar_event_id"], name: "index_programs_on_calendar_event_id"
     t.index ["song_list_id"], name: "index_programs_on_song_list_id"
+  end
+
+  create_table "scores", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.json "metadata", default: {}, null: false
+    t.integer "song_id"
+    t.datetime "updated_at", null: false
+    t.index ["song_id"], name: "index_scores_on_song_id"
   end
 
   create_table "song_list_items", force: :cascade do |t|
