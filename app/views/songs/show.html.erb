@@ -1,5 +1,23 @@
 <% content_for :title, @song.title %>
 
+<% if @song.song_media.any? %>
+  <div class="inline-block float-right" data-controller="visibility">
+    <div class="relative">
+      <button class="btn btn-secondary" data-action="visibility#toggleTargets"><%= t('.song_media.download') %> <%= tabler_icon :'chevron-down' %></button>
+
+      <div data-visibility-target="hideable" hidden class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none" role="menu" aria-orientation="vertical" tabindex="-1">
+        <% @song.song_media.each do |song_medium| %>
+          <%= link_to rails_blob_path(song_medium.file, disposition: 'attachment'), class: 'block px-4 py-2 text-sm text-primary', role: 'menuitem', tabindex: '-1' do %>
+            <%= file_icon(song_medium.file) %>
+            <%= song_medium.human_kind %>
+            <%= song_medium.human_register %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
 <p>
   <b><%= t('activerecord.attributes.song.composer') %></b>
   <%= @song.composer %>
@@ -39,7 +57,7 @@
   <%= button_to t('.destroy'), song_path(@song), method: :delete, class: 'btn btn-danger' %>
 <% end %>
 
-<% if @song.song_media.any? || policy(:song_medium).create? %>
+<% if policy(:song_medium).create? %>
   <h2><%= t('.song_media.title') %></h2>
   <% if policy(:song_medium).create? %>
     <%= link_to t('.song_media.new'), new_song_song_medium_path(@song), class: 'btn btn-primary' %>
@@ -61,20 +79,10 @@
             <td><%= file_icon(song_medium.file) %></td>
 
             <td>
-              <%= link_to song_medium.human_kind, song_song_medium_path(@song, song_medium) %>
+              <%= song_medium.human_kind %>
             </td>
 
             <td><%= song_medium.human_register %></td>
-
-            <td>
-              <% if song_medium.file.audio? %>
-                <%= audio_tag url_for(song_medium.file), controls: true, preload: 'none' %>
-              <% end %>
-            </td>
-
-            <td>
-              <%= link_to t('.song_media.download'), rails_blob_path(song_medium.file, disposition: 'attachment') %>
-            </td>
 
             <td>
               <% if policy(song_medium).destroy? %>
