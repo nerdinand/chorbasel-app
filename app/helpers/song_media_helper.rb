@@ -16,6 +16,6 @@ module SongMediaHelper
                   :'file-type-pdf'
                 elsif attachment.video?
                   :video
-                end)
+                end, classes: ['mr-2'])
   end
 end
