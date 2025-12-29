@@ -6,7 +6,7 @@ gem 'importmap-rails'
 gem 'propshaft'
 gem 'puma', '>= 5.0'
 gem 'rails', '~> 8.1'
-gem 'sqlite3', '~> 2.8'
+gem 'sqlite3', '~> 2.9'
 gem 'stimulus-rails'
 gem 'turbo-rails'
 
