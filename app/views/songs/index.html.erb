@@ -4,6 +4,11 @@
   <%= link_to t('.new'), new_song_path, class: 'btn btn-primary' %>
 <% end %>
 
+<%= form_with url: songs_path, method: :get do |form| %>
+  <%= form.select :language, ["English", "German"], { include_blank: true } %>
+  <%= submit_tag 'Apply', class: 'btn btn-primary' %>
+<% end %>
+
 <table>
   <thead>
     <tr class="sticky top-0">
