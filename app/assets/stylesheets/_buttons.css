@@ -1,6 +1,6 @@
 @layer components {
   .btn {
-    @apply inline-block no-underline px-2 py-2 mt-2 text-white border-solid rounded-md border-2
+    @apply inline-flex no-underline px-2 py-2 mt-2 text-white border-solid rounded-md border-2
   }
 
   .btn-primary {

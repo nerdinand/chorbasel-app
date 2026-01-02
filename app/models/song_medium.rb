@@ -24,6 +24,8 @@ class SongMedium < ApplicationRecord
   validates :kind, uniqueness: { scope: %i[song_id register] }
   validates :file, presence: true
 
+  scope :recording, -> { where(kind: [KIND_RECORDING_ALL, KIND_RECORDING_REGISTER]) }
+
   def human_register
     return nil if register.blank?
 

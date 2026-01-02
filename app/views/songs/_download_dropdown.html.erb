@@ -1,0 +1,15 @@
+<div class="inline-block float-right" data-controller="visibility">
+  <div class="relative">
+    <button class="btn btn-secondary" data-action="visibility#toggleTargets"><%= t('.download') %> <%= tabler_icon :'chevron-down' %></button>
+
+    <div data-visibility-target="hideable" hidden class="absolute right-0 z-10 mt-2 w-60 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none" role="menu" aria-orientation="vertical" tabindex="-1">
+      <% @song.song_media.each do |song_medium| %>
+        <%= link_to rails_blob_path(song_medium.file, disposition: 'attachment'), class: 'inline-flex block px-4 py-2 text-sm text-primary', role: 'menuitem', tabindex: '-1' do %>
+          <%= file_icon(song_medium.file) %>
+          <%= song_medium.human_kind %>
+          <%= song_medium.human_register %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
