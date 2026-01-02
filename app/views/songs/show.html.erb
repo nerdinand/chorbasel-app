@@ -1,21 +1,7 @@
 <% content_for :title, @song.title %>
 
 <% if @song.song_media.any? %>
-  <div class="inline-block float-right" data-controller="visibility">
-    <div class="relative">
-      <button class="btn btn-secondary" data-action="visibility#toggleTargets"><%= t('.song_media.download') %> <%= tabler_icon :'chevron-down' %></button>
-
-      <div data-visibility-target="hideable" hidden class="absolute right-0 z-10 mt-2 w-60 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none" role="menu" aria-orientation="vertical" tabindex="-1">
-        <% @song.song_media.each do |song_medium| %>
-          <%= link_to rails_blob_path(song_medium.file, disposition: 'attachment'), class: 'inline-flex block px-4 py-2 text-sm text-primary', role: 'menuitem', tabindex: '-1' do %>
-            <%= file_icon(song_medium.file) %>
-            <%= song_medium.human_kind %>
-            <%= song_medium.human_register %>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-  </div>
+  <%= render 'download_dropdown' %>
 <% end %>
 
 <p>
@@ -28,6 +14,19 @@
   <%= @song.arranger %>
 </p>
 
+<% if @song.score.present? %>
+  <% if policy(@song.score).edit? %>
+    <%= link_to t('.score.edit'), edit_song_score_path(@song), class: 'btn btn-primary' %>
+  <% end %>
+
+  <%= render 'score' %>
+
+<% else %>
+  <% if policy(Score.new).create? %>
+    <%= link_to t('.score.new'), new_song_score_path(@song), class: 'btn btn-primary' %>
+  <% end %>
+<% end %>
+
 <p>
   <b><%= t('activerecord.attributes.song.lyrics') %></b>
   <%= simple_format @song.lyrics, class: 'mb-3' %>
@@ -35,26 +34,12 @@
 
 <p><b><%= t('activerecord.attributes.song.genres') %></b></p>
 
-<ul>
-  <% @song.genres.each do |genre| %>
-    <li><%= genre %></li>
-  <% end %>
-</ul>
-
-<p><b><%= t('activerecord.attributes.song.registers') %></b></p>
-
-<ul>
-  <% @song.registers.each do |register| %>
-    <li><%= t("activerecord.attributes.song.enums.register.#{register}") %></li>
-  <% end %>
-</ul>
-
 <% if policy(@song).edit? %>
   <%= link_to t('.edit'), edit_song_path(@song), class: 'btn btn-primary' %>
 <% end %>
 
 <% if policy(@song).destroy? %>
-  <%= button_to t('.destroy'), song_path(@song), method: :delete, class: 'btn btn-danger' %>
+  <%= button_to t('.destroy'), song_path(@song), method: :delete, class: 'btn btn-danger', form_class: 'inline' %>
 <% end %>
 
 <% if policy(:song_medium).create? %>
@@ -93,15 +78,5 @@
         <% end %>
       </tbody>
     </table>
-  <% end %>
-<% end %>
-
-<% if @song.score.present? %>
-  <% if policy(@song.score).edit? %>
-    <%= link_to t('.score.edit'), edit_song_score_path(@song), class: 'btn btn-primary' %>
-  <% end %>
-<% else %>
-  <% if policy(Score.new).create? %>
-    <%= link_to t('.score.new'), new_song_score_path(@song), class: 'btn btn-primary' %>
   <% end %>
 <% end %>

@@ -1,0 +1,6 @@
+<% if (recording = @song.song_media.recording.first) %>
+  <%= content_tag :div, class: "relative left-1/2 w-dvw max-w-none -translate-x-1/2", data: {controller: 'score', 'score-url-value': url_for(@song.score.file), 'score-metadata-value': @song.score.metadata, 'score-delay-in-milliseconds-value': 200} do %>
+    <%= audio_tag url_for(recording.file), controls: true, preload: 'none', style: 'width: 100%', data: {'score-target': 'audioTag', 'action': 'seeked->score#update'} %>
+    <div data-score-target="score"></div>
+  <% end %>    
+<% end %>
