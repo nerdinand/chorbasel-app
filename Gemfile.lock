@@ -105,7 +105,7 @@ GEM
     bcrypt_pbkdf (1.1.2)
     bigdecimal (4.0.1)
     bindex (0.8.1)
-    bootsnap (1.20.0)
+    bootsnap (1.20.1)
       msgpack (~> 1.2)
     brakeman (7.1.2)
       racc
@@ -477,12 +477,12 @@ GEM
       caxlsx (<= 4.0)
       csv
       rodf
-    sqlite3 (2.8.1-aarch64-linux-gnu)
-    sqlite3 (2.8.1-arm-linux-gnu)
-    sqlite3 (2.8.1-arm64-darwin)
-    sqlite3 (2.8.1-x86-linux-gnu)
-    sqlite3 (2.8.1-x86_64-darwin)
-    sqlite3 (2.8.1-x86_64-linux-gnu)
+    sqlite3 (2.9.0-aarch64-linux-gnu)
+    sqlite3 (2.9.0-arm-linux-gnu)
+    sqlite3 (2.9.0-arm64-darwin)
+    sqlite3 (2.9.0-x86-linux-gnu)
+    sqlite3 (2.9.0-x86_64-darwin)
+    sqlite3 (2.9.0-x86_64-linux-gnu)
     sshkit (1.25.0)
       base64
       logger
@@ -581,7 +581,7 @@ DEPENDENCIES
   solid_cache (~> 1.0)
   solid_queue (~> 1.2)
   spreadsheet_architect (~> 5.1)
-  sqlite3 (~> 2.8)
+  sqlite3 (~> 2.9)
   stimulus-rails
   tabler_icons (~> 0.1.1)
   tailwindcss-rails (= 3.1.0)
