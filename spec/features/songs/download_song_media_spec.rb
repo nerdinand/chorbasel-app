@@ -3,7 +3,7 @@
 require 'rails_helper'
 require_relative '../log_in_helpers'
 
-RSpec.describe('Downloading song media', ignore_hidden_elements: false) do
+RSpec.describe('Downloading song media') do
   scenario do
     log_in_with_magic_link(users(:uwe))
     click_on 'Lieder'
