@@ -71,6 +71,11 @@ export default class extends Controller {
       return Math.max(...this.secondsToMeasureNumberListValue.map(e => e[1]))
     }
 
+    if (biggerIndex == 0) {
+      // We're before the beginning of the song (score-wise), therefore, no measure yet
+      return undefined
+    }
+
     let smallerIndex = biggerIndex - 1
 
     let nextMeasureNumber = this.secondsToMeasureNumberListValue[biggerIndex][1]
@@ -92,9 +97,12 @@ export default class extends Controller {
     return previousMeasureNumber + currentMeasureInSection
   }
 
-  showMeasure(measure) {
-    let playingMeasures = this.scoreTarget.querySelectorAll('.playing');
+  hideMeasures() {
+    let playingMeasures = this.scoreTarget.querySelectorAll(".playing");
     for (let playingMeasure of playingMeasures) playingMeasure.classList.remove("playing");
+  }
+
+  showMeasure(measure) {
     let measureListEntry = this.measureListValue[measure - 1]
 
     if (measureListEntry === undefined) {
@@ -117,6 +125,12 @@ export default class extends Controller {
   }
 
   update() {
-    this.showMeasure(this.getMeasure(this.audioTagTarget.currentTime))
+    this.hideMeasures()
+    let measure = this.getMeasure(this.audioTagTarget.currentTime)
+    if (measure === undefined) {
+      return
+    }
+
+    this.showMeasure(measure)
   }
 }
