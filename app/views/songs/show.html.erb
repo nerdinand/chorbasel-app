@@ -18,14 +18,13 @@
   <% if policy(@song.score).edit? %>
     <%= link_to t('.score.edit'), edit_song_score_path(@song), class: 'btn btn-primary' %>
   <% end %>
-
-  <%= render 'score' %>
-
 <% else %>
   <% if policy(Score.new).create? %>
     <%= link_to t('.score.new'), new_song_score_path(@song), class: 'btn btn-primary' %>
   <% end %>
 <% end %>
+
+<%= render 'score' %>
 
 <p>
   <b><%= t('activerecord.attributes.song.lyrics') %></b>
