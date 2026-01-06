@@ -10,7 +10,7 @@ export default class extends Controller {
     secondsToMeasureNumberList: Array,
   }
 
-  connect() {
+  scoreTargetConnected() {
     verovio.module.onRuntimeInitialized = () => {
       document.toolkit = new verovio.toolkit()
       document.toolkit.setOptions({
@@ -114,6 +114,10 @@ export default class extends Controller {
     if (playingMeasure === null) {
       this.scoreTarget.innerHTML = document.toolkit.renderToSVG(measureListEntry[1]);
       playingMeasure = document.getElementById(measureListEntry[0])
+    }
+
+    if (playingMeasure === null) {
+      return
     }
 
     playingMeasure.classList.add("playing")
