@@ -37,6 +37,9 @@ de:
             song_management: Liederverwaltung
             sponsorships: GönnerInnen / Freunde
             thank_you_gifts: Dankegeschenk-Koordination
+      score:
+        file: MEI-Datei
+        metadata: Metadaten
       song:
         arranger: Arrangeur:in
         composer: Komponist:in
@@ -303,6 +306,8 @@ de:
         create: Raten
       program:
         create: Zuordnung erstellen
+      score:
+        create: Speichern
       song:
         create: Lied erstellen
         update: Lied ändern
@@ -372,6 +377,17 @@ de:
     destroy:
       error: Fehler beim Löschen der Kalendereintrag-Zuordnung.
       success: Kalendereintrag-Zuordnung erfolgreich gelöscht.
+  scores:
+    create:
+      error: Fehler beim Speichern der Partitur.
+      success: Partitur erfolgreich gespeichert.
+    edit:
+      title: Partitur
+    new:
+      title: Partitur
+    update:
+      error: Fehler beim Speichern der Partitur.
+      success: Partitur erfolgreich gespeichert.
   searches:
     show:
       no_results_error: Keine Suchresultate für "%{query}".
@@ -455,6 +471,8 @@ de:
     destroy:
       error: Fehler beim Löschen des Lieds.
       success: Lied erfolgreich gelöscht.
+    download_dropdown:
+      download: Herunterladen
     edit:
       title: Lied bearbeiten
     index:
@@ -464,12 +482,16 @@ de:
       title: Lieder
     new:
       title: Neues Lied
+    score:
+      all_registers: Alle Stimmen
     show:
       destroy: Lied löschen
       edit: Lied bearbeiten
+      score:
+        edit: Partitur bearbeiten
+        new: Partitur bearbeiten
       song_media:
         destroy: Mediendatei löschen
-        download: Herunterladen
         kind: Art
         new: Neue Mediendatei
         register: Stimme

@@ -10,12 +10,12 @@ module SongMediaHelper
   end
 
   def file_icon(attachment)
-    if attachment.audio?
-      '🎵'
-    elsif attachment.content_type == 'application/pdf'
-      '📜'
-    elsif attachment.video?
-      '🎬'
-    end
+    tabler_icon(if attachment.audio?
+                  :'file-music'
+                elsif attachment.content_type == 'application/pdf'
+                  :'file-type-pdf'
+                elsif attachment.video?
+                  :video
+                end, classes: ['mr-2'])
   end
 end

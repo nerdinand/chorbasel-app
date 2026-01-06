@@ -1,0 +1,17 @@
+<%= render 'errors', model: @score %>
+
+<%= form_for @score, url: song_score_path(@score.song, @score) do |f| %>
+  <%= f.hidden_field :song_id %>
+
+  <div class="form-field">
+    <p><%= f.label :file %> <%# i18n-tasks-use t('activerecord.attributes.score.file') %></p>
+    <p><%= f.file_field :file, accept: 'application/vnd.mei+xml' %></p>
+  </div>
+
+  <div class="form-field">
+    <p><%= f.label :metadata %> <%# i18n-tasks-use t('activerecord.attributes.score.metadata') %></p>
+    <p><%= f.textarea :metadata %></p>
+  </div>
+
+  <p><%= f.submit class: 'btn btn-primary' %>  <%# i18n-tasks-use t('helpers.submit.score.create') %></p>
+<% end %>

@@ -1,5 +1,9 @@
 <% content_for :title, @song.title %>
 
+<% if @song.song_media.any? %>
+  <%= render 'download_dropdown' %>
+<% end %>
+
 <p>
   <b><%= t('activerecord.attributes.song.composer') %></b>
   <%= @song.composer %>
@@ -10,65 +14,38 @@
   <%= @song.arranger %>
 </p>
 
+<% if @song.score.present? %>
+  <% if policy(@song.score).edit? %>
+    <%= link_to t('.score.edit'), edit_song_score_path(@song), class: 'btn btn-primary' %>
+  <% end %>
+<% else %>
+  <% if policy(Score.new).create? %>
+    <%= link_to t('.score.new'), new_song_score_path(@song), class: 'btn btn-primary' %>
+  <% end %>
+<% end %>
+
+<%= render 'score' %>
+
 <p>
   <b><%= t('activerecord.attributes.song.lyrics') %></b>
   <%= simple_format @song.lyrics, class: 'mb-3' %>
 </p>
 
-<p>
-  <b><%= t('activerecord.attributes.song.key_signature') %></b>
-  <%= @song.key_signature %>
-</p>
-
-<p>
-  <b><%= t('activerecord.attributes.song.time_signature') %></b>
-  <%= @song.time_signature %>
-</p>
-
-<p>
-  <b><%= t('activerecord.attributes.song.language') %></b>
-  <%= @song.language %>
-</p>
-
-<p>
-  <b><%= t('activerecord.attributes.song.repertoire') %></b>
-  <%= boolean_emoji @song.repertoire %>
-</p>
-
-<p>
-  <b><%= t('activerecord.attributes.song.genres') %></b>
-</p>
-<ul>
-  <% @song.genres.each do |genre| %>
-    <li><%= genre %></li>
-  <% end %>
-</ul>
-
-<p>
-  <b><%= t('activerecord.attributes.song.registers') %></b>
-</p>
-<ul>
-  <% @song.registers.each do |register| %>
-    <li><%= t("activerecord.attributes.song.enums.register.#{register}") %></li>
-  <% end %>
-</ul>
+<p><b><%= t('activerecord.attributes.song.genres') %></b></p>
 
 <% if policy(@song).edit? %>
   <%= link_to t('.edit'), edit_song_path(@song), class: 'btn btn-primary' %>
 <% end %>
 
 <% if policy(@song).destroy? %>
-  <%= button_to t('.destroy'), song_path(@song), method: :delete, class: 'btn btn-danger' %>
+  <%= button_to t('.destroy'), song_path(@song), method: :delete, class: 'btn btn-danger', form_class: 'inline' %>
 <% end %>
 
-
-<% if @song.song_media.any? || policy(:song_medium).create? %>
+<% if policy(:song_medium).create? %>
   <h2><%= t('.song_media.title') %></h2>
-
   <% if policy(:song_medium).create? %>
     <%= link_to t('.song_media.new'), new_song_song_medium_path(@song), class: 'btn btn-primary' %>
   <% end %>
-
   <% if @song.song_media.any? %>
     <table>
       <thead>
@@ -79,20 +56,18 @@
         <th></th>
         <th></th>
       </thead>
+
       <tbody>
         <% @song.song_media.each do |song_medium| %>
           <tr>
             <td><%= file_icon(song_medium.file) %></td>
-            <td><%= song_medium.human_kind %></td>
+
+            <td>
+              <%= song_medium.human_kind %>
+            </td>
+
             <td><%= song_medium.human_register %></td>
-            <td>
-              <% if song_medium.file.audio? %>
-                <%= audio_tag url_for(song_medium.file), controls: true, preload: 'none' %>
-              <% end %>
-            </td>
-            <td>
-              <%= link_to t('.song_media.download'), rails_blob_path(song_medium.file, disposition: 'attachment') %>
-            </td>
+
             <td>
               <% if policy(song_medium).destroy? %>
                 <%= button_to t('.song_media.destroy'), song_song_medium_path(song_medium.song, song_medium), method: :delete, class: 'btn btn-danger' %>
