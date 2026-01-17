@@ -476,6 +476,7 @@ de:
     edit:
       title: Lied bearbeiten
     index:
+      apply: Filter anwenden
       destroy: Löschen
       edit: Bearbeiten
       new: Neues Lied
