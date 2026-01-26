@@ -6,12 +6,12 @@ härlig_är_jorden:
     Skön är själarnas pilgrimsgång
     Genom de fagra riken på jorden
     Gå vi till paradis med sång
-    
+
     Tidevarv komma, tidevarv försvinna
     Släkten följa släktens gång
     Aldrig förstummas tonen från himlen
     I själens glada pilgrimssång
-    
+
     Änglar den sjöngo först för markens herdar
     Skönt från själ till själ det ljöd
     Människa gläd dig, Frälsarn är kommen
@@ -21,4 +21,17 @@ härlig_är_jorden:
   language: Schwedisch
   repertoire: false
   genres: ["Volkslied", "Weihnachtslied", "foo"]
+  registers: ["soprano", "alto", "tenor", "bass"]
+
+
+Joyful, joyful:
+  title: Joyful, joyful
+  arranger: Some random person
+  lyrics: |
+
+  key_signature: Eb
+  time_signature: 2/2
+  language: English
+  repertoire: false
+  genres: ["gospel", "Weihnachtslied", "foo"]
   registers: ["soprano", "alto", "tenor", "bass"]
