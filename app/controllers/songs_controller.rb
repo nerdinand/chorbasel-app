@@ -2,7 +2,12 @@
 
 class SongsController < ApplicationController
   def index
-    @songs = authorize Song.order(:title)
+    songs = Song.order(:title)
+    @songs = if params[:language].present?
+               authorize songs.where(language: params[:language])
+             else
+               authorize songs.all
+             end
   end
 
   def show

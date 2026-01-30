@@ -8,6 +8,7 @@
 
 @import url("_attendance.css");
 @import url("_user.css");
+@import url("_score.css");
 
 @tailwind base;
 @tailwind components;

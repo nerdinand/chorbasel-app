@@ -6,7 +6,7 @@ gem 'importmap-rails'
 gem 'propshaft'
 gem 'puma', '>= 5.0'
 gem 'rails', '~> 8.1'
-gem 'sqlite3', '~> 2.8'
+gem 'sqlite3', '~> 2.9'
 gem 'stimulus-rails'
 gem 'turbo-rails'
 
@@ -19,7 +19,7 @@ gem 'tzinfo-data', platforms: %i[windows jruby]
 # Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
 gem 'solid_cable', '~> 3.0'
 gem 'solid_cache', '~> 1.0'
-gem 'solid_queue', '~> 1.2'
+gem 'solid_queue', '~> 1.3'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
@@ -78,9 +78,9 @@ gem 'down', '~> 5.4'
 
 gem 'arask', '~> 1.2'
 
-gem 'faker', '~> 3.5'
+gem 'faker', '~> 3.6'
 
-gem 'aws-sdk-s3', '~> 1.208', require: false
+gem 'aws-sdk-s3', '~> 1.213', require: false
 
 gem 'image_processing', '~> 1.13'
 
