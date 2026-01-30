@@ -16,6 +16,8 @@ class SongList < ApplicationRecord
   end
 
   def last_updated_at
+    return updated_at if song_list_items.none?
+
     song_list_items.pluck(:updated_at).union(song_list_items.joins(:song).pluck('songs.updated_at')).max
   end
 end

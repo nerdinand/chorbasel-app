@@ -8,7 +8,8 @@ class SongMediaBundleDownloadsController < ApplicationController
   def create
     song_media_bundle_download = authorize SongMediaBundleDownload.find_or_create_by(
       song_list_id: params[:song_list_id],
-      canonical_register: current_user.canonical_register
+      canonical_register: current_user.canonical_register,
+      song_list_updated_at: DateTime.new(0)
     )
 
     song_media_bundle_download.regenerate_if_necessary!
