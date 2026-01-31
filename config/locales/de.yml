@@ -81,11 +81,15 @@ de:
         song: Lied
       song_media_bundle_download:
         enums:
-          canonical_register:
-            alt: Alt
-            bass: Bass
-            soprano: Sopran
-            tenor: Tenor
+          register:
+            alto_1: Alt 1
+            alto_2: Alt 2
+            bass_1: Bass 1
+            bass_2: Bass 2
+            soprano_1: Sopran 1
+            soprano_2: Sopran 2
+            tenor_1: Tenor 1
+            tenor_2: Tenor 2
       song_medium:
         enums:
           kind:

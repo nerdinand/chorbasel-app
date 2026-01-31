@@ -6,3 +6,7 @@
   <%= t('activerecord.attributes.song_media_bundle_download.status') %>
 </p>
 <p><%= @song_media_bundle_download.status %></p>
+
+<% if @song_media_bundle_download.ready? %>
+  <%= link_to '.download', rails_blob_path(@song_media_bundle_download.file, disposition: 'attachment') %>
+<% end %>

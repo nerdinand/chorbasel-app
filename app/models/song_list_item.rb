@@ -6,6 +6,8 @@ class SongListItem < ApplicationRecord
 
   positioned on: :song_list
 
+  scope :has_song, -> { where.not(song: nil) }
+
   def display_name
     return name if name.present?
 

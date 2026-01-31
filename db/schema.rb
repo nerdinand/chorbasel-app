@@ -154,15 +154,15 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_26_143328) do
   end
 
   create_table "song_media_bundle_downloads", force: :cascade do |t|
-    t.string "canonical_register"
     t.datetime "created_at", null: false
-    t.time "last_downloaded_at"
+    t.datetime "last_downloaded_at"
     t.text "log"
+    t.string "register"
     t.integer "song_list_id"
-    t.time "song_list_updated_at"
+    t.datetime "song_list_updated_at"
     t.string "status"
     t.datetime "updated_at", null: false
-    t.index ["song_list_id", "canonical_register"], name: "index_smbd_on_song_list_id_and_canonical_register", unique: true
+    t.index ["song_list_id", "register"], name: "index_smbd_on_song_list_id_and_register", unique: true
     t.index ["song_list_id"], name: "index_song_media_bundle_downloads_on_song_list_id"
   end
 
