@@ -81,15 +81,12 @@ de:
         song: Lied
       song_media_bundle_download:
         enums:
-          register:
-            alto_1: Alt 1
-            alto_2: Alt 2
-            bass_1: Bass 1
-            bass_2: Bass 2
-            soprano_1: Sopran 1
-            soprano_2: Sopran 2
-            tenor_1: Tenor 1
-            tenor_2: Tenor 2
+          status:
+            errored: Fehlgeschlagen
+            processing: Download wird vorbereitet...
+            ready: Bereit zum Herunterladen
+        register: Stimme
+        status: Status
       song_medium:
         enums:
           kind:
@@ -104,21 +101,6 @@ de:
         birth_date: Geburtsdatum
         city: Ort
         email: E-Mail
-        enums:
-          register:
-            alto_1: Alt 1
-            alto_2: Alt 2
-            bass_1: Bass 1
-            bass_2: Bass 2
-            soprano_1: Sopran 1
-            soprano_2: Sopran 2
-            tenor_1: Tenor 1
-            tenor_2: Tenor 2
-          canonical_register:
-            alt: Alt
-            bass: Bass
-            soprano: Sopran
-            tenor: Tenor
         face_picture: Bild (nur Gesicht, fürs Namen raten)
         first_name: Vorname
         last_name: Nachname
@@ -429,6 +411,7 @@ de:
       title: Listeneintrag erstellen
     update:
       error: Fehler beim Bearbeiten des Listeneintrags.
+    update_success_response:
       success: Listeneintrag erfolgreich bearbeitet.
   song_lists:
     create:
@@ -466,6 +449,8 @@ de:
       name: Name
       new: Neuer Listeneintrag
       notes: Notiz
+      song_media_bundle_download:
+        create: Aufnahmen für meine Stimme herunterladen
     update:
       error: Fehler beim Bearbeiten der Liederliste.
       success: Liederliste erfolgreich bearbeitet.
@@ -480,6 +465,10 @@ de:
       title: Mediendatei bearbeiten
     new:
       title: Neue Mediendatei
+  song_media_bundle_downloads:
+    show:
+      download: Herunterladen
+      title: Download für %{song_list_name}
   songs:
     create:
       error: Fehler beim Erstellen des Lieds.

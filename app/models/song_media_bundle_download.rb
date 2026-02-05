@@ -25,10 +25,6 @@ class SongMediaBundleDownload < ApplicationRecord
 
   scope :expired, -> { where(last_downloaded_at: ...1.month.ago) }
 
-  def human_register
-    I18n.t("activerecord.attributes.song_media_bundle_download.enums.canonical_register.#{canonical_register}")
-  end
-
   def regenerate_if_necessary!
     return unless outdated?
 

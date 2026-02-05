@@ -86,12 +86,6 @@ class User < ApplicationRecord
     Register::Singer.new(register)
   end
 
-  def human_register
-    return nil if register.blank?
-
-    I18n.t("activerecord.attributes.user.enums.register.#{register}")
-  end
-
   def birth_date_this_year
     birth_date.change(year: Time.zone.today.year)
   end

@@ -5,8 +5,8 @@
     <% @song.song_media.recording.each do |recording| %>
       <div class="flex my-5">
         <strong class="w-1/6">
-          <% if recording.human_register.present? %>
-            <%= recording.human_register %>
+          <% if recording.register.present? %>
+            <%= human_register(recording.register) %>
           <% else %>
             <%= t('.all_registers') %>
           <% end %>

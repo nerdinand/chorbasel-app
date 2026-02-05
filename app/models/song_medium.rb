@@ -26,12 +26,6 @@ class SongMedium < ApplicationRecord
 
   scope :recording, -> { where(kind: [KIND_RECORDING_ALL, KIND_RECORDING_REGISTER]) }
 
-  def human_register
-    return nil if register.blank?
-
-    I18n.t("activerecord.attributes.song.enums.register.#{register}")
-  end
-
   def human_kind
     I18n.t("activerecord.attributes.song_medium.enums.kind.#{kind}")
   end
