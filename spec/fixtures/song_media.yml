@@ -1,3 +1,19 @@
-härlig_är_jorden_recording:
+härlig_är_jorden_recording_all:
   song: härlig_är_jorden
-  kind: recording_all
+  kind: härlig_är_jorden_recording_all
+
+härlig_är_jorden_recording_alto:
+  song: härlig_är_jorden
+  kind: härlig_är_jorden_recording_alto
+
+härlig_är_jorden_recording_bass:
+  song: härlig_är_jorden
+  kind: härlig_är_jorden_recording_bass
+
+härlig_är_jorden_recording_soprano:
+  song: härlig_är_jorden
+  kind: härlig_är_jorden_recording_soprano
+
+härlig_är_jorden_recording_tenor:
+  song: härlig_är_jorden
+  kind: härlig_är_jorden_recording_tenor
