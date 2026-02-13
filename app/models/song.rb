@@ -9,4 +9,6 @@ class Song < ApplicationRecord
   validates :repertoire, inclusion: { in: [true, false] }
 
   validates :registers, array: Register::Song::REGISTERS
+
+  normalizes :arranger, :composer, :key_signature, :language, :time_signature, with: ->(str) { str.presence }
 end
