@@ -339,6 +339,8 @@ de:
       error: Fehler beim Bearbeiten der Info
       success: Info erfolgreich bearbeitet
   layouts:
+    application:
+      back: Zurück
     footer:
       feedback: Feedback
       google_drive: Google Drive

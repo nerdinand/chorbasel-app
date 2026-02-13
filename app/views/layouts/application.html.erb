@@ -9,6 +9,10 @@
       <main class="container mx-auto px-6 md:px-24 my-20">
         <%= render 'layouts/flashes' %>
 
+        <% if logged_in? && browser.device.mobile? %>
+          <button class="btn btn-secondary mb-5" data-controller="back-button" data-back-button-target="button" data-action="click->back-button#goBack"><%= tabler_icon :'arrow-narrow-left' %><%= t('.back') %></button>
+        <% end %>
+
         <h1><%= content_for(:title) %></h1>
 
         <%= yield %>
