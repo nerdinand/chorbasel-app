@@ -481,6 +481,9 @@ de:
       apply: Filter anwenden
       destroy: Löschen
       edit: Bearbeiten
+      filter:
+        languages:
+          all: Alle Sprachen
       new: Neues Lied
       title: Lieder
     new:

@@ -5,7 +5,7 @@
 <% end %>
 
 <%= form_with url: songs_path, method: :get do |form| %>
-  <%= form.select :language, options_for_select(Song.distinct.pluck(:language).sort, selected: params[:language]), { include_blank: true } %>
+  <%= form.select :language, options_for_select(Song.distinct.pluck(:language).compact.sort, selected: params[:language]), { include_blank: t('.filter.languages.all') } %>
   <%= submit_tag t('.apply'), class: 'btn btn-primary' %>
 <% end %>
 
