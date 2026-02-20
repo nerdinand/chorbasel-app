@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SongListItem < ApplicationRecord
-  belongs_to :song_list
+  belongs_to :song_list, touch: true
   belongs_to :song, optional: true
 
   positioned on: :song_list

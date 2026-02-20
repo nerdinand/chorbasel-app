@@ -32,3 +32,8 @@ härlig_är_jorden_recording_tenor:
   name: file
   record: härlig_är_jorden_recording_tenor (SongMedium)
   blob: härlig_är_jorden_recording_tenor
+
+härlig_är_jorden_sheet:
+  name: file
+  record: härlig_är_jorden_sheet (SongMedium)
+  blob: härlig_är_jorden_sheet

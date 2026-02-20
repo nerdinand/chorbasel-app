@@ -10,6 +10,7 @@ class SongList < ApplicationRecord
 
   has_many :programs, dependent: :destroy
   has_many :calendar_events, through: :programs
+  has_many :songs, through: :song_list_items
 
   def next_order_number
     (song_list_items.pluck(:order).max || 0) + 1

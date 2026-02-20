@@ -15,11 +15,14 @@ RSpec.describe SongMediaBundleJob do
 
     song_media_bundle_download.reload
 
-    file = Zip::File.open_buffer(song_media_bundle_download.file.attachment.blob.download)
-    expect(file.entries).not_to be_empty
-
     expect(song_media_bundle_download.file.attachment.blob.content_type).to eq('application/zip')
-    expect(song_media_bundle_download.file.attachment.blob.byte_size).to eq(22)
+    expect(song_media_bundle_download.file.attachment.blob.byte_size).to eq(339_844)
+
+    file = Zip::File.open_buffer(song_media_bundle_download.file.attachment.blob.download)
+    expect(file.entries.size).to eq(1)
+    expect(file.entries[0].size).to eq(342_124)
+    expect(file.entries[0].name.force_encoding(Encoding::UTF_8)).to eq('Härlig_är_jorden_Bass-trimmed.m4a')
+
     expect(song_media_bundle_download.song_list_updated_at).to be_present
     expect(song_media_bundle_download.status).to eq('ready')
   end
