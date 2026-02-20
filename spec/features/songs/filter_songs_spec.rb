@@ -22,7 +22,7 @@ RSpec.describe('Filtering songs') do
     expect(page).to have_content('Härlig är jorden')
 
     within('#language') do
-      page.select 'English'
+      page.select 'Englisch'
     end
 
     click_on 'Filter anwenden'

@@ -7,7 +7,7 @@
         <%= link_to rails_blob_path(song_medium.file, disposition: 'attachment'), class: 'inline-flex block px-4 py-2 text-sm text-primary', role: 'menuitem', tabindex: '-1' do %>
           <%= file_icon(song_medium.file) %>
           <%= song_medium.human_kind %>
-          <%= song_medium.human_register %>
+          <%= human_register(song_medium.register) %>
         <% end %>
       <% end %>
     </div>

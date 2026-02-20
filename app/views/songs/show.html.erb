@@ -66,7 +66,7 @@
               <%= song_medium.human_kind %>
             </td>
 
-            <td><%= song_medium.human_register %></td>
+            <td><%= human_register(song_medium.register) %></td>
 
             <td>
               <% if policy(song_medium).destroy? %>

@@ -86,18 +86,18 @@ class User < ApplicationRecord
     Register::Singer.new(register)
   end
 
-  def human_register
-    return nil if register.blank?
-
-    I18n.t("activerecord.attributes.user.enums.register.#{register}")
-  end
-
   def birth_date_this_year
     birth_date.change(year: Time.zone.today.year)
   end
 
   def set_canonical_register
     self.canonical_register = Register::Singer::REGISTER_TO_CANONICAL_REGISTER[register]
+  end
+
+  def human_canonical_register
+    return nil if canonical_register.blank?
+
+    I18n.t("activerecord.attributes.user.enums.canonical_register.#{canonical_register}")
   end
 
   def current_status

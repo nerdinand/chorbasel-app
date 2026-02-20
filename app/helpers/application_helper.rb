@@ -17,4 +17,8 @@ module ApplicationHelper
   def empty_icon
     tag.svg class: 'status-icon', width: 24, height: 24
   end
+
+  def human_register(register)
+    I18n.t("activerecord.attributes.song.enums.register.#{register}")
+  end
 end

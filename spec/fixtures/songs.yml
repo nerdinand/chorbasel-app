@@ -24,14 +24,13 @@ härlig_är_jorden:
   registers: ["soprano", "alto", "tenor", "bass"]
 
 
-Joyful, joyful:
+joyful_joyful:
   title: Joyful, joyful
   arranger: Some random person
-  lyrics: |
-
+  lyrics:
   key_signature: Eb
   time_signature: 2/2
-  language: English
+  language: Englisch
   repertoire: false
-  genres: ["gospel", "Weihnachtslied", "foo"]
+  genres: ["Gospel"]
   registers: ["soprano", "alto", "tenor", "bass"]

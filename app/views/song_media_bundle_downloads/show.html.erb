@@ -1,0 +1,20 @@
+<% content_for :title, t('.title', song_list_name: @song_media_bundle_download.song_list.name) %>
+
+<div data-controller="reload" data-reload-interval-value="1000" data-reload-enabled-value="<%= @song_media_bundle_download.processing? %>"></div>
+
+<p>
+  <%= icon_for_song_media_bundle_download_status(@song_media_bundle_download.status) %>
+  <b><%= t('activerecord.attributes.song_media_bundle_download.status') %></b>
+  <%= I18n.t("activerecord.attributes.song_media_bundle_download.enums.status.#{@song_media_bundle_download.status}") %>
+</p>
+
+<p>
+  <b><%= t('activerecord.attributes.song_media_bundle_download.register') %></b>
+  <%= human_register(@song_media_bundle_download.register) %>
+</p>
+
+<% if @song_media_bundle_download.ready? %>
+  <p class="mt-5">
+    <%= link_to t('.download'), rails_blob_path(@song_media_bundle_download.file, disposition: 'attachment') %>
+  </p>
+<% end %>
