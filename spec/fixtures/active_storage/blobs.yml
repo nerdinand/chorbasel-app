@@ -1,3 +1,9 @@
 male_face_blob: <%= ActiveStorage::FixtureSet.blob filename: 'male-face.png' %>
 female_face_blob: <%= ActiveStorage::FixtureSet.blob filename: 'female-face.png' %>
-recording_blob: <%= ActiveStorage::FixtureSet.blob filename: 'Amazing_Grace_-_Choir.ogg' %>
+
+härlig_är_jorden_recording_all: <%= ActiveStorage::FixtureSet.blob filename: 'Härlig_är_jorden_Alle_Real_Group-trimmed.m4a' %>
+härlig_är_jorden_recording_alto: <%= ActiveStorage::FixtureSet.blob filename: 'Härlig_är_jorden_Alt-trimmed.m4a' %>
+härlig_är_jorden_recording_bass: <%= ActiveStorage::FixtureSet.blob filename: 'Härlig_är_jorden_Bass-trimmed.m4a' %>
+härlig_är_jorden_recording_soprano: <%= ActiveStorage::FixtureSet.blob filename: 'Härlig_är_jorden_Sopran-trimmed.m4a' %>
+härlig_är_jorden_recording_tenor: <%= ActiveStorage::FixtureSet.blob filename: 'Härlig_är_jorden_Tenor-trimmed.m4a' %>
+härlig_är_jorden_sheet: <%= ActiveStorage::FixtureSet.blob filename: 'Härlig_är_jorden.pdf' %>

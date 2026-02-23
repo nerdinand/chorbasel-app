@@ -153,6 +153,19 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_26_143328) do
     t.index ["song_id", "kind", "register"], name: "index_song_media_on_song_id_and_kind_and_register", unique: true
   end
 
+  create_table "song_media_bundle_downloads", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "last_downloaded_at"
+    t.text "log"
+    t.string "register"
+    t.integer "song_list_id"
+    t.datetime "song_list_updated_at"
+    t.string "status"
+    t.datetime "updated_at", null: false
+    t.index ["song_list_id", "register"], name: "index_smbd_on_song_list_id_and_register", unique: true
+    t.index ["song_list_id"], name: "index_song_media_bundle_downloads_on_song_list_id"
+  end
+
   create_table "songs", force: :cascade do |t|
     t.string "arranger"
     t.string "composer"

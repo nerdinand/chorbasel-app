@@ -15,6 +15,6 @@ RSpec.describe('Downloading song media') do
     click_on 'Herunterladen'
     # TODO: fix this not finding the invisible link (debug running with JS?)
     find('a', text: 'Audioaufnahme (alle Stimmen)', visible: false).click
-    expect(page.body.size).to eq(413_634)
+    expect(page.body.size).to eq(335_791)
   end
 end

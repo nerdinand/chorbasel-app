@@ -33,8 +33,7 @@ class SongListItemsController < ApplicationController
     @song_list_item = authorize SongListItem.find(params[:id])
 
     if @song_list_item.update(song_list_item_params)
-      flash.notice = t('.success')
-      redirect_to song_list_path(@song_list_item.song_list)
+      update_success_response
     else
       flash.alert = t('.error')
       render :edit, status: :unprocessable_content
@@ -57,5 +56,14 @@ class SongListItemsController < ApplicationController
 
   def song_list_item_params
     params.expect(song_list_item: %i[name notes song_list_id song_id position])
+  end
+
+  def update_success_response
+    if request.xhr?
+      head :no_content
+    else
+      flash.notice = t('.success')
+      redirect_to song_list_path(@song_list_item.song_list)
+    end
   end
 end

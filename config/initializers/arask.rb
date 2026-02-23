@@ -14,6 +14,7 @@ Arask.setup do |arask|
 
   # Run an ActiveJob.
   arask.create job: 'CalendarSyncJob', cron: '0 2 * * *' # At 02:00
+  arask.create job: 'SongMediaBundleDownloadCleanupJob', cron: '0 2 * * *' # At 02:00
 
   # Only run on production
   # arask.create script: 'Attachment.process_new', interval: 5.hours if Rails.env.production?

@@ -13,7 +13,7 @@ class SongMedium < ApplicationRecord
     KIND_CHOREOGRAPHY_VIDEO
   ].freeze
 
-  belongs_to :song
+  belongs_to :song, touch: true # when a SongMedium changes, its Song changes too
   has_one_attached :file
 
   validates :register, presence: true, inclusion: Register::Song::REGISTERS, if: proc { |sm|
@@ -25,12 +25,6 @@ class SongMedium < ApplicationRecord
   validates :file, presence: true
 
   scope :recording, -> { where(kind: [KIND_RECORDING_ALL, KIND_RECORDING_REGISTER]) }
-
-  def human_register
-    return nil if register.blank?
-
-    I18n.t("activerecord.attributes.song.enums.register.#{register}")
-  end
 
   def human_kind
     I18n.t("activerecord.attributes.song_medium.enums.kind.#{kind}")

@@ -9,7 +9,7 @@ module SongListItemsHelper
     if song_list_item.song.present?
       tabler_icon(:music, classes: ['status-icon'])
     else
-      empty_icon
+      tabler_icon(:'layout-list', classes: ['status-icon'])
     end
   end
 end
