@@ -48,6 +48,8 @@ class SongMediaBundleJob < ApplicationJob
   end
 
   def recording_for_register(song_media, register)
-    song_media.recording.find_by(register: register) || song_media.recording.find_by(register: Register::Singer::REGISTER_TO_CANONICAL_REGISTER[register])
+    song_media.recording.find_by(register: register) ||
+      song_media.recording.find_by(register: Register::Singer::REGISTER_TO_CANONICAL_REGISTER[register]) ||
+      song_media.recording.find_by(kind: SongMedium::KIND_RECORDING_ALL)
   end
 end
