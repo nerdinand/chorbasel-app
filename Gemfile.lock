@@ -271,6 +271,16 @@ GEM
     mini_portile2 (2.8.9)
     minitest (6.0.1)
       prism (~> 1.5)
+    mission_control-jobs (1.1.0)
+      actioncable (>= 7.1)
+      actionpack (>= 7.1)
+      activejob (>= 7.1)
+      activerecord (>= 7.1)
+      importmap-rails (>= 1.2.1)
+      irb (~> 1.13)
+      railties (>= 7.1)
+      stimulus-rails
+      turbo-rails
     msgpack (1.8.0)
     net-imap (0.6.2)
       date
@@ -566,6 +576,7 @@ DEPENDENCIES
   kamal (~> 2.10)
   letter_opener
   litestream (~> 0.14.0)
+  mission_control-jobs (~> 1.1)
   passwordless (~> 1.8)
   positioning (~> 0.4.7)
   propshaft

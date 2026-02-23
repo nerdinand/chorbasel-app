@@ -95,3 +95,5 @@ gem 'litestream', '~> 0.14.0'
 gem 'positioning', '~> 0.4.7'
 
 gem 'browser', '~> 6.2'
+
+gem 'mission_control-jobs', '~> 1.1'

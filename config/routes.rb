@@ -61,6 +61,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     resources :infos, except: %i[destroy show]
 
     resource :search, only: :show
+
+    mount MissionControl::Jobs::Engine, at: '/jobs'
   end
 
   get '*path' => redirect('/users/sign_in'), via: :all, constraints: lambda { |req|

@@ -27,5 +27,7 @@ module ChorbaselApp
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.time_zone = 'Europe/Zurich'
+
+    config.mission_control.jobs.http_basic_auth_enabled = false
   end
 end
