@@ -27,7 +27,6 @@ This is a standard Rails 8 app. We're using all the current best practices (mayb
 These are the most important non-standard dependencies of the app:
 
 * passwordless: For passwordless user login.
-* arask: For running tasks regularly (updating calendar_events daily from the master Google calendar).
 * tailwindcss: CSS framework.
 * pundit: For authorization of all the features through user roles.
 
