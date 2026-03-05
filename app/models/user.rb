@@ -101,7 +101,7 @@ class User < ApplicationRecord
   end
 
   def current_status
-    user_statuses.valid_at_time(Time.zone.today).first
+    user_statuses.valid_at_time(Time.zone.now).first
   end
 
   def current_human_status
