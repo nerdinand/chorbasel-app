@@ -13,7 +13,7 @@
     class="form-field"
     data-controller="single-choice-combobox"
     data-single-choice-combobox-empty-label-value="<%= t('stimulus.single_choice_combobox.empty_label') %>"
-    data-single-choice-combobox-choices-value="<%= Song.all.pluck(:music_composer).flatten.uniq.to_json %>"
+    data-single-choice-combobox-choices-value="<%= Song.all.pluck(:music_composer).compact.uniq.to_json %>"
   >
     <p>
       <%= f.label :music_composer %>
@@ -28,7 +28,7 @@
     class="form-field"
     data-controller="single-choice-combobox"
     data-single-choice-combobox-empty-label-value="<%= t('stimulus.single_choice_combobox.empty_label') %>"
-    data-single-choice-combobox-choices-value="<%= Song.all.pluck(:texter).flatten.uniq.to_json %>"
+    data-single-choice-combobox-choices-value="<%= Song.all.pluck(:texter).compact.uniq.to_json %>"
   >
     <p>
       <%= f.label :texter %>
@@ -43,7 +43,7 @@
     class="form-field"
     data-controller="single-choice-combobox"
     data-single-choice-combobox-empty-label-value="<%= t('stimulus.single_choice_combobox.empty_label') %>"
-    data-single-choice-combobox-choices-value="<%= Song.all.pluck(:arranger).flatten.uniq.to_json %>"
+    data-single-choice-combobox-choices-value="<%= Song.all.pluck(:arranger).compact.uniq.to_json %>"
   >
     <p>
       <%= f.label :arranger %>
@@ -58,7 +58,7 @@
     class="form-field"
     data-controller="single-choice-combobox"
     data-single-choice-combobox-empty-label-value="<%= t('stimulus.single_choice_combobox.empty_label') %>"
-    data-single-choice-combobox-choices-value="<%= Song.all.pluck(:key_signature).flatten.uniq.to_json %>"
+    data-single-choice-combobox-choices-value="<%= Song.all.pluck(:key_signature).compact.uniq.to_json %>"
   >
     <p>
       <%= f.label :key_signature %>
@@ -73,7 +73,7 @@
     class="form-field"
     data-controller="single-choice-combobox"
     data-single-choice-combobox-empty-label-value="<%= t('stimulus.single_choice_combobox.empty_label') %>"
-    data-single-choice-combobox-choices-value="<%= Song.all.pluck(:time_signature).flatten.uniq.to_json %>"
+    data-single-choice-combobox-choices-value="<%= Song.all.pluck(:time_signature).compact.uniq.to_json %>"
   >
     <p>
       <%= f.label :time_signature %>
@@ -88,7 +88,7 @@
     class="form-field"
     data-controller="single-choice-combobox"
     data-single-choice-combobox-empty-label-value="<%= t('stimulus.single_choice_combobox.empty_label') %>"
-    data-single-choice-combobox-choices-value="<%= Song.all.pluck(:language).flatten.uniq.to_json %>"
+    data-single-choice-combobox-choices-value="<%= Song.all.pluck(:language).compact.uniq.to_json %>"
   >
     <p>
       <%= f.label :language %>
@@ -118,7 +118,7 @@
   <div
     class="form-field"
     data-controller="combobox"
-    data-combobox-choices-value="<%= Song.all.pluck(:genres).flatten.uniq.to_json %>"
+    data-combobox-choices-value="<%= Song.all.pluck(:genres).compact.uniq.to_json %>"
   >
     <p>
       <%= f.label :genres %>

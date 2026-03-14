@@ -16,14 +16,24 @@ export default class extends Controller {
   }
 
   chooseElement(e) {
-    this.textFieldTarget.value = e.target.id
+    let newValue = e.target.id
+
+    if (newValue === "null") {
+      newValue = ""
+    }
+    this.textFieldTarget.value = newValue
 
     this.#updateChoices()
   }
 
   #updateChoices() {
     let selectedValue = this.textFieldTarget.value
-    let valuesToBeShown = this.choicesValue.filter(n => selectedValue !== n)
+    let choices = this.choicesValue.sort()
+    if (selectedValue !== "") {
+      choices = choices.concat([null])
+    }
+
+    let valuesToBeShown = choices.filter(n => selectedValue !== n)
 
     this.choicesTarget.innerHTML = ''
 
@@ -37,7 +47,7 @@ export default class extends Controller {
       linkTag.id = value
       
       let label
-      if (value === "") {
+      if (value === null) {
         label = this.emptyLabelValue
       } else {
         label = value
