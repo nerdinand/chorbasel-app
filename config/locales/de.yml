@@ -42,7 +42,6 @@ de:
         metadata: Metadaten
       song:
         arranger: Arrangeur:in
-        composer: Komponist:in
         enums:
           register:
             alto: Alt
@@ -63,8 +62,10 @@ de:
         key_signature: Tonart
         language: Sprache
         lyrics: Liedtext
+        music_composer: Musik / Komponist:in
         registers: Stimmen
         repertoire: Im Repertoire?
+        texter: Texter:in
         time_signature: Taktbezeichnung
         title: Name
       song_list:

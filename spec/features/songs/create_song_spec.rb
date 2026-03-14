@@ -14,7 +14,8 @@ RSpec.describe('Creating a song') do
     expect(page).to have_content('Neues Lied')
 
     fill_in 'Name', with: 'Auld Lang Syne'
-    fill_in 'Komponist:in', with: 'Robert Burns'
+    fill_in 'Musik / Komponist:in', with: 'traditionell'
+    fill_in 'Texter:in', with: 'Robert Burns'
     fill_in 'Arrangeur:in', with: 'Philippe A. Rayot'
     fill_in 'Tonart', with: 'Gb'
     fill_in 'Taktbezeichnung', with: '4/4'
