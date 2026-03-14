@@ -118,7 +118,7 @@
   <div
     class="form-field"
     data-controller="combobox"
-    data-combobox-choices-value="<%= Song.all.pluck(:genres).compact.uniq.to_json %>"
+    data-combobox-choices-value="<%= Song.all.pluck(:genres).flatten.uniq.to_json %>"
   >
     <p>
       <%= f.label :genres %>
