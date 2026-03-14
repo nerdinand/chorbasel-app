@@ -1,6 +1,6 @@
-<%= render 'errors', model: @song_list_item %>
+<%= render 'errors', model: song_list_item %>
 
-<%= form_for [@song_list_item.song_list, @song_list_item] do |f| %>
+<%= form_for [song_list_item.song_list, song_list_item] do |f| %>
   <%= f.hidden_field :song_list_id %>
 
   <div class="form-field">

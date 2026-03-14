@@ -2,7 +2,7 @@
 
 module SongListItemsHelper
   def song_list_item_song_options
-    Song.all.map { |s| [s.title, s.id] }
+    Song.order(:title).map { |s| [s.title, s.id] }
   end
 
   def song_list_item_icon(song_list_item)

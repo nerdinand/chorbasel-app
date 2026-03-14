@@ -2,7 +2,7 @@
 
 class SongListsController < ApplicationController
   def index
-    @song_lists = policy_scope(SongList)
+    @song_lists = policy_scope(SongList).order(created_at: :desc)
   end
 
   def show
