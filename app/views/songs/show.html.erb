@@ -1,7 +1,7 @@
 <% content_for :title, @song.title %>
 
 <% if @song.song_media.any? %>
-  <%= render 'download_dropdown' %>
+  <%= render 'download_dropdown', song: @song %>
 <% end %>
 
 <% if @song.music_composer.present? %>
