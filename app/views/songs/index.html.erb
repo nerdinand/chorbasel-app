@@ -13,10 +13,7 @@
   <thead>
     <tr class="sticky top-0">
       <th><%= t('activerecord.attributes.song.title') %></th>
-      <th><%= t('activerecord.attributes.song.composer') %></th>
-      <th><%= t('activerecord.attributes.song.arranger') %></th>
       <th><%= t('activerecord.attributes.song.registers') %></th>
-      <th><%= t('activerecord.attributes.song.repertoire') %></th>
       <th></th>
       <th></th>
     </tr>
@@ -28,16 +25,7 @@
           <%= link_to song.title, song %>
         </td>
         <td>
-          <%= song.composer %>
-        </td>
-        <td>
-          <%= song.arranger %>
-        </td>
-        <td>
           <%= register_string(song.registers) %>
-        </td>
-        <td>
-          <%= boolean_emoji(song.repertoire?) %>
         </td>
         <td>
           <% if policy(song).edit? %>

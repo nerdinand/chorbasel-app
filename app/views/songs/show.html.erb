@@ -4,15 +4,26 @@
   <%= render 'download_dropdown' %>
 <% end %>
 
-<p>
-  <b><%= t('activerecord.attributes.song.composer') %></b>
-  <%= @song.composer %>
-</p>
+<% if @song.music_composer.present? %>
+  <p>
+    <b><%= t('activerecord.attributes.song.music_composer') %></b>
+    <%= @song.music_composer %>
+  </p>
+<% end %>
 
-<p>
-  <b><%= t('activerecord.attributes.song.arranger') %></b>
-  <%= @song.arranger %>
-</p>
+<% if @song.texter.present? %>
+  <p>
+    <b><%= t('activerecord.attributes.song.texter') %></b>
+    <%= @song.texter %>
+  </p>
+<% end %>
+
+<% if @song.arranger.present? %>
+  <p>
+    <b><%= t('activerecord.attributes.song.arranger') %></b>
+    <%= @song.arranger %>
+  </p>
+<% end %>
 
 <% if @song.score.present? %>
   <% if policy(@song.score).edit? %>
@@ -26,12 +37,12 @@
 
 <%= render 'score' %>
 
-<p>
-  <b><%= t('activerecord.attributes.song.lyrics') %></b>
-  <%= simple_format @song.lyrics, class: 'mb-3' %>
-</p>
-
-<p><b><%= t('activerecord.attributes.song.genres') %></b></p>
+<% if @song.lyrics.present? %>
+  <p>
+    <b><%= t('activerecord.attributes.song.lyrics') %></b>
+    <%= simple_format @song.lyrics, class: 'mb-3' %>
+  </p>
+<% end %>
 
 <% if policy(@song).edit? %>
   <%= link_to t('.edit'), edit_song_path(@song), class: 'btn btn-primary' %>

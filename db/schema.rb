@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_02_164809) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_14_172005) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -159,14 +159,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_02_164809) do
 
   create_table "songs", force: :cascade do |t|
     t.string "arranger"
-    t.string "composer"
     t.datetime "created_at", null: false
     t.json "genres", default: [], null: false
     t.string "key_signature"
     t.string "language"
     t.text "lyrics"
+    t.string "music_composer"
     t.json "registers", default: [], null: false
     t.boolean "repertoire", default: false, null: false
+    t.string "texter"
     t.string "time_signature"
     t.string "title", null: false
     t.datetime "updated_at", null: false

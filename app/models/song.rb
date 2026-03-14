@@ -10,5 +10,7 @@ class Song < ApplicationRecord
 
   validates :registers, array: Register::Song::REGISTERS
 
-  normalizes :arranger, :composer, :key_signature, :language, :time_signature, with: ->(str) { str.presence }
+  normalizes :arranger, :music_composer, :texter, :key_signature, :language, :time_signature, with: lambda { |str|
+    str.presence
+  }
 end
