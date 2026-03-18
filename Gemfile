@@ -74,11 +74,11 @@ gem 'rails-i18n', '~> 8.1.0'
 
 gem 'icalendar', '~> 2.12'
 
-gem 'down', '~> 5.4'
+gem 'down', '~> 5.5'
 
 gem 'faker', '~> 3.6'
 
-gem 'aws-sdk-s3', '~> 1.215', require: false
+gem 'aws-sdk-s3', '~> 1.216', require: false
 
 gem 'image_processing', '~> 1.13'
 
