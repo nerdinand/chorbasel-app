@@ -148,6 +148,7 @@ GEM
       tzinfo
     faker (3.6.1)
       i18n (>= 1.8.11, < 2)
+    ffi (1.17.2)
     ffi (1.17.2-aarch64-linux-gnu)
     ffi (1.17.2-arm-linux-gnu)
     ffi (1.17.2-arm64-darwin)
@@ -604,4 +605,4 @@ DEPENDENCIES
   web-console
 
 BUNDLED WITH
-   2.6.9
+   4.0.8
