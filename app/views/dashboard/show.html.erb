@@ -31,27 +31,29 @@
 
 <h2><%= t('.calendar.title') %></h2>
 
-<table>
-  <thead>
-    <tr>
-      <% @overview_calendar_events.each do |calendar_event| %>
-        <th class="<%= calendar_event_color_class(calendar_event) %>">
-          <%= link_to_if policy(calendar_event).show?, calendar_event.date, calendar_event %>
-        </th>
-      <% end %>
-    </tr>
-  </thead>
-  
-  <tbody class="border-r-2">
-    <tr>
-      <% @overview_calendar_events.each do |calendar_event| %>
-        <td class="text-center">
-          <%= attendance_action_symbol(calendar_event) %>
-        </td>
-      <% end %>
-    </tr>
-  </tbody>
-</table>
+<div class="table-scroll">
+  <table class="table-wide">
+    <thead>
+      <tr>
+        <% @overview_calendar_events.each do |calendar_event| %>
+          <th class="<%= calendar_event_color_class(calendar_event) %>">
+            <%= link_to_if policy(calendar_event).show?, calendar_event.date, calendar_event %>
+          </th>
+        <% end %>
+      </tr>
+    </thead>
+
+    <tbody class="border-r-2">
+      <tr>
+        <% @overview_calendar_events.each do |calendar_event| %>
+          <td class="text-center">
+            <%= attendance_action_symbol(calendar_event) %>
+          </td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <% if params[:load_past] != 'true' %>
   <div class="mt-10">

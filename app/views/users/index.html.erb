@@ -20,68 +20,70 @@
   <% end %>
 </p>
 
-<table>
-  <thead>
-    <tr class="sticky top-0">
-      <th><%= t('.profile_complete') %></th>
-      <th><%= t('.face_picture') %></th>
-      <th><%= link_to t('.first_name'), request.query_parameters.merge(order: :first_name) %></th>
-      <th><%= link_to t('.last_name'), request.query_parameters.merge(order: :last_name) %></th>
-      <th><%= t('.email') %></th>
-      <th><%= link_to t('.register'), request.query_parameters.merge(order: :register) %></th>
-      <th><%= t('.roles') %></th>
-      <th><%= t('.status') %></th>
-      <% if current_user.roles_wrapper.app? %>
-        <th><%= t('.sessions') %></th>
-      <% end %>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
-      <tr class="register-<%= user.canonical_register %>">
-        <td>
-          <%= boolean_emoji(user.profile_complete?) %>
-        </td>
-        <td>
-          <% if user.face_picture.present? %>
-            <%= image_tag(user.face_picture.variant(:thumb)) %>
-          <% end %>
-        </td>
-        <td>
-          <%= user.first_name %>
-        </td>
-        <td>
-          <%= user.last_name %>
-        </td>
-        <td>
-          <%= mail_to user.email %>
-        </td>
-        <td>
-          <%= human_register(user.register) %>
-        </td>
-        <td>
-          <ul>
-            <% user.roles_wrapper.roles.each do |role| %>
-              <li><%= role.human_name %></li>
-            <% end %>
-          </ul>
-        </td>
-        <td>
-          <%= icon_for_user_status(user.current_status.try(:status)) %>
-          <%= user.current_human_status %>
-        </td>
+<div class="table-scroll">
+  <table class="table-wide">
+    <thead>
+      <tr class="sticky top-0">
+        <th><%= t('.profile_complete') %></th>
+        <th><%= t('.face_picture') %></th>
+        <th><%= link_to t('.first_name'), request.query_parameters.merge(order: :first_name) %></th>
+        <th><%= link_to t('.last_name'), request.query_parameters.merge(order: :last_name) %></th>
+        <th><%= t('.email') %></th>
+        <th><%= link_to t('.register'), request.query_parameters.merge(order: :register) %></th>
+        <th><%= t('.roles') %></th>
+        <th><%= t('.status') %></th>
         <% if current_user.roles_wrapper.app? %>
-          <td>
-            <%= user.passwordless_sessions.available.count %>
-          </td>
+          <th><%= t('.sessions') %></th>
         <% end %>
-        <td>
-          <% if policy(user).edit? %>
-            <%= link_to t('.edit'), edit_user_path(user), class: 'btn btn-primary' %>
-          <% end %>
-        </td>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr class="<%= "register-#{user.canonical_register}" %>">
+          <td>
+            <%= boolean_emoji(user.profile_complete?) %>
+          </td>
+          <td>
+            <% if user.face_picture.present? %>
+              <%= image_tag(user.face_picture.variant(:thumb)) %>
+            <% end %>
+          </td>
+          <td>
+            <%= user.first_name %>
+          </td>
+          <td>
+            <%= user.last_name %>
+          </td>
+          <td>
+            <%= mail_to user.email %>
+          </td>
+          <td>
+            <%= human_register(user.register) %>
+          </td>
+          <td>
+            <ul>
+              <% user.roles_wrapper.roles.each do |role| %>
+                <li><%= role.human_name %></li>
+              <% end %>
+            </ul>
+          </td>
+          <td>
+            <%= icon_for_user_status(user.current_status.try(:status)) %>
+            <%= user.current_human_status %>
+          </td>
+          <% if current_user.roles_wrapper.app? %>
+            <td>
+              <%= user.passwordless_sessions.available.count %>
+            </td>
+          <% end %>
+          <td>
+            <% if policy(user).edit? %>
+              <%= link_to t('.edit'), edit_user_path(user), class: 'btn btn-primary' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

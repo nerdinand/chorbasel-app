@@ -4,37 +4,39 @@
   <%= link_to t('.new'), new_info_path, class: 'btn btn-primary' %>
 <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th><%= t('.title') %></th>
-      <th><%= t('.description') %></th>
-      <th><%= t('.kind') %></th>
-      <th><%= t('.active') %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @infos.each do |info| %>
+<div class="table-scroll">
+  <table class="table-wide">
+    <thead>
       <tr>
-        <td>
-          <%= info.title %>
-        </td>
-        <td>
-          <%= info.description %>
-        </td>
-        <td>
-          <%= info.kind %>
-        </td>
-        <td>
-          <%= boolean_emoji(info.active?) %>
-        </td>
-        <td>
-          <% if policy(info).edit? %>
-            <%= link_to t('.edit'), edit_info_path(info), class: 'btn btn-primary' %>
-          <% end %>
-        </td>
+        <th><%= t('.title') %></th>
+        <th><%= t('.description') %></th>
+        <th><%= t('.kind') %></th>
+        <th><%= t('.active') %></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @infos.each do |info| %>
+        <tr>
+          <td>
+            <%= info.title %>
+          </td>
+          <td>
+            <%= info.description %>
+          </td>
+          <td>
+            <%= info.kind %>
+          </td>
+          <td>
+            <%= boolean_emoji(info.active?) %>
+          </td>
+          <td>
+            <% if policy(info).edit? %>
+              <%= link_to t('.edit'), edit_info_path(info), class: 'btn btn-primary' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

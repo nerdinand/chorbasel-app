@@ -342,6 +342,7 @@ de:
   layouts:
     application:
       back: Zurück
+      install_app: App installieren
     footer:
       feedback: Feedback
       google_drive: Google Drive

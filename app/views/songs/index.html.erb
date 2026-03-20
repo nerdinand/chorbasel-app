@@ -9,35 +9,37 @@
   <%= submit_tag t('.apply'), class: 'btn btn-primary' %>
 <% end %>
 
-<table>
-  <thead>
-    <tr class="sticky top-0">
-      <th><%= t('activerecord.attributes.song.title') %></th>
-      <th><%= t('activerecord.attributes.song.registers') %></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @songs.each do |song| %>
-      <tr>
-        <td>
-          <%= link_to song.title, song %>
-        </td>
-        <td>
-          <%= register_string(song.registers) %>
-        </td>
-        <td>
-          <% if policy(song).edit? %>
-            <%= link_to t('.edit'), edit_song_path(song), class: 'btn btn-primary' %>
-          <% end %>
-        </td>
-        <td>
-          <% if policy(song).destroy? %>
-            <%= button_to t('.destroy'), song_path(song), method: :delete, class: 'btn btn-danger' %>
-          <% end %>
-        </td>
+<div class="table-scroll">
+  <table class="table-wide">
+    <thead>
+      <tr class="sticky top-0">
+        <th><%= t('activerecord.attributes.song.title') %></th>
+        <th><%= t('activerecord.attributes.song.registers') %></th>
+        <th></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @songs.each do |song| %>
+        <tr>
+          <td>
+            <%= link_to song.title, song %>
+          </td>
+          <td>
+            <%= register_string(song.registers) %>
+          </td>
+          <td>
+            <% if policy(song).edit? %>
+              <%= link_to t('.edit'), edit_song_path(song), class: 'btn btn-primary' %>
+            <% end %>
+          </td>
+          <td>
+            <% if policy(song).destroy? %>
+              <%= button_to t('.destroy'), song_path(song), method: :delete, class: 'btn btn-danger' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
