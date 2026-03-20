@@ -19,3 +19,13 @@
     @apply border-primary-dark
   }
 }
+
+@layer components {
+  .table-scroll {
+    @apply w-full overflow-x-auto;
+  }
+
+  .table-wide {
+    @apply min-w-max;
+  }
+}

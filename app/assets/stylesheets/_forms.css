@@ -16,6 +16,6 @@
   }
 
   textarea {
-    @apply w-1/2 h-60;
+    @apply w-full md:w-1/2 h-60;
   }
 }

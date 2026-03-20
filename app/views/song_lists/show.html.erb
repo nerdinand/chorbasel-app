@@ -8,58 +8,59 @@
   <%= link_to t('.new'), new_song_list_song_list_item_path(@song_list), class: 'btn btn-primary' %>
 <% end %>
 
-<table>
-  <thead>
-    <tr>
+<div class="table-scroll">
+  <table class="table-wide">
+    <thead>
+      <tr>
+        <th></th>
+        <% if policy(@song_list).edit? %>
+          <th></th>
+          <th><%= t('.name') %></th>
+          <th><%= t('.notes') %></th>
+          <th></th>
+          <th></th>
+        <% else %>
+          <th><%= t('.name') %></th>
+          <th><%= t('.notes') %></th>
+        <% end %>
+      </tr>
+    </thead>
+
+    <tbody
       <% if policy(@song_list).edit? %>
-        <th></th>
-        <th></th>
-        <th><%= t('.name') %></th>
-        <th><%= t('.notes') %></th>
-        <th></th>
-        <th></th>
-      <% else %>
-        <th></th>
-        <th><%= t('.name') %></th>
-        <th><%= t('.notes') %></th>
+        data-controller="sortable"
+        data-sortable-animation-value="150"
+        data-sortable-resource-name-value="song_list_item"
+        data-sortable-handle-value=".handle"
       <% end %>
-    </tr>
-  </thead>
+    >
+      <% @song_list.song_list_items.order(:position).each.with_index do |song_list_item, index| %>
+        <% if policy(@song_list).edit? %>
+          <tr
+            data-sortable-update-url="<%= song_list_song_list_item_path(song_list_item.song_list, song_list_item) %>"
+          >
+            <td>
+              <%= tabler_icon :arrows_move_vertical, classes: ['cursor-move', 'handle'] %>
+            </td>
 
-  <tbody
-    <% if policy(@song_list).edit? %>
-      data-controller="sortable"
-      data-sortable-animation-value="150"
-      data-sortable-resource-name-value="song_list_item"
-      data-sortable-handle-value=".handle"
-    <% end %>
-  >
-    <% @song_list.song_list_items.order(:position).each.with_index do |song_list_item, index| %>
-      <% if policy(@song_list).edit? %>
-        <tr
-          data-sortable-update-url="<%= song_list_song_list_item_path(song_list_item.song_list, song_list_item) %>"
-        >
-          <td>
-            <%= tabler_icon :arrows_move_vertical, classes: ['cursor-move', 'handle'] %>
-          </td>
+            <%= render 'data_cells', song_list_item: song_list_item, index: index %>
 
-          <%= render 'data_cells', song_list_item: song_list_item, index: index %>
+            <td>
+              <%= link_to t('.edit'), edit_song_list_song_list_item_path(song_list_item.song_list, song_list_item), class: 'btn btn-primary' %>
+            </td>
 
-          <td>
-            <%= link_to t('.edit'), edit_song_list_song_list_item_path(song_list_item.song_list, song_list_item), class: 'btn btn-primary' %>
-          </td>
-
-          <td>
-            <% if policy(song_list_item).destroy? %>
-              <%= button_to t('.destroy'), song_list_song_list_item_path(song_list_item.song_list, song_list_item), method: :delete, class: 'btn btn-danger' %>
-            <% end %>
-          </td>
-        </tr>
-      <% else %>
-        <tr>
-          <%= render 'data_cells', song_list_item: song_list_item, index: index %>
-        </tr>
+            <td>
+              <% if policy(song_list_item).destroy? %>
+                <%= button_to t('.destroy'), song_list_song_list_item_path(song_list_item.song_list, song_list_item), method: :delete, class: 'btn btn-danger' %>
+              <% end %>
+            </td>
+          </tr>
+        <% else %>
+          <tr>
+            <%= render 'data_cells', song_list_item: song_list_item, index: index %>
+          </tr>
+        <% end %>
       <% end %>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>

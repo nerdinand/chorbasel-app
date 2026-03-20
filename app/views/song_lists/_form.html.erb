@@ -1,6 +1,6 @@
-<%= render 'errors', model: @song_list %>
+<%= render 'errors', model: song_list %>
 
-<%= form_for @song_list do |f| %>
+<%= form_for song_list do |f| %>
   <div class="form-field">
     <p>
       <%= f.label :name %>
@@ -27,6 +27,7 @@
   <%# i18n-tasks-use t('helpers.submit.song_list.update') %>
 <% end %>
 
-<% unless @song_list.new_record? %>
-  <%= render 'program_form' %>
+<% unless song_list.new_record? %>
+  <% form_program = local_assigns.fetch(:program, nil) || Program.new(song_list: song_list) %>
+  <%= render 'program_form', song_list:, program: form_program %>
 <% end %>

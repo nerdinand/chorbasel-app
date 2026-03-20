@@ -1,31 +1,38 @@
 <%
-navbar_links = []
+member_links = []
+admin_links = []
 
 if logged_in?
-  navbar_links = [[t('.dashboard'), dashboard_path]]
+  member_links = [[t('.dashboard'), dashboard_path]]
+
+  if policy(:song_list).index?
+    member_links << [t('.song_lists'), song_lists_path]
+  end
+
+  member_links << [t('.name_guessing'), new_name_guess_path]
+  member_links << [t('.profiles'), profiles_path]
 
   if policy(:user).index?
-    navbar_links << [t('.users'), users_path]
+    admin_links << [t('.users'), users_path]
   end
 
   if policy(:attendance).index?
-    navbar_links << [t('.attendances'), attendances_path]
+    admin_links << [t('.attendances'), attendances_path]
   end
-
-  if policy(:song_list).index?
-    navbar_links << [t('.song_lists'), song_lists_path]
-  end
-
-  navbar_links << [t('.name_guessing'), new_name_guess_path]
-  navbar_links << [t('.profiles'), profiles_path]
 
   if policy(:statistics).index?
-    navbar_links << [t('.statistics'), statistics_path]
+    admin_links << [t('.statistics'), statistics_path]
   end
 
   if policy(:info).new?
-    navbar_links << [t('.infos'), infos_path]
+    admin_links << [t('.infos'), infos_path]
   end
+end
+
+nav_link_classes = lambda do |path, mobile: false|
+  size_classes = mobile ? 'block px-3 py-2 text-base font-medium no-underline' : 'px-3 py-2 text-sm font-medium no-underline'
+  color_classes = current_page?(path) ? 'text-complementary' : 'text-white hover:text-complementary'
+  "#{size_classes} #{color_classes}"
 end
 %>
 
@@ -42,7 +49,7 @@ end
 
             Menu open: "hidden", Menu closed: "block"
           -->
-          <svg data-visibility-target="hideable" class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+          <svg data-visibility-target="openIcon" class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
           <!--
@@ -50,7 +57,7 @@ end
 
             Menu open: "block", Menu closed: "hidden"
           -->
-          <svg data-visibility-target="hideable" hidden class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+          <svg data-visibility-target="closeIcon" hidden class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
           </svg>
         </button>
@@ -61,8 +68,16 @@ end
         </div>
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
-            <% navbar_links.each do |text, path| %>
-              <%= link_to text, path, class: 'rounded-md bg-primary px-3 py-2 text-sm font-medium text-white' %>
+            <% member_links.each do |text, path| %>
+              <%= link_to text, path, class: nav_link_classes.call(path) %>
+            <% end %>
+
+            <% if admin_links.any? %>
+              <span class="my-2 w-px bg-white/40"></span>
+            <% end %>
+
+            <% admin_links.each do |text, path| %>
+              <%= link_to text, path, class: nav_link_classes.call(path) %>
             <% end %>
           </div>
         </div>
@@ -95,10 +110,18 @@ end
   </div>
 
   <!-- Mobile menu, show/hide based on menu state. -->
-  <div data-visibility-target="hideable" hidden class="sm:hidden" id="mobile-menu">
+  <div data-visibility-target="panel" hidden class="sm:hidden" id="mobile-menu">
     <div class="space-y-1 px-2 pb-3 pt-2">
-      <% navbar_links.each do |text, path| %>
-        <%= link_to text, path, class: 'block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-primary hover:text-white' %>
+      <% member_links.each do |text, path| %>
+        <%= link_to text, path, class: nav_link_classes.call(path, mobile: true) %>
+      <% end %>
+
+      <% if admin_links.any? %>
+        <div class="my-2 border-t border-white/30"></div>
+      <% end %>
+
+      <% admin_links.each do |text, path| %>
+        <%= link_to text, path, class: nav_link_classes.call(path, mobile: true) %>
       <% end %>
     </div>
   </div>
