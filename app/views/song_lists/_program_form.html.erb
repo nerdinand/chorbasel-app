@@ -33,7 +33,7 @@
   <div class="form-field">
     <p><%= f.label :calendar_event_id, t('.calendar_event_id') %></p>
 
-    <%= f.select :calendar_event_id, song_list_calendar_event_options, include_blank: true %>
+    <%= f.select :calendar_event_id, song_list_calendar_event_options, include_blank: '' %>
 
     <p class="field-hint"><%= t('.calendar_event.hint') %></p>
   </div>

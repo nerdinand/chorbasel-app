@@ -1,7 +1,7 @@
 <%# i18n-tasks-use t('activerecord.models.user') %>
-<%= render "errors", model: @user %>
+<%= render "errors", model: user %>
 
-<%= form_for @user do |f| %>
+<%= form_for user do |f| %>
   <div class="form-field">
     <p>
       <%= f.label :email %>
@@ -18,8 +18,8 @@
       <%= label_text %>
 
       <p>
-        <% if @user.face_picture.present? %>
-          <%= image_tag(@user.face_picture.variant(:thumb)) %>
+        <% if user.face_picture.present? %>
+          <%= image_tag(user.face_picture.variant(:thumb)) %>
         <% else %>
           <%= t('.face_picture.not_set_yet_notice') %>
         <% end %>
@@ -35,8 +35,8 @@
       <%= label_text %>
 
       <p>
-        <% if @user.profile_picture.present? %>
-          <%= image_tag(@user.profile_picture.variant(:medium)) %>
+        <% if user.profile_picture.present? %>
+          <%= image_tag(user.profile_picture.variant(:medium)) %>
         <% else %>
           <%= t('.profile_picture.not_set_yet_notice') %>
         <% end %>
@@ -140,7 +140,7 @@
     </p>
 
     <p>
-      <%= f.select :register, users_register_options, include_blank: true %>
+      <%= f.select :register, users_register_options, include_blank: '' %>
     </p>
 
     <p class="field-hint"><%= t('.register.hint') %></p>

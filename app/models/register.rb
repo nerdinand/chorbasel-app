@@ -21,8 +21,7 @@ module Register
       REGISTER_TENOR_1,
       REGISTER_TENOR_2,
       REGISTER_BASS_1,
-      REGISTER_BASS_2,
-      nil
+      REGISTER_BASS_2
     ].freeze
 
     REGISTER_SOPRANO = 'soprano'
