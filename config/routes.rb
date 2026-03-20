@@ -14,6 +14,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     get 'dashboard' => 'dashboard#show'
 
     resources :users, except: :destroy do
+      resource :profile, only: :show
       resources :user_statuses, except: %i[index show]
     end
 
