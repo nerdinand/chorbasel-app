@@ -145,12 +145,6 @@ de:
       title: Anwesenheiten
     new:
       title: Anwesenheit eintragen
-    quick_create:
-      error: Fehler beim Eintragen der Anwesenheit.
-      success: Anwesenheit erfolgreich eingetragen.
-    quick_update:
-      error: Fehler beim Ändern der Anwesenheit.
-      success: Anwesenheit erfolgreich geändert.
     table_header:
       name: Name
     update:
