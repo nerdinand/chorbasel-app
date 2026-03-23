@@ -10,7 +10,7 @@
 <%= render @calendar_event %>
 
 <% @calendar_event.attendance_statuses.each do |status, attendances| %>
-  <h2><%= icon_for_status(status) %> <%= I18n.t("activerecord.attributes.attendance.enums.status.#{status}") %> (<%= attendances.count %>)</h2>
+  <h2><%= icon_for_status(status) %> <%= I18n.t("activerecord.attributes.attendance.enums.status.#{status}") %> (<%= turbo_frame_tag "attendance-count-#{status}", src: calendar_event_attendance_count_path(@calendar_event, status:), loading: "eager" %>)</h2>
 
   <div class="table-scroll">
     <table class="table-wide">
