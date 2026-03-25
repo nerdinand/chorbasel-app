@@ -24,6 +24,10 @@ module Attendances
 
     private
 
+    def attendance_params
+      params.expect(attendance: %i[user_id calendar_event_id status remarks])
+    end
+
     def quick_action_success_response(attendance)
       respond_to do |format|
         format.turbo_stream do
