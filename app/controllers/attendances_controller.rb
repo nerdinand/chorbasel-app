@@ -42,28 +42,6 @@ class AttendancesController < ApplicationController
     end
   end
 
-  def quick_create
-    @attendance = authorize Attendance.new(attendance_params)
-
-    if @attendance.save
-      flash.notice = t('.success')
-    else
-      flash.alert = t('.error')
-    end
-    redirect_to @attendance.calendar_event
-  end
-
-  def quick_update
-    @attendance = authorize Attendance.find(params[:attendance_id])
-
-    if @attendance.update(attendance_params)
-      flash.notice = t('.success')
-    else
-      flash.alert = t('.error')
-    end
-    redirect_to @attendance.calendar_event
-  end
-
   private
 
   def build_attendance_table

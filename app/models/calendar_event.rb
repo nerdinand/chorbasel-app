@@ -47,8 +47,7 @@ class CalendarEvent < ApplicationRecord
     status_hash = Attendance::STATUSES.index_with do |status|
       attendances.where(status:)
     end
-    users_without_attendance = User.user_status_at_time(UserStatus::STATUS_ACTIVE, starts_at) -
-                               status_hash.values.reduce(&:+).map(&:user)
+    users_without_attendance = active_users_at_time - status_hash.values.reduce(&:+).map(&:user)
     status_hash[Attendance::STATUS_UNKNOWN] += users_without_attendance.map do |user|
       Attendance.new(user:, calendar_event: self)
     end
@@ -89,6 +88,10 @@ class CalendarEvent < ApplicationRecord
 
   def date_and_summary
     [starts_at.strftime('%d.%m.%Y'), summary].compact.join(' ')
+  end
+
+  def active_users_at_time
+    User.user_status_at_time(UserStatus::STATUS_ACTIVE, starts_at)
   end
 
   delegate :today?, to: :starts_at

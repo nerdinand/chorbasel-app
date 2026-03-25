@@ -19,18 +19,17 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     end
 
     resources :attendances, only: %i[index edit new create update] do
-      patch :quick_update
+      patch :update, path: 'quick', controller: 'attendances/quick_actions', as: 'quick_update'
     end
 
-    resource :attendance do
-      post :quick_create
-    end
+    post :create, controller: 'attendances/quick_actions', as: 'attendance_quick_create'
 
     namespace :calendar_events do
       resource :syncs, only: :create
     end
 
     resources :calendar_events, only: [:show] do
+      resource :attendance_count, only: [:show], controller: 'calendar_events/attendance_counts'
       resource :attendance, only: [] do
         resources :excuses, only: %i[new create], controller: 'calendar_events/attendances/excuses' do
           post :accept
