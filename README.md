@@ -30,6 +30,14 @@ These are the most important non-standard dependencies of the app:
 * tailwindcss: CSS framework.
 * pundit: For authorization of all the features through user roles.
 
+### Getting Started
+
+To get the app running locally:
+1. Ensure you have Ruby 3.3+ and SQLite3 installed.
+2. Clone the repository and run `bundle install`.
+3. Setup the database: `bin/rails db:prepare`.
+4. Start the development server: `bin/dev`.
+
 ### Development
 
 We aim to have a reasonable test coverage using these kinds of specs:
