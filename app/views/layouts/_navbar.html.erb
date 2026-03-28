@@ -1,5 +1,4 @@
-<%
-member_links = []
+<% member_links = []
 admin_links = []
 
 if logged_in?
@@ -33,39 +32,84 @@ nav_link_classes = lambda do |path, mobile: false|
   size_classes = mobile ? 'block px-3 py-2 text-base font-medium no-underline' : 'px-3 py-2 text-sm font-medium no-underline'
   color_classes = current_page?(path) ? 'text-complementary' : 'text-white hover:text-complementary'
   "#{size_classes} #{color_classes}"
-end
-%>
+end %>
 
 <nav class="bg-primary" data-controller="visibility">
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-    <div class="relative flex h-16 items-center justify-between" >
+    <div class="relative flex h-16 items-center justify-between">
       <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-        <!-- Mobile menu button-->
-        <button data-action="visibility#toggleTargets" type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+        <!-- Mobile menu button -->
+        <button
+          data-action="visibility#toggleTargets"
+          type="button"
+          class="
+            relative inline-flex items-center justify-center rounded-md p-2
+            text-white hover:bg-primary hover:text-white focus:outline-none
+            focus:ring-2 focus:ring-inset focus:ring-white
+          "
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+        >
           <span class="absolute -inset-0.5"></span>
           <span class="sr-only">Open main menu</span>
-          <!--
-            Icon when menu is closed.
 
-            Menu open: "hidden", Menu closed: "block"
+          <!--
+  Icon when menu is closed.
+
+  Menu open: "hidden", Menu closed: "block"
           -->
-          <svg data-visibility-target="openIcon" class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          <svg
+            data-visibility-target="openIcon"
+            class="size-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            data-slot="icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
           </svg>
-          <!--
-            Icon when menu is open.
 
-            Menu open: "block", Menu closed: "hidden"
+          <!--
+  Icon when menu is open.
+
+  Menu open: "block", Menu closed: "hidden"
           -->
-          <svg data-visibility-target="closeIcon" hidden class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          <svg
+            data-visibility-target="closeIcon"
+            hidden
+            class="size-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            data-slot="icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
           </svg>
         </button>
       </div>
-      <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+
+      <div
+        class="
+          flex flex-1 items-center justify-center sm:items-stretch
+          sm:justify-start
+        "
+      >
         <div class="flex shrink-0 items-center">
           <%= link_to image_tag(logo_path, class: 'h-8 w-auto'), root_path %>
         </div>
+
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
             <% member_links.each do |text, path| %>
@@ -84,22 +128,59 @@ end
       </div>
 
       <% if logged_in? %>
-        <div data-controller="visibility" class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+        <div
+          data-controller="visibility"
+          class="
+            absolute inset-y-0 right-0 flex items-center pr-2 sm:static
+            sm:inset-auto sm:ml-6 sm:pr-0
+          "
+        >
           <!-- Profile dropdown -->
           <div class="relative ml-3">
             <div>
-              <button type="button" data-action="visibility#toggleTargets" class="relative flex rounded-full bg-primary text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-white-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+              <button
+                type="button"
+                data-action="visibility#toggleTargets"
+                class="
+                  relative flex rounded-full bg-primary text-sm
+                  focus:outline-none focus:ring-2 focus:ring-white
+                  focus:ring-offset-2 focus:ring-offset-white-800
+                "
+                id="user-menu-button"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
                 <span class="absolute -inset-1.5"></span>
                 <span class="sr-only">Open user menu</span>
+
                 <% if current_user.face_picture.present? %>
                   <%= image_tag current_user.face_picture.variant(:thumb), class: 'size-8 rounded-full' %>
                 <% else %>
-                  <span class="size-8 rounded-full align-middle text-lg text-white bg-complementary"><%= current_user.display_name.first %></span>
+                  <span
+                    class="
+                      size-8 rounded-full align-middle text-lg text-white
+                      bg-complementary
+                    "
+                  >
+                    <%= current_user.display_name.first %>
+                  </span>
                 <% end %>
               </button>
             </div>
 
-            <div data-visibility-target="hideable" hidden class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+            <div
+              data-visibility-target="hideable"
+              hidden
+              class="
+                absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md
+                bg-white py-1 shadow-lg ring-1 ring-black/5
+                focus:outline-none
+              "
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="user-menu-button"
+              tabindex="-1"
+            >
               <%= link_to t('.my_data'), edit_user_path(current_user), class: 'block px-4 py-2 text-sm text-primary', role: 'menuitem', tabindex: '-1' %>
               <%= link_to t('.logout'), users_sign_out_path, method: :delete, class: 'block px-4 py-2 text-sm text-primary', role: 'menuitem', tabindex: '-1' %>
             </div>
@@ -110,7 +191,12 @@ end
   </div>
 
   <!-- Mobile menu, show/hide based on menu state. -->
-  <div data-visibility-target="panel" hidden class="sm:hidden" id="mobile-menu">
+  <div
+    data-visibility-target="panel"
+    hidden
+    class="sm:hidden"
+    id="mobile-menu"
+  >
     <div class="space-y-1 px-2 pb-3 pt-2">
       <% member_links.each do |text, path| %>
         <%= link_to text, path, class: nav_link_classes.call(path, mobile: true) %>

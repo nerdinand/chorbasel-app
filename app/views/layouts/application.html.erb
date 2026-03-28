@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
   <%= render 'layouts/head' %>
 
@@ -10,11 +11,24 @@
         <%= render 'layouts/flashes' %>
 
         <% if logged_in? %>
-          <button id="pwa-install-button" type="button" class="btn btn-secondary mb-5 hidden"><%= t('.install_app') %></button>
+          <button
+            id="pwa-install-button"
+            type="button"
+            class="btn btn-secondary mb-5 hidden"
+          >
+            <%= t('.install_app') %>
+          </button>
         <% end %>
 
         <% if logged_in? && browser.device.mobile? %>
-          <button class="btn btn-secondary mb-5" data-controller="back-button" data-back-button-target="button" data-action="click->back-button#goBack"><%= tabler_icon :'arrow-narrow-left' %><%= t('.back') %></button>
+          <button
+            class="btn btn-secondary mb-5"
+            data-controller="back-button"
+            data-back-button-target="button"
+            data-action="click->back-button#goBack"
+          >
+            <%= tabler_icon :'arrow-narrow-left' %><%= t('.back') %>
+          </button>
         <% end %>
 
         <h1><%= content_for(:title) %></h1>
