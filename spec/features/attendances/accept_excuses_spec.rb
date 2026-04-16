@@ -16,7 +16,7 @@ RSpec.describe('Accepting an excuse') do
     Attendance.create(
       calendar_event:,
       user: users(:uwe),
-      remarks: "Uwe:\n> Ich werde leider keine Lust haben.\n> Gruss Uwe",
+      remarks: "Ich werde leider keine Lust haben.\n> Gruss Uwe",
       status: 'excuse_requested'
     )
   end
@@ -38,7 +38,7 @@ RSpec.describe('Accepting an excuse') do
     expect(page).to have_content('Anwesenheit bearbeiten')
     expect(page).to have_content('Benutzer:in: Uwe S')
     expect(page).to have_content('Termin: my upcoming event')
-    expect(page).to have_content('Uwe: > Ich werde leider keine Lust haben. > Gruss Uwe')
+    expect(page).to have_content('Ich werde leider keine Lust haben. > Gruss Uwe')
 
     select 'Entschuldigt', from: 'Status'
     click_on 'Anwesenheit aktualisieren'

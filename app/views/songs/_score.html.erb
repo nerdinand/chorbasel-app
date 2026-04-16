@@ -1,8 +1,8 @@
-<% if @song.song_media.recording.any? %>
-  <% score_url = url_for(@song.score.file) if @song.score.present? %>
-  <% metadata = @song.score.metadata if @song.score.present? %>
+<% if song.song_media.recording.any? %>
+  <% score_url = url_for(song.score.file) if song.score.present? %>
+  <% metadata = song.score.metadata if song.score.present? %>
   <%= content_tag :div, data: {controller: 'score', 'score-url-value': score_url, 'score-metadata-value': metadata, 'score-delay-in-milliseconds-value': 200} do %>
-    <% @song.song_media.recording.each do |recording| %>
+    <% song.song_media.recording.each do |recording| %>
       <div class="flex my-5">
         <strong class="w-1/6">
           <% if recording.register.present? %>
@@ -11,7 +11,7 @@
             <%= t('.all_registers') %>
           <% end %>
         </strong>
-  
+
         <%= audio_tag url_for(recording.file), class: 'w-5/6', controls: true, preload: 'none', data: {'score-target': 'audioTag', 'action': 'seeked->score#update'} %>
       </div>
     <% end %>

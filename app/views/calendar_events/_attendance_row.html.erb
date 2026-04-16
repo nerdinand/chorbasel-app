@@ -1,4 +1,7 @@
-<tr class="<%= "register-#{attendance.user.canonical_register}" %>" id="attendance-row-user-<%= attendance.user.id %>">
+<tr
+  class="<%= "register-#{attendance.user.canonical_register}" %>"
+  id="attendance-row-user-<%= attendance.user.id %>"
+>
   <td>
     <% if attendance.new_record? %>
       <%= link_to attendance.user.full_name, new_attendance_path(user_id: attendance.user, calendar_event_id: attendance.calendar_event) %>
@@ -6,6 +9,7 @@
       <%= link_to attendance.user.full_name, edit_attendance_path(attendance) %>
     <% end %>
   </td>
+
   <% if status.in? [Attendance::STATUS_EXCUSE_REQUESTED, Attendance::STATUS_UNKNOWN] %>
     <td>
       <% url = attendance.new_record? ? attendance_quick_create_path : attendance_quick_update_path(attendance) %>
@@ -16,7 +20,9 @@
             <%= f.hidden_field :user_id %>
             <%= f.hidden_field :calendar_event_id %>
           <% end %>
+
           <%= f.hidden_field :status, value: new_status %>
+
           <%= button_tag do %>
             <%= icon_for_status(new_status) %>
           <% end %>

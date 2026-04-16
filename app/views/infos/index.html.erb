@@ -15,21 +15,26 @@
         <th></th>
       </tr>
     </thead>
+
     <tbody>
       <% @infos.each do |info| %>
         <tr>
           <td>
             <%= info.title %>
           </td>
+
           <td>
             <%= info.description %>
           </td>
+
           <td>
             <%= info.kind %>
           </td>
+
           <td>
             <%= boolean_emoji(info.active?) %>
           </td>
+
           <td>
             <% if policy(info).edit? %>
               <%= link_to t('.edit'), edit_info_path(info), class: 'btn btn-primary' %>

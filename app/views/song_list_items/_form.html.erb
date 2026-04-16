@@ -21,6 +21,7 @@
     </p>
 
     <%= f.select :song_id, song_list_item_song_options, include_blank: '' %>
+
     <p class="field-hint"><%= t('.song.hint') %></p>
   </div>
 
@@ -29,6 +30,7 @@
       <%= f.label :notes %>
       <%# i18n-tasks-use t('activerecord.attributes.song_list_item.notes') %>
     </p>
+
     <p><%= f.text_area :notes %></p>
   </div>
 

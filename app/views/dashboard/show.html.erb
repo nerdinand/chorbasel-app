@@ -3,6 +3,7 @@
     <p>
       <b><%= @info.title %></b>
     </p>
+
     <%= @info.description %>
   </div>
 <% end %>
@@ -19,6 +20,7 @@
 <h2><%= t('.upcoming_birthdays.title') %></h2>
 
 <p><%= t('.upcoming_birthdays.description') %></p>
+
 <ul>
   <% @upcoming_birthdays.each do |user, next_birthday| %>
     <li>
@@ -70,6 +72,7 @@
         <%= calendar_event.summary %>
       <% end %>
     </p>
+
     <%= render calendar_event %>
 
     <%= render 'attendance_status_and_action', attendance_check: @attendance_checks[calendar_event] %>

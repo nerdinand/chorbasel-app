@@ -46,7 +46,7 @@ module Attendances
             turbo_stream.append(
               "attendance-row-user-#{attendance.user.id}", partial: 'errors', locals: { model: attendance }
             )
-          ]
+          ], status: :bad_request
         end
       end
     end

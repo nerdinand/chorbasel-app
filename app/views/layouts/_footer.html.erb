@@ -5,12 +5,14 @@
     <%= link_to t('.website'), t('external_links.website'), target: "_blank" %>
     <%= link_to t('.infopoint'), t('external_links.infopoint'), target: "_blank" %>
     <%= link_to t('.google_drive'), t('external_links.google_drive'), target: "_blank" %>
-    
     <% if current_user.roles_wrapper.app? %>
       <br>
-      ChorBasel-App <%= app_version %>,
-      Ruby <%= RUBY_VERSION %>, 
-      Rails <%= Rails.version %>
+      ChorBasel-App
+      <%= app_version %>
+      , Ruby
+      <%= RUBY_VERSION %>
+      , Rails
+      <%= Rails.version %>
     <% end %>
   <% end %>
 </footer>

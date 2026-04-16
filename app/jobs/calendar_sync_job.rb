@@ -6,6 +6,11 @@ class CalendarSyncJob < ApplicationJob
   def perform
     calendar_url = Rails.application.credentials[:calendar_url]
 
+    if Rails.env.test?
+      Rails.logger.warn 'Skipping CalendarSyncJob because it is a test'
+      return
+    end
+
     if calendar_url.nil?
       Rails.logger.warn ':calendar_url is not defined in credentials, skipping CalendarSyncJob'
       return

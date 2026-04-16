@@ -19,25 +19,31 @@
         <th></th>
       </tr>
     </thead>
+
     <tbody>
       <% @user.user_statuses.order(from_date: :desc).each do |user_status| %>
         <tr>
           <td>
             <%= user_status.human_status %>
           </td>
+
           <td>
             <%= user_status.note %>
           </td>
+
           <td>
             <%= l(user_status.from_date)  if user_status.from_date.present? %>
           </td>
+
           <td>
             <%= l(user_status.to_date) if user_status.to_date.present? %>
           </td>
+
           <td>
             <% if policy(user_status).edit? %>
               <%= link_to t('.user_statuses.edit'), edit_user_user_status_path(user_status.user, user_status), class: 'btn btn-primary' %>
             <% end %>
+
             <% if policy(user_status).destroy? %>
               <%= button_to t('.user_statuses.destroy'), user_user_status_path(user_status.user, user_status), method: :delete, class: 'btn btn-danger' %>
             <% end %>

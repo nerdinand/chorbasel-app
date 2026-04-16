@@ -4,6 +4,7 @@
   <%= link_to @attendance_pagination.previous_params, class: 'no-underline' do %>
     <%= tabler_icon 'arrow_left', classes: ['inline', 'align-[sub]'] %>
   <% end %>
+
   <%= link_to @attendance_pagination.next_params, class: 'no-underline' do %>
     <%= tabler_icon 'arrow_right', classes: ['inline', 'align-[sub]'] %>
   <% end %>
@@ -25,15 +26,20 @@
 <div class="table-scroll">
   <table class="table-wide">
     <%= render 'table_header', attendance_table: @attendance_table %>
+
     <% @attendance_table.canonical_register_users.each do |register, users| %>
       <% if users.any? %>
         <tbody class="border-r-2">
           <% users.each do |user| %>
             <tr class="<%= "register-#{user.canonical_register}" %>">
-              <td class="<%= "border-x-2 sticky left-0 register-#{user.canonical_register}" %>"><%= user.full_name %></td>
+              <td class="<%= "border-x-2 sticky left-0 register-#{user.canonical_register}" %>">
+                <%= user.full_name %>
+              </td>
+
               <% @attendance_table.calendar_events.each do |calendar_event| %>
                 <td class="text-center">
                   <% user_status = @attendance_table.user_status_for(user, calendar_event) %>
+
                   <% if user_status.try(:active?) %>
                     <% attendance = @attendance_table.attendance_for(user, calendar_event) %>
                     <% if attendance.nil? %>
