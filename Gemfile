@@ -76,9 +76,9 @@ gem 'icalendar', '~> 2.12'
 
 gem 'down', '~> 5.5'
 
-gem 'faker', '~> 3.6'
+gem 'faker', '~> 3.7'
 
-gem 'aws-sdk-s3', '~> 1.217', require: false
+gem 'aws-sdk-s3', '~> 1.219', require: false
 
 gem 'image_processing', '~> 1.13'
 
