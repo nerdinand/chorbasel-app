@@ -31,8 +31,8 @@
       <% if users.any? %>
         <tbody class="border-r-2">
           <% users.each do |user| %>
-            <tr class="<%= "register-#{user.canonical_register}" %>">
-              <td class="<%= "border-x-2 sticky left-0 register-#{user.canonical_register}" %>">
+            <tr class="<%= register_class(user.canonical_register) %>">
+              <td class="border-x-2 sticky left-0 <%= register_class(user.canonical_register) %>">
                 <%= user.full_name %>
               </td>
 

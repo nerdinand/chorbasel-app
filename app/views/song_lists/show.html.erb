@@ -12,17 +12,10 @@
   <table class="table-wide">
     <thead>
       <tr>
-        <th></th>
+        <% headers = policy(@song_list).edit? ? ['', '', t('.name'), t('.notes'), '', ''] : ['', t('.name'), t('.notes')] %>
 
-        <% if policy(@song_list).edit? %>
-          <th></th>
-          <th><%= t('.name') %></th>
-          <th><%= t('.notes') %></th>
-          <th></th>
-          <th></th>
-        <% else %>
-          <th><%= t('.name') %></th>
-          <th><%= t('.notes') %></th>
+        <% headers.each do |h| %>
+          <th><%= h %></th>
         <% end %>
       </tr>
     </thead>

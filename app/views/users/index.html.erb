@@ -56,14 +56,14 @@
 
     <tbody>
       <% @users.each do |user| %>
-        <tr class="<%= "register-#{user.canonical_register}" %>">
+        <tr class="<%= register_class(user.canonical_register) %>">
           <td>
             <%= boolean_emoji(user.profile_complete?) %>
           </td>
 
           <td>
             <% if user.face_picture.present? %>
-              <%= image_tag(user.face_picture.variant(:thumb)) %>
+              <%= image_tag(user.face_picture.variant(:thumb), alt: "Face picture") %>
             <% end %>
           </td>
 

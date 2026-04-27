@@ -67,6 +67,7 @@ end %>
             stroke="currentColor"
             aria-hidden="true"
             data-slot="icon"
+            alt="closed menu icon"
           >
             <path
               stroke-linecap="round"
@@ -90,6 +91,7 @@ end %>
             stroke="currentColor"
             aria-hidden="true"
             data-slot="icon"
+            alt="open menu icon"
           >
             <path
               stroke-linecap="round"
@@ -107,7 +109,7 @@ end %>
         "
       >
         <div class="flex shrink-0 items-center">
-          <%= link_to image_tag(logo_path, class: 'h-8 w-auto'), root_path %>
+          <%= link_to image_tag(logo_path, class: 'h-8 w-auto', alt: "Logo"), root_path %>
         </div>
 
         <div class="hidden sm:ml-6 sm:block">
@@ -154,7 +156,7 @@ end %>
                 <span class="sr-only">Open user menu</span>
 
                 <% if current_user.face_picture.present? %>
-                  <%= image_tag current_user.face_picture.variant(:thumb), class: 'size-8 rounded-full' %>
+                  <%= image_tag current_user.face_picture.variant(:thumb), class: 'size-8 rounded-full', alt: "Face picture" %>
                 <% else %>
                   <span
                     class="

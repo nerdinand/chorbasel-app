@@ -1,5 +1,5 @@
 <%= form_with(model: @session, url: url_for(action: 'new'), data: { turbo: 'false' }) do |f| %>
-  <% email_field_name = :"passwordless[#{email_field}]" %>
+  <% email_field_name = :"passwordless[#{email_field}]" %> <%# herb:disable actionview-no-silent-helper %>
 
   <%= f.label email_field_name,
       t("passwordless.sessions.new.email.label"),

@@ -15,4 +15,8 @@ module UsersHelper
   def icon_for_user_filter(status)
     tabler_icon(STATUS_ICON_MAP[status], classes: ['status-icon'])
   end
+
+  def register_class(canonical_register)
+    "register-#{canonical_register}"
+  end
 end

@@ -19,7 +19,7 @@
 
       <p>
         <% if user.face_picture.present? %>
-          <%= image_tag(user.face_picture.variant(:thumb)) %>
+          <%= image_tag(user.face_picture.variant(:thumb), alt: "Face picture") %>
         <% else %>
           <%= t('.face_picture.not_set_yet_notice') %>
         <% end %>
@@ -36,7 +36,7 @@
 
       <p>
         <% if user.profile_picture.present? %>
-          <%= image_tag(user.profile_picture.variant(:medium)) %>
+          <%= image_tag(user.profile_picture.variant(:medium), alt: "Profile picture") %>
         <% else %>
           <%= t('.profile_picture.not_set_yet_notice') %>
         <% end %>

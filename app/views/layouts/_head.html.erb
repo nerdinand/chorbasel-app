@@ -24,7 +24,7 @@
   <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
   <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
-  <%= javascript_include_tag 'verovio-toolkit-wasm-5.7.0.js' %>
+  <%= javascript_include_tag 'verovio-toolkit-wasm-5.7.0.js', nonce: true %>
 
   <% if controller_name == 'songs' && action_name == 'show' %>
     <%# hack to disable turbo for the songs#show page, because it doesn't play well with verovio's lifecycle %>

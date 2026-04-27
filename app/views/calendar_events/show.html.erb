@@ -18,11 +18,11 @@
 
   <div class="table-scroll">
     <table class="table-wide">
-      <tbody id="<%= "attendances-#{status}" %>">
+      <%= tag.tbody id: "attendances-#{status}" do %>
         <% attendances.sort_by { |a| a.user.register_object }.each do |attendance| %>
           <%= render 'attendance_row', attendance:, status: %>
         <% end %>
-      </tbody>
+      <% end %>
     </table>
   </div>
 <% end %>
