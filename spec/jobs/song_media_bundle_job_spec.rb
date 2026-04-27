@@ -16,7 +16,7 @@ RSpec.describe SongMediaBundleJob do
     song_media_bundle_download.reload
 
     expect(song_media_bundle_download.file.attachment.blob.content_type).to eq('application/zip')
-    expect(song_media_bundle_download.file.attachment.blob.byte_size).to eq(339_844)
+    expect(song_media_bundle_download.file.attachment.blob.byte_size).to eq(339_884)
 
     file = Zip::File.open_buffer(song_media_bundle_download.file.attachment.blob.download)
     expect(file.entries.size).to eq(1)
