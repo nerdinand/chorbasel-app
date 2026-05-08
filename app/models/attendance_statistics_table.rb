@@ -61,16 +61,20 @@ class AttendanceStatisticsTable
   end
 
   def active_counts
-    @active_counts ||= users.joins(:user_statuses).active
+    @active_counts ||= users.joins(:user_statuses)
                             .joins('join calendar_events')
                             .where('calendar_events.id': calendar_events.ids)
                             .where('
                             (
                               user_statuses.from_date < calendar_events.starts_at AND
                               calendar_events.starts_at < user_statuses.to_date
-                            )
-                            OR (user_statuses.from_date < calendar_events.starts_at AND user_statuses.to_date IS NULL)
-                            OR (user_statuses.from_date IS NULL AND calendar_events.starts_at < user_statuses.to_date)')
+                            ) OR (
+                              user_statuses.from_date < calendar_events.starts_at AND
+                              user_statuses.to_date IS NULL
+                            ) OR (
+                              user_statuses.from_date IS NULL AND
+                              calendar_events.starts_at < user_statuses.to_date
+                            )')
                             .group('users.id').count
   end
 
