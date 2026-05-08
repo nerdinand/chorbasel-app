@@ -513,6 +513,7 @@ de:
       name_guesses:
         title: Namen raten
       soprano: Sopran
+      statistics_year: Chorjahr-Statistiken
       tenor: Tenor
       timestamp_tallies:
         title: Datensätze
@@ -521,6 +522,17 @@ de:
     timestamp_tallies:
       created: erstellt
       modified: verändert
+    years:
+      show:
+        calendar_events:
+          category:
+            concert: Konzerte
+            extra_practice: Extraproben
+            other: Andere
+            regular_practice: Normale Proben
+          title: Termine
+          total: Total Termine
+        title: Chorjahr %{year}
   stimulus:
     single_choice_combobox:
       empty_label: "(Leer)"

@@ -57,6 +57,9 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     resources :profiles, only: :index
 
     resources :statistics, only: :index
+    namespace :statistics do
+      resource :year, only: [:show]
+    end
 
     resources :infos, except: %i[destroy show]
 

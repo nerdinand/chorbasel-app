@@ -23,7 +23,7 @@ module CalendarEventsHelper
 
   def calendar_event_color_class(calendar_event)
     return 'bg-primary bg-opacity-30' if calendar_event.today?
-    return '' if calendar_event.practice?
+    return '' if calendar_event.regular_practice?
 
     'bg-complementary bg-opacity-30'
   end

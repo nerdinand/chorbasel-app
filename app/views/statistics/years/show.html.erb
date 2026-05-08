@@ -1,0 +1,43 @@
+<% content_for :title, t('.title', year: @year) %>
+
+<h2><%= t('.calendar_events.title') %></h2>
+
+<table>
+  <tbody>
+    <% CalendarEvent::CATEGORIES.each do |category| %>
+      <tr><td><%= t(".calendar_events.category.#{category}") %></td><td><%= @calendar_events_by_category[category].count %></td></tr>
+    <% end %>
+    <tfoot>
+      <tr>
+        <th><%= t('.calendar_events.total') %></th><td><%= @calendar_events_by_category.values.sum(&:count) %></td>
+      </tr>
+    </tfoot>
+  </tbody>
+</table>
+
+<h2><%= t('.attendance.title') %></h2>
+
+<table>
+  <thead>
+    <th><%= t('.user') %></th>
+    <th><%= t('.active_count') %></th>
+    <th><%= t('activerecord.attributes.attendance.enums.status.attended') %></th>
+    <th><%= t('activerecord.attributes.attendance.enums.status.excused') %></th>
+    <th><%= t('activerecord.attributes.attendance.enums.status.unknown') %></th>
+    <th><%= t('.percentage_active_attended') %></th>
+    <th><%= t('.percentage_overall_attended') %></th>
+  </thead>
+  <tbody>
+    <% @year_statistics_table.sorted_users.each do |user| %>
+      <tr>
+        <td><%= user.full_name %></td>
+        <td><%= @year_statistics_table.active_count(user) %></td>
+        <td><%= @year_statistics_table.count(user, Attendance::STATUS_ATTENDED) %></td>
+        <td><%= @year_statistics_table.count(user, Attendance::STATUS_EXCUSED) %></td>
+        <td><%= @year_statistics_table.count(user, Attendance::STATUS_UNKNOWN) %></td>
+        <td><%= number_to_percentage @year_statistics_table.active_percentage(user, Attendance::STATUS_ATTENDED), precision: 0 %></td>
+        <td><%= number_to_percentage @year_statistics_table.overall_percentage(user, Attendance::STATUS_ATTENDED), precision: 0 %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
