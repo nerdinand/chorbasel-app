@@ -46,15 +46,20 @@
 
   <table>
     <thead>
+      <tr>
+        <td colspan="3"></td>
+        <td colspan="3"><%= t('.header.status') %></td>
+        <td colspan="2"><%= t('.header.attendance') %></td>
+      </tr>
       <tr class="sticky top-0">
-        <th><%= t('.rank') %></th>
-        <th><%= t('.user') %></th>
-        <th><%= t('.active_count') %></th>
-        <th><%= t('activerecord.attributes.attendance.enums.status.attended') %></th>
-        <th><%= t('activerecord.attributes.attendance.enums.status.excused') %></th>
-        <th><%= t('activerecord.attributes.attendance.enums.status.unknown') %></th>
-        <th><%= t('.percentage_active_attended') %></th>
-        <th><%= t('.percentage_overall_attended') %></th>
+        <th></th>
+        <th></th>
+        <th><%= t('.header.active_count') %></th>
+        <th><%= t('.header.status_attended') %></th>
+        <th><%= t('.header.status_excused') %></th>
+        <th><%= t('.header.status_unknown') %></th>
+        <th><%= t('.header.percentage_active_attended') %></th>
+        <th><%= t('.header.percentage_overall_attended') %></th>
       </tr>
     </thead>
     <tbody>
@@ -65,10 +70,10 @@
         <tr>
           <td>
             <% if overall_percentage != last_overall_percentage %>
-              <%= rank %>
+              <%= rank %>.
             <% end %>
           </td>
-          <td><%= user.full_name %></td>
+          <td class="font-semibold"><%= user.full_name %></td>
           <td><%= @year_statistics_table.active_count(user) %></td>
           <td><%= @year_statistics_table.count(user, Attendance::STATUS_ATTENDED) %></td>
           <td><%= @year_statistics_table.count(user, Attendance::STATUS_EXCUSED) %></td>

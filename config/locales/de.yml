@@ -506,8 +506,36 @@ de:
       error: Fehler beim Bearbeiten des Lieds.
       success: Lied erfolgreich bearbeitet.
   statistics:
+    attendances:
+      show:
+        attendance:
+          title: Anwesenheit
+        calendar_events:
+          category:
+            concert: Konzerte
+            extra_practice: Extraproben
+            other: Andere
+            regular_practice: Normale Proben
+          title: Termine
+          total: Total Termine
+        choir_year_link: Chorjahr %{year}
+        error:
+          end_date_undefined: Enddatum nicht definiert
+          start_date_undefined: Startdatum nicht definiert
+        header:
+          active_count: Aktiv
+          attendance: Anwesenheit
+          percentage_active_attended: wo Aktiv
+          percentage_overall_attended: bei allen Proben
+          status: Status
+          status_attended: Anwesend
+          status_excused: Entschuldigt
+          status_unknown: Unbekannt
+        timeframe_title: Statistiken von %{from} bis %{to}
+        year_title: Chorjahr %{year}
     index:
       alto: Alt
+      attendance_statistics: Anwesenheitsstatistik
       attendance_tally: Anwesenheitquoten
       bass: Bass
       name_guesses:
@@ -522,19 +550,6 @@ de:
     timestamp_tallies:
       created: erstellt
       modified: verändert
-    attendances:
-      show:
-        calendar_events:
-          category:
-            concert: Konzerte
-            extra_practice: Extraproben
-            other: Andere
-            regular_practice: Normale Proben
-          title: Termine
-          total: Total Termine
-        year_title: Chorjahr %{year}
-        choir_year_link: Chorjahr %{year}
-        timeframe_title: Statistiken von %{from} bis %{to}
   stimulus:
     single_choice_combobox:
       empty_label: "(Leer)"
