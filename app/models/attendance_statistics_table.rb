@@ -60,7 +60,7 @@ class AttendanceStatisticsTable
     users_attendances.group('users.id', 'attendances.status').count
   end
 
-  def active_counts
+  def active_counts # rubocop:disable Metrics/MethodLength
     @active_counts ||= users.joins(:user_statuses)
                             .joins('join calendar_events')
                             .where('calendar_events.id': calendar_events.ids)
