@@ -522,7 +522,7 @@ de:
     timestamp_tallies:
       created: erstellt
       modified: verändert
-    years:
+    attendances:
       show:
         calendar_events:
           category:
@@ -532,7 +532,9 @@ de:
             regular_practice: Normale Proben
           title: Termine
           total: Total Termine
-        title: Chorjahr %{year}
+        year_title: Chorjahr %{year}
+        choir_year_link: Chorjahr %{year}
+        timeframe_title: Statistiken von %{from} bis %{to}
   stimulus:
     single_choice_combobox:
       empty_label: "(Leer)"

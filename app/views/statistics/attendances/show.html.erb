@@ -1,0 +1,71 @@
+<% if @year %>
+  <% content_for :title, t('.year_title', year: choir_year_string(@year)) %>
+
+  <div class="float-right">
+    <%= link_to statistics_attendance_path(year: @year - 1) do %>
+      <%= tabler_icon 'arrow_left', classes: ['inline', 'align-[sub]'] %>
+      <%= t('.choir_year_link', year: choir_year_string(@year - 1)) %>
+    <% end %>
+    |
+    <%= link_to statistics_attendance_path(year: @year + 1) do %>
+      <%= t('.choir_year_link', year: choir_year_string(@year + 1)) %>
+      <%= tabler_icon 'arrow_right', classes: ['inline', 'align-[sub]'] %>
+    <% end %>
+  </div>
+<% else %>
+  <% content_for :title, t('.timeframe_title', from: @timeframe_from, to: @timeframe_to) %>
+<% end %>
+
+<% if @timeframe_from.nil? || @timeframe_to.nil? %>
+  <div class="alert">
+    <% if @timeframe_from.nil? %>
+      <p><%= t('.error.start_date_undefined') %></p>
+    <% end %>
+
+    <% if @timeframe_to.nil? %>
+      <p><%= t('.error.end_date_undefined') %></p>
+    <% end %>
+  </div>
+<% else %>
+  <h2><%= t('.calendar_events.title') %></h2>
+
+  <table>
+    <tbody>
+      <% CalendarEvent::CATEGORIES.each do |category| %>
+        <tr><td><%= t(".calendar_events.category.#{category}") %></td><td><%= @calendar_events_by_category[category].try(:count) || 0 %></td></tr>
+      <% end %>
+      <tfoot>
+        <tr>
+          <th><%= t('.calendar_events.total') %></th><td><%= @calendar_events_by_category.values.sum(&:count) %></td>
+        </tr>
+      </tfoot>
+    </tbody>
+  </table>
+
+  <h2><%= t('.attendance.title') %></h2>
+
+  <table>
+    <thead>
+      <th><%= t('.user') %></th>
+      <th><%= t('.active_count') %></th>
+      <th><%= t('activerecord.attributes.attendance.enums.status.attended') %></th>
+      <th><%= t('activerecord.attributes.attendance.enums.status.excused') %></th>
+      <th><%= t('activerecord.attributes.attendance.enums.status.unknown') %></th>
+      <th><%= t('.percentage_active_attended') %></th>
+      <th><%= t('.percentage_overall_attended') %></th>
+    </thead>
+    <tbody>
+      <% @year_statistics_table.sorted_users.each do |user| %>
+        <tr>
+          <td><%= user.full_name %></td>
+          <td><%= @year_statistics_table.active_count(user) %></td>
+          <td><%= @year_statistics_table.count(user, Attendance::STATUS_ATTENDED) %></td>
+          <td><%= @year_statistics_table.count(user, Attendance::STATUS_EXCUSED) %></td>
+          <td><%= @year_statistics_table.count(user, Attendance::STATUS_UNKNOWN) %></td>
+          <td><%= number_to_percentage @year_statistics_table.active_percentage(user, Attendance::STATUS_ATTENDED), precision: 0 %></td>
+          <td><%= number_to_percentage @year_statistics_table.overall_percentage(user, Attendance::STATUS_ATTENDED), precision: 0 %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

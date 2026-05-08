@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class YearStatisticsTable
+class AttendanceStatisticsTable
   def initialize(users, calendar_events)
     @users = users
     @calendar_events = calendar_events
@@ -11,7 +11,14 @@ class YearStatisticsTable
   end
 
   def count(user, status)
-    user_id_status_counts.fetch([user.id, status], 0)
+    if status == Attendance::STATUS_UNKNOWN
+      user_status_counts = user_id_status_counts.fetch(user.id, {})
+      return calendar_events.count - user_status_counts.values.sum + user_status_counts.fetch(
+        Attendance::STATUS_UNKNOWN, 0
+      )
+    end
+
+    user_id_status_counts.dig(user.id, status) || 0
   end
 
   def active_percentage(user, status)
@@ -37,9 +44,20 @@ class YearStatisticsTable
 
   def user_id_status_counts
     @user_id_status_counts ||= begin
-      users_attendances = users.joins(:attendances).where('attendances.calendar_event_id': calendar_events.pluck(:id))
-      users_attendances.group('users.id', 'attendances.status').count
+      grouped_by_user_id = user_attendances_counts.group_by do |k, _v|
+        k.first
+      end
+      grouped_by_user_id.transform_values do |v|
+        v.to_h do |a|
+          [a.first.second, a.second]
+        end
+      end
     end
+  end
+
+  def user_attendances_counts
+    users_attendances = users.joins(:attendances).where('attendances.calendar_event_id': calendar_events.pluck(:id))
+    users_attendances.group('users.id', 'attendances.status').count
   end
 
   def active_counts

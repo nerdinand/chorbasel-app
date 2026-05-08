@@ -64,8 +64,7 @@ class CalendarEvent < ApplicationRecord
       "%#{GENERAL_ASSEMBLY_ABBREVIATION_KEYWORD}%"
     )
   }
-  scope :last_general_assembly, -> { general_assembly.past.last }
-  scope :next_general_assembly, -> { general_assembly.future.first }
+  scope :in_time_range, ->(from, to) { where('starts_at > ? and starts_at <= ?', from, to) }
 
   def attendance_statuses
     status_hash = Attendance::STATUSES.index_with do |status|
