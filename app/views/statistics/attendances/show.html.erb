@@ -46,25 +46,37 @@
 
   <table>
     <thead>
-      <th><%= t('.user') %></th>
-      <th><%= t('.active_count') %></th>
-      <th><%= t('activerecord.attributes.attendance.enums.status.attended') %></th>
-      <th><%= t('activerecord.attributes.attendance.enums.status.excused') %></th>
-      <th><%= t('activerecord.attributes.attendance.enums.status.unknown') %></th>
-      <th><%= t('.percentage_active_attended') %></th>
-      <th><%= t('.percentage_overall_attended') %></th>
+      <tr class="sticky top-0">
+        <th><%= t('.rank') %></th>
+        <th><%= t('.user') %></th>
+        <th><%= t('.active_count') %></th>
+        <th><%= t('activerecord.attributes.attendance.enums.status.attended') %></th>
+        <th><%= t('activerecord.attributes.attendance.enums.status.excused') %></th>
+        <th><%= t('activerecord.attributes.attendance.enums.status.unknown') %></th>
+        <th><%= t('.percentage_active_attended') %></th>
+        <th><%= t('.percentage_overall_attended') %></th>
+      </tr>
     </thead>
     <tbody>
-      <% @year_statistics_table.sorted_users.each do |user| %>
+      <% last_overall_percentage = nil %>
+      <% @year_statistics_table.sorted_users.each.with_index do |user, index| %>
+        <% rank = index + 1 %>
+        <% overall_percentage = @year_statistics_table.overall_percentage(user, Attendance::STATUS_ATTENDED) %>
         <tr>
+          <td>
+            <% if overall_percentage != last_overall_percentage %>
+              <%= rank %>
+            <% end %>
+          </td>
           <td><%= user.full_name %></td>
           <td><%= @year_statistics_table.active_count(user) %></td>
           <td><%= @year_statistics_table.count(user, Attendance::STATUS_ATTENDED) %></td>
           <td><%= @year_statistics_table.count(user, Attendance::STATUS_EXCUSED) %></td>
           <td><%= @year_statistics_table.count(user, Attendance::STATUS_UNKNOWN) %></td>
           <td><%= number_to_percentage @year_statistics_table.active_percentage(user, Attendance::STATUS_ATTENDED), precision: 0 %></td>
-          <td><%= number_to_percentage @year_statistics_table.overall_percentage(user, Attendance::STATUS_ATTENDED), precision: 0 %></td>
+          <td><%= number_to_percentage overall_percentage, precision: 0 %></td>
         </tr>
+        <% last_overall_percentage = overall_percentage %>
       <% end %>
     </tbody>
   </table>
