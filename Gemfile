@@ -17,7 +17,7 @@ gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[windows jruby]
 
 # Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
-gem 'solid_cable', '~> 3.0'
+gem 'solid_cable', '~> 4.0'
 gem 'solid_cache', '~> 1.0'
 gem 'solid_queue', '~> 1.4'
 
@@ -78,9 +78,9 @@ gem 'down', '~> 5.6'
 
 gem 'faker', '~> 3.8'
 
-gem 'aws-sdk-s3', '~> 1.221', require: false
+gem 'aws-sdk-s3', '~> 1.224', require: false
 
-gem 'image_processing', '~> 1.13'
+gem 'image_processing', '~> 2.0'
 
 gem 'chartkick', '~> 5.2'
 
