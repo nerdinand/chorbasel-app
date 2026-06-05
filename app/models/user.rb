@@ -17,6 +17,8 @@ class User < ApplicationRecord
     phone_number
     birth_date
     register
+    face_picture
+    profile_picture
   ].freeze
 
   has_one_attached :face_picture do |attachable|

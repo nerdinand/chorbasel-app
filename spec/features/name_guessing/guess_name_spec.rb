@@ -5,7 +5,7 @@ require_relative '../log_in_helpers'
 
 RSpec.describe('Guessing names') do
   before do
-    srand(42)
+    srand(23)
   end
 
   scenario 'making a wrong guess' do

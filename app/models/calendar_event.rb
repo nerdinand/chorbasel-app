@@ -6,8 +6,23 @@ class CalendarEvent < ApplicationRecord
   ONGOING_TIME_WINDOW_BEFORE = 30.minutes
   ONGOING_TIME_WINDOW_AFTER = 30.minutes
 
+  REGULAR_PRACTICE_KEYWORD = 'normale probe'
   PRACTICE_KEYWORD = 'probe'
   CONCERT_KEYWORD = 'konzert'
+  GENERAL_ASSEMBLY_KEYWORD = 'Generalversammlung'
+  GENERAL_ASSEMBLY_ABBREVIATION_KEYWORD = 'GV'
+
+  CATEGORY_OTHER = :other
+  CATEGORY_REGULAR_PRACTICE = :regular_practice
+  CATEGORY_EXTRA_PRACTICE = :extra_practice
+  CATEGORY_CONCERT = :concert
+
+  CATEGORIES = [
+    CATEGORY_REGULAR_PRACTICE,
+    CATEGORY_EXTRA_PRACTICE,
+    CATEGORY_CONCERT,
+    CATEGORY_OTHER
+  ].freeze
 
   validates :uid, :event_created_at, :starts_at, :ends_at, :summary, presence: true
 
@@ -40,8 +55,16 @@ class CalendarEvent < ApplicationRecord
     where(starts_at: ..ONGOING_TIME_WINDOW_BEFORE.from_now).where(ends_at: ONGOING_TIME_WINDOW_AFTER.ago..)
   }
 
-  scope :practice, -> { where('summary like ?', "%#{PRACTICE_KEYWORD}%") }
+  scope :practice, -> { where('summary like ?', "%#{REGULAR_PRACTICE_KEYWORD}%") }
   scope :concert, -> { where('summary like ?', "%#{CONCERT_KEYWORD}%") }
+  scope :general_assembly, lambda {
+    where(
+      'summary like ? or summary like ?',
+      "%#{GENERAL_ASSEMBLY_KEYWORD}%",
+      "%#{GENERAL_ASSEMBLY_ABBREVIATION_KEYWORD}%"
+    )
+  }
+  scope :in_time_range, ->(from, to) { where('starts_at > ? and starts_at <= ?', from, to) }
 
   def attendance_statuses
     status_hash = Attendance::STATUSES.index_with do |status|
@@ -62,12 +85,24 @@ class CalendarEvent < ApplicationRecord
     CalendarEvent.after(starts_at).first
   end
 
-  def practice?
-    summary.downcase.include? PRACTICE_KEYWORD
+  def regular_practice?
+    summary.downcase.include? REGULAR_PRACTICE_KEYWORD
   end
 
   def concert?
     summary.downcase.include? CONCERT_KEYWORD
+  end
+
+  def extra_practice?
+    summary.downcase.include?(PRACTICE_KEYWORD) && !regular_practice?
+  end
+
+  def category
+    return :regular_practice if regular_practice?
+    return :extra_practice if extra_practice?
+    return :concert if concert?
+
+    :other
   end
 
   def duration

@@ -8,6 +8,16 @@ marit_face_picture_attachment:
   record: marit (User)
   blob: female_face_blob
 
+fabienne_face_picture_attachment:
+  name: face_picture
+  record: fabienne (User)
+  blob: female_face_blob
+
+fabienne_profile_picture_attachment:
+  name: profile_picture
+  record: fabienne (User)
+  blob: female_face_blob
+
 härlig_är_jorden_recording_all:
   name: file
   record: härlig_är_jorden_recording_all (SongMedium)
