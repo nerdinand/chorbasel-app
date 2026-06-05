@@ -7,16 +7,16 @@ RSpec.describe('Creating song media') do
   scenario do
     log_in_with_magic_link(users(:phips))
     click_on 'Lieder'
-    expect(page).to have_content('Liederlisten')
+    expect(page).to have_text('Liederlisten')
     click_on 'Alle Lieder'
-    expect(page).to have_content('Lieder')
+    expect(page).to have_text('Lieder')
     click_on 'Härlig är jorden'
-    expect(page).to have_content('Härlig är jorden')
+    expect(page).to have_text('Härlig är jorden')
     click_on 'Neue Mediendatei'
 
     select 'Notenblatt', from: 'Art'
     attach_file 'Datei', Rails.root.join('spec/fixtures/files/Härlig_är_jorden.pdf')
     click_on 'Mediendatei erstellen'
-    expect(page).to have_content('Mediendatei erfolgreich erstellt.')
+    expect(page).to have_text('Mediendatei erfolgreich erstellt.')
   end
 end

@@ -6,12 +6,12 @@ require_relative '../log_in_helpers'
 RSpec.describe('Completing a profile') do
   scenario do
     log_in_with_magic_link(users(:uwe))
-    expect(page).to have_content(
+    expect(page).to have_text(
       'Dein Benutzerprofil ist unvollständig. Bitte hilf uns indem du die fehlenden Informationen einträgst.'
     )
 
     click_on 'Benutzerprofil vervollständigen'
-    expect(page).to have_content('Benutzer:in bearbeiten')
+    expect(page).to have_text('Benutzer:in bearbeiten')
 
     fill_in 'Spitzname', with: 'uwu'
     fill_in 'Anrede', with: 'Herr'
@@ -23,6 +23,6 @@ RSpec.describe('Completing a profile') do
     select 'Bass 1', from: 'Stimme'
     click_on 'Benutzer:in aktualisieren'
 
-    expect(page).to have_content('Benutzer:in erfolgreich geändert.')
+    expect(page).to have_text('Benutzer:in erfolgreich geändert.')
   end
 end

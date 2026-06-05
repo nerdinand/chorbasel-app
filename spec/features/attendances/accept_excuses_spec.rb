@@ -26,8 +26,8 @@ RSpec.describe('Accepting an excuse') do
 
     click_on 'Anwesenheiten'
 
-    expect(page).to have_content('Zu bestätigende Abwesenheiten')
-    expect(page).to have_content('Uwe my upcoming event')
+    expect(page).to have_text('Zu bestätigende Abwesenheiten')
+    expect(page).to have_text('Uwe my upcoming event')
     expect(page).to have_css('tr', text: 'Uwe S') do |tr|
       expect(tr).to have_css('.attendance-status-icon-excused')
       expect(tr).to have_css('.attendance-status-icon-excuse-requested')
@@ -35,16 +35,16 @@ RSpec.describe('Accepting an excuse') do
 
     click_on 'Uwe my upcoming event'
 
-    expect(page).to have_content('Anwesenheit bearbeiten')
-    expect(page).to have_content('Benutzer:in: Uwe S')
-    expect(page).to have_content('Termin: my upcoming event')
-    expect(page).to have_content('Ich werde leider keine Lust haben. > Gruss Uwe')
+    expect(page).to have_text('Anwesenheit bearbeiten')
+    expect(page).to have_text('Benutzer:in: Uwe S')
+    expect(page).to have_text('Termin: my upcoming event')
+    expect(page).to have_text('Ich werde leider keine Lust haben. > Gruss Uwe')
 
     select 'Entschuldigt', from: 'Status'
     click_on 'Anwesenheit aktualisieren'
 
-    expect(page).to have_content('Anwesenheit erfolgreich geändert.')
-    expect(page).to have_no_content('Zu bestätigende Abwesenheiten')
+    expect(page).to have_text('Anwesenheit erfolgreich geändert.')
+    expect(page).to have_no_text('Zu bestätigende Abwesenheiten')
     expect(page).to have_css('tr', text: 'Uwe S') do |tr|
       expect(tr).to have_css('.attendance-status-icon-excused')
       expect(tr).to have_css('.attendance-status-icon-excused')

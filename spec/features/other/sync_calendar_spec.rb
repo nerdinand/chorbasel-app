@@ -7,6 +7,6 @@ RSpec.describe 'Syncing the calendar' do
   scenario 'syncing the calendar' do
     log_in_with_magic_link(users(:ferdi))
     click_on 'Chorkalender importieren'
-    expect(page).to have_content('Chorkalender erfolgreich importiert.')
+    expect(page).to have_text('Chorkalender erfolgreich importiert.')
   end
 end

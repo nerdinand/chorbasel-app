@@ -7,11 +7,11 @@ RSpec.describe('Creating a song') do
   scenario do
     log_in_with_magic_link(users(:phips))
     click_on 'Lieder'
-    expect(page).to have_content('Liederlisten')
+    expect(page).to have_text('Liederlisten')
     click_on 'Alle Lieder'
-    expect(page).to have_content('Lieder')
+    expect(page).to have_text('Lieder')
     click_on 'Neues Lied'
-    expect(page).to have_content('Neues Lied')
+    expect(page).to have_text('Neues Lied')
 
     fill_in 'Name', with: 'Auld Lang Syne'
     fill_in 'Musik / Komponist:in', with: 'traditionell'
@@ -63,6 +63,6 @@ For auld lang syne
 
     click_on 'Lied erstellen'
 
-    expect(page).to have_content('Lied erfolgreich erstellt.')
+    expect(page).to have_text('Lied erfolgreich erstellt.')
   end
 end

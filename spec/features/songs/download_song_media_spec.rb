@@ -7,11 +7,11 @@ RSpec.describe('Downloading song media') do
   scenario do
     log_in_with_magic_link(users(:uwe))
     click_on 'Lieder'
-    expect(page).to have_content('Liederlisten')
+    expect(page).to have_text('Liederlisten')
     click_on 'Alle Lieder'
-    expect(page).to have_content('Lieder')
+    expect(page).to have_text('Lieder')
     click_on 'Härlig är jorden'
-    expect(page).to have_content('Härlig är jorden')
+    expect(page).to have_text('Härlig är jorden')
     click_on 'Herunterladen'
     # TODO: fix this not finding the invisible link (debug running with JS?)
     find('a', text: 'Audioaufnahme (alle Stimmen)', visible: false).click

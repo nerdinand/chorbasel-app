@@ -11,18 +11,18 @@ RSpec.describe('Guessing names') do
   scenario 'making a wrong guess' do
     log_in_with_magic_link(users(:uwe))
     click_on 'Namen raten'
-    expect(page).to have_content('Namen raten')
+    expect(page).to have_text('Namen raten')
     fill_in 'Vorname oder Spitzname',	with: 'Foo'
     click_on 'Raten'
-    expect(page).to have_content('Leider falsch geraten! Das war Marit.')
+    expect(page).to have_text('Leider falsch geraten! Das war Marit.')
   end
 
   scenario 'making a correct guess' do
     log_in_with_magic_link(users(:uwe))
     click_on 'Namen raten'
-    expect(page).to have_content('Namen raten')
+    expect(page).to have_text('Namen raten')
     fill_in 'Vorname oder Spitzname',	with: 'Marit'
     click_on 'Raten'
-    expect(page).to have_content('Richtig!')
+    expect(page).to have_text('Richtig!')
   end
 end
