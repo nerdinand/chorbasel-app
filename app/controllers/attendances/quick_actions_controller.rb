@@ -13,7 +13,7 @@ module Attendances
     end
 
     def update
-      attendance = authorize Attendance.find(params[:attendance_id])
+      attendance = authorize Attendance.find(params.expect(:attendance_id))
 
       if attendance.update(attendance_params)
         quick_action_success_response(attendance)

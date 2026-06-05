@@ -7,10 +7,10 @@ RSpec.describe('Filtering songs') do
   scenario do
     log_in_with_magic_link(users(:uwe))
     click_on 'Lieder'
-    expect(page).to have_content('Liederlisten')
+    expect(page).to have_text('Liederlisten')
     click_on 'Alle Lieder'
-    expect(page).to have_content('Joyful, joyful')
-    expect(page).to have_content('Härlig är jorden')
+    expect(page).to have_text('Joyful, joyful')
+    expect(page).to have_text('Härlig är jorden')
 
     within('#language') do
       page.select 'Schwedisch'
@@ -18,8 +18,8 @@ RSpec.describe('Filtering songs') do
 
     click_on 'Filter anwenden'
     # Check that the page has some content
-    expect(page).to have_no_content('Joyful, joyful')
-    expect(page).to have_content('Härlig är jorden')
+    expect(page).to have_no_text('Joyful, joyful')
+    expect(page).to have_text('Härlig är jorden')
 
     within('#language') do
       page.select 'Englisch'
@@ -27,7 +27,7 @@ RSpec.describe('Filtering songs') do
 
     click_on 'Filter anwenden'
     # Check that the page has some content
-    expect(page).to have_content('Joyful, joyful')
-    expect(page).to have_no_content('Härlig är jorden')
+    expect(page).to have_text('Joyful, joyful')
+    expect(page).to have_no_text('Härlig är jorden')
   end
 end

@@ -4,7 +4,7 @@ module CalendarEvents
   module Attendances
     class AttendancesController < ApplicationController
       def create
-        calendar_event = CalendarEvent.find(params[:calendar_event_id])
+        calendar_event = CalendarEvent.find(params.expect(:calendar_event_id))
 
         result = AttendanceRestrictionCheck.new(current_user, calendar_event).can_create_signup
 

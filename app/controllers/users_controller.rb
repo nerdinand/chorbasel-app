@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = authorize User.includes(:user_statuses).find(params[:id])
+    @user = authorize User.includes(:user_statuses).find(params.expect(:id))
   end
 
   def create
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = authorize User.find(params[:id])
+    @user = authorize User.find(params.expect(:id))
 
     if @user.update(user_params)
       flash.notice = t('.success')

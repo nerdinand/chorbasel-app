@@ -16,12 +16,12 @@ RSpec.describe('Making an excuse') do
 
   scenario do
     log_in_with_magic_link(users(:uwe))
-    expect(page).to have_content('my upcoming event')
+    expect(page).to have_text('my upcoming event')
     click_on 'Entschuldigung erfassen'
-    expect(page).to have_content('Entschuldigung erfassen')
+    expect(page).to have_text('Entschuldigung erfassen')
     fill_in 'Entschuldigung', with: "Ich werde leider keine Lust haben.\nGruss Uwe"
     click_on 'Entschuldigung speichern'
-    expect(page).to have_content('Entschuldigung erfolgreich erfasst.')
-    expect(page).to have_no_content('Entschuldigung erfassen')
+    expect(page).to have_text('Entschuldigung erfolgreich erfasst.')
+    expect(page).to have_no_text('Entschuldigung erfassen')
   end
 end

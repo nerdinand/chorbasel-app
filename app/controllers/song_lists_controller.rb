@@ -6,7 +6,7 @@ class SongListsController < ApplicationController
   end
 
   def show
-    @song_list = policy_scope(SongList).includes(:song_list_items).find(params[:id])
+    @song_list = policy_scope(SongList).includes(:song_list_items).find(params.expect(:id))
   end
 
   def new
@@ -14,7 +14,7 @@ class SongListsController < ApplicationController
   end
 
   def edit
-    @song_list = authorize SongList.find(params[:id])
+    @song_list = authorize SongList.find(params.expect(:id))
     @program = authorize Program.new(song_list: @song_list)
   end
 
@@ -31,7 +31,7 @@ class SongListsController < ApplicationController
   end
 
   def update
-    @song_list = authorize SongList.find(params[:id])
+    @song_list = authorize SongList.find(params.expect(:id))
 
     if @song_list.update(song_list_params)
       flash.notice = t('.success')
@@ -43,7 +43,7 @@ class SongListsController < ApplicationController
   end
 
   def destroy
-    song_list = authorize SongList.find(params[:id])
+    song_list = authorize SongList.find(params.expect(:id))
 
     if song_list.destroy
       flash.notice = t('.success')

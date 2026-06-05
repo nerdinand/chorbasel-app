@@ -13,7 +13,7 @@ class ProgramsController < ApplicationController
   end
 
   def destroy
-    program = authorize Program.find(params[:id])
+    program = authorize Program.find(params.expect(:id))
 
     if program.destroy
       flash.notice = t('.success')

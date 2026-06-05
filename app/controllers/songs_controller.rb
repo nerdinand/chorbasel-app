@@ -11,7 +11,7 @@ class SongsController < ApplicationController
   end
 
   def show
-    @song = authorize Song.includes(:song_media).find(params[:id])
+    @song = authorize Song.includes(:song_media).find(params.expect(:id))
   end
 
   def new
@@ -21,7 +21,7 @@ class SongsController < ApplicationController
   end
 
   def edit
-    @song = authorize Song.find(params[:id])
+    @song = authorize Song.find(params.expect(:id))
   end
 
   def create
@@ -37,7 +37,7 @@ class SongsController < ApplicationController
   end
 
   def update
-    @song = authorize Song.find(params[:id])
+    @song = authorize Song.find(params.expect(:id))
 
     if @song.update(song_params)
       flash.notice = t('.success')
@@ -49,7 +49,7 @@ class SongsController < ApplicationController
   end
 
   def destroy
-    song = authorize Song.find(params[:id])
+    song = authorize Song.find(params.expect(:id))
 
     if song.destroy
       flash.notice = t('.success')

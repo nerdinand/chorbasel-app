@@ -6,7 +6,7 @@ class UserStatusesController < ApplicationController
   end
 
   def edit
-    @user_status = authorize UserStatus.find(params[:id])
+    @user_status = authorize UserStatus.find(params.expect(:id))
   end
 
   def create
@@ -22,7 +22,7 @@ class UserStatusesController < ApplicationController
   end
 
   def update
-    @user_status = authorize UserStatus.find(params[:id])
+    @user_status = authorize UserStatus.find(params.expect(:id))
 
     if @user_status.update(user_status_params)
       flash.notice = t('.success')
@@ -34,7 +34,7 @@ class UserStatusesController < ApplicationController
   end
 
   def destroy
-    user_status = authorize UserStatus.find(params[:id])
+    user_status = authorize UserStatus.find(params.expect(:id))
 
     if user_status.destroy
       flash.notice = t('.success')

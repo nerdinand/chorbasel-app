@@ -8,14 +8,14 @@ class AttendancesController < ApplicationController
   end
 
   def new
-    user = User.find(params[:user_id])
-    calendar_event = CalendarEvent.find(params[:calendar_event_id])
+    user = User.find(params.expect(:user_id))
+    calendar_event = CalendarEvent.find(params.expect(:calendar_event_id))
 
     @attendance = authorize Attendance.new(user:, calendar_event:, status: Attendance::STATUS_EXCUSED)
   end
 
   def edit
-    @attendance = authorize Attendance.find(params[:id])
+    @attendance = authorize Attendance.find(params.expect(:id))
   end
 
   def create
@@ -31,7 +31,7 @@ class AttendancesController < ApplicationController
   end
 
   def update
-    @attendance = authorize Attendance.find(params[:id])
+    @attendance = authorize Attendance.find(params.expect(:id))
 
     if @attendance.update(attendance_params)
       flash.notice = t('.success')

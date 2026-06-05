@@ -16,8 +16,8 @@ RSpec.describe('Creating an attendance') do
 
   scenario do
     log_in_with_magic_link(users(:uwe))
-    expect(page).to have_content('my test event')
+    expect(page).to have_text('my test event')
     click_on 'Anwesenheit eintragen'
-    expect(page).to have_content('Anwesenheit erfolgreich eingetragen.')
+    expect(page).to have_text('Anwesenheit erfolgreich eingetragen.')
   end
 end

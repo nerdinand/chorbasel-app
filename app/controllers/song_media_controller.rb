@@ -18,7 +18,7 @@ class SongMediaController < ApplicationController
   end
 
   def destroy
-    song_medium = authorize SongMedium.find(params[:id])
+    song_medium = authorize SongMedium.find(params.expect(:id))
 
     if song_medium.destroy
       flash.notice = t('.success')

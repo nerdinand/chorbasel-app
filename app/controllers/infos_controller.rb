@@ -10,7 +10,7 @@ class InfosController < ApplicationController
   end
 
   def edit
-    @info = authorize Info.find(params[:id])
+    @info = authorize Info.find(params.expect(:id))
   end
 
   def create
@@ -26,7 +26,7 @@ class InfosController < ApplicationController
   end
 
   def update
-    @info = authorize Info.find(params[:id])
+    @info = authorize Info.find(params.expect(:id))
 
     if @info.update(info_params)
       flash.notice = t('.success')
