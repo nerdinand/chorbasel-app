@@ -27,8 +27,8 @@ class CalendarSyncService
 
   def parse_ics(file_path)
     Rails.logger.info 'Parsing calendar file...'
-    ics_file = File.open(file_path)
-    parsed = Icalendar::Event.parse(ics_file)
+    ics_content = File.read(file_path)
+    parsed = Icalendar::Event.parse(ics_content)
     Rails.logger.info 'Finished parsing calendar file.'
     parsed
   end
