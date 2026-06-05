@@ -4,7 +4,7 @@ module CalendarEvents
   module Attendances
     class ExcusesController < ApplicationController
       def new
-        calendar_event = CalendarEvent.find(params[:calendar_event_id])
+        calendar_event = CalendarEvent.find(params.expect(:calendar_event_id))
         @attendance = authorize Attendance.new(calendar_event:, user: current_user)
         result = AttendanceRestrictionCheck.new(current_user, calendar_event).can_create_excuse
 
@@ -15,7 +15,7 @@ module CalendarEvents
       end
 
       def create
-        calendar_event = CalendarEvent.find(params[:calendar_event_id])
+        calendar_event = CalendarEvent.find(params.expect(:calendar_event_id))
         result = AttendanceRestrictionCheck.new(current_user, calendar_event).can_create_excuse
 
         if result.success?
@@ -27,7 +27,7 @@ module CalendarEvents
       end
 
       def accept
-        @attendance = authorize Attendance.find(params[:excuse_id])
+        @attendance = authorize Attendance.find(params.expect(:excuse_id))
 
         @attendance.accept!
 

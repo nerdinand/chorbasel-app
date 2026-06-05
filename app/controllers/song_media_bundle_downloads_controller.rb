@@ -2,7 +2,7 @@
 
 class SongMediaBundleDownloadsController < ApplicationController
   def show
-    @song_media_bundle_download = authorize SongMediaBundleDownload.find(params[:id])
+    @song_media_bundle_download = authorize SongMediaBundleDownload.find(params.expect(:id))
   end
 
   def create
