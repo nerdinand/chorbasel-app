@@ -97,3 +97,7 @@ gem 'browser', '~> 6.2'
 gem 'mission_control-jobs', '~> 1.1'
 
 gem 'ruby-vips', '~> 2.3'
+
+gem 'google-apis-drive_v3', '~> 0.81.0'
+
+gem 'multi_json', '~> 1.21'

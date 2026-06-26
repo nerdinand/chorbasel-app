@@ -29,6 +29,14 @@
     <p><%= f.file_field :file %></p>
   </div>
 
+  <div class="form-field">
+    <p>
+      <%= f.label :file_identifier %> <%# i18n-tasks-use t('activerecord.attributes.song_medium.file_identifier') %>
+    </p>
+
+    <p><%= f.text_field :file_identifier %></p>
+  </div>
+
   <p>
     <%= f.submit class: 'btn btn-primary' %> <%# i18n-tasks-use t('helpers.submit.song_medium.create') %>
   </p>

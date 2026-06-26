@@ -65,14 +65,12 @@
           <th><%= t('.song_media.kind') %></th>
           <th><%= t('.song_media.register') %></th>
           <th></th>
-          <th></th>
-          <th></th>
         </thead>
 
         <tbody>
           <% @song.song_media.each do |song_medium| %>
             <tr>
-              <td><%= file_icon(song_medium.file) %></td>
+              <td><%= file_icon(song_medium) %></td>
 
               <td>
                 <%= song_medium.human_kind %>

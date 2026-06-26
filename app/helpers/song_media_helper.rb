@@ -9,13 +9,15 @@ module SongMediaHelper
     Register::Song::REGISTERS.map { |r| [t("activerecord.attributes.song.enums.register.#{r}"), r] }
   end
 
-  def file_icon(attachment)
-    tabler_icon(if attachment.audio?
+  def file_icon(song_medium)
+    tabler_icon(if song_medium.type_audio?
                   :'file-music'
-                elsif attachment.content_type == 'application/pdf'
+                elsif song_medium.type_pdf?
                   :'file-type-pdf'
-                elsif attachment.video?
+                elsif song_medium.type_video?
                   :video
+                else
+                  :file
                 end, classes: ['mr-2'])
   end
 end

@@ -16,12 +16,14 @@
       tabindex="-1"
     >
       <% song.song_media.each do |song_medium| %>
-        <%= link_to rails_blob_path(song_medium.file, disposition: 'attachment'), class: 'inline-flex block px-4 py-2 text-sm text-primary', role: 'menuitem', tabindex: '-1' do %>
-          <%= file_icon(song_medium.file) %>
-          <%= song_medium.human_kind %>
+        <% if song_medium.file.present? %>
+          <%= link_to rails_blob_path(song_medium.file, disposition: 'attachment'), class: 'inline-flex block px-4 py-2 text-sm text-primary', role: 'menuitem', tabindex: '-1' do %>
+            <%= file_icon(song_medium) %>
+            <%= song_medium.human_kind %>
 
-          <% if song_medium.register.present? %>
-            <%= human_register(song_medium.register) %>
+            <% if song_medium.register.present? %>
+              <%= human_register(song_medium.register) %>
+            <% end %>
           <% end %>
         <% end %>
       <% end %>
