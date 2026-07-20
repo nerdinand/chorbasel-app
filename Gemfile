@@ -78,7 +78,7 @@ gem 'down', '~> 5.6'
 
 gem 'faker', '~> 3.8'
 
-gem 'aws-sdk-s3', '~> 1.226', require: false
+gem 'aws-sdk-s3', '~> 1.228', require: false
 
 gem 'image_processing', '~> 2.0'
 
