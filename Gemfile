@@ -19,7 +19,7 @@ gem 'tzinfo-data', platforms: %i[windows jruby]
 # Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
 gem 'solid_cable', '~> 4.0'
 gem 'solid_cache', '~> 1.0'
-gem 'solid_queue', '~> 1.4'
+gem 'solid_queue', '~> 1.5'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
@@ -78,7 +78,7 @@ gem 'down', '~> 5.6'
 
 gem 'faker', '~> 3.8'
 
-gem 'aws-sdk-s3', '~> 1.226', require: false
+gem 'aws-sdk-s3', '~> 1.228', require: false
 
 gem 'image_processing', '~> 2.0'
 
