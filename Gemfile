@@ -97,3 +97,5 @@ gem 'browser', '~> 6.2'
 gem 'mission_control-jobs', '~> 1.1'
 
 gem 'ruby-vips', '~> 2.3'
+
+gem 'icalendar-recurrence', '~> 1.2'

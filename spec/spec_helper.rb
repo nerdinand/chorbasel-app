@@ -98,12 +98,12 @@ end
 require 'simplecov'
 
 SimpleCov.start do
-  add_filter '/spec/'
-  add_filter '/config/'
+  SimpleCov.skip '/spec/'
+  SimpleCov.skip '/config/'
 
-  add_group 'Controllers', 'app/controllers'
-  add_group 'Models', 'app/models'
-  add_group 'Helpers', 'app/helpers'
-  add_group 'Mailers', 'app/mailers'
-  add_group 'Policies', 'app/policies'
+  SimpleCov.group 'Controllers', 'app/controllers'
+  SimpleCov.group 'Models', 'app/models'
+  SimpleCov.group 'Helpers', 'app/helpers'
+  SimpleCov.group 'Mailers', 'app/mailers'
+  SimpleCov.group 'Policies', 'app/policies'
 end
