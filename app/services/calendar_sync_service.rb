@@ -7,12 +7,13 @@ class CalendarSyncService
     @created_count = 0
     @updated_count = 0
     @deleted_count = 0
+    @unchanged_count = 0
   end
 
   def perform!
     download_file(calendar_url, calendar_tmp_path)
-    ical_events = parse_ics(calendar_tmp_path)
-    sync_to_database(ical_events)
+    events = parse_ics(calendar_tmp_path)
+    sync_to_database(events)
   end
 
   private
@@ -28,50 +29,57 @@ class CalendarSyncService
   def parse_ics(file_path)
     Rails.logger.info 'Parsing calendar file...'
     ics_content = File.read(file_path)
-    parsed = Icalendar::Event.parse(ics_content)
+    events = OccurrenceResolver.parse_and_resolve(ics_content)
     Rails.logger.info 'Finished parsing calendar file.'
-    parsed
+    events
   end
 
-  def sync_to_database(ical_events)
+  def sync_to_database(events)
     Rails.logger.info 'Syncing events to database...'
-    create_or_update_events(ical_events)
-    delete_deleted_events(ical_events)
+    create_or_update_events(events)
+    destroy_deleted_events(events)
     Rails.logger.info "Finished syncing events to database: created: #{@created_count}, \
-updated: #{@updated_count}, deleted: #{@deleted_count}"
+updated: #{@updated_count}, deleted: #{@deleted_count}, unchanged: #{@unchanged_count}"
   end
 
-  def create_or_update_events(ical_events)
-    ical_events.each do |ical_event|
-      create_or_update_event(ical_event)
+  def create_or_update_events(events)
+    events.each do |event|
+      create_or_update_event(event)
     end
   end
 
-  def create_or_update_event(ical_event)
-    calendar_event = CalendarEvent.find_or_initialize_by(uid: ical_event.uid.to_s)
+  def create_or_update_event(event)
+    calendar_event = CalendarEvent.find_or_initialize_by(uid: event.uid.to_s)
+    calendar_event.attributes = calendar_event_attributes(event)
+    save!(calendar_event)
+  end
 
+  def save!(calendar_event)
     if calendar_event.new_record?
       @created_count += 1
-    else
+    elsif calendar_event.changed?
       @updated_count += 1
+    else
+      @unchanged_count += 1
     end
 
-    calendar_event.update!(calendar_event_attributes(ical_event))
+    calendar_event.save!
   end
 
-  def calendar_event_attributes(ical_event)
+  def calendar_event_attributes(event)
     {
-      event_created_at: ical_event.created.to_datetime,
-      starts_at: ical_event.dtstart.to_datetime,
-      ends_at: ical_event.dtend.to_datetime,
-      location: ical_event.location.to_s,
-      summary: ical_event.summary.to_s,
-      description: ical_event.description.to_s
+      event_created_at: event.created.to_datetime,
+      starts_at: event.dtstart.to_datetime,
+      ends_at: event.dtend.to_datetime,
+      location: event.location.to_s,
+      summary: event.summary.to_s,
+      description: event.description.to_s,
+      is_recurring: event.is_a?(OccurrenceResolver::CalendarOccurrence)
     }
   end
 
-  def delete_deleted_events(ical_events)
-    ical_uids = ical_events.map { |ical_event| ical_event.uid.to_s }
+  def destroy_deleted_events(events)
+    ical_uids = events.map { |event| event.uid.to_s }
     deleted_ical_uids = CalendarEvent.pluck(:uid) - ical_uids
     calendar_events_to_delete = CalendarEvent.where(uid: deleted_ical_uids)
     @deleted_count = calendar_events_to_delete.count
