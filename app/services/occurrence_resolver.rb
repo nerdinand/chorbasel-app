@@ -41,6 +41,7 @@ class OccurrenceResolver
   def parse_and_resolve
     events = Icalendar::Event.parse(ics_content)
     events.map do |e|
+      debugger if e.uid == '46q4ltidl8n87sbj7mkuii11u1@google.com'
       if e.rrule.empty?
         e
       else

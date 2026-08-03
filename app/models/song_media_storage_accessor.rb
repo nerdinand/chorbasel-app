@@ -2,6 +2,26 @@
 
 require 'singleton'
 
+class DriveFiles
+  def initialize(all_files)
+    @all_files = all_files.map { |f| DriveFile.new(f) }.group_by(&:parent)
+  end
+
+  def roots
+    @all_files[nil]
+  end
+end
+
+class DriveFile
+  def initialize(file)
+    @file = file
+  end
+
+  def parent
+    @file.parents.try(:first)
+  end
+end
+
 class SongMediaStorageAccessor
   include Singleton
 
@@ -14,11 +34,17 @@ class SongMediaStorageAccessor
     )
   end
 
+  def files
+    DriveFiles.new(retrieve_files)
+    # grouped = files.group_by(&:parents)
+    # grouped.transform_keys { |k| files.find { |f| f.id == k.first } }
+  end
+
   def retrieve_files(next_page_token = nil)
     response = @drive_service.list_files(
-      q: "trashed = false and mimeType != 'application/vnd.google-apps.folder'",
+      q: 'trashed = false',
       page_size: 1000,
-      fields: 'files(id, name, mimeType), next_page_token',
+      fields: 'files(id, name, mimeType, parents), next_page_token',
       include_items_from_all_drives: true,
       supports_all_drives: true,
       page_token: next_page_token
