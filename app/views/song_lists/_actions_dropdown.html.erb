@@ -19,6 +19,7 @@
         <%= link_to t('.song_media_bundle_download.create'), song_list_song_media_bundle_downloads_path(song_list), data: { turbo_method: :post }, class: 'inline-flex block px-4 py-2 text-sm text-primary', role: 'menuitem', tabindex: '-1' %>
       <% end %>
 
+      <%= link_to t('.lyrics.show'), song_list_lyrics_path(song_list), class: 'inline-flex block px-4 py-2 text-sm text-primary', role: 'menuitem', tabindex: '-1' %>
     </div>
   </div>
 </div>
