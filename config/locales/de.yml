@@ -411,6 +411,10 @@ de:
     update_success_response:
       success: Listeneintrag erfolgreich bearbeitet.
   song_lists:
+    actions_dropdown:
+      actions: Aktionen
+      song_media_bundle_download:
+        create: Aufnahmen für meine Stimme herunterladen
     create:
       error: Fehler beim Erstellen der Liederliste.
       success: Liederliste erfolgreich erstellt.
@@ -446,8 +450,6 @@ de:
       name: Name
       new: Neuer Listeneintrag
       notes: Notiz
-      song_media_bundle_download:
-        create: Aufnahmen für meine Stimme herunterladen
     update:
       error: Fehler beim Bearbeiten der Liederliste.
       success: Liederliste erfolgreich bearbeitet.
