@@ -23,6 +23,8 @@
   <%# Includes all stylesheet files in app/views/stylesheets %>
   <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
   <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "print", media: 'print', "data-turbo-track": "reload" %>
+
   <%= javascript_importmap_tags %>
   <%= javascript_include_tag 'verovio-toolkit-wasm-5.7.0.js', nonce: true %>
 
