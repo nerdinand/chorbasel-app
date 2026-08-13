@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_03_183129) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_10_172833) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -64,6 +64,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_03_183129) do
     t.string "uid", null: false
     t.datetime "updated_at", null: false
     t.index ["starts_at"], name: "index_calendar_events_on_starts_at"
+    t.index ["uid", "sequence"], name: "index_calendar_events_on_uid_and_sequence", unique: true
     t.index ["uid"], name: "index_calendar_events_on_uid", unique: true
   end
 
