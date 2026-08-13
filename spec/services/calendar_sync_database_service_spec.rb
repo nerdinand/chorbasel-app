@@ -62,6 +62,23 @@ RSpec.describe CalendarSyncDatabaseService do
         expect(service.unchanged_count).to eq(1)
       end
     end
+
+    context 'when an event is removed' do
+      let(:ics_content) { Rails.root.join('spec/fixtures/files/icalendar/delete_A.ics').read }
+
+      it 'deletes the event' do
+        events = OccurrenceResolver.parse_and_resolve(ics_content)
+        service.perform!(events)
+
+        calendar_event = CalendarEvent.find_by(uid: 'A')
+        expect(calendar_event).to be_nil
+
+        expect(service.created_count).to eq(0)
+        expect(service.updated_count).to eq(0)
+        expect(service.deleted_count).to eq(1)
+        expect(service.unchanged_count).to eq(0)
+      end
+    end
   end
 end
 
