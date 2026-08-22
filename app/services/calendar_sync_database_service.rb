@@ -14,6 +14,8 @@ class CalendarSyncDatabaseService
     destroy_deleted_events(events)
     Rails.logger.info "Finished syncing events to database: created: #{@created_count}, \
 updated: #{@updated_count}, deleted: #{@deleted_count}, unchanged: #{@unchanged_count}"
+    { created_count: @created_count, updated_count: @updated_count, deleted_count: @deleted_count,
+      unchanged_count: @unchanged_count }
   end
 
   def create_or_update_events(events)
