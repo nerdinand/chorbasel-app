@@ -30,6 +30,57 @@ class OccurrenceResolver
     attr_reader :occurrence, :index
   end
 
+  class ChangedCalendarOccurrence
+    def initialize(event)
+      @event = event
+    end
+
+    def uid
+      "#{event.uid}-#{event.recurrence_id}"
+    end
+
+    delegate_missing_to :event
+
+    private
+
+    attr_reader :event
+  end
+
+  class CalendarEventsGroup
+    def initialize(events)
+      @events = events
+    end
+
+    def should_resolve_occurrences?
+      return false unless recurring_event
+      return false if events.many? && all_identical?
+
+      true
+    end
+
+    def all_identical?
+      events.all? { |e| events_identical?(events.first, e) }
+    end
+
+    def recurring_event
+      events.find { |e| !e.rrule.empty? }
+    end
+
+    def main_event
+      return events.find { |e| e.recurrence_id.nil? } if recurring_event.nil?
+
+      recurring_event
+    end
+
+    private
+
+    attr_reader :events
+
+    def events_identical?(event1, event2)
+      event1.instance_variables.all? { |iv| event1.instance_variable_get(iv) == event2.instance_variable_get(iv) }
+    end
+  end
+
   def initialize(ics_content)
     @ics_content = ics_content
   end
@@ -44,10 +95,12 @@ class OccurrenceResolver
     events_by_uid = events.group_by(&:uid)
 
     events_by_uid.map do |_uid, events|
-      if events.many? || !events.first.rrule.empty?
+      group = CalendarEventsGroup.new(events)
+
+      if group.should_resolve_occurrences?
         resolve_occurrences(events)
       else
-        events.first
+        group.main_event
       end
     end.flatten
   end
@@ -62,10 +115,8 @@ class OccurrenceResolver
     else # this means at least one of the recurring event instances has been changed
       recurring_events = events.reject { |e| e.rrule.empty? }
       changed_events = events - recurring_events
-
-      raise "Can't handle more than one recurring event with the same uid." unless recurring_events.one?
-
-      resolve_changed_occurrences(recurring_events.first, changed_events)
+      recurring_event = recurring_events.first
+      resolve_changed_occurrences(recurring_event, changed_events)
     end
   end
 
@@ -77,6 +128,6 @@ class OccurrenceResolver
     events = resolve_simple_occurrences(recurring_event)
     changed_events_recurrence_ids = changed_events.map(&:recurrence_id)
     unchanged_occurrences = events.delete_if { |e| e.dtstart.in? changed_events_recurrence_ids }
-    unchanged_occurrences + changed_events
+    unchanged_occurrences + changed_events.map { |ce| ChangedCalendarOccurrence.new(ce) }
   end
 end
