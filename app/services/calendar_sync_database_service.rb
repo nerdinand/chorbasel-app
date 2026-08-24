@@ -51,7 +51,7 @@ updated: #{@updated_count}, deleted: #{@deleted_count}, unchanged: #{@unchanged_
       summary: event.summary.to_s,
       description: event.description.to_s,
       is_recurring: event.is_a?(CalendarRecurrence::Occurrence) ||
-                    event.is_a?(CalendarRecurrence::ChangedOccurrence)
+        event.is_a?(CalendarRecurrence::ChangedOccurrence)
     }
   end
 
