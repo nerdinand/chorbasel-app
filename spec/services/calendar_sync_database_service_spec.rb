@@ -27,7 +27,7 @@ RSpec.describe CalendarSyncDatabaseService do
         let(:ics_content) { Rails.root.join('spec/fixtures/files/icalendar/update_A.ics').read }
 
         it 'updates the event' do
-          events = OccurrenceResolver.parse_and_resolve(ics_content)
+          events = CalendarRecurrence::Resolver.parse_and_resolve(ics_content)
           service.perform!(events)
 
           calendar_event = CalendarEvent.find_by(uid: 'A')
@@ -46,7 +46,7 @@ RSpec.describe CalendarSyncDatabaseService do
         let(:ics_content) { Rails.root.join('spec/fixtures/files/icalendar/create_B.ics').read }
 
         it 'creates a new event' do
-          events = OccurrenceResolver.parse_and_resolve(ics_content)
+          events = CalendarRecurrence::Resolver.parse_and_resolve(ics_content)
           service.perform!(events)
 
           calendar_event = CalendarEvent.find_by(uid: 'B')
@@ -65,7 +65,7 @@ RSpec.describe CalendarSyncDatabaseService do
         let(:ics_content) { Rails.root.join('spec/fixtures/files/icalendar/delete_A.ics').read }
 
         it 'deletes the event' do
-          events = OccurrenceResolver.parse_and_resolve(ics_content)
+          events = CalendarRecurrence::Resolver.parse_and_resolve(ics_content)
           service.perform!(events)
 
           calendar_event = CalendarEvent.find_by(uid: 'A')
@@ -84,7 +84,7 @@ RSpec.describe CalendarSyncDatabaseService do
         let(:ics_content) { Rails.root.join('spec/fixtures/files/icalendar/recurring.ics').read }
 
         it 'creates individual CalendarEvents' do
-          events = OccurrenceResolver.parse_and_resolve(ics_content)
+          events = CalendarRecurrence::Resolver.parse_and_resolve(ics_content)
           service.perform!(events)
 
           calendar_event = CalendarEvent.find_by(uid: '5CB0C633-9066-437D-B18E-3C912504FC34-0')
@@ -113,7 +113,7 @@ RSpec.describe CalendarSyncDatabaseService do
         let(:ics_content) { Rails.root.join('spec/fixtures/files/icalendar/recurring_changed.ics').read }
 
         it 'creates CalendarEvents for the recurring events and for the changed event, but no duplicates' do
-          events = OccurrenceResolver.parse_and_resolve(ics_content)
+          events = CalendarRecurrence::Resolver.parse_and_resolve(ics_content)
           service.perform!(events)
 
           calendar_event = CalendarEvent.find_by(uid: '5CB0C633-9066-437D-B18E-3C912504FC34-0')
@@ -142,7 +142,7 @@ RSpec.describe CalendarSyncDatabaseService do
         let(:ics_content) { Rails.root.join('spec/fixtures/files/icalendar/orphaned_recurrence.ics').read }
 
         it 'ignores the orphan' do
-          events = OccurrenceResolver.parse_and_resolve(ics_content)
+          events = CalendarRecurrence::Resolver.parse_and_resolve(ics_content)
           service.perform!(events)
 
           calendar_event = CalendarEvent.find_by(uid: 'A7D89486-131F-43B1-9C70-3D7F0B0490DD')
@@ -159,7 +159,7 @@ RSpec.describe CalendarSyncDatabaseService do
         let(:ics_content) { Rails.root.join('spec/fixtures/files/icalendar/recurring_weird.ics').read }
 
         it 'does something' do
-          events = OccurrenceResolver.parse_and_resolve(ics_content)
+          events = CalendarRecurrence::Resolver.parse_and_resolve(ics_content)
           service.perform!(events)
 
           calendar_events_data = CalendarEvent

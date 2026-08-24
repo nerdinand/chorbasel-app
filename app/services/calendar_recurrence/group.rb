@@ -1,52 +1,7 @@
 # frozen_string_literal: true
 
-class OccurrenceResolver
-  class CalendarOccurrence
-    def initialize(occurrence, index)
-      @occurrence = occurrence
-      @index = index
-    end
-
-    delegate_missing_to :occurrence_parent
-
-    def uid
-      "#{occurrence.parent.uid}-#{index}"
-    end
-
-    def dtstart
-      occurrence.start_time
-    end
-
-    def dtend
-      occurrence.end_time
-    end
-
-    private
-
-    def occurrence_parent
-      occurrence.parent
-    end
-
-    attr_reader :occurrence, :index
-  end
-
-  class ChangedCalendarOccurrence
-    def initialize(event)
-      @event = event
-    end
-
-    def uid
-      "#{event.uid}-#{event.recurrence_id}"
-    end
-
-    delegate_missing_to :event
-
-    private
-
-    attr_reader :event
-  end
-
-  class CalendarEventsGroup
+module CalendarRecurrence
+  class Group
     def initialize(events)
       @events = events
     end
@@ -96,40 +51,18 @@ class OccurrenceResolver
     end
 
     def resolve_simple_occurrences(event)
-      event.all_occurrences.map.with_index { |o, i| CalendarOccurrence.new(o, i) }
+      event.all_occurrences.map.with_index { |o, i| CalendarRecurrence::Occurrence.new(o, i) }
     end
 
     def resolve_changed_occurrences(recurring_event, changed_events)
       events = resolve_simple_occurrences(recurring_event)
       changed_events_recurrence_ids = changed_events.map(&:recurrence_id)
       unchanged_occurrences = events.delete_if { |e| e.dtstart.in? changed_events_recurrence_ids }
-      unchanged_occurrences + changed_events.map { |ce| ChangedCalendarOccurrence.new(ce) }
+      unchanged_occurrences + changed_events.map { |ce| CalendarRecurrence::ChangedOccurrence.new(ce) }
     end
 
     def events_identical?(event1, event2)
       event1.instance_variables.all? { |iv| event1.instance_variable_get(iv) == event2.instance_variable_get(iv) }
     end
   end
-
-  def initialize(ics_content)
-    @ics_content = ics_content
-  end
-
-  def self.parse_and_resolve(ics_content)
-    new(ics_content).parse_and_resolve
-  end
-
-  def parse_and_resolve
-    events = Icalendar::Event.parse(ics_content)
-
-    events_by_uid = events.group_by(&:uid)
-
-    events_by_uid.map do |_uid, events|
-      CalendarEventsGroup.new(events).resolve_events
-    end.flatten
-  end
-
-  private
-
-  attr_reader :ics_content
 end
