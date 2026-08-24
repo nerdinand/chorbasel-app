@@ -100,7 +100,7 @@ class OccurrenceResolver
       if group.should_resolve_occurrences?
         resolve_occurrences(events)
       else
-        group.main_event
+        [group.main_event].compact
       end
     end.flatten
   end
