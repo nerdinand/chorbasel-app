@@ -7,16 +7,32 @@ module CalendarRecurrence
     end
 
     def resolve_events
-      if should_resolve_occurrences?
-        resolve_occurrences
-      else
-        [main_event].compact
-      end
+      deduplicate_by_latest_sequence(
+        if should_resolve_occurrences?
+          resolve_occurrences
+        else
+          main_events
+        end
+      )
     end
 
     private
 
     attr_reader :events
+
+    def deduplicate_by_latest_sequence(events)
+      return max_by_sequence(events) unless recurring_event
+
+      recurring_events = events.select { |e| e.recurrence_id.nil? }
+      changed_events = events - recurring_events
+      recurring_events + changed_events.group_by(&:recurrence_id).transform_values do |v|
+        max_by_sequence(v)
+      end.values
+    end
+
+    def max_by_sequence(events)
+      events.max { |a, b| a.sequence <=> b.sequence }
+    end
 
     def should_resolve_occurrences?
       return false unless recurring_event
@@ -33,10 +49,10 @@ module CalendarRecurrence
       events.find { |e| !e.rrule.empty? }
     end
 
-    def main_event
-      return events.find { |e| e.recurrence_id.nil? } if recurring_event.nil?
+    def main_events
+      return events.select { |e| e.recurrence_id.nil? } if recurring_event.nil?
 
-      recurring_event
+      [recurring_event]
     end
 
     def resolve_occurrences

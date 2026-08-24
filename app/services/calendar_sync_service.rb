@@ -25,7 +25,7 @@ class CalendarSyncService
   def parse_ics(file_path)
     Rails.logger.info 'Parsing calendar file...'
     ics_content = File.read(file_path)
-    events = OccurrenceResolver.parse_and_resolve(ics_content)
+    events = CalendarRecurrence::Resolver.parse_and_resolve(ics_content)
     Rails.logger.info 'Finished parsing calendar file.'
     events
   end

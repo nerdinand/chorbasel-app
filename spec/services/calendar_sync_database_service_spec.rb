@@ -77,6 +77,26 @@ RSpec.describe CalendarSyncDatabaseService do
           expect(service.unchanged_count).to eq(0)
         end
       end
+
+      context 'when syncing multiple sequences of the same uid' do
+        let(:ics_content) { Rails.root.join('spec/fixtures/files/icalendar/sequences.ics').read }
+
+        it 'keeps the data with the last sequence number' do
+          events = CalendarRecurrence::Resolver.parse_and_resolve(ics_content)
+          service.perform!(events)
+
+          calendar_event = CalendarEvent.find_by(uid: 'A')
+          expect(calendar_event.summary).to eq('A 3')
+
+          calendar_event = CalendarEvent.find_by(uid: 'B')
+          expect(calendar_event.summary).to eq('B 2')
+
+          expect(service.created_count).to eq(1)
+          expect(service.updated_count).to eq(1)
+          expect(service.deleted_count).to eq(0)
+          expect(service.unchanged_count).to eq(0)
+        end
+      end
     end
 
     describe 'recurring events' do
@@ -158,7 +178,7 @@ RSpec.describe CalendarSyncDatabaseService do
       context 'when syncing a weird recurrence' do
         let(:ics_content) { Rails.root.join('spec/fixtures/files/icalendar/recurring_weird.ics').read }
 
-        it 'does something' do
+        it 'creates recurring CalendarEvents with multiple overrides' do
           events = CalendarRecurrence::Resolver.parse_and_resolve(ics_content)
           service.perform!(events)
 
