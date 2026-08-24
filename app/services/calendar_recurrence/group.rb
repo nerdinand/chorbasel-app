@@ -21,6 +21,7 @@ module CalendarRecurrence
     attr_reader :events
 
     def deduplicate_by_latest_sequence(events)
+      return events if events.empty?
       return max_by_sequence(events) unless recurring_event
 
       recurring_events = events.select { |e| e.recurrence_id.nil? }
