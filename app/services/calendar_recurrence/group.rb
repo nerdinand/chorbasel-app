@@ -32,7 +32,7 @@ module CalendarRecurrence
     end
 
     def max_by_sequence(events)
-      events.max { |a, b| a.sequence <=> b.sequence }
+      events.max_by { |e| e.sequence.to_i }
     end
 
     def should_resolve_occurrences?
@@ -62,7 +62,7 @@ module CalendarRecurrence
       else # this means at least one of the recurring event instances has been changed
         recurring_events = events.reject { |e| e.rrule.empty? }
         changed_events = events - recurring_events
-        recurring_event = recurring_events.first
+        recurring_event = max_by_sequence(recurring_events)
         resolve_changed_occurrences(recurring_event, changed_events)
       end
     end
