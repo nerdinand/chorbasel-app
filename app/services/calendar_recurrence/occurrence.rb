@@ -2,15 +2,14 @@
 
 module CalendarRecurrence
   class Occurrence
-    def initialize(occurrence, index)
+    def initialize(occurrence)
       @occurrence = occurrence
-      @index = index
     end
 
     delegate_missing_to :occurrence_parent
 
     def uid
-      "#{occurrence.parent.uid}-#{index}"
+      "#{occurrence.parent.uid}/#{recurrence_id.rfc3339}"
     end
 
     def dtstart
@@ -19,6 +18,10 @@ module CalendarRecurrence
 
     def dtend
       occurrence.end_time
+    end
+
+    def recurrence_id
+      occurrence.start_time.in_time_zone
     end
 
     private

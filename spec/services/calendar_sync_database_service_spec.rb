@@ -107,17 +107,17 @@ RSpec.describe CalendarSyncDatabaseService do
           events = CalendarRecurrence::Resolver.parse_and_resolve(ics_content)
           service.perform!(events)
 
-          calendar_event = CalendarEvent.find_by(uid: '5CB0C633-9066-437D-B18E-3C912504FC34-0')
+          calendar_event = CalendarEvent.find_by(uid: '5CB0C633-9066-437D-B18E-3C912504FC34/2026-08-22T15:00:00+02:00')
           expect(calendar_event.starts_at).to eq(Time.zone.parse('2026-08-22T15:00:00'))
           expect(calendar_event.ends_at).to eq(Time.zone.parse('2026-08-22T16:00:00'))
           expect(calendar_event.summary).to eq('New Event')
 
-          calendar_event = CalendarEvent.find_by(uid: '5CB0C633-9066-437D-B18E-3C912504FC34-1')
+          calendar_event = CalendarEvent.find_by(uid: '5CB0C633-9066-437D-B18E-3C912504FC34/2026-08-29T15:00:00+02:00')
           expect(calendar_event.starts_at).to eq(Time.zone.parse('2026-08-29T15:00:00'))
           expect(calendar_event.ends_at).to eq(Time.zone.parse('2026-08-29T16:00:00'))
           expect(calendar_event.summary).to eq('New Event')
 
-          calendar_event = CalendarEvent.find_by(uid: '5CB0C633-9066-437D-B18E-3C912504FC34-2')
+          calendar_event = CalendarEvent.find_by(uid: '5CB0C633-9066-437D-B18E-3C912504FC34/2026-09-05T15:00:00+02:00')
           expect(calendar_event.starts_at).to eq(Time.zone.parse('2026-09-05T15:00:00'))
           expect(calendar_event.ends_at).to eq(Time.zone.parse('2026-09-05T16:00:00'))
           expect(calendar_event.summary).to eq('New Event')
@@ -136,17 +136,17 @@ RSpec.describe CalendarSyncDatabaseService do
           events = CalendarRecurrence::Resolver.parse_and_resolve(ics_content)
           service.perform!(events)
 
-          calendar_event = CalendarEvent.find_by(uid: '5CB0C633-9066-437D-B18E-3C912504FC34-0')
+          calendar_event = CalendarEvent.find_by(uid: '5CB0C633-9066-437D-B18E-3C912504FC34/2026-08-22T15:00:00+02:00')
           expect(calendar_event.starts_at).to eq(Time.zone.parse('2026-08-22T15:00:00'))
           expect(calendar_event.ends_at).to eq(Time.zone.parse('2026-08-22T16:00:00'))
           expect(calendar_event.summary).to eq('New Event')
 
-          calendar_event = CalendarEvent.find_by(uid: '5CB0C633-9066-437D-B18E-3C912504FC34-1')
+          calendar_event = CalendarEvent.find_by(uid: '5CB0C633-9066-437D-B18E-3C912504FC34/2026-08-29T15:00:00+02:00')
           expect(calendar_event.starts_at).to eq(Time.zone.parse('2026-08-29T15:00:00'))
           expect(calendar_event.ends_at).to eq(Time.zone.parse('2026-08-29T16:00:00'))
           expect(calendar_event.summary).to eq('New Event')
 
-          calendar_event = CalendarEvent.find_by(uid: '5CB0C633-9066-437D-B18E-3C912504FC34-2026-09-05 15:00:00 +0200')
+          calendar_event = CalendarEvent.find_by(uid: '5CB0C633-9066-437D-B18E-3C912504FC34/2026-09-05T15:00:00+02:00')
           expect(calendar_event.starts_at).to eq(Time.zone.parse('2026-09-06T15:00:00'))
           expect(calendar_event.ends_at).to eq(Time.zone.parse('2026-09-06T16:00:00'))
           expect(calendar_event.summary).to eq('Changed event')
@@ -188,63 +188,63 @@ RSpec.describe CalendarSyncDatabaseService do
                                  .pluck(:uid, :starts_at, :ends_at, :summary)
 
           expect(calendar_events_data).to eq(
-            [['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1-0',
+            [['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1/2016-01-13T20:00:00+01:00',
               Time.zone.parse('2016-01-13T20:00:00'),
               Time.zone.parse('2016-01-13T22:00:00'),
               'Vocale'],
-             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1-1',
+             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1/2016-01-20T20:00:00+01:00',
               Time.zone.parse('2016-01-20T20:00:00'),
               Time.zone.parse('2016-01-20T22:00:00'),
               'Vocale'],
-             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1-2',
+             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1/2016-01-27T20:00:00+01:00',
               Time.zone.parse('2016-01-27T20:00:00'),
               Time.zone.parse('2016-01-27T22:00:00'),
               'Vocale'],
-             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1-3',
+             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1/2016-02-03T20:00:00+01:00',
               Time.zone.parse('2016-02-03T20:00:00'),
               Time.zone.parse('2016-02-03T22:00:00'),
               'Vocale'],
-             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1-4',
+             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1/2016-02-24T20:00:00+01:00',
               Time.zone.parse('2016-02-24T20:00:00'),
               Time.zone.parse('2016-02-24T22:00:00'),
               'Vocale'],
-             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1-5',
+             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1/2016-03-02T20:00:00+01:00',
               Time.zone.parse('2016-03-02T20:00:00'),
               Time.zone.parse('2016-03-02T22:00:00'),
               'Vocale'],
-             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1-6',
+             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1/2016-03-09T20:00:00+01:00',
               Time.zone.parse('2016-03-09T20:00:00'),
               Time.zone.parse('2016-03-09T22:00:00'),
               'Vocale'],
-             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1-7',
+             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1/2016-03-16T20:00:00+01:00',
               Time.zone.parse('2016-03-16T20:00:00'),
               Time.zone.parse('2016-03-16T22:00:00'),
               'Vocale'],
-             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1-8',
+             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1/2016-04-06T20:00:00+02:00',
               Time.zone.parse('2016-04-06T20:00:00'),
               Time.zone.parse('2016-04-06T22:00:00'),
               'Vocale'],
-             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1-9',
+             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1/2016-04-13T20:00:00+02:00',
               Time.zone.parse('2016-04-13T20:00:00'),
               Time.zone.parse('2016-04-13T22:00:00'),
               'Vocale'],
-             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1-2016-04-20 20:00:00 +0200',
+             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1/2016-04-20T20:00:00+02:00',
               Time.zone.parse('2016-04-20T19:55:00'),
               Time.zone.parse('2016-04-20T22:00:00'),
               'Vocale (bzw. alle)'],
-             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1-2016-04-27 20:00:00 +0200',
+             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1/2016-04-27T20:00:00+02:00',
               Time.zone.parse('2016-04-27T20:00:00'),
               Time.zone.parse('2016-04-27T22:00:00'),
               'Vocale  (bzw. alle)'],
-             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1-2016-05-04 20:00:00 +0200',
+             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1/2016-05-04T20:00:00+02:00',
               Time.zone.parse('2016-05-04T20:30:00'),
               Time.zone.parse('2016-05-04T22:30:00'),
               'Gesamtprobe'],
-             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1-2016-05-11 20:00:00 +0200',
+             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1/2016-05-11T20:00:00+02:00',
               Time.zone.parse('2016-05-11T20:00:00'),
               Time.zone.parse('2016-05-11T22:00:00'),
               'Vocale  (bzw. alle)'],
-             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1-2016-05-18 20:00:00 +0200',
+             ['61122CD5-BC31-4D0A-852B-05EA7AEA1AD1/2016-05-18T20:00:00+02:00',
               Time.zone.parse('2016-05-18T19:55:00'),
               Time.zone.parse('2016-05-18T22:00:00'),
               'VoCantiVox: Gesamtprobe']]

@@ -7,7 +7,7 @@ module CalendarRecurrence
     end
 
     def uid
-      "#{event.uid}-#{event.recurrence_id}"
+      "#{event.uid}/#{event.recurrence_id.rfc3339}"
     end
 
     delegate_missing_to :event

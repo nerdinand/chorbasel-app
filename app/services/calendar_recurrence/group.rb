@@ -67,7 +67,7 @@ module CalendarRecurrence
     end
 
     def resolve_simple_occurrences(event)
-      event.all_occurrences.map.with_index { |o, i| CalendarRecurrence::Occurrence.new(o, i) }
+      event.all_occurrences.map { |o| CalendarRecurrence::Occurrence.new(o) }
     end
 
     def resolve_changed_occurrences(recurring_event, changed_events)
