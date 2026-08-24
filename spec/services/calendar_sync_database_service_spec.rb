@@ -16,7 +16,6 @@ RSpec.describe CalendarSyncDatabaseService do
         summary: 'A',
         description: '',
         location: '',
-        sequence: 0,
         event_created_at: Time.zone.parse('2026-08-01T02:00:00'),
         starts_at: Time.zone.parse('2026-08-01T20:00:00'),
         ends_at: Time.zone.parse('2026-08-01T21:00:00')
@@ -35,7 +34,6 @@ RSpec.describe CalendarSyncDatabaseService do
           expect(calendar_event.starts_at).to eq(Time.zone.parse('2026-08-01T22:00:00'))
           expect(calendar_event.ends_at).to eq(Time.zone.parse('2026-08-01T23:00:00'))
           expect(calendar_event.summary).to eq('A 2')
-          expect(calendar_event.sequence).to eq(1)
 
           expect(service.created_count).to eq(0)
           expect(service.updated_count).to eq(1)
@@ -55,7 +53,6 @@ RSpec.describe CalendarSyncDatabaseService do
           expect(calendar_event.starts_at).to eq(Time.zone.parse('2026-08-01T20:00:00'))
           expect(calendar_event.ends_at).to eq(Time.zone.parse('2026-08-01T21:00:00'))
           expect(calendar_event.summary).to eq('B')
-          expect(calendar_event.sequence).to eq(0)
 
           expect(service.created_count).to eq(1)
           expect(service.updated_count).to eq(0)
@@ -94,19 +91,16 @@ RSpec.describe CalendarSyncDatabaseService do
           expect(calendar_event.starts_at).to eq(Time.zone.parse('2026-08-22T15:00:00'))
           expect(calendar_event.ends_at).to eq(Time.zone.parse('2026-08-22T16:00:00'))
           expect(calendar_event.summary).to eq('New Event')
-          expect(calendar_event.sequence).to eq(0)
 
           calendar_event = CalendarEvent.find_by(uid: '5CB0C633-9066-437D-B18E-3C912504FC34-1')
           expect(calendar_event.starts_at).to eq(Time.zone.parse('2026-08-29T15:00:00'))
           expect(calendar_event.ends_at).to eq(Time.zone.parse('2026-08-29T16:00:00'))
           expect(calendar_event.summary).to eq('New Event')
-          expect(calendar_event.sequence).to eq(0)
 
           calendar_event = CalendarEvent.find_by(uid: '5CB0C633-9066-437D-B18E-3C912504FC34-2')
           expect(calendar_event.starts_at).to eq(Time.zone.parse('2026-09-05T15:00:00'))
           expect(calendar_event.ends_at).to eq(Time.zone.parse('2026-09-05T16:00:00'))
           expect(calendar_event.summary).to eq('New Event')
-          expect(calendar_event.sequence).to eq(0)
 
           expect(service.created_count).to eq(3)
           expect(service.updated_count).to eq(0)
@@ -118,7 +112,7 @@ RSpec.describe CalendarSyncDatabaseService do
       context 'when syncing a recurring event where one of the events has been changed' do
         let(:ics_content) { Rails.root.join('spec/fixtures/files/icalendar/recurring_changed.ics').read }
 
-        it 'creates CalendarEvents for the sequence and for the changed event, but no duplicates' do
+        it 'creates CalendarEvents for the recurring events and for the changed event, but no duplicates' do
           events = OccurrenceResolver.parse_and_resolve(ics_content)
           service.perform!(events)
 
@@ -126,20 +120,16 @@ RSpec.describe CalendarSyncDatabaseService do
           expect(calendar_event.starts_at).to eq(Time.zone.parse('2026-08-22T15:00:00'))
           expect(calendar_event.ends_at).to eq(Time.zone.parse('2026-08-22T16:00:00'))
           expect(calendar_event.summary).to eq('New Event')
-          expect(calendar_event.sequence).to eq(0)
 
           calendar_event = CalendarEvent.find_by(uid: '5CB0C633-9066-437D-B18E-3C912504FC34-1')
           expect(calendar_event.starts_at).to eq(Time.zone.parse('2026-08-29T15:00:00'))
           expect(calendar_event.ends_at).to eq(Time.zone.parse('2026-08-29T16:00:00'))
           expect(calendar_event.summary).to eq('New Event')
-          expect(calendar_event.sequence).to eq(0)
 
-          calendar_event = CalendarEvent.find_by(uid: '5CB0C633-9066-437D-B18E-3C912504FC34-2026-09-05 15:00:00 +0200',
-                                                 sequence: 1)
+          calendar_event = CalendarEvent.find_by(uid: '5CB0C633-9066-437D-B18E-3C912504FC34-2026-09-05 15:00:00 +0200')
           expect(calendar_event.starts_at).to eq(Time.zone.parse('2026-09-06T15:00:00'))
           expect(calendar_event.ends_at).to eq(Time.zone.parse('2026-09-06T16:00:00'))
           expect(calendar_event.summary).to eq('Changed event')
-          expect(calendar_event.sequence).to eq(1)
 
           expect(service.created_count).to eq(3)
           expect(service.updated_count).to eq(0)

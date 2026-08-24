@@ -51,6 +51,18 @@ class OccurrenceResolver
       @events = events
     end
 
+    def resolve_events
+      if should_resolve_occurrences?
+        resolve_occurrences
+      else
+        [main_event].compact
+      end
+    end
+
+    private
+
+    attr_reader :events
+
     def should_resolve_occurrences?
       return false unless recurring_event
       return false if events.many? && all_identical?
@@ -72,9 +84,27 @@ class OccurrenceResolver
       recurring_event
     end
 
-    private
+    def resolve_occurrences
+      if events.one?
+        resolve_simple_occurrences(events.first)
+      else # this means at least one of the recurring event instances has been changed
+        recurring_events = events.reject { |e| e.rrule.empty? }
+        changed_events = events - recurring_events
+        recurring_event = recurring_events.first
+        resolve_changed_occurrences(recurring_event, changed_events)
+      end
+    end
 
-    attr_reader :events
+    def resolve_simple_occurrences(event)
+      event.all_occurrences.map.with_index { |o, i| CalendarOccurrence.new(o, i) }
+    end
+
+    def resolve_changed_occurrences(recurring_event, changed_events)
+      events = resolve_simple_occurrences(recurring_event)
+      changed_events_recurrence_ids = changed_events.map(&:recurrence_id)
+      unchanged_occurrences = events.delete_if { |e| e.dtstart.in? changed_events_recurrence_ids }
+      unchanged_occurrences + changed_events.map { |ce| ChangedCalendarOccurrence.new(ce) }
+    end
 
     def events_identical?(event1, event2)
       event1.instance_variables.all? { |iv| event1.instance_variable_get(iv) == event2.instance_variable_get(iv) }
@@ -95,39 +125,11 @@ class OccurrenceResolver
     events_by_uid = events.group_by(&:uid)
 
     events_by_uid.map do |_uid, events|
-      group = CalendarEventsGroup.new(events)
-
-      if group.should_resolve_occurrences?
-        resolve_occurrences(events)
-      else
-        [group.main_event].compact
-      end
+      CalendarEventsGroup.new(events).resolve_events
     end.flatten
   end
 
   private
 
   attr_reader :ics_content
-
-  def resolve_occurrences(events)
-    if events.one?
-      resolve_simple_occurrences(events.first)
-    else # this means at least one of the recurring event instances has been changed
-      recurring_events = events.reject { |e| e.rrule.empty? }
-      changed_events = events - recurring_events
-      recurring_event = recurring_events.first
-      resolve_changed_occurrences(recurring_event, changed_events)
-    end
-  end
-
-  def resolve_simple_occurrences(event)
-    event.all_occurrences.map.with_index { |o, i| CalendarOccurrence.new(o, i) }
-  end
-
-  def resolve_changed_occurrences(recurring_event, changed_events)
-    events = resolve_simple_occurrences(recurring_event)
-    changed_events_recurrence_ids = changed_events.map(&:recurrence_id)
-    unchanged_occurrences = events.delete_if { |e| e.dtstart.in? changed_events_recurrence_ids }
-    unchanged_occurrences + changed_events.map { |ce| ChangedCalendarOccurrence.new(ce) }
-  end
 end

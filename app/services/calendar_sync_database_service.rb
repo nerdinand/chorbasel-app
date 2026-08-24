@@ -50,8 +50,7 @@ updated: #{@updated_count}, deleted: #{@deleted_count}, unchanged: #{@unchanged_
       location: event.location.to_s,
       summary: event.summary.to_s,
       description: event.description.to_s,
-      is_recurring: event.is_a?(OccurrenceResolver::CalendarOccurrence),
-      sequence: event.sequence
+      is_recurring: event.is_a?(OccurrenceResolver::CalendarOccurrence)
     }
   end
 
