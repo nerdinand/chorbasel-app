@@ -11,7 +11,7 @@ class CalendarSyncDatabaseService
   def perform!(events)
     Rails.logger.info 'Syncing events to database...'
     create_or_update_events(events)
-    destroy_deleted_events(events)
+    mark_deleted_events(events)
     Rails.logger.info "Finished syncing events to database: created: #{@created_count}, \
 updated: #{@updated_count}, deleted: #{@deleted_count}, unchanged: #{@unchanged_count}"
     { created_count: @created_count, updated_count: @updated_count, deleted_count: @deleted_count,
@@ -55,12 +55,12 @@ updated: #{@updated_count}, deleted: #{@deleted_count}, unchanged: #{@unchanged_
     }
   end
 
-  def destroy_deleted_events(events)
+  def mark_deleted_events(events)
     ical_uids = events.map { |event| event.uid.to_s }
     deleted_ical_uids = CalendarEvent.pluck(:uid) - ical_uids
     calendar_events_to_delete = CalendarEvent.where(uid: deleted_ical_uids)
     @deleted_count = calendar_events_to_delete.count
-    calendar_events_to_delete.destroy_all
+    calendar_events_to_delete.update!(deleted: true)
   end
 
   attr_reader :created_count, :updated_count, :deleted_count, :unchanged_count

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_28_171931) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_29_133956) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -53,6 +53,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_28_171931) do
 
   create_table "calendar_events", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.boolean "deleted", default: false, null: false
     t.string "description"
     t.datetime "ends_at", null: false
     t.datetime "event_created_at", null: false
