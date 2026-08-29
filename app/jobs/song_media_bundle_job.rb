@@ -5,7 +5,15 @@ class SongMediaBundleJob < ApplicationJob
 
   def perform(song_media_bundle_download_id)
     song_media_bundle_download = SongMediaBundleDownload.find(song_media_bundle_download_id)
+    perform!(song_media_bundle_download)
+  rescue StandardError => e
+    song_media_bundle_download.update(status: :errored)
+    raise e
+  end
 
+  private
+
+  def perform!(song_media_bundle_download)
     ActiveRecord::Base.transaction do
       create_and_upload_bundle!(song_media_bundle_download)
 
@@ -15,8 +23,6 @@ class SongMediaBundleJob < ApplicationJob
       )
     end
   end
-
-  private
 
   def create_and_upload_bundle!(song_media_bundle_download)
     bundle = create_bundle(song_media_bundle_download)

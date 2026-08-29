@@ -1,12 +1,12 @@
 <% content_for :title, @song_list.name %>
 
-<% if policy(SongMediaBundleDownload).create? %>
-  <%= button_to t('.song_media_bundle_download.create'), song_list_song_media_bundle_downloads_path(@song_list), class: 'btn btn-secondary' %>
-<% end %>
+<div class="mb-5">
+  <%= render 'actions_dropdown', song_list: @song_list %>
 
-<% if policy(SongListItem).new? %>
-  <%= link_to t('.new'), new_song_list_song_list_item_path(@song_list), class: 'btn btn-primary' %>
-<% end %>
+  <% if policy(SongListItem).new? %>
+    <%= link_to t('.new'), new_song_list_song_list_item_path(@song_list), class: 'btn btn-primary' %>
+  <% end %>
+</div>
 
 <div class="table-scroll">
   <table class="table-wide">

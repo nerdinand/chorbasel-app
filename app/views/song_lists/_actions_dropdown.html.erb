@@ -1,0 +1,25 @@
+<div class="inline-block float-right" data-controller="visibility">
+  <div class="relative">
+    <button class="btn btn-secondary" data-action="visibility#toggleTargets">
+      <%= t('.actions') %> <%= tabler_icon :'chevron-down' %>
+    </button>
+
+    <div
+      data-visibility-target="hideable"
+      hidden
+      class="
+        absolute right-0 z-10 mt-2 w-60 origin-top-right rounded-md bg-white
+        py-1 shadow-lg ring-1 ring-black/5 focus:outline-none
+      "
+      role="menu"
+      aria-orientation="vertical"
+      tabindex="-1"
+    >
+      <% if policy(SongMediaBundleDownload).create? %>
+        <%= link_to t('.song_media_bundle_download.create'), song_list_song_media_bundle_downloads_path(song_list), data: { turbo_method: :post }, class: 'inline-flex block px-4 py-2 text-sm text-primary', role: 'menuitem', tabindex: '-1' %>
+      <% end %>
+
+      <%= link_to t('.lyrics.show'), song_list_lyrics_path(song_list), class: 'inline-flex block px-4 py-2 text-sm text-primary', role: 'menuitem', tabindex: '-1' %>
+    </div>
+  </div>
+</div>

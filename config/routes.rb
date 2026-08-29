@@ -43,6 +43,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       resources :song_media_bundle_downloads, only: %i[create show]
 
       resources :programs, only: %i[create destroy]
+
+      resource :lyrics, only: :show
     end
 
     resources :songs do

@@ -34,7 +34,7 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :roles, array: Roles::ROLES
   validates :phone_number, format: { with: INTERNATIONAL_PHONE_NUMBER_REGEX }, allow_blank: true
-  validates :register, inclusion: Register::Singer::REGISTERS, allow_blank: true
+  validates :register, inclusion: Register::Singer::REGISTERS, allow_nil: true
   validates :canonical_register, inclusion: Register::Singer::CANONICAL_REGISTERS, allow_blank: true
 
   has_many :attendances, dependent: :destroy
