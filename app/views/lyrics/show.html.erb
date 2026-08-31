@@ -1,0 +1,13 @@
+<% content_for :title, t('.title', song_list_name: @song_list.name) %>
+
+<% @song_list.song_list_items.each do |sli| %>
+  <h2><%= sli.display_name %></h2>
+
+  <% if sli.notes.present? %>
+    <em><%= sli.notes %></em>
+  <% end %>
+
+  <% if sli.song? && sli.song.lyrics.present? %>
+    <p><%= simple_format sli.song.lyrics, class: 'mb-3' %></p>
+  <% end %>
+<% end %>

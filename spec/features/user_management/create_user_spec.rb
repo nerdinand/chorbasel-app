@@ -16,6 +16,7 @@ RSpec.describe('Creating an attendance') do
     fill_in 'E-Mail', with: 'user@example.com'
     fill_in 'Vorname', with: 'New'
     fill_in 'Nachname', with: 'User'
+    select 'Tenor 1', from: 'Stimme'
 
     perform_enqueued_jobs do
       click_on 'Benutzer:in erstellen'
