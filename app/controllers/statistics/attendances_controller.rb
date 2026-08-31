@@ -15,7 +15,7 @@ module Statistics
       @calendar_events_by_category = calendar_events.group_by(&:category)
       users = find_users
 
-      @year_statistics_table = AttendanceStatisticsTable.new(users, calendar_events.practice.past)
+      @year_statistics_table = AttendanceStatisticsTable.new(users, calendar_events.practice)
     end
 
     private
