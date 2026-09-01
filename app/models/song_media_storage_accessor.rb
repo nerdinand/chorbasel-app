@@ -72,7 +72,15 @@ class DriveFile
     audio? || video? || pdf?
   end
 
-  delegate :id, :name, to: :file
+  def download
+    buffer = StringIO.new
+    SongMediaStorageAccessor.instance.get_file(
+      id, download_dest: buffer, supports_all_drives: true
+    )
+    buffer
+  end
+
+  delegate :id, :name, :size, to: :file
 
   attr_reader :file
 end
@@ -94,7 +102,7 @@ class SongMediaStorageAccessor
   end
 
   def retrieve_files(next_page_token = nil)
-    response = @drive_service.list_files(
+    response = drive_service.list_files(
       q: 'trashed = false',
       page_size: 1000,
       fields: 'files(id, name, mimeType, parents), next_page_token',
@@ -107,4 +115,10 @@ class SongMediaStorageAccessor
     files += retrieve_files(response.next_page_token) if response.next_page_token
     files
   end
+
+  delegate :get_file, to: :drive_service
+
+  private
+
+  attr_reader :drive_service
 end
