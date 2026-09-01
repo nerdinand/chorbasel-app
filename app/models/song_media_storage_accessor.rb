@@ -4,22 +4,77 @@ require 'singleton'
 
 class DriveFiles
   def initialize(all_files)
-    @all_files = all_files.map { |f| DriveFile.new(f) }.group_by(&:parent)
+    @all_files = all_files.map { |f| DriveFile.new(self, f) }
+    @files_by_id = @all_files.index_by(&:id)
+    @files_by_parent = @all_files.group_by(&:parent)
   end
 
   def roots
-    @all_files[nil]
+    @files_by_parent[nil]
   end
+
+  attr_reader :files_by_id, :files_by_parent, :all_files
 end
 
 class DriveFile
-  def initialize(file)
+  def initialize(drive_files, file)
+    @drive_files = drive_files
     @file = file
   end
 
   def parent
-    @file.parents.try(:first)
+    @drive_files.files_by_id[@file.parents.try(:first)]
   end
+
+  def children
+    @drive_files.files_by_parent[self] || []
+  end
+
+  def ancestors
+    ancestors = []
+    f = self
+    until f.nil?
+      ancestors << f
+      f = f.parent
+    end
+    ancestors
+  end
+
+  def ancestor_names
+    ancestors.map(&:name).reverse
+  end
+
+  def folder?
+    file.mime_type == 'application/vnd.google-apps.folder'
+  end
+
+  def shortcut?
+    file.mime_type == 'application/vnd.google-apps.shortcut'
+  end
+
+  def file?
+    !folder? && !shortcut?
+  end
+
+  def audio?
+    file.mime_type.starts_with?('audio/') || file.mime_type == 'application/ogg'
+  end
+
+  def video?
+    file.mime_type.starts_with? 'video/'
+  end
+
+  def pdf?
+    file.mime_type == 'application/pdf'
+  end
+
+  def media_file?
+    audio? || video? || pdf?
+  end
+
+  delegate :id, :name, to: :file
+
+  attr_reader :file
 end
 
 class SongMediaStorageAccessor
@@ -34,10 +89,8 @@ class SongMediaStorageAccessor
     )
   end
 
-  def files
+  def drive_files
     DriveFiles.new(retrieve_files)
-    # grouped = files.group_by(&:parents)
-    # grouped.transform_keys { |k| files.find { |f| f.id == k.first } }
   end
 
   def retrieve_files(next_page_token = nil)

@@ -34,7 +34,7 @@
       <%= f.label :file_identifier %> <%# i18n-tasks-use t('activerecord.attributes.song_medium.file_identifier') %>
     </p>
 
-    <p><%= f.text_field :file_identifier %></p>
+    <p><%= f.select :file_identifier, file_identifier_options(drive_files) %></p>
   </div>
 
   <p>

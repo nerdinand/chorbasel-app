@@ -3,6 +3,7 @@
 class SongMediaController < ApplicationController
   def new
     @song_medium = authorize SongMedium.new(song_id: params[:song_id])
+    @drive_files = SongMediaStorageAccessor.instance.drive_files
   end
 
   def create
