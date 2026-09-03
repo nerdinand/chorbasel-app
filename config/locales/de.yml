@@ -449,12 +449,6 @@ de:
       destroy: Kalendereintrag-Zuordnung löschen
       programs:
         title: Kalendereintrag-Zuordnungen
-    show:
-      destroy: Löschen
-      edit: Bearbeiten
-      name: Name
-      new: Neuer Listeneintrag
-      notes: Notiz
     update:
       error: Fehler beim Bearbeiten der Liederliste.
       success: Liederliste erfolgreich bearbeitet.
