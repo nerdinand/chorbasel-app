@@ -94,7 +94,7 @@ gem 'positioning', '~> 0.4.8'
 
 gem 'browser', '~> 6.2'
 
-gem 'mission_control-jobs', '~> 1.1'
+gem 'mission_control-jobs', '~> 1.2'
 
 gem 'ruby-vips', '~> 2.3'
 
