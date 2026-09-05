@@ -26,7 +26,13 @@ class SongMediaStorageAccessor
     response.files + retrieve_files(response.next_page_token)
   end
 
-  delegate :get_file, to: :drive_service
+  def download(id)
+    buffer = StringIO.new
+    drive_service.get_file(
+      id, download_dest: buffer, supports_all_drives: true
+    )
+    buffer.tap(&:rewind)
+  end
 
   private
 

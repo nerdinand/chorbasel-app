@@ -44,6 +44,7 @@ group :development, :test do
   gem 'rubocop-capybara'
   gem 'rubocop-rails'
   gem 'rubocop-rspec_rails'
+  gem 'simplecov-rspec', '~> 1.0'
 end
 
 group :development do
@@ -60,7 +61,6 @@ group :test do
   gem 'capybara'
   gem 'pundit-matchers', '~> 4.0'
   gem 'selenium-webdriver'
-  gem 'simplecov', require: false
 end
 
 gem 'tailwindcss-rails', '= 3.1.0'

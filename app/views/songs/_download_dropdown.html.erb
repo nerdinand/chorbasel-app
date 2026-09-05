@@ -25,6 +25,15 @@
               <%= human_register(song_medium.register) %>
             <% end %>
           <% end %>
+        <% else %>
+          <%= link_to song_song_medium_load_path(song_id: song_medium.song.id, song_medium_id: song_medium.id), class: 'inline-flex block px-4 py-2 text-sm text-primary', role: 'menuitem', tabindex: '-1' do %>
+            <%= file_icon(song_medium) %>
+            <%= song_medium.human_kind %>
+
+            <% if song_medium.register.present? %>
+              <%= human_register(song_medium.register) %>
+            <% end %>
+          <% end %>
         <% end %>
       <% end %>
     </div>

@@ -30,6 +30,13 @@ class SongMediaController < ApplicationController
     end
   end
 
+  def load
+    song_medium = authorize SongMedium.find(params.expect(:song_medium_id))
+    return render status: :not_found if song_medium.file_identifier.nil?
+
+    send_data(song_medium.buffer)
+  end
+
   private
 
   def song_medium_params

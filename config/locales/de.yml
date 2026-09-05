@@ -96,6 +96,7 @@ de:
             recording_register: Audioaufnahme
             sheet_music: Notenblatt
         file: Datei
+        file_identifier: Google Drive-Datei
         kind: Art
         register: Stimme
       user:

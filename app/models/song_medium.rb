@@ -48,4 +48,8 @@ class SongMedium < ApplicationRecord
 
     file.attachment.video?
   end
+
+  def buffer
+    SongMediaStorageAccessor.instance.download(file_identifier)
+  end
 end

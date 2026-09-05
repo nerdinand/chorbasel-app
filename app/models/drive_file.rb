@@ -24,14 +24,6 @@ class DriveFile
     ancestors.map(&:name).reverse
   end
 
-  def download
-    buffer = StringIO.new
-    SongMediaStorageAccessor.instance.get_file(
-      id, download_dest: buffer, supports_all_drives: true
-    )
-    buffer
-  end
-
   delegate :id, :name, :size, to: :file
 
   attr_reader :file
