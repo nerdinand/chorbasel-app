@@ -21,9 +21,9 @@ module SongMediaHelper
                 end, classes: ['mr-2'])
   end
 
-  def file_identifier_options(drive_files)
-    drive_files.all_files.select(&:media_file?).map do |drive_file|
-      [drive_file.ancestor_names.join('/'), drive_file.id]
+  def file_identifier_options(song_media_storage_entries)
+    song_media_storage_entries.map do |entry|
+      [entry.path, entry.identifier]
     end.sort_by(&:first)
   end
 end
