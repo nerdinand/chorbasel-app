@@ -80,7 +80,7 @@ gem 'faker', '~> 3.8'
 
 gem 'aws-sdk-s3', '~> 1.228', require: false
 
-gem 'image_processing', '~> 2.0'
+gem 'image_processing', '~> 2.1'
 
 gem 'chartkick', '~> 5.2'
 
