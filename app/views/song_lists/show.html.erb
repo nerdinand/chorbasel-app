@@ -1,60 +1,48 @@
 <% content_for :title, @song_list.name %>
 
-<div class="mb-5">
+<div>
   <%= render 'actions_dropdown', song_list: @song_list %>
 
   <% if policy(SongListItem).new? %>
-    <%= link_to t('.new'), new_song_list_song_list_item_path(@song_list), class: 'btn btn-primary' %>
+    <%= link_to tabler_icon(:plus), new_song_list_song_list_item_path(@song_list), class: 'btn btn-primary' %>
   <% end %>
 </div>
 
-<div class="table-scroll">
-  <table class="table-wide">
-    <thead>
-      <tr>
-        <% headers = policy(@song_list).edit? ? ['', '', t('.name'), t('.notes'), '', ''] : ['', t('.name'), t('.notes')] %>
-
-        <% headers.each do |h| %>
-          <th><%= h %></th>
-        <% end %>
-      </tr>
-    </thead>
-
-    <tbody
+<table class="table-auto md:table-fixed inline-block">
+  <tbody
+    <% if policy(@song_list).edit? %>
+      data-controller="sortable"
+      data-sortable-animation-value="150"
+      data-sortable-resource-name-value="song_list_item"
+      data-sortable-handle-value=".handle"
+    <% end %>
+  >
+    <% @song_list.song_list_items.order(:position).each.with_index do |song_list_item, index| %>
       <% if policy(@song_list).edit? %>
-        data-controller="sortable"
-        data-sortable-animation-value="150"
-        data-sortable-resource-name-value="song_list_item"
-        data-sortable-handle-value=".handle"
+        <tr
+          data-sortable-update-url="<%= song_list_song_list_item_path(song_list_item.song_list, song_list_item) %>"
+        >
+          <td>
+            <%= tabler_icon :arrows_move_vertical, classes: ['cursor-move', 'handle'] %>
+          </td>
+
+          <%= render 'data_cells', song_list_item: song_list_item, index: index %>
+
+          <td>
+            <%= link_to tabler_icon(:edit), edit_song_list_song_list_item_path(song_list_item.song_list, song_list_item), class: 'btn btn-primary' %>
+          </td>
+
+          <% if policy(song_list_item).destroy? %>
+            <td>
+              <%= button_to tabler_icon(:x), song_list_song_list_item_path(song_list_item.song_list, song_list_item), method: :delete, class: 'btn btn-danger' %>
+            </td>
+          <% end %>
+        </tr>
+      <% else %>
+        <tr>
+          <%= render 'data_cells', song_list_item: song_list_item, index: index %>
+        </tr>
       <% end %>
-    >
-      <% @song_list.song_list_items.order(:position).each.with_index do |song_list_item, index| %>
-        <% if policy(@song_list).edit? %>
-          <tr
-            data-sortable-update-url="<%= song_list_song_list_item_path(song_list_item.song_list, song_list_item) %>"
-          >
-            <td>
-              <%= tabler_icon :arrows_move_vertical, classes: ['cursor-move', 'handle'] %>
-            </td>
-
-            <%= render 'data_cells', song_list_item: song_list_item, index: index %>
-
-            <td>
-              <%= link_to t('.edit'), edit_song_list_song_list_item_path(song_list_item.song_list, song_list_item), class: 'btn btn-primary' %>
-            </td>
-
-            <td>
-              <% if policy(song_list_item).destroy? %>
-                <%= button_to t('.destroy'), song_list_song_list_item_path(song_list_item.song_list, song_list_item), method: :delete, class: 'btn btn-danger' %>
-              <% end %>
-            </td>
-          </tr>
-        <% else %>
-          <tr>
-            <%= render 'data_cells', song_list_item: song_list_item, index: index %>
-          </tr>
-        <% end %>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+    <% end %>
+  </tbody>
+</table>

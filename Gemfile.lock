@@ -80,7 +80,7 @@ GEM
     ast (2.4.3)
     aws-eventstream (1.4.0)
     aws-partitions (1.1262.0)
-    aws-sdk-core (3.254.0)
+    aws-sdk-core (3.257.0)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.992.0)
       aws-sigv4 (~> 1.9)
@@ -88,11 +88,12 @@ GEM
       bigdecimal
       jmespath (~> 1, >= 1.6.1)
       logger
+      rexml (~> 3.4, >= 3.4.2)
     aws-sdk-kms (1.129.0)
       aws-sdk-core (~> 3, >= 3.248.0)
       aws-sigv4 (~> 1.5)
-    aws-sdk-s3 (1.228.2)
-      aws-sdk-core (~> 3, >= 3.254.0)
+    aws-sdk-s3 (1.232.1)
+      aws-sdk-core (~> 3, >= 3.256.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.5)
     aws-sigv4 (1.12.1)
@@ -218,7 +219,7 @@ GEM
       ice_cube (~> 0.16)
       tzinfo (~> 2.0)
     ice_cube (0.17.0)
-    image_processing (2.0.2)
+    image_processing (2.1.0)
     importmap-rails (2.2.3)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
@@ -304,7 +305,7 @@ GEM
     minitest (6.0.6)
       drb (~> 2.0)
       prism (~> 1.5)
-    mission_control-jobs (1.1.0)
+    mission_control-jobs (1.3.1)
       actioncable (>= 7.1)
       actionpack (>= 7.1)
       activejob (>= 7.1)
@@ -601,7 +602,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  aws-sdk-s3 (~> 1.228)
+  aws-sdk-s3 (~> 1.232)
   bootsnap
   brakeman
   browser (~> 6.2)
@@ -614,12 +615,12 @@ DEPENDENCIES
   i18n-tasks (~> 1.1.2)
   icalendar (~> 2.12)
   icalendar-recurrence (~> 1.2)
-  image_processing (~> 2.0)
+  image_processing (~> 2.1)
   importmap-rails
   kamal (~> 2.12)
   letter_opener
   litestream (~> 0.14.0)
-  mission_control-jobs (~> 1.1)
+  mission_control-jobs (~> 1.3)
   multi_json (~> 1.21)
   passwordless (~> 1.8)
   positioning (~> 0.4.8)

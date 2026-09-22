@@ -78,9 +78,9 @@ gem 'down', '~> 5.6'
 
 gem 'faker', '~> 3.8'
 
-gem 'aws-sdk-s3', '~> 1.228', require: false
+gem 'aws-sdk-s3', '~> 1.232', require: false
 
-gem 'image_processing', '~> 2.0'
+gem 'image_processing', '~> 2.1'
 
 gem 'chartkick', '~> 5.2'
 
@@ -94,7 +94,7 @@ gem 'positioning', '~> 0.4.8'
 
 gem 'browser', '~> 6.2'
 
-gem 'mission_control-jobs', '~> 1.1'
+gem 'mission_control-jobs', '~> 1.3'
 
 gem 'ruby-vips', '~> 2.3'
 
