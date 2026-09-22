@@ -1,0 +1,7 @@
+storage_entry:
+  identifier: identifier
+  mime_type: audio/mpeg
+  name: file.mp3
+  parent_identifier: parent-identifier
+  parent_identifiers: ['parent-identifier']
+  path: path/to/the/file.mp3
