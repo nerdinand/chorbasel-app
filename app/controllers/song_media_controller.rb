@@ -44,6 +44,6 @@ class SongMediaController < ApplicationController
   private
 
   def song_medium_params
-    params.expect(song_medium: %i[song_id register kind file file_identifier])
+    params.expect(song_medium: %i[song_id register kind file_identifier])
   end
 end

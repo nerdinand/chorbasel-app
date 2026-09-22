@@ -14,7 +14,8 @@ class SongMedium < ApplicationRecord
   ].freeze
 
   belongs_to :song, touch: true # when a SongMedium changes, its Song changes too
-  belongs_to :song_media_storage_entry, foreign_key: :file_identifier, primary_key: :identifier, inverse_of: false
+  belongs_to :song_media_storage_entry, foreign_key: :file_identifier, primary_key: :identifier, inverse_of: false,
+                                        optional: true
   has_one_attached :file
 
   validates :register, presence: true, inclusion: Register::Song::REGISTERS, if: proc { |sm|
