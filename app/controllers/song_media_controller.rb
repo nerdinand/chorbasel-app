@@ -35,7 +35,7 @@ class SongMediaController < ApplicationController
     return render status: :not_found if storage_entry.nil?
 
     send_data(
-      storage_entry.buffer.string.force_encoding('binary'),
+      storage_entry.data,
       filename: storage_entry.name,
       type: storage_entry.mime_type
     )

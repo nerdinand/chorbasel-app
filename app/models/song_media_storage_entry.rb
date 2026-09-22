@@ -12,6 +12,12 @@ class SongMediaStorageEntry < ApplicationRecord
   scope :audio, -> { where("mime_type like 'audio/%' or mime_type = 'application/ogg'") }
   scope :pdf, -> { where("mime_type = 'application/pdf'") }
 
+  def data
+    buffer.string.force_encoding('binary')
+  end
+
+  private
+
   def buffer
     SongMediaStorageAccessor.instance.download(identifier)
   end

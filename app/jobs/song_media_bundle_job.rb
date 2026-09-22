@@ -50,7 +50,11 @@ class SongMediaBundleJob < ApplicationJob
     recording = recording_for_register(song_media, register)
     return nil if recording.nil?
 
-    [recording.file.filename, recording.file.attachment.download]
+    if recording.file.present?
+      [recording.file.filename, recording.file.attachment.download]
+    else
+      [recording.song_media_storage_entry.name, recording.song_media_storage_entry.data]
+    end
   end
 
   def recording_for_register(song_media, register)
