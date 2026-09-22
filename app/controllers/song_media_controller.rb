@@ -31,10 +31,14 @@ class SongMediaController < ApplicationController
   end
 
   def load
-    song_medium = authorize SongMedium.find(params.expect(:song_medium_id))
-    return render status: :not_found if song_medium.file_identifier.nil?
+    storage_entry = authorize(SongMedium.find(params.expect(:song_medium_id))).try(:song_media_storage_entry)
+    return render status: :not_found if storage_entry.nil?
 
-    send_data(song_medium.buffer)
+    send_data(
+      storage_entry.buffer.string.force_encoding('binary'),
+      filename: storage_entry.name,
+      type: storage_entry.mime_type
+    )
   end
 
   private

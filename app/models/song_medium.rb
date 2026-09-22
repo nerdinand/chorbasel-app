@@ -14,6 +14,7 @@ class SongMedium < ApplicationRecord
   ].freeze
 
   belongs_to :song, touch: true # when a SongMedium changes, its Song changes too
+  belongs_to :song_media_storage_entry, foreign_key: :file_identifier, primary_key: :identifier, inverse_of: false
   has_one_attached :file
 
   validates :register, presence: true, inclusion: Register::Song::REGISTERS, if: proc { |sm|
@@ -47,9 +48,5 @@ class SongMedium < ApplicationRecord
     return false if file.blank?
 
     file.attachment.video?
-  end
-
-  def buffer
-    SongMediaStorageAccessor.instance.download(file_identifier)
   end
 end
