@@ -32,20 +32,24 @@ class SongMedium < ApplicationRecord
     I18n.t("activerecord.attributes.song_medium.enums.kind.#{kind}")
   end
 
+  def drive_file?
+    file_identifier.present?
+  end
+
   def type_audio?
-    return false if file.blank?
+    return song_media_storage_entry.type_audio? if file.blank?
 
     file.attachment.audio?
   end
 
   def type_pdf?
-    return false if file.blank?
+    return song_media_storage_entry.type_pdf? if file.blank?
 
     file.attachment.content_type == 'application/pdf'
   end
 
   def type_video?
-    return false if file.blank?
+    return song_media_storage_entry.type_video? if file.blank?
 
     file.attachment.video?
   end

@@ -13,10 +13,8 @@
         </strong>
 
         <% if recording.file.present? %>
-          <%= tabler_icon :file %>
           <%= audio_tag url_for(recording.file), class: 'w-5/6', controls: true, preload: 'none', data: {'score-target': 'audioTag', 'action': 'seeked->score#update'} %>
         <% else %>
-          <%= tabler_icon :'brand-google-drive' %>
           <%= audio_tag song_song_medium_load_path(song_id: recording.song.id, song_medium_id: recording.id), class: 'w-5/6', controls: true, preload: 'none', data: {'score-target': 'audioTag', 'action': 'seeked->score#update'} %>
         <% end %>
       </div>

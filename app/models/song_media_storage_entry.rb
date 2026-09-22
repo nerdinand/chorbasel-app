@@ -16,6 +16,18 @@ class SongMediaStorageEntry < ApplicationRecord
     buffer.string.force_encoding('binary')
   end
 
+  def type_audio?
+    mime_type.starts_with?('audio/') || mime_type == 'application/ogg'
+  end
+
+  def type_pdf?
+    mime_type == 'application/pdf'
+  end
+
+  def type_video?
+    mime_type.starts_with?('video/')
+  end
+
   private
 
   def buffer
