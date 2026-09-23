@@ -1,0 +1,147 @@
+erDiagram
+	direction TB
+	"ActiveStorage::Attachment" {
+		string name
+		string record_type
+	}
+	"ActiveStorage::Blob" {
+		integer byte_size
+		string checksum
+		string content_type
+		string filename
+		string key
+		text metadata
+		string service_name
+	}
+	"ActiveStorage::VariantRecord" {
+		string variation_digest
+	}
+	Attendance {
+		text remarks
+		string status
+	}
+	CalendarEvent {
+		boolean deleted
+		string description
+		datetime ends_at
+		datetime event_created_at
+		boolean is_recurring
+		string location
+		datetime starts_at
+		string summary
+		string uid
+	}
+	Info {
+		boolean active
+		text description
+		string kind
+		string title
+	}
+	NameGuess {
+		boolean correct
+	}
+	"Passwordless::Session" {
+		string authenticatable_type
+		datetime claimed_at
+		datetime expires_at
+		string identifier
+		datetime timeout_at
+		string token_digest
+	}
+	Program {
+	}
+	Score {
+		json metadata
+	}
+	Song {
+		string arranger
+		json genres
+		string key_signature
+		string language
+		text lyrics
+		string music_composer
+		json registers
+		boolean repertoire
+		string texter
+		string time_signature
+		string title
+	}
+	SongList {
+		string name
+		string status
+	}
+	SongListItem {
+		string name
+		text notes
+		integer position
+	}
+	SongMediaBundleDownload {
+		datetime last_downloaded_at
+		text log
+		string register
+		datetime song_list_updated_at
+		string status
+	}
+	SongMediaStorageEntry {
+		string identifier
+		string mime_type
+		string name
+		json parent_identifiers
+		string path
+	}
+	SongMedium {
+		string kind
+		string register
+	}
+	User {
+		date birth_date
+		string canonical_register
+		string city
+		string email
+		string first_name
+		string last_name
+		string member_since
+		string nick_name
+		string phone_number
+		string register
+		text remarks
+		json roles
+		string salutation
+		string street
+		string zip_code
+	}
+	UserStatus {
+		date from_date
+		string note
+		string status
+		date to_date
+	}
+	"ActiveStorage::Blob" ||--|o "ActiveStorage::Attachment" : ""
+	"ActiveStorage::VariantRecord" ||--|o "ActiveStorage::Attachment" : ""
+	Score ||--|o "ActiveStorage::Attachment" : ""
+	SongMediaBundleDownload ||--|o "ActiveStorage::Attachment" : ""
+	SongMedium ||--|o "ActiveStorage::Attachment" : ""
+	User ||--|o "ActiveStorage::Attachment" : ""
+	"ActiveStorage::Blob" ||--}o "ActiveStorage::Attachment" : ""
+	"ActiveStorage::Blob" ||--}o "ActiveStorage::VariantRecord" : ""
+	"ActiveStorage::Blob" o|..|o "ActiveStorage::Blob" : ""
+	CalendarEvent ||--}o Attendance : ""
+	User ||--}o Attendance : ""
+	CalendarEvent ||--}o Program : ""
+	CalendarEvent o|..}o SongList : ""
+	User ||--}o NameGuess : ""
+	User ||--}o "Passwordless::Session" : ""
+	SongList ||--}o Program : ""
+	Song ||--|o Score : ""
+	Score o|..|o "ActiveStorage::Blob" : ""
+	Song ||--}o SongMedium : ""
+	Song o|--}o SongListItem : ""
+	SongList ||--}o SongListItem : ""
+	SongList ||--}o SongMediaBundleDownload : ""
+	SongList o|..}o Song : ""
+	SongMediaBundleDownload o|..|o "ActiveStorage::Blob" : ""
+	SongMediaStorageEntry o|--}o SongMediaStorageEntry : ""
+	SongMediaStorageEntry o|--}o SongMedium : ""
+	SongMedium o|..|o "ActiveStorage::Blob" : ""
+	User o|..|o "ActiveStorage::Blob" : ""
+	User ||--}o UserStatus : ""

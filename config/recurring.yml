@@ -5,3 +5,6 @@ production:
   bundle_download_cleanup:
     class: SongMediaBundleDownloadCleanupJob
     schedule: every day at 2am
+  calendar_sync:
+    class: SongMediaStorageUpdateJob
+    schedule: every day at 3am
