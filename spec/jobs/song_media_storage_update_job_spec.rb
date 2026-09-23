@@ -8,6 +8,7 @@ RSpec.describe SongMediaStorageUpdateJob do
   fixtures :all
 
   it 'synchronises the Google Drive files to the database' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+    allow(SongMediaStorageAccessor).to receive(:new)
     allow(SongMediaStorageAccessor.instance).to receive(:drive_files).and_return(
       DriveFiles.new(
         [

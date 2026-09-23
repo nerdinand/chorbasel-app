@@ -101,8 +101,18 @@ SimpleCov::RSpec.start do
   skip '/config/'
 
   group 'Controllers', 'app/controllers'
-  group 'Models', 'app/models'
   group 'Helpers', 'app/helpers'
+  group 'Jobs', 'app/jobs'
   group 'Mailers', 'app/mailers'
+  group 'Models', 'app/models'
   group 'Policies', 'app/policies'
+  group 'Services', 'app/services'
+  group 'Validators', 'app/validators'
+
+  enable_coverage :branch            # track branches as well as lines
+
+  coverage :line do
+    minimum      90                  # fail the suite below 90% line coverage
+    maximum_drop 1                   # ...or when coverage drops more than 1%
+  end
 end
