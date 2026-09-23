@@ -28,11 +28,11 @@ class SongMediaStorageUpdateJob < ApplicationJob
 
   def to_attributes(drive_file)
     {
-      identifier: drive_file.file.id,
-      mime_type: drive_file.file.mime_type,
-      name: drive_file.file.name,
-      parent_identifiers: drive_file.file.parents,
-      parent_identifier: drive_file.file.parents.try(&:first),
+      identifier: drive_file.id,
+      mime_type: drive_file.mime_type,
+      name: drive_file.name,
+      parent_identifiers: drive_file.parents,
+      parent_identifier: drive_file.parents.try(&:first),
       path: drive_file.ancestor_names.join('/')
     }
   end

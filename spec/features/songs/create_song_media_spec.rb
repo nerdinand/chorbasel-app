@@ -15,7 +15,7 @@ RSpec.describe('Creating song media') do
     click_on 'Neue Mediendatei'
 
     select 'Notenblatt', from: 'Art'
-    select 'path/to/the/file.mp3', from: 'Google Drive-Datei'
+    select 'Folder/file.mp3', from: 'Google Drive-Datei'
     click_on 'Mediendatei erstellen'
     expect(page).to have_text('Mediendatei erfolgreich erstellt.')
   end

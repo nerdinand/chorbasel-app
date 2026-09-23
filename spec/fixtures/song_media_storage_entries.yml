@@ -1,7 +1,22 @@
-storage_entry:
-  identifier: identifier
+parent:
+  identifier: parent-identifier
+  mime_type: application/vnd.google-apps.folder
+  name: Folder
+  parent_identifiers: []
+  path: Folder
+
+storage_entry_1:
+  identifier: identifier-1
   mime_type: audio/mpeg
   name: file.mp3
   parent_identifier: parent-identifier
   parent_identifiers: ['parent-identifier']
-  path: path/to/the/file.mp3
+  path: Folder/file.mp3
+
+storage_entry_2:
+  identifier: identifier-2
+  mime_type: application/pdf
+  name: file.pdf
+  parent_identifier: parent-identifier
+  parent_identifiers: ['parent-identifier']
+  path: Folder/file.pdf

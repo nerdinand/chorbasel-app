@@ -14,7 +14,7 @@ class DriveFile
     ancestors.map(&:name).reverse
   end
 
-  delegate :id, :name, :size, to: :file
+  delegate :id, :mime_type, :name, :parents, to: :file
 
   attr_reader :file
 
