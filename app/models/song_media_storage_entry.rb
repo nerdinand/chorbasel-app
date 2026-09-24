@@ -27,10 +27,4 @@ class SongMediaStorageEntry < ApplicationRecord
   def type_video?
     mime_type.starts_with?('video/')
   end
-
-  private
-
-  def buffer
-    SongMediaStorageAccessor.instance.download(identifier)
-  end
 end

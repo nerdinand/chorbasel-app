@@ -18,14 +18,6 @@ class SongMediaStorageAccessor
     DriveFiles.new(retrieve_files)
   end
 
-  def retrieve_files(next_page_token = nil)
-    response = request_files(next_page_token)
-
-    return response.files unless response.next_page_token
-
-    response.files + retrieve_files(response.next_page_token)
-  end
-
   def download(id)
     buffer = StringIO.new
     drive_service.get_file(
@@ -35,6 +27,14 @@ class SongMediaStorageAccessor
   end
 
   private
+
+  def retrieve_files(next_page_token = nil)
+    response = request_files(next_page_token)
+
+    return response.files unless response.next_page_token
+
+    response.files + retrieve_files(response.next_page_token)
+  end
 
   def request_files(next_page_token)
     drive_service.list_files(
