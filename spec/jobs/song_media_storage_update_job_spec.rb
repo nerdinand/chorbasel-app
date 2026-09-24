@@ -7,7 +7,7 @@ MockDriveFile = Struct.new('DriveFile', :id, :mime_type, :name, :parents)
 RSpec.describe SongMediaStorageUpdateJob do
   fixtures :all
 
-  it 'synchronises the Google Drive files to the database' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+  it 'synchronises the Google Drive files to the database' do
     RSpec::Mocks.configuration.allow_message_expectations_on_nil = true
     allow(SongMediaStorageAccessor).to receive(:new)
     allow(SongMediaStorageAccessor.instance).to receive(:drive_files).and_return(
