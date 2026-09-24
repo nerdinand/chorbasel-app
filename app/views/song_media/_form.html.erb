@@ -23,10 +23,10 @@
 
   <div class="form-field">
     <p>
-      <%= f.label :file %> <%# i18n-tasks-use t('activerecord.attributes.song_medium.file') %>
+      <%= f.label :file_identifier %> <%# i18n-tasks-use t('activerecord.attributes.song_medium.file_identifier') %>
     </p>
 
-    <p><%= f.file_field :file %></p>
+    <p><%= f.select :file_identifier, file_identifier_options(song_media_storage_entries) %></p>
   </div>
 
   <p>
