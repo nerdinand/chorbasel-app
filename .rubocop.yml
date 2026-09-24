@@ -13,6 +13,7 @@ Style/Documentation:
 RSpec/MultipleExpectations:
   Exclude: 
   - spec/features/**/*
+  - spec/requests/**/*
 
 RSpec/ExampleLength:
   Exclude: 
