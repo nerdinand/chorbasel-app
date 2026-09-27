@@ -60,7 +60,7 @@ RSpec.describe SongListsController do
     describe 'with missing name' do
       let(:params) { { song_list: { name: '', status: 'in_preparation' } } }
 
-      it 'creates a record and redirects successfully' do
+      it 'renders an error' do
         expect do
           post '/song_lists', params: params
           expect(response).to have_http_status(:unprocessable_content)
