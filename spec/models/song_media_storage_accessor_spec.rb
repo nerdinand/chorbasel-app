@@ -7,10 +7,14 @@ class FakeDriveService
   def get_file(id, **options); end
 end
 
+class SongMediaStorageAccessorWithoutSetup < SongMediaStorageAccessor
+  def initialize; end # rubocop:disable Lint/MissingSuper
+end
+
 Response = Struct.new('Response', :next_page_token, :files)
 GoogleDriveFile = Struct.new('GoogleDriveFile', :id, :mime_type, :name, :parents)
 
-RSpec.describe SongMediaStorageAccessor do
+RSpec.describe SongMediaStorageAccessorWithoutSetup do # rubocop:disable RSpec/SpecFilePathFormat
   describe '#drive_files' do
     it 'requests files from google drive and builds the hierarchy' do
       accessor = described_class.instance.tap do |s|
