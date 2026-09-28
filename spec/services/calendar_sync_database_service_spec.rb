@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# rubocop:disable RSpec/MultipleExpectations, RSpec/ExampleLength, RSpec/NestedGroups
+# rubocop:disable RSpec/NestedGroups
 
 require 'rails_helper'
 

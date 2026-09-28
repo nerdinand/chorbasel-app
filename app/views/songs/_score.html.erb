@@ -12,7 +12,11 @@
           <% end %>
         </strong>
 
-        <%= audio_tag url_for(recording.file), class: 'w-5/6', controls: true, preload: 'none', data: {'score-target': 'audioTag', 'action': 'seeked->score#update'} %>
+        <% if recording.file.present? %>
+          <%= audio_tag url_for(recording.file), class: 'w-5/6', controls: true, preload: 'none', data: {'score-target': 'audioTag', 'action': 'seeked->score#update'} %>
+        <% else %>
+          <%= audio_tag song_song_medium_load_path(song_id: recording.song.id, song_medium_id: recording.id), class: 'w-5/6', controls: true, preload: 'none', data: {'score-target': 'audioTag', 'action': 'seeked->score#update'} %>
+        <% end %>
       </div>
     <% end %>
 

@@ -39,3 +39,7 @@ config/registry-token
 .DS_Store
 coverage
 erd.pdf
+
+# Ignore key files for decrypting credentials and more.
+/config/credentials/*.key
+

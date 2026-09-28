@@ -19,7 +19,7 @@ RSpec.describe Attendances::QuickActionsController do
       { attendance: { user_id: user.id, calendar_event_id: calendar_event.id, status: 'attended' } }
     end
 
-    it 'creates a new attendance' do # rubocop:disable RSpec/MultipleExpectations,RSpec/ExampleLength
+    it 'creates a new attendance' do
       expect do
         post :create, params: params, xhr: true
         expect(response).to be_successful
@@ -29,7 +29,7 @@ RSpec.describe Attendances::QuickActionsController do
       end.to change(Attendance, :count).by(1)
     end
 
-    it 'renders error response when creating attendance fails' do # rubocop:disable RSpec/MultipleExpectations
+    it 'renders error response when creating attendance fails' do
       post :create, params: params.deep_merge({ attendance: { status: 'invalid' } }), xhr: true
       expect(response).to have_http_status(:bad_request)
       expect(response.body).to match(
@@ -53,7 +53,7 @@ RSpec.describe Attendances::QuickActionsController do
       { attendance_id: attendance.id, attendance: { status: 'excused' } }
     end
 
-    it 'updates an existing attendance' do # rubocop:disable RSpec/MultipleExpectations
+    it 'updates an existing attendance' do
       patch :update, params: params, xhr: true
       expect(response).to be_successful
       expect(response.body).to match(
@@ -61,7 +61,7 @@ RSpec.describe Attendances::QuickActionsController do
       )
     end
 
-    it 'renders error response when updating attendance fails' do # rubocop:disable RSpec/MultipleExpectations
+    it 'renders error response when updating attendance fails' do
       patch :update, params: params.deep_merge({ attendance: { status: 'invalid' } }), xhr: true
       expect(response).to have_http_status(:bad_request)
       expect(response.body).to match(

@@ -57,6 +57,6 @@ class SongListsController < ApplicationController
   private
 
   def song_list_params
-    params.expect(song_list: %i[name status calendar_event_id])
+    params.expect(song_list: %i[name status])
   end
 end

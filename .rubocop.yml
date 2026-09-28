@@ -11,12 +11,10 @@ Style/Documentation:
   Enabled: false
 
 RSpec/MultipleExpectations:
-  Exclude: 
-  - spec/features/**/*
+  Enabled: false
 
 RSpec/ExampleLength:
-  Exclude: 
-  - spec/features/**/*
+  Enabled: false
 
 Metrics/AbcSize:
   Exclude:

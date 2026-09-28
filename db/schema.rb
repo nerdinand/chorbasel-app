@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_29_133956) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_03_201421) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -158,6 +158,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_29_133956) do
     t.datetime "updated_at", null: false
     t.index ["song_list_id", "register"], name: "index_smbd_on_song_list_id_and_register", unique: true
     t.index ["song_list_id"], name: "index_song_media_bundle_downloads_on_song_list_id"
+  end
+
+  create_table "song_media_storage_entries", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "identifier", null: false
+    t.string "mime_type", null: false
+    t.string "name", null: false
+    t.string "parent_identifier"
+    t.json "parent_identifiers"
+    t.string "path"
+    t.datetime "updated_at", null: false
+    t.index ["identifier"], name: "index_song_media_storage_entries_on_identifier", unique: true
   end
 
   create_table "songs", force: :cascade do |t|

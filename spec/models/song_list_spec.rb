@@ -50,7 +50,7 @@ RSpec.describe SongList do
         end.to change(song_list, :last_updated_at)
       end
 
-      it 'changes the return value when a song in the list has a new song medium' do # rubocop:disable RSpec/ExampleLength
+      it 'changes the return value when a song in the list has a new song medium' do
         song_medium = SongMedium.new(
           kind: 'choreography_video'
         )

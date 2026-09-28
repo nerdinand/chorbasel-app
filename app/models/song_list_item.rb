@@ -8,6 +8,10 @@ class SongListItem < ApplicationRecord
 
   scope :has_song, -> { where.not(song: nil) }
 
+  validates :notes, presence: { if: [-> { song.blank? }, -> { name.blank? }] }
+  validates :name, presence: { if: [-> { song.blank? }, -> { notes.blank? }] }
+  validates :song, presence: { if: [-> { name.blank? }, -> { notes.blank? }] }
+
   def display_name
     return name if name.present?
 
