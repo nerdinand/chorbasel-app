@@ -22,11 +22,13 @@ class DriveFile
 
   def ancestors
     ancestors = []
-    f = self
-    until f.nil?
-      ancestors << f
-      f = f.parent
+    file = self
+
+    until file.nil?
+      ancestors << file
+      file = file.parent
     end
+
     ancestors
   end
 end

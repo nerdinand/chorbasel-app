@@ -19,14 +19,14 @@ class SongMediaStorageUpdateJob < ApplicationJob
 
     ActiveRecord::Base.transaction do
       list = drive_files.all_files.map do |drive_file|
-        to_attributes(drive_file)
+        attributes_hash(drive_file)
       end
       identifiers = insert_or_update(list)
       destroy_others(identifiers)
     end
   end
 
-  def to_attributes(drive_file)
+  def attributes_hash(drive_file)
     {
       identifier: drive_file.id,
       mime_type: drive_file.mime_type,
