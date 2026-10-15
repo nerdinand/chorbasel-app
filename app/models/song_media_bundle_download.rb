@@ -5,7 +5,7 @@ class SongMediaBundleDownload < ApplicationRecord
 
   has_one_attached :file
 
-  # rubocop:disable Naming/VariableNumber
+  # rubocop:disable-next Naming/VariableNumber
   enum :register,
        {
          soprano_1: 'soprano_1',
@@ -17,7 +17,6 @@ class SongMediaBundleDownload < ApplicationRecord
          bass_1: 'bass_1',
          bass_2: 'bass_2'
        }
-  # rubocop:enable Naming/VariableNumber
 
   enum :status, { processing: 'processing', ready: 'ready', errored: 'errored' }, default: :processing
 
