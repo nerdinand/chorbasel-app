@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe SongMediaBundleJob do
   fixtures :all
 
-  it 'generates the zip file and sets the required attributes on the download' do # rubocop:disable RSpec/ExampleLength,RSpec/MultipleExpectations
+  it 'generates the zip file and sets the required attributes on the download' do
     song_media_bundle_download = SongMediaBundleDownload.create(
       song_list: song_lists(:concert1),
       register: 'bass_2'

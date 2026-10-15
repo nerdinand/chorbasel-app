@@ -29,6 +29,10 @@ class SongMediumPolicy < ApplicationPolicy
     song_management?
   end
 
+  def load?
+    show?
+  end
+
   private
 
   def song_management?

@@ -1,3 +1,7 @@
 concert1:
   name: Concert 1
   status: active
+
+christmas_concert:
+  name: Weihnachtskonzert
+  status: in_preparation

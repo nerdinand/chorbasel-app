@@ -1,14 +1,6 @@
 # frozen_string_literal: true
 
 class SongListItemsController < ApplicationController
-  def index
-    @song_list_items = policy_scope(SongListItem)
-  end
-
-  def show
-    @song_list_item = policy_scope(SongListItem).find(params.expect(:id))
-  end
-
   def new
     @song_list_item = authorize SongListItem.new(song_list_id: params[:song_list_id])
   end
