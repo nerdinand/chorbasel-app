@@ -31,8 +31,7 @@
 /public/assets
 
 # Ignore master key for decrypting credentials and more.
-/config/master.key
-config/registry-token
+/config/credentials/
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
