@@ -98,7 +98,7 @@ gem 'mission_control-jobs', '~> 1.3'
 
 gem 'ruby-vips', '~> 2.3'
 
-gem 'google-apis-drive_v3', '~> 0.81.0'
+gem 'google-apis-drive_v3', '~> 0.88.0'
 
 gem 'icalendar-recurrence', '~> 1.2'
 
@@ -106,4 +106,4 @@ gem 'multi_json', '~> 1.21'
 
 # FIXME: There seems to be an issue with activesupport being incompatible
 # with json > 2 (https://github.com/rails/rails/issues/58685) so we downgrade it from 3 to 2
-gem 'json', '~> 2'
+gem 'json', '~> 3'
