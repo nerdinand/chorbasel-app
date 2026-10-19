@@ -1,0 +1,139 @@
+/* combobox.css — styles for the `combobox` Stimulus controller.
+   The controller only relies on one class itself: it toggles `combobox--open`
+   on the root element. All other classes live in the markup / the
+   controller-generated list items. */
+
+.combobox {
+  position: relative;
+  display: inline-block;
+  min-width: 14rem;
+  max-width: 100%;
+  font-size: 0.875rem;
+  color: #1e293b;
+}
+
+.combobox__input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.5rem 2rem 0.5rem 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  font: inherit;
+  color: inherit;
+}
+
+.combobox__input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.combobox__input[readonly] {
+  cursor: default;
+  background-color: #f8fafc;
+}
+
+.combobox__toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 2rem;
+  border: 0;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+  font-size: 0.7rem;
+  line-height: 1;
+}
+
+.combobox__toggle::before {
+  content: "▾";
+}
+
+.combobox--open .combobox__toggle::before {
+  content: "▴";
+}
+
+.combobox__menu {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  margin: 0;
+  padding: 0.25rem;
+  list-style: none;
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+  max-height: 14rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: none;
+}
+
+.combobox--open .combobox__menu {
+  display: block;
+}
+
+.combobox__option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.5rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.combobox__option--highlighted {
+  background-color: #eff6ff;
+}
+
+.combobox__option--selected {
+  font-weight: 600;
+  color: #1d4ed8;
+}
+
+.combobox__option--clear {
+  font-weight: 400;
+  color: #64748b;
+}
+
+.combobox__option--custom {
+  color: #047857;
+}
+
+.combobox__empty {
+  padding: 0.375rem 0.5rem;
+  color: #94a3b8;
+}
+
+.combobox__checkbox {
+  flex: none;
+  position: relative;
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid #94a3b8;
+  border-radius: 0.25rem;
+}
+
+.combobox__checkbox--checked {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+.combobox__checkbox--checked::after {
+  content: "";
+  position: absolute;
+  left: 0.3rem;
+  top: 0.1rem;
+  width: 0.25rem;
+  height: 0.5rem;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}

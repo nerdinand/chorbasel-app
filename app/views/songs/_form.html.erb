@@ -42,20 +42,34 @@
     <div data-single-choice-combobox-target="choices" class="mb-2"></div>
   </div>
 
-  <div
-    class="form-field"
-    data-controller="single-choice-combobox"
-    data-single-choice-combobox-empty-label-value="<%= t('stimulus.single_choice_combobox.empty_label') %>"
-    data-single-choice-combobox-choices-value="<%= Song.all.pluck(:arranger).compact.uniq.to_json %>"
-  >
+
+  <div class="form-field">
     <p>
       <%= f.label :arranger %>
       <%# i18n-tasks-use t('activerecord.attributes.song.arranger') %>
     </p>
 
-    <%= f.text_field :arranger, value: song.arranger, data: { 'single-choice-combobox-target': 'textField', action: 'single-choice-combobox#input' }, class: 'mb-2' %>
+    <div class="combobox" data-controller="combobox"
+      data-combobox-choices-value='<%= Song.all.pluck(:arranger).compact.uniq.to_json %>'
+      data-combobox-multiselect-value="false"
+      data-combobox-allow-custom-value="true"
+      data-combobox-empty-label-value="<%= t('stimulus.single_choice_combobox.empty_label') %>"
+    >
+      <%= f.text_field(
+          :arranger,
+          placeholder: t('stimulus.single_choice_combobox.empty_label'),
+          data: { 
+            'combobox-target': 'textField',
+            action: 'click->combobox#fieldClick input->combobox#input keydown->combobox#keydown blur->combobox#blur' 
+          }, 
+          class: 'combobox__input',
+          autocomplete: 'off'
+        )
+      %>
 
-    <div data-single-choice-combobox-target="choices" class="mb-2"></div>
+      <button type="button" class="combobox__toggle" data-combobox-target="toggle" aria-label="Show options" data-action="click->combobox#toggle"></button>
+      <ul class="combobox__menu" data-combobox-target="choices"></ul>
+    </div>
   </div>
 
   <div

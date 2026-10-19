@@ -29,6 +29,35 @@
     <p><%= f.select :file_identifier, file_identifier_options(song_media_storage_entries) %></p>
   </div>
 
+  <div class="form-field">
+    <p>
+      <%= f.label :file_identifier %>
+      <%# i18n-tasks-use t('activerecord.attributes.song_medium.file_identifier') %>
+    </p>
+
+    <div class="combobox" data-controller="combobox"
+      data-combobox-choices-value='<%= file_identifier_options(song_media_storage_entries).to_json %>'
+      data-combobox-multiselect-value="false"
+      data-combobox-allow-custom-value="true"
+      data-combobox-empty-label-value="<%= t('stimulus.single_choice_combobox.empty_label') %>"
+    >
+      <%= f.text_field(
+          :file_identifier,
+          placeholder: t('stimulus.single_choice_combobox.empty_label'),
+          data: { 
+            'combobox-target': 'textField',
+            action: 'click->combobox#fieldClick input->combobox#input keydown->combobox#keydown blur->combobox#blur' 
+          },
+          class: 'combobox__input',
+          autocomplete: 'off'
+        )
+      %>
+
+      <button type="button" class="combobox__toggle" data-combobox-target="toggle" aria-label="Show options" data-action="click->combobox#toggle"></button>
+      <ul class="combobox__menu" data-combobox-target="choices"></ul>
+    </div>
+  </div>
+
   <p>
     <%= f.submit class: 'btn btn-primary' %> <%# i18n-tasks-use t('helpers.submit.song_medium.create') %>
   </p>
