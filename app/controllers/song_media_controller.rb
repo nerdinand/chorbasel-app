@@ -13,6 +13,7 @@ class SongMediaController < ApplicationController
       flash.notice = t('.success')
       redirect_to song_path(@song_medium.song)
     else
+      @song_media_storage_entries = SongMediaStorageEntry.media_file
       flash.alert = t('.error')
       render :new, status: :unprocessable_content
     end

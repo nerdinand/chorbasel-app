@@ -462,7 +462,7 @@ de:
     edit:
       title: Mediendatei bearbeiten
     new:
-      title: Neue Mediendatei
+      title: Neue Mediendatei für %{song_title}
   song_media_bundle_downloads:
     show:
       download: Herunterladen

@@ -6,13 +6,14 @@ import { Controller } from "@hotwired/stimulus"
 //   * select a single value (like a <select>) or multiple values
 //   * optional filtering of the list while typing
 //   * optional entry of values that are not part of `choices`
+//   * optional label/value pairs: display one thing, submit another
 //   * full keyboard support (ArrowUp/ArrowDown, Enter, Escape)
 //
 // Markup
 //   <div class="combobox" data-controller="combobox"
-//        data-combobox-choices-value='["Apple", "Banana", "Cherry"]'
+//        data-combobox-choices-value='[["Apple", 1], ["Banana", 2]]'
 //        data-combobox-multiselect-value="true">
-//     <input type="text" class="combobox__input" autocomplete="off"
+//     <input type="text" class="combobox__input" name="fruit" autocomplete="off"
 //            data-combobox-target="textField" placeholder="Pick fruit…"
 //            data-action="click->combobox#fieldClick
 //                         input->combobox#input
@@ -25,24 +26,38 @@ import { Controller } from "@hotwired/stimulus"
 //   </div>
 //
 // Configuration values
-//   choices     Array    options to choose from (default: [])
+//   choices     Array    options to choose from. Each entry is either a plain
+//                        value ("Apple") or a [label, value] pair
+//                        (["Apple", 1]); plain values act as their own label
+//                        (default: [])
 //   filterable  Boolean  typing filters the list (default: true)
 //   multiselect Boolean  several values may be selected; they are serialised
-//                        as a comma separated list in the text field
-//                        (default: false)
-//   allowCustom Boolean  the user may enter values that are not in `choices`
-//                        (default: false)
+//                        as a comma separated list (default: false)
+//   allowCustom Boolean  the user may enter values that are not in `choices`;
+//                        such values act as their own label (default: false)
 //   emptyLabel  String   label for the "clear selection" entry shown in
 //                        single-select mode while a value is selected
 //                        (default: "Clear"; "" hides the entry)
 //
-// The text field is the source of truth: on connect its content is
-// deserialised into the current selection, and every change is written back
-// as a comma separated list. Values therefore cannot contain commas. When a
-// `change` is written programmatically, call the `sync` action afterwards so
-// the controller re-reads the field.
+// Values vs. labels
+//   The submitted values are kept as a comma separated list. As long as every
+//   label equals its value, that list lives in the text field itself and the
+//   form submits it directly. As soon as any label differs from its value,
+//   the values are written to a hidden input instead: provide one with
+//   `data-combobox-target="hiddenField"` (recommended — give it the `name`
+//   attribute), or the controller creates one automatically next to the text
+//   field and moves the text field's `name` attribute onto it. The text field
+//   then displays the labels while the hidden field holds the values.
+//
+//   On connect the selection is read from the hidden field if it has a
+//   value, otherwise from the text field — pre-fill either with values
+//   (never labels). After changing either field programmatically, call the
+//   `sync` action.
+//
+// Caveats: values and labels cannot contain commas (they separate values),
+// and values are treated as strings, as forms do.
 export default class extends Controller {
-  static targets = ["textField", "toggle", "choices"]
+  static targets = ["textField", "toggle", "choices", "hiddenField"]
 
   static values = {
     choices: { type: Array, default: [] },
@@ -53,6 +68,7 @@ export default class extends Controller {
   }
 
   #choices = []
+  #autoHiddenField = null
   #keepFocus = null
   #closeOnOutsideMousedown = null
 
@@ -97,12 +113,18 @@ export default class extends Controller {
     document.removeEventListener("mousedown", this.#closeOnOutsideMousedown)
   }
 
-  // Re-read the selection from the text field. Call this action after
-  // changing the field value programmatically.
+  // Re-read the selection from the canonical field (the hidden field if one is
+  // in use, the text field otherwise) and rewrite both fields. Call this
+  // action after changing a field programmatically.
   sync() {
-    this.selected = this.#deserialize(this.textFieldTarget.value)
+    if (!this.hasTextFieldTarget || !this.hasChoicesTarget) return
+
+    this.#normalizeChoices()
+    this.#ensureHiddenField()
+
+    this.selected = this.#deserializeValues(this.#canonicalValue())
     if (!this.multiselectValue) this.selected = this.selected.slice(0, 1)
-    this.#choices = this.choicesValue.map((value) => String(value))
+    this.#writeFields(false)
     this.#render()
   }
 
@@ -186,8 +208,7 @@ export default class extends Controller {
   }
 
   choicesValueChanged() {
-    this.#choices = this.choicesValue.map((value) => String(value))
-    this.#render()
+    this.sync()
   }
 
   // -- Private ----------------------------------------------------------------
@@ -224,7 +245,7 @@ export default class extends Controller {
 
     const exact = this.#matchChoice(query)
     if (exact) {
-      this.#add(exact)
+      this.#add(exact.value)
       return true
     }
     if (this.allowCustomValue) {
@@ -235,7 +256,7 @@ export default class extends Controller {
     // prefix and pressing Enter selects it even without allowCustom.
     const visible = this.#visibleChoices()
     if (visible.length === 1) {
-      this.#add(visible[0])
+      this.#add(visible[0].value)
       return true
     }
     return false
@@ -249,29 +270,32 @@ export default class extends Controller {
     }
   }
 
+  // Match typed text against the labels.
   #matchChoice(query) {
     const needle = query.toLowerCase()
-    return this.#choices.find((choice) => choice.toLowerCase() === needle)
+    return this.#choices.find((choice) => choice.label.toLowerCase() === needle)
   }
 
   // Values not present in `choices` (previously entered custom values) are
   // kept visible so they can be inspected and removed.
   #visibleChoices() {
-    let values = [
-      ...new Set([
-        ...this.selected.filter((value) => !this.#choices.includes(value)),
-        ...this.#choices,
-      ]),
+    const extras = this.selected
+      .filter((value) => !this.#choices.some((choice) => choice.value === value))
+      .map((value) => ({ label: value, value: value }))
+
+    let choices = [
+      ...new Map([...extras, ...this.#choices].map((choice) => [choice.value, choice])).values(),
     ]
+
     if (this.filterableValue && this.query.trim() !== "") {
       const needle = this.query.trim().toLowerCase()
-      values = values.filter((value) => value.toLowerCase().includes(needle))
+      choices = choices.filter((choice) => choice.label.toLowerCase().includes(needle))
     }
-    return values
+    return choices
   }
 
   // The filter text is the whole field in single-select mode, and the segment
-  // after the last comma in multiselect mode.
+  // after the last comma in multiselect mode. The text field shows labels.
   #extractQuery() {
     const text = this.textFieldTarget.value
     if (!this.multiselectValue) return text
@@ -279,7 +303,49 @@ export default class extends Controller {
     return separator === -1 ? text : text.slice(separator + 1)
   }
 
-  #deserialize(value) {
+  #normalizeChoices() {
+    this.#choices = this.choicesValue.map((entry) => {
+      if (Array.isArray(entry) && entry.length === 2) {
+        return { label: String(entry[0]), value: String(entry[1]) }
+      }
+      const value = String(entry)
+      return { label: value, value: value }
+    })
+  }
+
+  // Hidden input holding the canonical values, if labels differ from values.
+  #hidden() {
+    if (this.hasHiddenFieldTarget) return this.hiddenFieldTarget
+    return this.#autoHiddenField
+  }
+
+  #ensureHiddenField() {
+    if (!this.hasTextFieldTarget || this.#hidden()) return
+    if (!this.#choices.some((choice) => choice.label !== choice.value)) return
+
+    const hidden = document.createElement("input")
+    hidden.type = "hidden"
+    if (this.textFieldTarget.name) {
+      hidden.name = this.textFieldTarget.name
+      this.textFieldTarget.removeAttribute("name")
+    }
+    this.textFieldTarget.insertAdjacentElement("afterend", hidden)
+    this.#autoHiddenField = hidden
+  }
+
+  // The values come from the hidden field if it has content, otherwise from
+  // the text field (which then holds values, as a server round-trip would).
+  #canonicalValue() {
+    const hidden = this.#hidden()
+    return hidden && hidden.value !== "" ? hidden.value : this.textFieldTarget.value
+  }
+
+  #labelFor(value) {
+    const choice = this.#choices.find((entry) => entry.value === value)
+    return choice ? choice.label : value
+  }
+
+  #deserializeValues(value) {
     return value.split(",").map((item) => item.trim()).filter((item) => item !== "")
   }
 
@@ -287,15 +353,33 @@ export default class extends Controller {
     return values.join(", ")
   }
 
-  // Write the canonical selection back to the text field. Also reverts
+  // Write labels to the text field and values to the hidden field (or, when
+  // labels equal values, values to the text field). Also reverts
   // uncommittable filter text on blur/escape.
-  #reserialize() {
+  #writeFields(dispatch) {
+    if (!this.hasTextFieldTarget) return
     this.query = ""
+
+    const hidden = this.#hidden()
     const serialized = this.#serialize(this.selected)
-    if (this.textFieldTarget.value !== serialized) {
-      this.textFieldTarget.value = serialized
-      this.textFieldTarget.dispatchEvent(new Event("change", { bubbles: true }))
+
+    if (hidden) {
+      const display = this.#serialize(this.selected.map((value) => this.#labelFor(value)))
+      if (this.textFieldTarget.value !== display) {
+        this.textFieldTarget.value = display
+        if (dispatch) this.textFieldTarget.dispatchEvent(new Event("change", { bubbles: true }))
+      }
     }
+
+    const valueField = hidden || this.textFieldTarget
+    if (valueField.value !== serialized) {
+      valueField.value = serialized
+      if (dispatch) valueField.dispatchEvent(new Event("change", { bubbles: true }))
+    }
+  }
+
+  #reserialize() {
+    this.#writeFields(true)
   }
 
   #open() {
@@ -347,11 +431,11 @@ export default class extends Controller {
       }))
     }
 
-    this.#visibleChoices().forEach((value) => {
+    this.#visibleChoices().forEach((choice) => {
       menu.appendChild(this.#buildOption({
-        value: value,
-        label: value,
-        selected: this.selected.includes(value),
+        value: choice.value,
+        label: choice.label,
+        selected: this.selected.includes(choice.value),
       }))
     })
 
