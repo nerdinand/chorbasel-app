@@ -10,38 +10,23 @@
     <p><%= f.text_field :title %></p>
   </div>
 
-  <div
-    class="form-field"
-    data-controller="single-choice-combobox"
-    data-single-choice-combobox-empty-label-value="<%= t('stimulus.single_choice_combobox.empty_label') %>"
-    data-single-choice-combobox-choices-value="<%= Song.all.pluck(:music_composer).compact.uniq.to_json %>"
-  >
+  <div class="form-field">
     <p>
       <%= f.label :music_composer %>
       <%# i18n-tasks-use t('activerecord.attributes.song.music_composer') %>
     </p>
 
-    <%= f.text_field :music_composer, value: song.music_composer, data: { 'single-choice-combobox-target': 'textField', action: 'single-choice-combobox#input' }, class: 'mb-2' %>
-
-    <div data-single-choice-combobox-target="choices" class="mb-2"></div>
+    <%= combobox(f, :music_composer, Song.all.pluck(:music_composer).compact.uniq, allow_custom_value: true) %>
   </div>
 
-  <div
-    class="form-field"
-    data-controller="single-choice-combobox"
-    data-single-choice-combobox-empty-label-value="<%= t('stimulus.single_choice_combobox.empty_label') %>"
-    data-single-choice-combobox-choices-value="<%= Song.all.pluck(:texter).compact.uniq.to_json %>"
-  >
+  <div class="form-field">
     <p>
       <%= f.label :texter %>
       <%# i18n-tasks-use t('activerecord.attributes.song.texter') %>
     </p>
 
-    <%= f.text_field :texter, value: song.texter, data: { 'single-choice-combobox-target': 'textField', action: 'single-choice-combobox#input' }, class: 'mb-2' %>
-
-    <div data-single-choice-combobox-target="choices" class="mb-2"></div>
+    <%= combobox(f, :texter, Song.all.pluck(:texter).compact.uniq, allow_custom_value: true) %>
   </div>
-
 
   <div class="form-field">
     <p>
@@ -49,75 +34,34 @@
       <%# i18n-tasks-use t('activerecord.attributes.song.arranger') %>
     </p>
 
-    <div class="combobox" data-controller="combobox"
-      data-combobox-choices-value='<%= Song.all.pluck(:arranger).compact.uniq.to_json %>'
-      data-combobox-multiselect-value="false"
-      data-combobox-allow-custom-value="true"
-      data-combobox-empty-label-value="<%= t('stimulus.single_choice_combobox.empty_label') %>"
-    >
-      <%= f.text_field(
-          :arranger,
-          placeholder: t('stimulus.single_choice_combobox.empty_label'),
-          data: { 
-            'combobox-target': 'textField',
-            action: 'click->combobox#fieldClick input->combobox#input keydown->combobox#keydown blur->combobox#blur' 
-          }, 
-          class: 'combobox__input',
-          autocomplete: 'off'
-        )
-      %>
-
-      <button type="button" class="combobox__toggle" data-combobox-target="toggle" aria-label="Show options" data-action="click->combobox#toggle"></button>
-      <ul class="combobox__menu" data-combobox-target="choices"></ul>
-    </div>
+    <%= combobox(f, :arranger, Song.all.pluck(:arranger).compact.uniq, allow_custom_value: true) %>
   </div>
 
-  <div
-    class="form-field"
-    data-controller="single-choice-combobox"
-    data-single-choice-combobox-empty-label-value="<%= t('stimulus.single_choice_combobox.empty_label') %>"
-    data-single-choice-combobox-choices-value="<%= Song.all.pluck(:key_signature).compact.uniq.to_json %>"
-  >
+  <div class="form-field">
     <p>
       <%= f.label :key_signature %>
       <%# i18n-tasks-use t('activerecord.attributes.song.key_signature') %>
     </p>
 
-    <%= f.text_field :key_signature, value: song.key_signature, data: { 'single-choice-combobox-target': 'textField', action: 'single-choice-combobox#input' }, class: 'mb-2' %>
-
-    <div data-single-choice-combobox-target="choices" class="mb-2"></div>
+    <%= combobox(f, :key_signature, Song.all.pluck(:key_signature).compact.uniq, allow_custom_value: true) %>
   </div>
 
-  <div
-    class="form-field"
-    data-controller="single-choice-combobox"
-    data-single-choice-combobox-empty-label-value="<%= t('stimulus.single_choice_combobox.empty_label') %>"
-    data-single-choice-combobox-choices-value="<%= Song.all.pluck(:time_signature).compact.uniq.to_json %>"
-  >
+  <div class="form-field">
     <p>
       <%= f.label :time_signature %>
       <%# i18n-tasks-use t('activerecord.attributes.song.time_signature') %>
     </p>
 
-    <%= f.text_field :time_signature, value: song.time_signature, data: { 'single-choice-combobox-target': 'textField', action: 'single-choice-combobox#input' }, class: 'mb-2' %>
-
-    <div data-single-choice-combobox-target="choices" class="mb-2"></div>
+    <%= combobox(f, :time_signature, Song.all.pluck(:time_signature).compact.uniq, allow_custom_value: true) %>
   </div>
 
-  <div
-    class="form-field"
-    data-controller="single-choice-combobox"
-    data-single-choice-combobox-empty-label-value="<%= t('stimulus.single_choice_combobox.empty_label') %>"
-    data-single-choice-combobox-choices-value="<%= Song.all.pluck(:language).compact.uniq.to_json %>"
-  >
+  <div class="form-field">
     <p>
       <%= f.label :language %>
       <%# i18n-tasks-use t('activerecord.attributes.song.language') %>
     </p>
 
-    <%= f.text_field :language, value: song.language, data: { 'single-choice-combobox-target': 'textField', action: 'single-choice-combobox#input' }, class: 'mb-2' %>
-
-    <div data-single-choice-combobox-target="choices" class="mb-2"></div>
+    <%= combobox(f, :language, Song.all.pluck(:language).compact.uniq, allow_custom_value: true) %>
   </div>
 
   <div class="form-field">
@@ -138,19 +82,13 @@
     <p><%= f.check_box :repertoire %></p>
   </div>
 
-  <div
-    class="form-field"
-    data-controller="combobox"
-    data-combobox-choices-value="<%= Song.all.pluck(:genres).flatten.uniq.to_json %>"
-  >
+  <div class="form-field">
     <p>
       <%= f.label :genres %>
       <%# i18n-tasks-use t('activerecord.attributes.song.genres') %>
     </p>
 
-    <%= f.text_field :genres, value: song.genres.join(', '), data: { 'combobox-target': 'textField', action: 'combobox#input' }, class: 'mb-2' %>
-
-    <div data-combobox-target="choices" class="mb-2"></div>
+    <%= combobox(f, :genres, Song.all.pluck(:genres).flatten.uniq, multiselect: true, allow_custom_value: true) %>
   </div>
 
   <div class="form-field">

@@ -1,0 +1,21 @@
+<div class="combobox" data-controller="combobox"
+  data-combobox-choices-value='<%= choices %>'
+  data-combobox-multiselect-value="<%= multiselect %>"
+  data-combobox-allow-custom-value="<%= allow_custom_value %>"
+  data-combobox-empty-label-value="<%= t('stimulus.single_choice_combobox.empty_label') %>"
+>
+  <%= form.text_field(
+      field,
+      value:,
+      placeholder: t('stimulus.single_choice_combobox.empty_label'),
+      data: { 
+        'combobox-target': 'textField',
+        action: 'click->combobox#fieldClick input->combobox#input keydown->combobox#keydown focus->combobox#focus blur->combobox#blur' 
+      }, 
+      class: 'combobox__input',
+      autocomplete: 'off'
+    )
+  %>
+  <button type="button" class="combobox__toggle" data-combobox-target="toggle" aria-label="Show options" data-action="click->combobox#toggle"></button>
+  <ul class="combobox__menu" data-combobox-target="choices"></ul>
+</div>

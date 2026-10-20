@@ -18,6 +18,7 @@ import { Controller } from "@hotwired/stimulus"
 //            data-action="click->combobox#fieldClick
 //                         input->combobox#input
 //                         keydown->combobox#keydown
+//                         focus->combobox#focus
 //                         blur->combobox#blur">
 //     <button type="button" class="combobox__toggle"
 //             data-combobox-target="toggle" aria-label="Show options"
@@ -56,6 +57,10 @@ import { Controller } from "@hotwired/stimulus"
 //
 // Caveats: values and labels cannot contain commas (they separate values),
 // and values are treated as strings, as forms do.
+//
+// In multiselect mode the controller keeps an empty ", " segment at the end
+// of the text field while the user is editing, so that continued typing
+// starts a new value instead of extending the last one; blur removes it.
 export default class extends Controller {
   static targets = ["textField", "toggle", "choices", "hiddenField"]
 
@@ -132,6 +137,11 @@ export default class extends Controller {
 
   fieldClick() {
     if (!this.open) this.#open()
+    this.#ensureOpenSegment()
+  }
+
+  focus() {
+    this.#ensureOpenSegment()
   }
 
   toggle() {
@@ -174,6 +184,7 @@ export default class extends Controller {
         } else {
           this.#commitQuery()
           this.#reserialize()
+          if (this.multiselectValue) this.#openSegment()
           this.#render()
           if (!this.multiselectValue) this.#close()
         }
@@ -184,6 +195,7 @@ export default class extends Controller {
         event.preventDefault()
         if (this.multiselectValue && this.#commitQuery()) {
           this.#reserialize()
+          this.#openSegment()
           this.#render()
         }
         break
@@ -228,7 +240,11 @@ export default class extends Controller {
       this.selected = [value]
     }
     this.#reserialize()
-    if (!this.multiselectValue) this.#close()
+    if (!this.multiselectValue) {
+      this.#close()
+    } else {
+      this.#openSegment()
+    }
     this.#render()
   }
 
@@ -301,6 +317,35 @@ export default class extends Controller {
     if (!this.multiselectValue) return text
     const separator = text.lastIndexOf(",")
     return separator === -1 ? text : text.slice(separator + 1)
+  }
+
+  // Leave an empty segment at the end of the field so that continued typing
+  // adds another value instead of extending the last one. Used after a
+  // commit (Enter, comma, clicking an option).
+  #openSegment() {
+    if (!this.multiselectValue || this.textFieldTarget.readOnly) return
+
+    const field = this.textFieldTarget
+    if (field.value !== "" && !field.value.endsWith(", ")) {
+      field.value += ", "
+    }
+    field.setSelectionRange(field.value.length, field.value.length)
+    this.query = ""
+  }
+
+  // Same, but only when the caret sits at the very end of the field, so that
+  // clicks and focus never disturb mid-text editing.
+  #ensureOpenSegment() {
+    if (!this.multiselectValue || this.textFieldTarget.readOnly) return
+
+    const field = this.textFieldTarget
+    const atEnd =
+      field.selectionStart === field.selectionEnd &&
+      field.selectionStart === field.value.length
+    if (atEnd && field.value !== "" && !field.value.endsWith(", ")) {
+      field.value += ", "
+      field.setSelectionRange(field.value.length, field.value.length)
+    }
   }
 
   #normalizeChoices() {
