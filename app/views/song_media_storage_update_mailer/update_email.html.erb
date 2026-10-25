@@ -1,0 +1,44 @@
+<h1><%= t('.title') %></h1>
+
+<h2><%= t('.created_entries', count: @created_entries.count) %></h2>
+<ul>
+  <% @created_entries.each do |entry| %>
+    <li>
+      <%= entry.identifier %>: <%= entry.path %>
+    </li>
+  <% end %>
+</ul>
+
+<h2><%= t('.updated_entries', count: @updated_entries.count) %></h2>
+<ul>
+  <% @updated_entries.each do |entry| %>
+    <li>
+      <%= entry.identifier %>: <%= entry.path %>
+    </li>
+  <% end %>
+</ul>
+
+<h2><%= t('.deleted_entries', count: @deleted_entry_identifiers.count) %></h2>
+<ul>
+  <% @deleted_entry_identifiers.each do |identifier| %>
+    <li>
+      <%= identifier %>
+    </li>
+  <% end %>
+</ul>
+
+<h2><%= t('.unchanged_entries', count: @unchanged_entry_identifiers.count) %></h2>
+
+<%= t('.omitted') %>
+
+<h2><%= t('.orphaned_media', count: @orphaned_media.count) %></h2>
+<ul>
+  <% @orphaned_media.each do |song_medium| %>
+    <li>
+      <%= song_medium.file_identifier %>
+      <%= song_medium.kind %>
+      <%= song_medium.register %>
+      <%= link_to t('.edit_song'), edit_song_path(song_medium.song) %>
+    </li>
+  <% end %>
+</ul>
