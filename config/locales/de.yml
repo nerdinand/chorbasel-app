@@ -467,6 +467,17 @@ de:
     show:
       download: Herunterladen
       title: Download für %{song_list_name}
+  song_media_storage_update_mailer:
+    subject: Mediendateien-Speicher-Update
+    update_email:
+      created_entries: "%{count} neue Einträge"
+      deleted_entries: "%{count} gelöschte Einträge"
+      edit_song: Lied bearbeiten
+      omitted: "(weggelassen)"
+      orphaned_media: "%{count} verwaiste Einträge"
+      title: Mediendateien-Speicher-Update
+      unchanged_entries: "%{count} unveränderte Einträge"
+      updated_entries: "%{count} aktualisierte Einträge"
   songs:
     create:
       error: Fehler beim Erstellen des Lieds.
