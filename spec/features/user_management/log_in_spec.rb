@@ -8,14 +8,14 @@ RSpec.describe('Logging in and out') do
     log_in_with_code(users(:uwe))
     expect(page).to have_text('Willkommen, Uwe!')
     expect(page).to have_text('Dashboard')
-    click_on 'Ausloggen', visible: false
+    click_on 'Ausloggen', visible: :hidden
     expect(page).to have_text('Erfolgreich ausgeloggt.')
   end
 
   scenario 'with the magic link' do
     log_in_with_magic_link(users(:uwe))
     expect(page).to have_text('Dashboard')
-    click_on 'Ausloggen', visible: false
+    click_on 'Ausloggen', visible: :hidden
     expect(page).to have_text('Erfolgreich ausgeloggt.')
   end
 end
