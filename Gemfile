@@ -8,7 +8,7 @@ gem 'importmap-rails'
 gem 'propshaft'
 gem 'puma', '>= 5.0'
 gem 'rails', '~> 8.1'
-gem 'sqlite3', '~> 2.9'
+gem 'sqlite3', '~> 2.10'
 gem 'stimulus-rails'
 gem 'turbo-rails'
 
@@ -80,7 +80,7 @@ gem 'down', '~> 5.6'
 
 gem 'faker', '~> 3.8'
 
-gem 'aws-sdk-s3', '~> 1.232', require: false
+gem 'aws-sdk-s3', '~> 1.234', require: false
 
 gem 'image_processing', '~> 2.1'
 
@@ -90,7 +90,7 @@ gem 'tabler_icons', '~> 0.1.1'
 
 gem 'spreadsheet_architect', '~> 5.1'
 
-gem 'litestream', '~> 0.14.0'
+gem 'litestream', '~> 0.16.1'
 
 gem 'positioning', '~> 0.4.8'
 
@@ -100,7 +100,7 @@ gem 'mission_control-jobs', '~> 1.3'
 
 gem 'ruby-vips', '~> 2.3'
 
-gem 'google-apis-drive_v3', '~> 0.81.0'
+gem 'google-apis-drive_v3', '~> 0.88.0'
 
 gem 'icalendar-recurrence', '~> 1.2'
 
@@ -108,4 +108,4 @@ gem 'multi_json', '~> 1.21'
 
 # FIXME: There seems to be an issue with activesupport being incompatible
 # with json > 2 (https://github.com/rails/rails/issues/58685) so we downgrade it from 3 to 2
-gem 'json', '~> 2'
+gem 'json', '~> 3'
