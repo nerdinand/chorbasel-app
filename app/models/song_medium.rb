@@ -42,19 +42,19 @@ class SongMedium < ApplicationRecord
   end
 
   def type_audio?
-    return song_media_storage_entry.type_audio? if file.drive_file_present?
+    return song_media_storage_entry.type_audio? if drive_file_present?
 
     file.attachment.try(:audio?) || false
   end
 
   def type_pdf?
-    return song_media_storage_entry.type_pdf? if file.drive_file_present?
+    return song_media_storage_entry.type_pdf? if drive_file_present?
 
     file.attachment.try { |f| f.content_type == 'application/pdf' } || false
   end
 
   def type_video?
-    return song_media_storage_entry.type_video? if file.drive_file_present?
+    return song_media_storage_entry.type_video? if drive_file_present?
 
     file.attachment.try(:video?) || false
   end
