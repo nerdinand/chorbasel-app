@@ -25,6 +25,7 @@ export default class extends Controller {
         lyricWordSpace: 2,
         adjustPageHeight: true,
         adjustPageWidth: true,
+        expandNever: true
       })
 
       this.secondsToMeasureNumberListValue = this.metadataValue["secondsToMeasureNumberList"]
@@ -61,6 +62,9 @@ export default class extends Controller {
       }
       i += 500
     }
+
+    console.log(measures);
+    
     controller.measureListValue = measures
   }
 
