@@ -25,3 +25,14 @@
 #   # Report violations without enforcing the policy.
 #   # config.content_security_policy_report_only = true
 # end
+
+Rails.application.configure do
+  config.content_security_policy do |policy|
+    # Allow 'unsafe-eval' for WASM modules (Emscripten uses eval/Function)
+    # Allow 'unsafe-inline' for verovio WASM bundle which contains inline scripts
+    policy.script_src :self, :https, "'unsafe-eval'", "'unsafe-inline'"
+
+    # Allow WASM execution
+    policy.wasm_unsafe_eval true if policy.respond_to?(:wasm_unsafe_eval)
+  end
+end

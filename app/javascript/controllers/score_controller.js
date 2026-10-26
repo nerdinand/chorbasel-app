@@ -10,9 +10,108 @@ export default class extends Controller {
     secondsToMeasureNumberList: Array,
   }
 
-  scoreTargetConnected() {
-    verovio.module.onRuntimeInitialized = () => {
-      document.toolkit = new verovio.toolkit()
+  initializeVerovio() {
+    // Check if WebAssembly is supported
+    if (typeof WebAssembly === 'undefined') {
+      return;
+    }
+
+    // Check if verovio object exists at all
+    if (typeof verovio === 'undefined') {
+      return;
+    }
+
+    // If toolkit already exists, we're already initialized
+    if (document.toolkit) {
+      this.setupToolkit();
+      return;
+    }
+
+    // If module exists, check if it's already initialized
+    if (verovio?.module) {
+      // In Emscripten, check if runtime is already initialized
+      // Different Verovio versions may use different properties
+      const isInitialized = verovio.module.calledRun || 
+                           verovio.module._initialized ||
+                           (typeof verovio.module._main === 'function' && verovio.module._main.length === 0) ||
+                           // Check if HEAP is available (WASM memory is initialized)
+                           (verovio.module.HEAPU8 && verovio.module.HEAPU8.length > 0) ||
+                           // Check if toolkit constructor exists (module is ready)
+                           (typeof verovio.module._vrvToolkit_constructor === 'function');
+      
+      if (isInitialized) {
+        this.setupToolkit();
+        return;
+      }
+      
+      // If module has a then() method (promise), use it
+      if (typeof verovio.module.then === 'function') {
+        verovio.module.then(() => {
+          this.setupToolkit();
+        });
+        return;
+      }
+      
+      // Set callback for when module initializes
+      const existingCallback = verovio.module.onRuntimeInitialized;
+      verovio.module.onRuntimeInitialized = () => {
+        if (existingCallback) {
+          try {
+            existingCallback();
+          } catch (e) {
+            // Ignore errors from existing callback
+          }
+        }
+        this.setupToolkit();
+      };
+      
+      // Safari/Chrome/Edge fix: Also try after a short delay in case module is already initialized
+      // but the callback doesn't fire when set after initialization
+      setTimeout(() => {
+        if (!document.toolkit) {
+          this.setupToolkit();
+        }
+      }, 100);
+      
+      return;
+    }
+
+    // Module not loaded yet, wait for it to appear
+    const interval = setInterval(() => {
+      if (verovio?.module) {
+        clearInterval(interval);
+        
+        // Check if already initialized
+        const isInitialized = verovio.module.calledRun || 
+                           verovio.module._initialized ||
+                           (verovio.module.HEAPU8 && verovio.module.HEAPU8.length > 0) ||
+                           (typeof verovio.module._vrvToolkit_constructor === 'function');
+        if (isInitialized) {
+          this.setupToolkit();
+          return;
+        }
+        
+        const existingCallback = verovio.module.onRuntimeInitialized;
+        verovio.module.onRuntimeInitialized = () => {
+          if (existingCallback) existingCallback();
+          this.setupToolkit();
+        };
+        if (document.toolkit) {
+          this.setupToolkit();
+        }
+      }
+    }, 50);
+    
+    // Prevent infinite waiting
+    setTimeout(() => {
+      clearInterval(interval);
+    }, 5000);
+  }
+
+  setupToolkit() {
+    try {
+      document.toolkit = new verovio.toolkit();
+      
       document.toolkit.setOptions({
         pageWidth: document.body.clientWidth,
         pageHeight: 100,
@@ -26,21 +125,38 @@ export default class extends Controller {
         adjustPageHeight: true,
         adjustPageWidth: true,
         expandNever: true
-      })
+      });
 
-      this.secondsToMeasureNumberListValue = this.metadataValue["secondsToMeasureNumberList"]
+      this.secondsToMeasureNumberListValue = this.metadataValue["secondsToMeasureNumberList"];
 
       fetch(this.urlValue)
-      .then( (response) => response.text())
-      .then( (meiXML) => {
-        let svg = document.toolkit.renderData(meiXML, {});
-        this.scoreTarget.innerHTML = svg;
-      })
-      .then(() => this.buildMeasureList(this))
-      .then(() => {
-        setTimeout(this.updateAndSetTimeout(this), this.delayInMillisecondsValue)
-      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+          }
+          return response.text();
+        })
+        .then((meiXML) => {
+          let svg = document.toolkit.renderData(meiXML, {});
+          if (!svg) {
+            throw new Error('Rendered SVG is empty');
+          }
+          this.scoreTarget.innerHTML = svg;
+        })
+        .then(() => this.buildMeasureList(this))
+        .then(() => {
+          setTimeout(this.updateAndSetTimeout(this), this.delayInMillisecondsValue);
+        })
+        .catch((error) => {
+          // Ignore fetch/render errors
+        });
+    } catch (error) {
+      // Ignore toolkit creation errors
     }
+  }
+
+  scoreTargetConnected() {
+    this.initializeVerovio();
   }
 
   buildMeasureList(controller) {
@@ -63,8 +179,6 @@ export default class extends Controller {
       i += 500
     }
 
-    console.log(measures);
-    
     controller.measureListValue = measures
   }
 
@@ -132,9 +246,21 @@ export default class extends Controller {
     setTimeout(() => controller.updateAndSetTimeout(controller), controller.delayInMillisecondsValue)
   }
 
-  update() {
+  update(event) {
+    // If called from an event (e.g., seeked event on audio tag), use and remember that audio element
+    // Otherwise use the last remembered audio element or fall back to the first audio tag target
+    if (event) {
+      this.currentAudioElement = event.target;
+    }
+    
+    const audioElement = this.currentAudioElement || this.audioTagTarget;
+    
+    if (!audioElement) {
+      return;
+    }
+    
     this.hideMeasures()
-    let measure = this.getMeasure(this.audioTagTarget.currentTime)
+    let measure = this.getMeasure(audioElement.currentTime)
     if (measure === undefined) {
       return
     }
