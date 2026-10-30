@@ -59,6 +59,7 @@ module Register
   end
 
   module Song
+    REGISTER_SOLO = 'solo'
     REGISTER_SOPRANO = 'soprano'
     REGISTER_ALTO = 'alto'
     REGISTER_TENOR = 'tenor'
@@ -79,6 +80,7 @@ module Register
       REGISTER_ALTO,
       REGISTER_TENOR,
       REGISTER_BASS,
+      REGISTER_SOLO,
       REGISTER_SOPRANO_1,
       REGISTER_SOPRANO_2,
       REGISTER_MEZZO_SOPRANO,
