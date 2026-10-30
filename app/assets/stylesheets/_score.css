@@ -1,3 +1,9 @@
 .playing {
   fill: crimson;
 }
+
+.score > svg {
+  @apply h-screen;
+  width: auto;
+  display: block;
+}

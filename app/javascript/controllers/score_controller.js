@@ -11,6 +11,8 @@ export default class extends Controller {
   }
 
   initializeVerovio() {
+    this.currentMeasureNumber = null;
+
     // Check if WebAssembly is supported
     if (typeof WebAssembly === 'undefined') {
       return;
@@ -113,7 +115,7 @@ export default class extends Controller {
       document.toolkit = new verovio.toolkit();
       
       document.toolkit.setOptions({
-        pageWidth: document.body.clientWidth,
+        pageWidth: 100000,
         pageHeight: 100,
         scale: 50,
         svgViewBox: true,
@@ -182,7 +184,7 @@ export default class extends Controller {
     controller.measureListValue = measures
   }
 
-  getMeasure(recordingTime) {
+  getMeasureNumber(recordingTime) {
     let biggerIndex = this.secondsToMeasureNumberListValue.findIndex((e) => e[0] > recordingTime)
 
     if (biggerIndex == -1) {
@@ -215,13 +217,23 @@ export default class extends Controller {
     return previousMeasureNumber + currentMeasureInSection
   }
 
-  hideMeasures() {
+  hidePlayingMeasures() {
     let playingMeasures = this.scoreTarget.querySelectorAll(".playing");
     for (let playingMeasure of playingMeasures) playingMeasure.classList.remove("playing");
   }
 
-  showMeasure(measure) {
-    let measureListEntry = this.measureListValue[measure - 1]
+  showPlayingMeasure(measureNumber) {
+    let playingMeasure = this.getPlayingMeasure(measureNumber)
+
+    if (playingMeasure === null) {
+      return
+    }
+
+    playingMeasure.classList.add("playing")
+  }
+
+  getPlayingMeasure(measureNumber) {
+    let measureListEntry = this.measureListValue[measureNumber - 1]
 
     if (measureListEntry === undefined) {
       return
@@ -233,12 +245,22 @@ export default class extends Controller {
       this.scoreTarget.innerHTML = document.toolkit.renderToSVG(measureListEntry[1]);
       playingMeasure = document.getElementById(measureListEntry[0])
     }
+    return playingMeasure
+  }
 
-    if (playingMeasure === null) {
-      return
-    }
+  scrollToMeasure(measureNumber) {
+    const playingMeasure = this.getPlayingMeasure(measureNumber)
+    const container = this.scoreTarget
 
-    playingMeasure.classList.add("playing")
+    const viewPortWidth = window.visualViewport.width
+    const measureLeft = playingMeasure.getBoundingClientRect().left
+    const measureWidth = playingMeasure.getBoundingClientRect().width
+    const scrollToLeft = container.scrollLeft + measureLeft - viewPortWidth/2 + measureWidth/2
+    
+    container.scrollTo({
+      left: scrollToLeft,
+      scrollPosition: 'smooth'
+    })
   }
 
   updateAndSetTimeout(controller) {
@@ -259,12 +281,16 @@ export default class extends Controller {
       return;
     }
     
-    this.hideMeasures()
-    let measure = this.getMeasure(audioElement.currentTime)
-    if (measure === undefined) {
+    this.hidePlayingMeasures()
+    let measureNumber = this.getMeasureNumber(audioElement.currentTime)
+    if (measureNumber === undefined) {
       return
     }
+    this.showPlayingMeasure(measureNumber)
 
-    this.showMeasure(measure)
+    if (this.currentMeasureNumber != measureNumber) {
+      this.currentMeasureNumber = measureNumber
+      this.scrollToMeasure(measureNumber)
+    }
   }
 }

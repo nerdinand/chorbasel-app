@@ -13,13 +13,13 @@
         </strong>
 
         <% if recording.file.present? %>
-          <%= audio_tag url_for(recording.file), class: 'w-5/6', controls: true, preload: 'none', data: {'score-target': 'audioTag', 'action': 'seeked->score#update'} %>
+          <%= audio_tag url_for(recording.file), class: 'w-5/6', controls: true, preload: 'none', data: {'score-target': 'audioTag', 'action': 'timeupdate->score#update'} %>
         <% else %>
-          <%= audio_tag song_song_medium_load_path(song_id: recording.song.id, song_medium_id: recording.id), class: 'w-5/6', controls: true, preload: 'none', data: {'score-target': 'audioTag', 'action': 'seeked->score#update'} %>
+          <%= audio_tag song_song_medium_load_path(song_id: recording.song.id, song_medium_id: recording.id), class: 'w-5/6', controls: true, preload: 'none', data: {'score-target': 'audioTag', 'action': 'timeupdate->score#update'} %>
         <% end %>
       </div>
     <% end %>
 
-    <%= content_tag :div, nil, class: "relative left-1/2 w-dvw max-w-none -translate-x-1/2", data: {'score-target': 'score'} %>
+    <%= content_tag :div, nil, class: "w-full overflow-x-auto score relative left-1/2 w-dvw max-w-none -translate-x-1/2", data: {'score-target': 'score'} %>
   <% end %>
 <% end %>
