@@ -2,7 +2,7 @@
   <% score_url = url_for(song.score.file) if song.score&.file.present? %>
   <% metadata = song.score.metadata if song.score&.metadata.present? %>
   <%= content_tag :div, data: {controller: 'score', 'score-url-value': score_url, 'score-metadata-value': metadata, 'score-delay-in-milliseconds-value': 200} do %>
-    <% song.song_media.recording.each do |recording| %>
+    <% song.song_media.recording.ordered_by_register.each do |recording| %>
       <div class="flex my-5">
         <strong class="w-1/6">
           <% if recording.register.present? %>

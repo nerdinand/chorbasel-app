@@ -68,7 +68,7 @@
         </thead>
 
         <tbody>
-          <% @song.song_media.each do |song_medium| %>
+          <% @song.song_media.ordered_by_register.each do |song_medium| %>
             <tr>
               <td>
                 <%= file_icon(song_medium) %>

@@ -13,6 +13,26 @@ class SongMedium < ApplicationRecord
     KIND_CHOREOGRAPHY_VIDEO
   ].freeze
 
+  REGISTERS_ORDER = [
+    '',
+    nil,
+    Register::Song::REGISTER_SOLO,
+    Register::Song::REGISTER_SOPRANO,
+    Register::Song::REGISTER_SOPRANO_1,
+    Register::Song::REGISTER_SOPRANO_2,
+    Register::Song::REGISTER_MEZZO_SOPRANO,
+    Register::Song::REGISTER_ALTO,
+    Register::Song::REGISTER_ALTO_1,
+    Register::Song::REGISTER_ALTO_2,
+    Register::Song::REGISTER_TENOR,
+    Register::Song::REGISTER_TENOR_1,
+    Register::Song::REGISTER_TENOR_2,
+    Register::Song::REGISTER_BARITONE,
+    Register::Song::REGISTER_BASS,
+    Register::Song::REGISTER_BASS_1,
+    Register::Song::REGISTER_BASS_2
+  ].freeze
+
   belongs_to :song, touch: true # when a SongMedium changes, its Song changes too
   belongs_to :song_media_storage_entry, foreign_key: :file_identifier, primary_key: :identifier, inverse_of: false,
                                         optional: true
@@ -28,6 +48,7 @@ class SongMedium < ApplicationRecord
   validates :file_identifier, presence: true, if: proc { |sm| sm.file.blank? }
 
   scope :recording, -> { where(kind: [KIND_RECORDING_ALL, KIND_RECORDING_REGISTER]) }
+  scope :ordered_by_register, -> { in_order_of(:register, REGISTERS_ORDER, filter: false) }
 
   def human_kind
     I18n.t("activerecord.attributes.song_medium.enums.kind.#{kind}")

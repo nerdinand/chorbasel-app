@@ -15,7 +15,7 @@
       aria-orientation="vertical"
       tabindex="-1"
     >
-      <% song.song_media.each do |song_medium| %>
+      <% song.song_media.ordered_by_register.each do |song_medium| %>
         <% if song_medium.file.present? %>
           <%= link_to rails_blob_path(song_medium.file, disposition: 'attachment'), class: 'inline-flex block px-4 py-2 text-sm text-primary', role: 'menuitem', tabindex: '-1' do %>
             <%= file_icon(song_medium) %>
