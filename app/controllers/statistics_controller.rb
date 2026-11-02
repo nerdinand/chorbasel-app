@@ -13,7 +13,7 @@ class StatisticsController < ApplicationController
     authorize :statistics, :index?
 
     @name_guess_counts = calculate_name_guess_counts
-    calendar_events = CalendarEvent.unscoped.practice.order(starts_at: :desc).past
+    calendar_events = CalendarEvent.unscoped.undeleted.practice.order(starts_at: :desc).past
                                    .limit(LAST_N_CALENDAR_EVENTS).includes(attendances: [:user]).reverse
     @attendance_tally_table = AttendanceTallyTable.new(calendar_events)
 
