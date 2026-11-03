@@ -2,23 +2,52 @@
   <% score_url = url_for(song.score.file) if song.score&.file.present? %>
   <% metadata = song.score.metadata if song.score&.metadata.present? %>
   <%= content_tag :div, data: {controller: 'score', 'score-url-value': score_url, 'score-metadata-value': metadata, 'score-delay-in-milliseconds-value': 200} do %>
-    <% song.song_media.recording.ordered_by_register.each do |recording| %>
-      <div class="flex my-5">
-        <strong class="w-1/6">
-          <% if recording.register.present? %>
-            <%= human_register(recording.register) %>
-          <% else %>
-            <%= t('.all_registers') %>
-          <% end %>
-        </strong>
 
-        <% if recording.file.present? %>
-          <%= audio_tag url_for(recording.file), class: 'w-5/6', controls: true, preload: 'none', data: {'score-target': 'audioTag', 'action': 'timeupdate->score#update'} %>
-        <% else %>
-          <%= audio_tag song_song_medium_load_path(song_id: recording.song.id, song_medium_id: recording.id), class: 'w-5/6', controls: true, preload: 'none', data: {'score-target': 'audioTag', 'action': 'timeupdate->score#update'} %>
-        <% end %>
-      </div>
-    <% end %>
+    <trackswitch-player>
+      <script type="application/json">
+        <%= 
+          recording_map = song.song_media.recording.ordered_by_register.map do |recording|
+            src = if recording.file.present?
+              url_for(recording.file)
+            else
+              song_song_medium_load_path(song_id: recording.song.id, song_medium_id: recording.id)
+            end
+      
+            title = if recording.register.present?
+              human_register(recording.register)
+            else
+              t('.all_registers')
+            end
+            [recording.id.to_s, {src:, title:}]
+          end.to_h
+          
+          config = {
+            css: {},
+            media: recording_map.map do |id, hash| 
+              [id, {type: 'audio', src: hash[:src], title: hash[:title]}]
+            end.to_h,
+            views: [
+              {
+                type: 'navigationBar',
+                controls: ['playback', 'globalVolume', 'markerNavigation', 'looping', 'sync', 'timer', 'seekBar']
+              },
+              *recording_map.keys.map do |id| 
+                {type: 'waveform', height: 50, tracks: [id]}
+              end,
+              {type: 'trackList', tracks: recording_map.keys}
+            ]
+          }
+
+          raw config.to_json
+        %>
+      </script>
+    </trackswitch-player>
+
+    <script nonce="true">
+      document.querySelector('trackswitch-player')?.addEventListener('trackswitch-error', e => {
+        console.error('TrackSwitch error:', e.detail);
+      });
+    </script>
 
     <%= content_tag :div, nil, class: "w-full overflow-x-auto score relative left-1/2 w-dvw max-w-none -translate-x-1/2", data: {'score-target': 'score'} %>
   <% end %>
