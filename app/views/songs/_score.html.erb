@@ -3,7 +3,7 @@
   <% metadata = song.score.metadata if song.score&.metadata.present? %>
   <%= content_tag :div, data: {controller: 'score', 'score-url-value': score_url, 'score-metadata-value': metadata, 'score-delay-in-milliseconds-value': 200} do %>
 
-    <trackswitch-player>
+    <trackswitch-player data-score-target='trackswitchPlayer' data-action='trackswitch-position->score#update'>
       <script type="application/json">
         <%= 
           recording_map = song.song_media.recording.ordered_by_register.map do |recording|
@@ -44,7 +44,8 @@
     </trackswitch-player>
 
     <script nonce="true">
-      document.querySelector('trackswitch-player')?.addEventListener('trackswitch-error', e => {
+      trackswitchPlayer = document.querySelector('trackswitch-player')
+      trackswitchPlayer?.addEventListener('trackswitch-error', e => {
         console.error('TrackSwitch error:', e.detail);
       });
     </script>

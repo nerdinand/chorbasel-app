@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = [ "audioTag", "score" ]
+  static targets = [ "trackswitchPlayer", "score" ]
   static values = {
     url: String,
     delayInMilliseconds: Number,
@@ -146,9 +146,6 @@ export default class extends Controller {
           this.scoreTarget.innerHTML = svg;
         })
         .then(() => this.buildMeasureList(this))
-        .then(() => {
-          setTimeout(this.updateAndSetTimeout(this), this.delayInMillisecondsValue);
-        })
         .catch((error) => {
           // Ignore fetch/render errors
         });
@@ -224,11 +221,6 @@ export default class extends Controller {
 
   showPlayingMeasure(measureNumber) {
     let playingMeasure = this.getPlayingMeasure(measureNumber)
-
-    if (playingMeasure === null) {
-      return
-    }
-
     playingMeasure.classList.add("playing")
   }
 
@@ -263,26 +255,10 @@ export default class extends Controller {
     })
   }
 
-  updateAndSetTimeout(controller) {
-    controller.update()
-    setTimeout(() => controller.updateAndSetTimeout(controller), controller.delayInMillisecondsValue)
-  }
-
-  update(event) {
-    // If called from an event (e.g., seeked event on audio tag), use and remember that audio element
-    // Otherwise use the last remembered audio element or fall back to the first audio tag target
-    if (event) {
-      this.currentAudioElement = event.target;
-    }
-    
-    const audioElement = this.currentAudioElement || this.audioTagTarget;
-    
-    if (!audioElement) {
-      return;
-    }
-    
+  update(event) {    
     this.hidePlayingMeasures()
-    let measureNumber = this.getMeasureNumber(audioElement.currentTime)
+
+    let measureNumber = this.getMeasureNumber(event.detail.position)
     if (measureNumber === undefined) {
       return
     }
