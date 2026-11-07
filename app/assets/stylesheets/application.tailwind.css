@@ -15,6 +15,41 @@
 @tailwind utilities;
 
 @layer base {
+  /* Palette as RGB channels, used by the colors in config/tailwind.config.js */
+  :root {
+    color-scheme: light dark;
+
+    --color-bg: 255 255 255;
+    --color-ink: 5 5 5;
+    --color-body: 50 50 50;
+    --color-muted: 85 85 85;
+    --color-line: 226 226 227;
+    --color-contrast: 230 240 240;
+    --color-primary: 79 139 139;
+    --color-primary-dark: 47 99 99;
+    --color-primary-darker: 30 69 69;
+    --color-on-primary: 255 255 255;
+    --color-complementary: 253 192 78;
+    --color-complementary-dark: 169 128 52;
+    --color-danger: 196 63 102;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-bg: 20 26 26;
+      --color-ink: 238 243 243;
+      --color-body: 210 218 218;
+      --color-muted: 163 176 176;
+      --color-line: 42 51 51;
+      --color-contrast: 29 42 42;
+      --color-primary-dark: 124 192 192;
+      --color-primary-darker: 169 218 218;
+      --color-on-primary: 11 20 20;
+      --color-complementary-dark: 201 154 69;
+      --color-danger: 224 112 143;
+    }
+  }
+
   @font-face {
     font-family: "Poppins";
     font-weight: 500;

@@ -1,5 +1,9 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 
+// Colors are CSS variables (RGB channels) defined in application.tailwind.css,
+// so dark mode only has to swap the variables.
+const color = (name) => `rgb(var(--color-${name}) / <alpha-value>)`;
+
 module.exports = {
   content: [
     "./public/*.html",
@@ -16,19 +20,21 @@ module.exports = {
       },
     },
     colors: {
-      primary: "#4F8B8B",
-      "primary-dark": "#2F6363",
-      "primary-darker": "#1E4545",
-      complementary: "#FDC04E",
-      "complementary-dark": "#A98034",
-      contrast: "#E6F0F0",
+      primary: color("primary"),
+      "primary-dark": color("primary-dark"),
+      "primary-darker": color("primary-darker"),
+      "on-primary": color("on-primary"),
+      complementary: color("complementary"),
+      "complementary-dark": color("complementary-dark"),
+      contrast: color("contrast"),
       white: "white",
-      success: "#4F8B8B",
-      danger: "#C43F66",
-      ink: "#050505",
-      body: "#323232",
-      muted: "#555555",
-      line: "#E2E2E3",
+      success: color("primary"),
+      danger: color("danger"),
+      bg: color("bg"),
+      ink: color("ink"),
+      body: color("body"),
+      muted: color("muted"),
+      line: color("line"),
     },
     // The new design has square corners everywhere.
     borderRadius: {

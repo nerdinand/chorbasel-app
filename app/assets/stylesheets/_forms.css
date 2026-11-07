@@ -3,6 +3,11 @@
     @apply rounded !important;
   }
 
+  /* :not() raises specificity above the @tailwindcss/forms [type='…'] rules */
+  :is(input, select, textarea):not([type="checkbox"]):not([type="radio"]) {
+    @apply bg-bg text-ink border-muted;
+  }
+
   input[type="checkbox"] {
     @apply mr-2 text-xs;
   }

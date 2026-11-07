@@ -16,6 +16,6 @@
   }
 
   footer a {
-    @apply text-complementary mx-1
+    @apply text-primary-dark mx-1
   }
 }

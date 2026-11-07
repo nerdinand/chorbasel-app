@@ -1,6 +1,6 @@
 @layer base {
   tr:hover {
-    @apply bg-complementary
+    @apply bg-contrast
   }
 
   tr {
@@ -12,7 +12,7 @@
   }
 
   th {
-    @apply bg-white
+    @apply bg-bg
   }
 
   tr .btn-primary:hover {

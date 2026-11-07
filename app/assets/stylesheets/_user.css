@@ -1,15 +1,19 @@
 .register-soprano {
-  background-color: #b0e09a
+  background-color: #b0e09a;
+  color: #050505
 }
 
 .register-alto {
-  background-color: #e09e9a
+  background-color: #e09e9a;
+  color: #050505
 }
 
 .register-tenor {
-  background-color: #fcfd9d
+  background-color: #fcfd9d;
+  color: #050505
 }
 
 .register-bass {
-  background-color: #b3a3fb
+  background-color: #b3a3fb;
+  color: #050505
 }
