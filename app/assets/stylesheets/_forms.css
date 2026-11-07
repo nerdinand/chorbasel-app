@@ -1,7 +1,7 @@
 @layer components {
   /* :not() raises specificity above the @tailwindcss/forms [type='…'] rules */
   :is(input, select, textarea):not([type="checkbox"], [type="radio"], [type="submit"], [type="file"]) {
-    @apply bg-bg text-ink border-muted/50 px-3;
+    @apply bg-bg text-ink border-muted/50 px-3 focus:border-primary-dark focus:ring-primary-dark;
   }
 
   :is(input, select):not([type="checkbox"], [type="radio"], [type="submit"], [type="file"]) {

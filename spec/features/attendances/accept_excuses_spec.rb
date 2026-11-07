@@ -24,7 +24,7 @@ RSpec.describe('Accepting an excuse') do
   scenario do
     log_in_with_magic_link(users(:fabienne))
 
-    click_on 'Anwesenheiten'
+    click_on 'Anwesenheiten', visible: :hidden
 
     expect(page).to have_text('Zu bestätigende Abwesenheiten')
     expect(page).to have_text('Uwe my upcoming event')

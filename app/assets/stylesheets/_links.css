@@ -7,14 +7,6 @@
     @apply text-primary-darker
   }
 
-  nav a {
-    @apply text-white no-underline
-  }
-
-  nav a:hover {
-    @apply text-primary-dark no-underline
-  }
-
   footer a {
     @apply text-primary-dark mx-1
   }

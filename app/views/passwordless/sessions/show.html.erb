@@ -1,10 +1,24 @@
-<%= form_with(model: @session, url: url_for(action: 'update'), scope: 'passwordless', method: 'patch', data: { turbo: false }) do |f| %>
-  <%= f.label :token, t(".token") %>
-
-  <%= f.text_field :token,
-      required: true,
-      autofocus: true,
-      autocomplete: "one-time-code" %>
-
-  <%= f.submit t(".confirm"), class: 'btn btn-primary' %>
+<% content_for :title, t('.title') %>
+<% content_for :header do %>
+  <p class="max-w-[520px] text-[17px] leading-normal"><%= t('.intro') %></p>
 <% end %>
+
+<div class="max-w-[440px] pt-4">
+  <%= form_with(model: @session, url: url_for(action: 'update'), scope: 'passwordless', method: 'patch', data: { turbo: false }, class: 'flex flex-col gap-2.5') do |f| %>
+    <%= f.label :token, t(".token") %>
+
+    <%= f.text_field :token,
+        required: true,
+        autofocus: true,
+        autocomplete: "one-time-code",
+        aria: { describedby: 'token-hint' } %>
+
+    <p id="token-hint" class="text-sm text-muted"><%= t('.spam_hint') %></p>
+
+    <%= f.submit t(".confirm"), class: 'btn btn-primary mt-2.5' %>
+  <% end %>
+
+  <div class="mt-9 pt-4 border-t border-line">
+    <%= link_to t('.other_email'), users_sign_in_path %>
+  </div>
+</div>

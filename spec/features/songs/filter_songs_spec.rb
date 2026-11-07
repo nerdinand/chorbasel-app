@@ -6,7 +6,7 @@ require_relative '../log_in_helpers'
 RSpec.describe('Filtering songs') do
   scenario do
     log_in_with_magic_link(users(:uwe))
-    click_on 'Lieder'
+    click_on 'Lieder', visible: :hidden
     expect(page).to have_text('Liederlisten')
     click_on 'Alle Lieder'
     expect(page).to have_text('Joyful, joyful')

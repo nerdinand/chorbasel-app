@@ -3,35 +3,44 @@
 <html>
   <%= render 'layouts/head' %>
 
-  <body class="flex flex-col justify-between h-screen bg-bg text-body">
+  <body class="flex flex-col justify-between min-h-screen bg-bg text-body">
     <div>
       <%= render 'layouts/navbar' %>
 
-      <main class="container mx-auto px-4 md:px-24 my-6 md:my-20">
-        <%= render 'layouts/flashes' %>
+      <% if logged_in? %>
+        <div class="max-w-[1440px] mx-auto px-4 md:px-10 flex flex-wrap gap-x-6">
+          <% if browser.device.mobile? %>
+            <button
+              class="my-1 inline-flex items-center gap-1 min-h-[44px] text-primary-dark"
+              data-controller="back-button"
+              data-back-button-target="button"
+              data-action="click->back-button#goBack"
+            >
+              <%= tabler_icon :'arrow-narrow-left' %><%= t('.back') %>
+            </button>
+          <% end %>
 
-        <% if logged_in? %>
           <button
             id="pwa-install-button"
             type="button"
-            class="btn btn-secondary mb-5 hidden"
+            class="my-1 min-h-[44px] text-primary-dark underline underline-offset-[3px] hidden"
           >
             <%= t('.install_app') %>
           </button>
-        <% end %>
+        </div>
+      <% end %>
 
-        <% if logged_in? && browser.device.mobile? %>
-          <button
-            class="btn btn-secondary mb-5"
-            data-controller="back-button"
-            data-back-button-target="button"
-            data-action="click->back-button#goBack"
-          >
-            <%= tabler_icon :'arrow-narrow-left' %><%= t('.back') %>
-          </button>
-        <% end %>
+      <% if content_for?(:title) %>
+        <header class="bg-contrast">
+          <div class="max-w-[1440px] mx-auto px-5 md:px-10 pt-7 pb-5 md:pt-10 md:pb-7 flex flex-col gap-3">
+            <h1 class="m-0"><%= content_for(:title) %></h1>
+            <%= content_for(:header) %>
+          </div>
+        </header>
+      <% end %>
 
-        <h1><%= content_for(:title) %></h1>
+      <main class="max-w-[1440px] mx-auto px-4 md:px-10 pt-6 pb-16">
+        <%= render 'layouts/flashes' %>
 
         <%= yield %>
       </main>
