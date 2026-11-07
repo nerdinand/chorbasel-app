@@ -1,15 +1,24 @@
 @layer components {
-  input, select {
-    @apply rounded !important;
+  /* :not() raises specificity above the @tailwindcss/forms [type='…'] rules */
+  :is(input, select, textarea):not([type="checkbox"], [type="radio"], [type="submit"], [type="file"]) {
+    @apply bg-bg text-ink border-muted/50 px-3;
   }
 
-  /* :not() raises specificity above the @tailwindcss/forms [type='…'] rules */
-  :is(input, select, textarea):not([type="checkbox"]):not([type="radio"]) {
-    @apply bg-bg text-ink border-muted;
+  :is(input, select):not([type="checkbox"], [type="radio"], [type="submit"], [type="file"]) {
+    @apply min-h-[44px];
+  }
+
+  label {
+    @apply font-heading font-semibold text-[15px] text-ink;
+  }
+
+  /* Labels that wrap hints or file inputs (users/_form) */
+  label :is(p, input) {
+    @apply font-body font-normal text-body;
   }
 
   input[type="checkbox"] {
-    @apply mr-2 text-xs;
+    @apply mr-2 text-primary-dark;
   }
 
   .form-field {
@@ -17,7 +26,7 @@
   }
 
   .field-hint {
-    @apply text-xs mt-1;
+    @apply text-sm text-muted mt-1;
   }
 
   textarea {

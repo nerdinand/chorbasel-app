@@ -1,25 +1,29 @@
 @layer components {
   .btn {
-    @apply inline-flex no-underline px-2 py-2 mt-2 text-on-primary border-solid rounded-md border-2
+    @apply inline-flex items-center justify-center gap-2 min-h-[44px] px-5 py-2 border border-solid font-heading font-semibold text-[15px] no-underline cursor-pointer
   }
 
   .btn-primary {
-    @apply bg-primary-dark border-primary-dark
+    @apply bg-primary-dark border-primary-dark text-on-primary
+  }
+
+  .btn-primary:hover {
+    @apply bg-primary-darker border-primary-darker text-on-primary
   }
 
   .btn-secondary {
-    @apply bg-complementary-dark border-complementary-dark
+    @apply bg-transparent border-primary text-primary-dark
   }
 
-  .btn-primary:hover, .btn-secondary:hover {
-    @apply bg-primary-darker border-primary-darker
+  .btn-secondary:hover {
+    @apply bg-contrast text-primary-darker
   }
 
   .btn-danger {
-    @apply bg-danger border-danger
+    @apply bg-danger border-danger text-on-primary
   }
 
   .btn-danger:hover {
-    @apply opacity-90
+    @apply opacity-90 text-on-primary
   }
 }

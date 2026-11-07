@@ -28,6 +28,7 @@ module.exports = {
       "complementary-dark": color("complementary-dark"),
       contrast: color("contrast"),
       white: "white",
+      transparent: "transparent",
       success: color("primary"),
       danger: color("danger"),
       bg: color("bg"),
@@ -35,6 +36,8 @@ module.exports = {
       body: color("body"),
       muted: color("muted"),
       line: color("line"),
+      notice: color("notice"),
+      "notice-line": color("notice-line"),
     },
     // The new design has square corners everywhere.
     borderRadius: {

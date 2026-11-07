@@ -1,13 +1,21 @@
-.attendance-status-icon-attended {
-  @apply bg-success
+.status-square {
+  @apply inline-block w-3.5 h-3.5 align-middle border-2 border-transparent
 }
 
-.attendance-status-icon-excused {
-  @apply bg-danger
+.status-square-attended {
+  @apply bg-primary
 }
 
-.attendance-status-icon-excuse-requested {
-  @apply bg-complementary-dark
+.status-square-excused {
+  @apply bg-complementary
+}
+
+.status-square-excuse-requested {
+  @apply bg-complementary/30 border-dashed border-complementary-dark
+}
+
+.status-square-unknown {
+  @apply border-muted/60
 }
 
 .form-inline {

@@ -1,10 +1,10 @@
 @layer components {
   a {
-    @apply text-primary-dark underline decoration-2 decoration-complementary
+    @apply text-primary-dark underline underline-offset-[3px]
   }
 
   a:hover {
-    @apply text-primary
+    @apply text-primary-darker
   }
 
   nav a {

@@ -32,6 +32,8 @@
     --color-complementary: 253 192 78;
     --color-complementary-dark: 169 128 52;
     --color-danger: 196 63 102;
+    --color-notice: 254 243 220;
+    --color-notice-line: 241 213 146;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -47,6 +49,8 @@
       --color-on-primary: 11 20 20;
       --color-complementary-dark: 201 154 69;
       --color-danger: 224 112 143;
+      --color-notice: 46 38 23;
+      --color-notice-line: 107 86 38;
     }
   }
 

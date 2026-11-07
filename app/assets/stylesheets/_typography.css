@@ -3,20 +3,20 @@
     @apply font-body;
   }
 
-  h1, h2 {
-    @apply font-heading;
+  h1, h2, h3 {
+    @apply font-heading font-semibold text-ink;
   }
 
-  h1 { 
-    @apply text-3xl mb-3;
+  h1 {
+    @apply text-[30px] leading-tight tracking-tight mb-3;
   }
 
   h2 {
-    @apply text-2xl mt-4 mb-3;
+    @apply text-[15px] mt-8 mb-3 pb-2 border-b border-line;
   }
 
   h3 {
-    @apply text-lg;
+    @apply text-base;
   }
 
   ul {

@@ -1,10 +1,6 @@
 @layer base {
-  tr:hover {
-    @apply bg-contrast
-  }
-
   tr {
-    @apply border-y-2
+    @apply border-b border-line
   }
 
   td, th {
@@ -12,11 +8,7 @@
   }
 
   th {
-    @apply bg-bg
-  }
-
-  tr .btn-primary:hover {
-    @apply border-primary-dark
+    @apply bg-bg font-heading font-semibold text-[13px] text-muted
   }
 }
 
