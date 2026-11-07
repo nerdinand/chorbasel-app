@@ -12,7 +12,7 @@
   }
 
   .btn-primary:hover, .btn-secondary:hover {
-    @apply bg-complementary border-complementary
+    @apply bg-primary-darker border-primary-darker
   }
 
   .btn-danger {
@@ -20,6 +20,6 @@
   }
 
   .btn-danger:hover {
-    @apply bg-complementary
+    @apply opacity-90
   }
 }

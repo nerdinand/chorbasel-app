@@ -2,10 +2,10 @@
 
 class AttendanceTallyTable
   COLORS = {
-    Register::Singer::REGISTER_SOPRANO => '#b0e09a',
-    Register::Singer::REGISTER_ALTO => '#e09e9a',
-    Register::Singer::REGISTER_TENOR => '#fcfd9d',
-    Register::Singer::REGISTER_BASS => '#b3a3fb'
+    Register::Singer::REGISTER_SOPRANO => '#9C243A',
+    Register::Singer::REGISTER_ALTO => '#EA6D23',
+    Register::Singer::REGISTER_TENOR => '#5D3484',
+    Register::Singer::REGISTER_BASS => '#517829'
   }.freeze
 
   def initialize(calendar_events)

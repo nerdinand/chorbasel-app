@@ -16,13 +16,16 @@
 
 @layer base {
   @font-face {
-    font-family: "Afacad Flux";
-    src: url("AfacadFlux.ttf") format('truetype');
-    src: url("AfacadFlux.woff2") format('woff2');
+    font-family: "Poppins";
+    font-weight: 500;
+    font-display: swap;
+    src: url("Poppins-500.woff2") format('woff2');
   }
 
   @font-face {
-    font-family: "Open Sans";
-    src: url("OpenSans-VariableFont.ttf") format('truetype');
+    font-family: "Poppins";
+    font-weight: 600;
+    font-display: swap;
+    src: url("Poppins-600.woff2") format('woff2');
   }
 }
