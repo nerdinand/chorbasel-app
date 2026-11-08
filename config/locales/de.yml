@@ -131,6 +131,7 @@ de:
       user: Benutzer:in
   application:
     search_form:
+      open: Suche öffnen
       query_placeholder: Suche
       submit: Suchen
   attendances:

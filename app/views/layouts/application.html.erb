@@ -7,6 +7,8 @@
     <div>
       <%= render 'layouts/navbar' %>
 
+      <%= render 'layouts/flashes' %>
+
       <% if logged_in? %>
         <div class="max-w-[1440px] mx-auto px-4 md:px-10 flex flex-wrap gap-x-6">
           <% if browser.device.mobile? %>
@@ -40,8 +42,6 @@
       <% end %>
 
       <main class="max-w-[1440px] mx-auto px-4 md:px-10 pt-6 pb-16">
-        <%= render 'layouts/flashes' %>
-
         <%= yield %>
       </main>
     </div>

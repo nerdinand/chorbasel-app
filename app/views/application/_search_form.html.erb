@@ -1,4 +1,26 @@
-<%= form_for :search, url: search_path, method: :get do |f| %>
-  <%= f.text_field :query, placeholder: t('.query_placeholder'), value: params.dig(:search, :query) %>
-  <%= f.submit t('.submit'), class: 'btn btn-primary' %>
-<% end %>
+<div data-controller="visibility">
+  <button
+    type="button"
+    data-action="visibility#toggleTargets"
+    class="size-11 flex items-center justify-center text-ink md:hidden"
+    aria-controls="search-panel"
+  >
+    <span class="sr-only"><%= t('.open') %></span>
+    <%= tabler_icon :search, classes: ['size-6'] %>
+  </button>
+
+  <%# Collapsed behind the icon on mobile, always visible from md %>
+  <div
+    id="search-panel"
+    data-visibility-target="hideable"
+    hidden
+    class="absolute inset-x-0 top-full z-20 p-3 bg-bg border-b border-line shadow-lg md:static md:block md:p-0 md:border-0 md:shadow-none"
+  >
+    <%= form_for :search, url: search_path, method: :get, html: { role: 'search', class: 'relative flex items-center w-full' } do |f| %>
+      <%= f.label :query, t('.query_placeholder'), class: 'sr-only' %>
+      <span class="absolute left-3 flex text-muted pointer-events-none"><%= tabler_icon :search, classes: ['size-[18px]'] %></span>
+      <%= f.search_field :query, placeholder: t('.query_placeholder'), value: params.dig(:search, :query), class: 'w-full !pl-10 text-[15px]' %>
+      <%= f.submit t('.submit'), class: 'sr-only' %>
+    <% end %>
+  </div>
+</div>

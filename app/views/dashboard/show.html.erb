@@ -1,21 +1,18 @@
-<% if @info.present? %>
-  <div class="<%= @info.kind %>">
-    <p>
-      <b><%= @info.title %></b>
-    </p>
+<div class="flex flex-col gap-2 [&>*]:my-0">
+  <% if @info.present? %>
+    <div class="<%= @info.kind %>">
+      <p class="font-medium text-ink"><%= @info.title %></p>
+      <%= @info.description %>
+    </div>
+  <% end %>
 
-    <%= @info.description %>
-  </div>
-<% end %>
-
-<% unless current_user.profile_complete? %>
-  <div>
-    <%= t('.profile_completeness.message') %>
-    <%= link_to t('.profile_completeness.link'), edit_user_path(current_user) %>
-  </div>
-<% end %>
-
-<%= render 'search_form' %>
+  <% unless current_user.profile_complete? %>
+    <div class="alert flex flex-wrap items-center gap-x-3.5 gap-y-1">
+      <p class="flex-[1_1_300px]"><%= t('.profile_completeness.message') %></p>
+      <%= link_to t('.profile_completeness.link'), edit_user_path(current_user), class: 'font-medium' %>
+    </div>
+  <% end %>
+</div>
 
 <h2><%= t('.upcoming_birthdays.title') %></h2>
 

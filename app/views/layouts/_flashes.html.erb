@@ -1,5 +1,7 @@
 <% if flash.any? %>
-  <% flash.each do |type, message| %>
-    <div class="<%= type %>"><%= message %></div>
-  <% end %>
+  <div class="max-w-[1440px] mx-auto px-4 md:px-10 py-4 flex flex-col gap-2 [&>*]:my-0">
+    <% flash.each do |type, message| %>
+      <div class="<%= type %>"><%= message %></div>
+    <% end %>
+  </div>
 <% end %>

@@ -35,7 +35,7 @@ end
 
 bar_link_classes = lambda do |path|
   state_classes = current_page?(path) ? 'border-b-primary-dark text-ink font-medium' : 'border-b-transparent text-body hover:text-ink'
-  "flex items-center px-3 border-y-[3px] border-t-transparent no-underline #{state_classes}"
+  "flex items-center px-3 whitespace-nowrap border-y-[3px] border-t-transparent no-underline #{state_classes}"
 end %>
 
 <div class="relative bg-bg border-b border-line" data-controller="visibility">
@@ -98,7 +98,11 @@ end %>
     <% end %>
 
     <% if logged_in? %>
-      <div data-controller="visibility" class="relative ml-auto self-center">
+      <div class="ml-auto self-center md:flex-[0_1_340px] min-w-0">
+        <%= render 'application/search_form' %>
+      </div>
+
+      <div data-controller="visibility" class="relative self-center ml-2">
         <button
           type="button"
           data-action="visibility#toggleTargets"
