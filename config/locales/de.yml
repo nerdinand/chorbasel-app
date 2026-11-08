@@ -492,8 +492,6 @@ de:
     destroy:
       error: Fehler beim Löschen des Lieds.
       success: Lied erfolgreich gelöscht.
-    download_dropdown:
-      download: Herunterladen
     edit:
       title: Lied bearbeiten
     index:
@@ -509,17 +507,18 @@ de:
       title: Neues Lied
     score:
       all_registers: Alle Stimmen
+      title: Aufnahmen
     show:
       destroy: Lied löschen
+      details: Details
       edit: Lied bearbeiten
       score:
         edit: Partitur bearbeiten
         new: Partitur bearbeiten
       song_media:
         destroy: Mediendatei löschen
-        kind: Art
+        download: "%{name} herunterladen"
         new: Neue Mediendatei
-        register: Stimme
         title: Mediendateien
     update:
       error: Fehler beim Bearbeiten des Lieds.

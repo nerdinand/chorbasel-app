@@ -18,7 +18,7 @@ module SongMediaHelper
                   :video
                 else
                   :file
-                end, classes: ['mr-2'])
+                end, classes: ['size-5'])
   end
 
   def file_identifier_options(song_media_storage_entries)

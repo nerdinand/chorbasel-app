@@ -1,99 +1,90 @@
 <% content_for :title, @song.title %>
 
-<% if @song.song_media.any? %>
-  <%= render 'download_dropdown', song: @song %>
-<% end %>
-
-<% if @song.music_composer.present? %>
-  <p>
-    <b><%= t('activerecord.attributes.song.music_composer') %></b>
-    <%= @song.music_composer %>
-  </p>
-<% end %>
-
-<% if @song.texter.present? %>
-  <p>
-    <b><%= t('activerecord.attributes.song.texter') %></b>
-    <%= @song.texter %>
-  </p>
-<% end %>
-
-<% if @song.arranger.present? %>
-  <p>
-    <b><%= t('activerecord.attributes.song.arranger') %></b>
-    <%= @song.arranger %>
-  </p>
-<% end %>
-
-<% if @song.score.present? %>
-  <% if policy(@song.score).edit? %>
-    <%= link_to t('.score.edit'), edit_song_score_path(@song), class: 'btn btn-primary' %>
-  <% end %>
-<% else %>
-  <% if policy(Score.new).create? %>
-    <%= link_to t('.score.new'), new_song_score_path(@song), class: 'btn btn-primary' %>
+<% credits = { music_composer: @song.music_composer, texter: @song.texter, arranger: @song.arranger }.compact_blank %>
+<% if credits.any? %>
+  <% content_for(:header) do %>
+    <p class="text-[15px]">
+      <% credits.each_with_index do |(attribute, name), index| %>
+        <%= ' · ' if index.positive? %><%= Song.human_attribute_name(attribute) %> <strong class="font-medium text-ink"><%= name %></strong>
+      <% end %>
+    </p>
   <% end %>
 <% end %>
 
-<%= render 'score', song: @song %>
+<div class="flex flex-wrap gap-x-12">
+  <div class="flex-[999_1_560px] min-w-0">
+    <% if @song.score.present? %>
+      <% if policy(@song.score).edit? %>
+        <%= link_to t('.score.edit'), edit_song_score_path(@song), class: 'btn btn-secondary mt-6' %>
+      <% end %>
+    <% else %>
+      <% if policy(Score.new).create? %>
+        <%= link_to t('.score.new'), new_song_score_path(@song), class: 'btn btn-secondary mt-6' %>
+      <% end %>
+    <% end %>
 
-<% if @song.lyrics.present? %>
-  <p>
-    <b><%= t('activerecord.attributes.song.lyrics') %></b>
-    <%= simple_format @song.lyrics, class: 'mb-3' %>
-  </p>
-<% end %>
+    <%= render 'score', song: @song %>
 
-<% if policy(@song).edit? %>
-  <%= link_to t('.edit'), edit_song_path(@song), class: 'btn btn-primary' %>
-<% end %>
+    <% if @song.lyrics.present? %>
+      <h2><%= t('activerecord.attributes.song.lyrics') %></h2>
+      <div class="text-[17px] leading-relaxed text-ink [&>p]:mb-7"><%= simple_format @song.lyrics %></div>
+    <% end %>
 
-<% if policy(@song).destroy? %>
-  <%= button_to t('.destroy'), song_path(@song), method: :delete, class: 'btn btn-danger', form_class: 'inline' %>
-<% end %>
+    <div class="mt-8 flex flex-wrap gap-2">
+      <% if policy(@song).edit? %>
+        <%= link_to t('.edit'), edit_song_path(@song), class: 'btn btn-secondary' %>
+      <% end %>
 
-<% if policy(:song_medium).create? %>
-  <h2><%= t('.song_media.title') %></h2>
-  <% if policy(:song_medium).create? %>
-    <%= link_to t('.song_media.new'), new_song_song_medium_path(@song), class: 'btn btn-primary' %>
-  <% end %>
-  <% if @song.song_media.any? %>
-    <div class="table-scroll">
-      <table class="table-wide">
-        <thead>
-          <th></th>
-          <th><%= t('.song_media.kind') %></th>
-          <th><%= t('.song_media.register') %></th>
-          <th></th>
-        </thead>
-
-        <tbody>
-          <% @song.song_media.ordered_by_register.each do |song_medium| %>
-            <tr>
-              <td>
-                <%= file_icon(song_medium) %>
-                <%= tabler_icon :'brand-google-drive' if song_medium.drive_file? %>
-              </td>
-
-              <td>
-                <%= song_medium.human_kind %>
-              </td>
-
-              <td>
-                <% if song_medium.register.present? %>
-                  <%= human_register(song_medium.register) %>
-                <% end %>
-              </td>
-
-              <td>
-                <% if policy(song_medium).destroy? %>
-                  <%= button_to t('.song_media.destroy'), song_song_medium_path(song_medium.song, song_medium), method: :delete, class: 'btn btn-danger' %>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <% if policy(@song).destroy? %>
+        <%= button_to t('.destroy'), song_path(@song), method: :delete, class: 'btn btn-danger' %>
+      <% end %>
     </div>
-  <% end %>
-<% end %>
+  </div>
+
+  <aside class="flex-[1_1_300px] min-w-0">
+    <h2><%= t('.details') %></h2>
+    <dl class="m-0 flex flex-col gap-3.5">
+      <% { registers: register_string(@song.registers), language: @song.language, key_signature: @song.key_signature,
+           time_signature: @song.time_signature, genres: @song.genres.join(', ') }.compact_blank.each do |attribute, value| %>
+        <div>
+          <dt class="text-[13px] text-muted"><%= Song.human_attribute_name(attribute) %></dt>
+          <dd class="m-0 text-[15px] text-ink"><%= value %></dd>
+        </div>
+      <% end %>
+    </dl>
+
+    <% if @song.song_media.any? || policy(:song_medium).create? %>
+      <h2><%= t('.song_media.title') %></h2>
+
+      <% @song.song_media.ordered_by_register.each do |song_medium| %>
+        <% name = [song_medium.human_kind, human_register(song_medium.register)].compact_blank.join(' ') %>
+
+        <div class="flex items-center gap-3 py-2.5 px-1 border-b border-line">
+          <span class="size-11 flex-none flex items-center justify-center bg-contrast text-primary-dark"><%= file_icon(song_medium) %></span>
+
+          <span class="flex-1 min-w-0 text-[15px] text-ink">
+            <%= name %>
+            <%= tabler_icon :'brand-google-drive', classes: ['size-4 text-muted'] if song_medium.drive_file? %>
+          </span>
+
+          <% if policy(song_medium).destroy? %>
+            <%= button_to song_song_medium_path(song_medium.song, song_medium), method: :delete, class: 'size-11 flex items-center justify-center bg-danger text-on-primary hover:opacity-90' do %>
+              <span class="sr-only"><%= t('.song_media.destroy') %></span>
+              <%= tabler_icon :trash, classes: ['size-5'] %>
+            <% end %>
+          <% end %>
+
+          <% download_path = song_medium.file.present? ? rails_blob_path(song_medium.file, disposition: 'attachment') : song_song_medium_load_path(song_id: @song.id, song_medium_id: song_medium.id) %>
+          <%= link_to download_path, class: 'size-11 flex-none flex items-center justify-center border border-primary text-primary-dark no-underline' do %>
+            <span class="sr-only"><%= t('.song_media.download', name:) %></span>
+            <%= tabler_icon :download, classes: ['size-5'] %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if policy(:song_medium).create? %>
+        <%= link_to t('.song_media.new'), new_song_song_medium_path(@song), class: 'btn btn-secondary mt-3.5' %>
+      <% end %>
+    <% end %>
+  </aside>
+</div>

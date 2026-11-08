@@ -2,9 +2,11 @@
   <% score_url = url_for(song.score.file) if song.score&.file.present? %>
   <% metadata = song.score.metadata if song.score&.metadata.present? %>
   <%= content_tag :div, data: {controller: 'score', 'score-url-value': score_url, 'score-metadata-value': metadata, 'score-delay-in-milliseconds-value': 200} do %>
+    <h2><%= t('.title') %></h2>
+
     <% song.song_media.recording.ordered_by_register.each do |recording| %>
-      <div class="flex my-5">
-        <strong class="w-1/6">
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-1 py-2.5 px-1 border-b border-line">
+        <strong class="w-32 flex-none font-heading font-semibold text-[15px] text-ink">
           <% if recording.register.present? %>
             <%= human_register(recording.register) %>
           <% else %>
@@ -13,13 +15,13 @@
         </strong>
 
         <% if recording.file.present? %>
-          <%= audio_tag url_for(recording.file), class: 'w-5/6', controls: true, preload: 'none', data: {'score-target': 'audioTag', 'action': 'timeupdate->score#update'} %>
+          <%= audio_tag url_for(recording.file), class: 'flex-[1_1_240px] min-w-0', controls: true, preload: 'none', data: {'score-target': 'audioTag', 'action': 'timeupdate->score#update'} %>
         <% else %>
-          <%= audio_tag song_song_medium_load_path(song_id: recording.song.id, song_medium_id: recording.id), class: 'w-5/6', controls: true, preload: 'none', data: {'score-target': 'audioTag', 'action': 'timeupdate->score#update'} %>
+          <%= audio_tag song_song_medium_load_path(song_id: recording.song.id, song_medium_id: recording.id), class: 'flex-[1_1_240px] min-w-0', controls: true, preload: 'none', data: {'score-target': 'audioTag', 'action': 'timeupdate->score#update'} %>
         <% end %>
       </div>
     <% end %>
 
-    <%= content_tag :div, nil, class: "w-full overflow-x-auto score relative left-1/2 w-dvw max-w-none -translate-x-1/2", data: {'score-target': 'score'} %>
+    <%= content_tag :div, nil, class: "w-full overflow-x-auto score mt-6", data: {'score-target': 'score'} %>
   <% end %>
 <% end %>

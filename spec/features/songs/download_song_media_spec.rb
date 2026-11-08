@@ -12,9 +12,7 @@ RSpec.describe('Downloading song media') do
     expect(page).to have_text('Lieder')
     click_on 'Härlig är jorden'
     expect(page).to have_text('Härlig är jorden')
-    click_on 'Herunterladen'
-    # TODO: fix this not finding the invisible link (debug running with JS?)
-    find('a', text: 'Audioaufnahme (alle Stimmen)', visible: :hidden).click
+    click_on 'Audioaufnahme (alle Stimmen) herunterladen'
     expect(page.body.size).to eq(335_791)
   end
 end
