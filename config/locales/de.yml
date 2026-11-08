@@ -184,17 +184,22 @@ de:
         excuse_requested: Du hast eine Entschuldigung erfasst.
         excused: Du bist entschuldigt.
         unknown: Dein Anwesenheitsstatus ist unbekannt.
-      calendar:
-        title: Kalender
       calendar_events:
         attendance:
           new: Entschuldigung erfassen
           submit: Anwesenheit eintragen
         sync: Chorkalender importieren
+      category:
+        concert: Konzert
+        extra_practice: Extraprobe
+        other: Spezialtermin
       load_past: Vergangene Termine laden
       profile_completeness:
         link: Benutzerprofil vervollständigen
         message: Dein Benutzerprofil ist unvollständig. Bitte hilf uns indem du die fehlenden Informationen einträgst.
+      special_event: Konzert / Spezialtermin
+      title: Dashboard
+      today: Heute
       upcoming_birthdays:
         description: Diese Mitsänger:innen haben bald Geburtstag!
         title: Geburtstage

@@ -1,3 +1,35 @@
+<% content_for(:title, t('.title')) %>
+
+<% content_for(:header) do %>
+  <p class="text-ink"><%= l(Date.current, format: '%A, %-d. %B') %></p>
+
+  <div class="mt-3 flex items-start gap-1.5 overflow-x-auto [&_.status-square]:size-6">
+    <% @overview_calendar_events.group_by { |e| e.starts_at.beginning_of_month }.each do |month, calendar_events| %>
+      <% calendar_events.each_with_index do |calendar_event, index| %>
+        <div class="w-8 flex-none flex flex-col items-center gap-1 text-[13px] <%= calendar_event.today? ? 'font-semibold text-primary-dark' : 'font-medium' %>">
+          <span class="flex <%= 'outline outline-2 outline-offset-2 outline-primary-dark' unless calendar_event.regular_practice? %>">
+            <%= attendance_action_symbol(calendar_event) %>
+          </span>
+          <%= link_to_if policy(calendar_event).show?, calendar_event.starts_at.day, calendar_event, class: 'no-underline' %>
+          <span class="min-h-4 text-xs whitespace-nowrap">
+            <%= calendar_event.today? ? t('.today') : (l(month, format: '%b') if index.zero?) %>
+          </span>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <ul role="list" class="list-none p-0 m-0 flex flex-wrap gap-x-3.5 gap-y-1.5 text-[13px]">
+    <% Attendance::STATUSES.each do |status| %>
+      <li class="flex items-center gap-1.5"><%= icon_for_status(status) %><%= t("activerecord.attributes.attendance.enums.status.#{status}") %></li>
+    <% end %>
+    <li class="flex items-center gap-1.5">
+      <span class="flex mx-0.5 outline outline-2 outline-offset-2 outline-primary-dark"><%= icon_for_status(:unknown) %></span>
+      <%= t('.special_event') %>
+    </li>
+  </ul>
+<% end %>
+
 <div class="flex flex-col gap-2 [&>*]:my-0">
   <% if @info.present? %>
     <div class="<%= @info.kind %>">
@@ -18,39 +50,20 @@
 
 <p><%= t('.upcoming_birthdays.description') %></p>
 
-<ul>
+<ul role="list" class="list-none p-0 mt-3 mb-0">
   <% @upcoming_birthdays.each do |user, next_birthday| %>
-    <li>
-      <%= l next_birthday %>: <b><%= user.full_name %></b>
+    <li class="flex items-center gap-5 py-3 px-1 border-b border-line">
+      <span class="w-[52px] flex-none flex flex-col items-center">
+        <span class="text-[13px] font-medium text-muted"><%= l(next_birthday, format: '%b') %></span>
+        <span class="font-heading font-semibold text-[22px] leading-tight text-ink"><%= next_birthday.day %></span>
+      </span>
+      <span class="flex items-center gap-2.5">
+        <span class="flex text-primary"><%= tabler_icon :cake, classes: ['size-[18px]'] %></span>
+        <%= user.full_name %>
+      </span>
     </li>
   <% end %>
 </ul>
-
-<h2><%= t('.calendar.title') %></h2>
-
-<div class="table-scroll">
-  <table class="table-wide">
-    <thead>
-      <tr>
-        <% @overview_calendar_events.each do |calendar_event| %>
-          <th class="<%= calendar_event_color_class(calendar_event) %>">
-            <%= link_to_if policy(calendar_event).show?, calendar_event.date, calendar_event %>
-          </th>
-        <% end %>
-      </tr>
-    </thead>
-
-    <tbody class="border-r-2">
-      <tr>
-        <% @overview_calendar_events.each do |calendar_event| %>
-          <td class="text-center">
-            <%= attendance_action_symbol(calendar_event) %>
-          </td>
-        <% end %>
-      </tr>
-    </tbody>
-  </table>
-</div>
 
 <% if params[:load_past] != 'true' %>
   <div class="mt-10">
@@ -58,24 +71,41 @@
   </div>
 <% end %>
 
-<% @calendar_events.each do |calendar_event| %>
-  <div class="my-5 p-2 border-solid border-primary border-2 rounded bg-gray <%= calendar_event_color_class(calendar_event) %>">
-    <p class="font-bold">
-      <% if policy(Attendance).index? %>
-        <%= link_to calendar_event do %>
-          <%= calendar_event.summary %>
-        <% end %>
-      <% else %>
-        <%= calendar_event.summary %>
-      <% end %>
-    </p>
+<% @calendar_events.group_by { |e| e.starts_at.beginning_of_month }.each do |month, calendar_events| %>
+  <section aria-label="<%= l(month, format: '%B %Y') %>">
+    <h2 class="sticky top-0 z-10 bg-bg mt-0 mb-0 pt-7"><%= l(month, format: '%B %Y') %></h2>
 
-    <%= render calendar_event %>
+    <% calendar_events.each do |calendar_event| %>
+      <% highlighted = calendar_event.today? || !calendar_event.regular_practice? %>
 
-    <%= render 'attendance_status_and_action', attendance_check: @attendance_checks[calendar_event] %>
-  </div>
+      <article class="flex flex-wrap items-start gap-x-5 gap-y-3 <%= highlighted ? 'mt-3 mb-1 py-4 pr-4 pl-1 bg-contrast' : 'py-4 px-1 border-b border-line' %>">
+        <div class="w-[52px] flex-none flex flex-col items-center">
+          <span class="text-[13px] font-medium <%= highlighted ? 'text-primary-dark' : 'text-muted' %>"><%= l(calendar_event.starts_at, format: '%a') %></span>
+          <span class="font-heading font-semibold text-[22px] leading-tight <%= highlighted ? 'text-primary-dark' : 'text-ink' %>"><%= calendar_event.starts_at.day %></span>
+        </div>
+
+        <div class="flex-[1_1_240px] min-w-0 text-[15px] text-muted">
+          <% unless calendar_event.regular_practice? %>
+            <span class="inline-block mb-1 px-2 py-0.5 bg-primary-dark text-on-primary font-heading font-semibold text-xs"><%= t(".category.#{calendar_event.category}") %></span>
+          <% end %>
+
+          <h3 class="m-0">
+            <%= link_to_if policy(Attendance).index?, calendar_event.summary, calendar_event %>
+          </h3>
+
+          <%= render calendar_event %>
+        </div>
+
+        <div class="max-w-full">
+          <%= render 'attendance_status_and_action', attendance_check: @attendance_checks[calendar_event] %>
+        </div>
+      </article>
+    <% end %>
+  </section>
 <% end %>
 
 <% if policy(:calendar_sync).create? %>
-  <%= button_to t('.calendar_events.sync'), calendar_events_syncs_path, method: :post, class: 'btn btn-primary' %>
+  <div class="mt-10">
+    <%= button_to t('.calendar_events.sync'), calendar_events_syncs_path, method: :post, class: 'btn btn-secondary' %>
+  </div>
 <% end %>
