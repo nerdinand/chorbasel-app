@@ -173,9 +173,9 @@ export default class extends Controller {
 
       if (currentMeasureId != lastMeasureId) {
         lastMeasureId = currentMeasureId
-        measures.push([currentMeasureId, elements.page])
+        measures.push(currentMeasureId)
       }
-      i += 500
+      i += 100
     }
 
     controller.measureListValue = measures
@@ -225,19 +225,7 @@ export default class extends Controller {
   }
 
   getPlayingMeasure(measureNumber) {
-    let measureListEntry = this.measureListValue[measureNumber - 1]
-
-    if (measureListEntry === undefined) {
-      return
-    }
-
-    var playingMeasure = document.getElementById(measureListEntry[0])
-
-    if (playingMeasure === null) {
-      this.scoreTarget.innerHTML = document.toolkit.renderToSVG(measureListEntry[1]);
-      playingMeasure = document.getElementById(measureListEntry[0])
-    }
-    return playingMeasure
+    return document.getElementById(this.measureListValue[measureNumber - 1])
   }
 
   scrollToMeasure(measureNumber) {
@@ -268,5 +256,21 @@ export default class extends Controller {
       this.currentMeasureNumber = measureNumber
       this.scrollToMeasure(measureNumber)
     }
+  }
+
+  click(event) {
+    const x = event.clientX
+    const y = event.clientY
+
+    let clickedMeasureId = null
+    for (const measureId of this.measureListValue) {
+      const measureElement = document.getElementById(measureId)
+      const rect = measureElement.getBoundingClientRect()
+      if (rect.left <= x && x <= rect.right && rect.top <= y && y <= rect.bottom) {
+        clickedMeasureId = measureId
+        break
+      }
+    }
+    document.getElementById(clickedMeasureId)?.classList.add("playing")
   }
 }

@@ -3,7 +3,7 @@
   <% metadata = song.score.metadata if song.score&.metadata.present? %>
   <%= content_tag :div, data: {controller: 'score', 'score-url-value': score_url, 'score-metadata-value': metadata, 'score-delay-in-milliseconds-value': 200} do %>
 
-    <trackswitch-player data-score-target='trackswitchPlayer' data-action='trackswitch-position->score#update'>
+    <trackswitch-player data-score-target="trackswitchPlayer" data-action="trackswitch-position->score#update">
       <script type="application/json">
         <%= 
           recording_map = song.song_media.recording.ordered_by_register.map do |recording|
@@ -50,6 +50,6 @@
       });
     </script>
 
-    <%= content_tag :div, nil, class: "w-full overflow-x-auto score relative left-1/2 w-dvw max-w-none -translate-x-1/2", data: {'score-target': 'score'} %>
+    <%= content_tag :div, nil, class: "w-full overflow-x-auto score relative left-1/2 w-dvw max-w-none -translate-x-1/2", data: {'score-target': 'score', action: 'click->score#click'} %>
   <% end %>
 <% end %>
