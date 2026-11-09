@@ -1,10 +1,12 @@
+<%# Collapsed borders don't stick with the cells, so the bottom line is a shadow and the past/future line sits on the link %>
 <thead>
-  <tr>
-    <th class="sticky top-0 left-0 z-20 text-left"><%= t('.name') %></th>
+  <tr class="border-b-0">
+    <th class="sticky top-0 left-0 z-20 text-left shadow-[inset_0_-1px_0] shadow-line"><%= t('.name') %></th>
 
     <% attendance_table.calendar_events.each do |calendar_event| %>
-      <th class="sticky top-0 z-10 <%= calendar_event_color_class(calendar_event) %> <%= 'border-l border-muted/60' if calendar_event == first_future_event %>">
-        <%= link_to calendar_event.date, calendar_event, class: 'no-underline' %>
+      <th class="sticky top-0 z-10 p-0 shadow-[inset_0_-1px_0] shadow-line">
+        <%# Highlight on the link, so the cell's own background stays opaque while rows scroll underneath %>
+        <%= link_to calendar_event.date, calendar_event, class: "block p-2 no-underline #{calendar_event_color_class(calendar_event)} #{'border-l border-muted/60' if calendar_event == first_future_event}" %>
       </th>
     <% end %>
   </tr>
