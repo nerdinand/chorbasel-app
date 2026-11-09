@@ -1,0 +1,37 @@
+<% first_future_event = attendance_table.calendar_events.find(&:future?) %>
+
+<%# Scrolls vertically too, so the sticky date header has a box to stick in %>
+<div class="table-scroll mt-2 max-h-[90dvh] overflow-y-auto">
+  <table class="table-wide [&_.status-square]:size-[30px]">
+    <%= render 'table_header', attendance_table:, first_future_event: %>
+
+    <% attendance_table.canonical_register_users.each do |register, users| %>
+      <% if users.any? %>
+        <tbody>
+          <tr>
+            <th colspan="<%= attendance_table.calendar_events.size + 1 %>" scope="colgroup" class="pt-6 text-left text-[15px] text-ink">
+              <span class="sticky left-2 inline-flex items-center gap-2.5">
+                <span class="size-3" style="background: <%= AttendanceTallyTable::COLORS[register] %>"></span>
+                <%= register.present? ? human_register(register) : t('attendances.index.no_register') %>
+              </span>
+            </th>
+          </tr>
+
+          <% users.each do |user| %>
+            <tr>
+              <td class="sticky left-0 z-[1] bg-bg whitespace-nowrap text-ink">
+                <%= user.full_name %>
+              </td>
+
+              <% attendance_table.calendar_events.each do |calendar_event| %>
+                <td class="text-center <%= 'border-l border-muted/60' if calendar_event == first_future_event %>">
+                  <%= render 'attendance_cell', attendance_table: attendance_table, user:, calendar_event: %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      <% end %>
+    <% end %>
+  </table>
+</div>

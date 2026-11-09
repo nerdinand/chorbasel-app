@@ -1,10 +1,10 @@
 <thead>
-  <tr class="sticky top-0 z-10">
-    <th><%= t('.name') %></th>
+  <tr>
+    <th class="sticky top-0 left-0 z-20 text-left"><%= t('.name') %></th>
 
     <% attendance_table.calendar_events.each do |calendar_event| %>
-      <th class="<%= calendar_event_color_class(calendar_event) %>">
-        <%= link_to calendar_event.date, calendar_event %>
+      <th class="sticky top-0 z-10 <%= calendar_event_color_class(calendar_event) %> <%= 'border-l border-muted/60' if calendar_event == first_future_event %>">
+        <%= link_to calendar_event.date, calendar_event, class: 'no-underline' %>
       </th>
     <% end %>
   </tr>

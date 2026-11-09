@@ -1,64 +1,36 @@
 <% content_for :title, t('.title') %>
 
-<div class="float-right">
-  <%= link_to @attendance_pagination.previous_params, class: 'no-underline' do %>
-    <%= tabler_icon 'arrow_left', classes: ['inline', 'align-[sub]'] %>
+<% if @excuse_requested_attendances.any? %>
+  <div class="alert">
+    <p class="font-medium text-ink"><%= t('.excuse_requested.title') %></p>
+    <ul role="list" class="list-none p-0 mt-2 mb-0 flex flex-col gap-1">
+      <% @excuse_requested_attendances.each do |attendance| %>
+        <li>
+          <%= link_to edit_attendance_path(attendance) do %>
+            <%= render attendance %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="mt-6 flex justify-end gap-2">
+  <%= link_to @attendance_pagination.previous_params, class: 'size-11 flex items-center justify-center border border-primary text-primary-dark no-underline' do %>
+    <span class="sr-only"><%= t('.previous') %></span>
+    <%= tabler_icon 'arrow_left', classes: ['size-5'] %>
   <% end %>
 
-  <%= link_to @attendance_pagination.next_params, class: 'no-underline' do %>
-    <%= tabler_icon 'arrow_right', classes: ['inline', 'align-[sub]'] %>
+  <%= link_to @attendance_pagination.next_params, class: 'size-11 flex items-center justify-center border border-primary text-primary-dark no-underline' do %>
+    <span class="sr-only"><%= t('.next') %></span>
+    <%= tabler_icon 'arrow_right', classes: ['size-5'] %>
   <% end %>
 </div>
 
-<% if @excuse_requested_attendances.any? %>
-  <h2><%= t('.excuse_requested.title') %></h2>
-  <ul>
-    <% @excuse_requested_attendances.each do |attendance| %>
-      <li>
-        <%= link_to edit_attendance_path(attendance) do %>
-          <%= render attendance %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
+<div class="md:hidden">
+  <%= render 'stacked_table', attendance_table: @attendance_table %>
+</div>
 
-<div class="table-scroll">
-  <table class="table-wide">
-    <%= render 'table_header', attendance_table: @attendance_table %>
-
-    <% @attendance_table.canonical_register_users.each do |register, users| %>
-      <% if users.any? %>
-        <tbody class="border-r-2">
-          <% users.each do |user| %>
-            <tr class="<%= register_class(user.canonical_register) %>">
-              <td class="border-x-2 sticky left-0 <%= register_class(user.canonical_register) %>">
-                <%= user.full_name %>
-              </td>
-
-              <% @attendance_table.calendar_events.each do |calendar_event| %>
-                <td class="text-center">
-                  <% user_status = @attendance_table.user_status_for(user, calendar_event) %>
-
-                  <% if user_status.try(:active?) %>
-                    <% attendance = @attendance_table.attendance_for(user, calendar_event) %>
-                    <% if attendance.nil? %>
-                      <%= link_to icon_for_status(Attendance::STATUS_UNKNOWN), new_attendance_path(user_id: user, calendar_event_id: calendar_event) %>
-                    <% else %>
-                      <%= link_to edit_attendance_path(attendance) do %>
-                        <%= icon_for_status(attendance.status) %>
-                      <% end %>
-                    <% end %>
-                  <% else %>
-                    <%= icon_for_user_status(user_status.try(:status)) %>
-                  <% end %>
-                </td>
-              <% end %>
-            </tr>
-          <% end %>
-        </tbody>
-        <%= render 'table_header', attendance_table: @attendance_table %>
-      <% end %>
-    <% end %>
-  </table>
+<div class="hidden md:block">
+  <%= render 'table', attendance_table: @attendance_table %>
 </div>

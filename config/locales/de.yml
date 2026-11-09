@@ -144,6 +144,9 @@ de:
     index:
       excuse_requested:
         title: Zu bestätigende Abwesenheiten
+      next: Spätere Termine
+      no_register: Ohne Stimme
+      previous: Frühere Termine
       title: Anwesenheiten
     new:
       title: Anwesenheit eintragen

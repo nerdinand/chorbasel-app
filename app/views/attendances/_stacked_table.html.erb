@@ -1,0 +1,43 @@
+<% first_future_event = attendance_table.calendar_events.find(&:future?) %>
+<% divider = capture do %><span class="w-px self-stretch mx-1 bg-muted/60"></span><% end %>
+
+<%# Scrolls vertically too, so the sticky date header has a box to stick in %>
+<div class="mt-2 max-h-[90dvh] overflow-auto">
+  <div class="min-w-max [&_.status-square]:size-[30px]">
+    <div class="sticky top-0 z-10 flex gap-[5px] py-2 bg-bg border-b border-muted/60">
+      <% attendance_table.calendar_events.each do |calendar_event| %>
+        <%= divider if calendar_event == first_future_event %>
+        <%= link_to calendar_event, class: "w-[30px] flex flex-col items-center leading-tight text-[10px] text-muted no-underline #{calendar_event_color_class(calendar_event)}" do %>
+          <span class="text-[11px] <%= calendar_event.today? ? 'font-semibold text-primary-dark' : 'font-medium text-body' %>"><%= calendar_event.starts_at.day %></span>
+          <%= l(calendar_event.starts_at, format: '%b') %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <% attendance_table.canonical_register_users.each do |register, users| %>
+      <% if users.any? %>
+        <h3 class="m-0 pt-5 pb-2 border-b border-line text-[15px]">
+          <span class="sticky left-0 inline-flex items-center gap-2">
+            <span class="size-2.5" style="background: <%= AttendanceTallyTable::COLORS[register] %>"></span>
+            <%= register.present? ? human_register(register) : t('attendances.index.no_register') %>
+          </span>
+        </h3>
+
+        <% users.each do |user| %>
+          <div class="py-3 border-b border-line flex flex-col gap-2">
+            <span class="sticky left-0 self-start text-ink"><%= user.full_name %></span>
+
+            <div class="flex gap-[5px]">
+              <% attendance_table.calendar_events.each do |calendar_event| %>
+                <%= divider if calendar_event == first_future_event %>
+                <div class="w-[30px] flex justify-center">
+                  <%= render 'attendance_cell', attendance_table:, user:, calendar_event: %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
