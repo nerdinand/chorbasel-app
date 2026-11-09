@@ -1,0 +1,3 @@
+<%# Day number over the short month, shared by the table and the stacked view %>
+<span class="text-[11px] <%= calendar_event.today? ? 'font-semibold text-primary-dark' : 'font-medium text-body' %>"><%= calendar_event.starts_at.day %></span>
+<%= l(calendar_event.starts_at, format: '%b') %>

@@ -1,4 +1,7 @@
 <% content_for :title, t('.title') %>
+<% content_for :header do %>
+  <p class="text-ink"><%= l(Date.current, format: '%A, %-d. %B') %></p>
+<% end %>
 
 <% if @excuse_requested_attendances.any? %>
   <div class="alert">
@@ -15,16 +18,22 @@
   </div>
 <% end %>
 
-<div class="mt-6 flex justify-end gap-2">
-  <%= link_to @attendance_pagination.previous_params, class: 'size-11 flex items-center justify-center border border-primary text-primary-dark no-underline' do %>
-    <span class="sr-only"><%= t('.previous') %></span>
-    <%= tabler_icon 'arrow_left', classes: ['size-5'] %>
-  <% end %>
+<div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+  <ul role="list" class="list-none p-0 m-0 flex flex-wrap gap-x-3.5 gap-y-1.5 text-[13px]">
+    <%= render 'status_legend_items' %>
+  </ul>
 
-  <%= link_to @attendance_pagination.next_params, class: 'size-11 flex items-center justify-center border border-primary text-primary-dark no-underline' do %>
-    <span class="sr-only"><%= t('.next') %></span>
-    <%= tabler_icon 'arrow_right', classes: ['size-5'] %>
-  <% end %>
+  <div class="ml-auto flex gap-2">
+    <%= link_to @attendance_pagination.previous_params, class: 'size-11 flex items-center justify-center border border-primary text-primary-dark no-underline' do %>
+      <span class="sr-only"><%= t('.previous') %></span>
+      <%= tabler_icon 'arrow_left', classes: ['size-5'] %>
+    <% end %>
+
+    <%= link_to @attendance_pagination.next_params, class: 'size-11 flex items-center justify-center border border-primary text-primary-dark no-underline' do %>
+      <span class="sr-only"><%= t('.next') %></span>
+      <%= tabler_icon 'arrow_right', classes: ['size-5'] %>
+    <% end %>
+  </div>
 </div>
 
 <div class="md:hidden">

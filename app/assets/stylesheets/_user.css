@@ -1,19 +1,16 @@
+/* Voice colors from AttendanceTallyTable::COLORS as a light tint, readable in light and dark mode */
 .register-soprano {
-  background-color: #b0e09a;
-  color: #050505
+  background-color: rgb(156 36 58 / 0.15)
 }
 
 .register-alto {
-  background-color: #e09e9a;
-  color: #050505
+  background-color: rgb(234 109 35 / 0.15)
 }
 
 .register-tenor {
-  background-color: #fcfd9d;
-  color: #050505
+  background-color: rgb(93 52 132 / 0.15)
 }
 
 .register-bass {
-  background-color: #b3a3fb;
-  color: #050505
+  background-color: rgb(81 120 41 / 0.15)
 }

@@ -1,7 +1,7 @@
-<p><%= calendar_event_time_string(calendar_event) %></p>
-
-<p class="text-xs">
-  <%= time_ago_in_words_in_or_ago(calendar_event.starts_at) %>
+<%# The dashboard shows the date in its own column and passes with_date: false %>
+<p>
+  <%= calendar_event_time_string(calendar_event, with_date: local_assigns.fetch(:with_date, true)) %>
+  · <%= time_ago_in_words_in_or_ago(calendar_event.starts_at) %>
 </p>
 
 <% if calendar_event.song_lists.active.any? %>

@@ -4,6 +4,14 @@ import "controllers"
 import "chartkick"
 import "Chart.bundle"
 
+// Chart text and grid lines in the page's colors, so they are readable in light and dark mode.
+// Chartkick draws its charts after this module ran, so the defaults apply to all charts.
+const cssColor = (name) => `rgb(${getComputedStyle(document.documentElement).getPropertyValue(`--color-${name}`)})`
+window.Chart.defaults.color = cssColor('body')
+window.Chart.defaults.borderColor = cssColor('line')
+window.Chart.defaults.font.family = getComputedStyle(document.body).fontFamily
+window.Chart.defaults.font.size = 13
+
 if ('serviceWorker' in navigator) {
 	window.addEventListener('load', () => {
 		navigator.serviceWorker.register('/service-worker')

@@ -13,6 +13,7 @@
               <span class="sticky left-2 inline-flex items-center gap-2.5">
                 <span class="size-3" style="background: <%= AttendanceTallyTable::COLORS[register] %>"></span>
                 <%= register.present? ? human_register(register) : t('attendances.index.no_register') %>
+                <span class="font-body font-normal text-muted"><%= users.size %></span>
               </span>
             </th>
           </tr>

@@ -10,7 +10,7 @@
       <%= render 'layouts/flashes' %>
 
       <% if logged_in? %>
-        <div class="max-w-[1440px] mx-auto px-4 md:px-10 flex flex-wrap gap-x-6">
+        <div class="page-width flex flex-wrap gap-x-6">
           <% if browser.device.mobile? %>
             <button
               class="my-1 inline-flex items-center gap-1 min-h-[44px] text-primary-dark"
@@ -34,14 +34,14 @@
 
       <% if content_for?(:title) %>
         <header class="bg-contrast">
-          <div class="max-w-[1440px] mx-auto px-5 md:px-10 pt-7 pb-5 md:pt-10 md:pb-7 flex flex-col gap-3">
+          <div class="page-width pt-7 pb-5 md:pt-10 md:pb-7 flex flex-col gap-3">
             <h1 class="m-0"><%= content_for(:title) %></h1>
             <%= content_for(:header) %>
           </div>
         </header>
       <% end %>
 
-      <main class="max-w-[1440px] mx-auto px-4 md:px-10 pt-6 pb-16">
+      <main class="page-width pt-6 pb-16">
         <%= yield %>
       </main>
     </div>

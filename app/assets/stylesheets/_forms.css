@@ -12,11 +12,6 @@
     @apply font-heading font-semibold text-[15px] text-ink;
   }
 
-  /* Labels that wrap hints or file inputs (users/_form) */
-  label :is(p, input) {
-    @apply font-body font-normal text-body;
-  }
-
   input[type="checkbox"] {
     @apply mr-2 text-primary-dark;
   }

@@ -5,9 +5,9 @@ module CalendarEventsHelper
   TIME_FORMAT = '%H:%M'
   DATE_AND_TIME_FORMAT = "#{DATE_FORMAT} #{TIME_FORMAT}".freeze
 
-  def calendar_event_time_string(calendar_event)
+  def calendar_event_time_string(calendar_event, with_date: true)
     if calendar_event.starts_and_ends_on_same_day?
-      time_string_same_day(calendar_event)
+      time_string_same_day(calendar_event, with_date:)
     else
       time_string_different_day(calendar_event)
     end
@@ -30,12 +30,12 @@ module CalendarEventsHelper
 
   private
 
-  def time_string_same_day(calendar_event)
-    date = l(calendar_event.starts_at, format: DATE_FORMAT)
+  def time_string_same_day(calendar_event, with_date:)
+    date = l(calendar_event.starts_at, format: DATE_FORMAT) if with_date
     start_time = l(calendar_event.starts_at, format: TIME_FORMAT)
     end_time = l(calendar_event.ends_at, format: TIME_FORMAT)
 
-    "#{date} #{start_time}-#{end_time} (#{humanize_duration(calendar_event.duration)})"
+    [date, "#{start_time}-#{end_time}", "(#{humanize_duration(calendar_event.duration)})"].compact.join(' ')
   end
 
   def time_string_different_day(calendar_event)

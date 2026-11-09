@@ -6,11 +6,15 @@
   <div class="mt-3 flex items-start gap-1.5 overflow-x-auto [&_.status-square]:size-6">
     <% @overview_calendar_events.group_by { |e| e.starts_at.beginning_of_month }.each do |month, calendar_events| %>
       <% calendar_events.each_with_index do |calendar_event, index| %>
+        <% special = !calendar_event.regular_practice? %>
+
         <div class="w-8 flex-none flex flex-col items-center gap-1 text-[13px] <%= calendar_event.today? ? 'font-semibold text-primary-dark' : 'font-medium' %>">
-          <span class="flex <%= 'outline outline-2 outline-offset-2 outline-primary-dark' unless calendar_event.regular_practice? %>">
-            <%= attendance_action_symbol(calendar_event) %>
+          <span class="flex"><%= attendance_action_symbol(calendar_event) %></span>
+
+          <%# Special events get the same dark chip as the category badge in the timeline %>
+          <span class="<%= 'px-1 bg-primary-dark text-on-primary' if special %>">
+            <%= link_to_if policy(calendar_event).show?, calendar_event.starts_at.day, calendar_event, class: "no-underline #{'text-on-primary hover:text-on-primary' if special}" %>
           </span>
-          <%= link_to_if policy(calendar_event).show?, calendar_event.starts_at.day, calendar_event, class: 'no-underline' %>
           <span class="min-h-4 text-xs whitespace-nowrap">
             <%= calendar_event.today? ? t('.today') : (l(month, format: '%b') if index.zero?) %>
           </span>
@@ -20,12 +24,9 @@
   </div>
 
   <ul role="list" class="list-none p-0 m-0 flex flex-wrap gap-x-3.5 gap-y-1.5 text-[13px]">
-    <% Attendance::STATUSES.each do |status| %>
-      <li class="flex items-center gap-1.5"><%= icon_for_status(status) %><%= t("activerecord.attributes.attendance.enums.status.#{status}") %></li>
-    <% end %>
-    <li class="flex items-center gap-1.5">
-      <span class="flex mx-0.5 outline outline-2 outline-offset-2 outline-primary-dark"><%= icon_for_status(:unknown) %></span>
-      <%= t('.special_event') %>
+    <%= render 'attendances/status_legend_items' %>
+    <li class="flex items-center">
+      <span class="px-1.5 bg-primary-dark text-on-primary font-medium"><%= t('.special_event') %></span>
     </li>
   </ul>
 <% end %>
@@ -50,17 +51,12 @@
 
 <p><%= t('.upcoming_birthdays.description') %></p>
 
-<ul role="list" class="list-none p-0 mt-3 mb-0">
+<ul role="list" class="list-none p-0 mt-2 mb-0">
   <% @upcoming_birthdays.each do |user, next_birthday| %>
-    <li class="flex items-center gap-5 py-3 px-1 border-b border-line">
-      <span class="w-[52px] flex-none flex flex-col items-center">
-        <span class="text-[13px] font-medium text-muted"><%= l(next_birthday, format: '%b') %></span>
-        <span class="font-heading font-semibold text-[22px] leading-tight text-ink"><%= next_birthday.day %></span>
-      </span>
-      <span class="flex items-center gap-2.5">
-        <span class="flex text-primary"><%= tabler_icon :cake, classes: ['size-[18px]'] %></span>
-        <%= user.full_name %>
-      </span>
+    <li class="flex items-center gap-2.5 py-1.5 px-1 border-b border-line">
+      <span class="flex text-primary"><%= tabler_icon :cake, classes: ['size-4'] %></span>
+      <span class="w-14 flex-none text-[13px] font-medium text-muted"><%= l(next_birthday, format: '%-d. %b') %></span>
+      <span class="min-w-0 truncate"><%= user.full_name %></span>
     </li>
   <% end %>
 </ul>
@@ -93,7 +89,7 @@
             <%= link_to_if policy(Attendance).index?, calendar_event.summary, calendar_event %>
           </h3>
 
-          <%= render calendar_event %>
+          <%= render calendar_event, with_date: false %>
         </div>
 
         <div class="max-w-full">

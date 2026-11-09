@@ -3,7 +3,9 @@
 
   <div class="flex flex-col gap-2 mt-2">
     <% if @user.register.present? %>
-      <p class="absolute rounded-md top-2 left-2 <%= register_class(@user.canonical_register) %> border-2 border-white font-semibold text-sm px-2 py-1 flex items-center">
+      <%# Solid background, since the badge sits on the photo %>
+      <p class="absolute top-2 left-2 bg-bg text-ink font-semibold text-sm px-2 py-1 flex items-center gap-2">
+        <span class="size-2.5" style="background: <%= AttendanceTallyTable::COLORS[@user.canonical_register] %>"></span>
         <span><%= human_register(@user.register) %></span>
       </p>
     <% end %>
