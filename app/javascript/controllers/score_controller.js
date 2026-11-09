@@ -8,6 +8,7 @@ export default class extends Controller {
     metadata: Object,
     measureList: Array,
     secondsToMeasureNumberList: Array,
+    measureNumberToSecondsList: Array,
   }
 
   initializeVerovio() {
@@ -145,7 +146,7 @@ export default class extends Controller {
           }
           this.scoreTarget.innerHTML = svg;
         })
-        .then(() => this.buildMeasureList(this))
+        .then(() => this.buildMeasureLists(this))
         .catch((error) => {
           // Ignore fetch/render errors
         });
@@ -158,10 +159,11 @@ export default class extends Controller {
     this.initializeVerovio();
   }
 
-  buildMeasureList(controller) {
+  buildMeasureLists(controller) {
     let i = 1
     let lastMeasureId = null
     let measures = []
+    let measureSeconds = []
 
     while(true) {
       let elements = document.toolkit.getElementsAtTime(i)
@@ -174,11 +176,13 @@ export default class extends Controller {
       if (currentMeasureId != lastMeasureId) {
         lastMeasureId = currentMeasureId
         measures.push(currentMeasureId)
+        measureSeconds.push(i / 1000.0)
       }
       i += 100
     }
 
     controller.measureListValue = measures
+    controller.measureNumberToSecondsList = measureSeconds
   }
 
   getMeasureNumber(recordingTime) {
@@ -271,6 +275,16 @@ export default class extends Controller {
         break
       }
     }
-    document.getElementById(clickedMeasureId)?.classList.add("playing")
+
+    if (clickedMeasureId && this.trackswitchPlayerTarget && this.measureListValue && this.secondsToMeasureNumberListValue) {      
+      const measureIndex = this.measureListValue.indexOf(clickedMeasureId);
+
+      if (measureIndex !== -1) {
+        const seconds = this.measureNumberToSecondsList[measureIndex];
+        if (seconds) {
+          this.trackswitchPlayerTarget.controller.seekTo(seconds);
+        }
+      }
+    }
   }
 }
