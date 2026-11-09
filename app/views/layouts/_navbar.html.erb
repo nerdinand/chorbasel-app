@@ -28,13 +28,18 @@ if logged_in?
   end
 end
 
+# The root path renders the dashboard too
+active = lambda do |path|
+  current_page?(path) || (path == dashboard_path && current_page?(root_path))
+end
+
 nav_link_classes = lambda do |path|
-  state_classes = current_page?(path) ? 'border-primary-dark bg-contrast' : 'border-transparent hover:bg-contrast'
+  state_classes = active.call(path) ? 'border-primary-dark bg-contrast' : 'border-transparent hover:bg-contrast'
   "block px-4 py-3 border-l-4 text-ink no-underline hover:text-ink #{state_classes}"
 end
 
 bar_link_classes = lambda do |path|
-  state_classes = current_page?(path) ? 'border-b-primary-dark text-ink font-medium' : 'border-b-transparent text-body hover:text-ink'
+  state_classes = active.call(path) ? 'border-b-primary-dark text-ink font-medium' : 'border-b-transparent text-body hover:text-ink'
   "flex items-center px-3 whitespace-nowrap border-y-[3px] border-t-transparent no-underline #{state_classes}"
 end %>
 
@@ -84,7 +89,7 @@ end %>
     <% if logged_in? %>
       <ul role="list" class="hidden xl:flex list-none p-0 m-0">
         <% member_links.each do |text, path| %>
-          <li class="flex"><%= link_to text, path, class: bar_link_classes.call(path), aria: { current: current_page?(path) ? 'page' : nil } %></li>
+          <li class="flex"><%= link_to text, path, class: bar_link_classes.call(path), aria: { current: active.call(path) ? 'page' : nil } %></li>
         <% end %>
 
         <% if admin_links.any? %>
@@ -92,7 +97,7 @@ end %>
         <% end %>
 
         <% admin_links.each do |text, path| %>
-          <li class="flex"><%= link_to text, path, class: bar_link_classes.call(path), aria: { current: current_page?(path) ? 'page' : nil } %></li>
+          <li class="flex"><%= link_to text, path, class: bar_link_classes.call(path), aria: { current: active.call(path) ? 'page' : nil } %></li>
         <% end %>
       </ul>
     <% end %>
