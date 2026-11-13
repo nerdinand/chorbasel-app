@@ -28,6 +28,9 @@
   <%= javascript_importmap_tags %>
   <%= javascript_include_tag 'verovio-toolkit-wasm-6.3.0.js', nonce: true %>
 
+  <%# FIXME: Apparently trackswitch currently only works with this package, no properly released version... %>
+  <script src="https://audiolabs.github.io/trackswitch.js/js/trackswitch.js"></script>
+
   <% if controller_name == 'songs' && action_name == 'show' %>
     <%# hack to disable turbo for the songs#show page, because it doesn't play well with verovio's lifecycle %>
     <meta name="turbo-visit-control" content="reload">

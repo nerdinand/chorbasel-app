@@ -1,10 +1,11 @@
 <div class="combobox" data-controller="combobox"
-  data-combobox-choices-value='<%= choices %>'
+  data-combobox-choices-value="<%= choices %>"
   data-combobox-multiselect-value="<%= multiselect %>"
   data-combobox-allow-custom-value="<%= allow_custom_value %>"
   data-combobox-empty-label-value="<%= t('stimulus.single_choice_combobox.empty_label') %>"
 >
-  <%= form.text_field(
+  <%= 
+    form.text_field(
       field,
       value:,
       placeholder: t('stimulus.single_choice_combobox.empty_label'),
