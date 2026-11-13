@@ -9,6 +9,7 @@ module AttendancesHelper
   }.freeze
 
   def attendances_status_options
+    # i18n-tasks-use t('activerecord.attributes.attendance.enums.status')
     Attendance::STATUSES.map { |r| [t("activerecord.attributes.attendance.enums.status.#{r}"), r] }
   end
 

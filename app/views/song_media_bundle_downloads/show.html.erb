@@ -9,6 +9,7 @@
 <p>
   <%= icon_for_song_media_bundle_download_status(@song_media_bundle_download.status) %>
   <b><%= t('activerecord.attributes.song_media_bundle_download.status') %></b>
+  <%# i18n-tasks-use t('activerecord.attributes.song_media_bundle_download.enums.status') %>
   <%= I18n.t("activerecord.attributes.song_media_bundle_download.enums.status.#{@song_media_bundle_download.status}") %>
 </p>
 

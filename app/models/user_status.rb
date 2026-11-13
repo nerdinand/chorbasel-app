@@ -45,6 +45,10 @@ class UserStatus < ApplicationRecord
   end
 
   def human_status
+    # FIXME: Fuck knows why, but here just specifying the parent element doesn't seem to work...
+    # i18n-tasks-use t('activerecord.attributes.user_status.enums.status.active')
+    # i18n-tasks-use t('activerecord.attributes.user_status.enums.status.paused')
+    # i18n-tasks-use t('activerecord.attributes.user_status.enums.status.inactive')
     I18n.t("activerecord.attributes.user_status.enums.status.#{status}")
   end
 end

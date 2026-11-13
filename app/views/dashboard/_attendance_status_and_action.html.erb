@@ -2,6 +2,7 @@
 <% calendar_event = attendance_check.calendar_event %>
 
 <%= icon_for_status(attendance.status) %>
+<%# i18n-tasks-use t('dashboard.show.attendance_status') %>
 <%= t("dashboard.show.attendance_status.#{attendance.status}") %>
 
 <br>

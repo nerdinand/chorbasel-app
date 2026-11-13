@@ -32,6 +32,7 @@
   <table>
     <tbody>
       <% CalendarEvent::CATEGORIES.each do |category| %>
+        <%# i18n-tasks-use t('statistics.attendances.show.calendar_events.category') %>
         <tr><td><%= t(".calendar_events.category.#{category}") %></td><td><%= @calendar_events_by_category[category].try(:count) || 0 %></td></tr>
       <% end %>
       <tfoot>

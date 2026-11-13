@@ -42,7 +42,7 @@ group :development, :test do
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem 'brakeman', require: false
 
-  gem 'rspec-rails', '~> 8.0'
+  gem 'rspec-rails', '~> 8.1'
   gem 'rubocop-capybara'
   gem 'rubocop-rails'
   gem 'rubocop-rspec_rails'
@@ -53,7 +53,7 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'web-console'
 
-  gem 'i18n-tasks', '~> 1.1.2'
+  gem 'i18n-tasks', '~> 1.2.0'
   gem 'letter_opener'
   gem 'rails-erd', '~> 2.2'
 end
