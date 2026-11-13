@@ -35,7 +35,7 @@
   <% end %>
 <% end %>
 
-<%= render 'score', song: @song %>
+<%= render 'score', song: @song, score_config: @score_config %>
 
 <% if @song.lyrics.present? %>
   <p>

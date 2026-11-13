@@ -4,51 +4,10 @@
   <%= content_tag :div, data: {controller: 'score', 'score-url-value': score_url, 'score-metadata-value': metadata, 'score-delay-in-milliseconds-value': 200} do %>
 
     <trackswitch-player data-score-target="trackswitchPlayer" data-action="trackswitch-position->score#update">
-      <script type="application/json">
-        <%= 
-          recording_map = song.song_media.recording.ordered_by_register.map do |recording|
-            src = if recording.file.present?
-              url_for(recording.file)
-            else
-              song_song_medium_load_path(song_id: recording.song.id, song_medium_id: recording.id)
-            end
-      
-            title = if recording.register.present?
-              human_register(recording.register)
-            else
-              t('.all_registers')
-            end
-            [recording.id.to_s, {src:, title:}]
-          end.to_h
-          
-          config = {
-            css: {},
-            media: recording_map.map do |id, hash| 
-              [id, {type: 'audio', src: hash[:src], title: hash[:title]}]
-            end.to_h,
-            views: [
-              {
-                type: 'navigationBar',
-                controls: ['playback', 'globalVolume', 'markerNavigation', 'looping', 'sync', 'timer', 'seekBar']
-              },
-              *recording_map.keys.map do |id| 
-                {type: 'waveform', height: 50, tracks: [id]}
-              end,
-              {type: 'trackList', tracks: recording_map.keys}
-            ]
-          }
-
-          raw config.to_json
-        %>
+      <script type="application/json"> <%# herb:disable html-allowed-script-type %>
+        <%= raw score_config.to_json %>
       </script>
     </trackswitch-player>
-
-    <script nonce="true">
-      trackswitchPlayer = document.querySelector('trackswitch-player')
-      trackswitchPlayer?.addEventListener('trackswitch-error', e => {
-        console.error('TrackSwitch error:', e.detail);
-      });
-    </script>
 
     <%= content_tag :div, nil, class: "w-full overflow-x-auto score relative left-1/2 w-dvw max-w-none -translate-x-1/2", data: {'score-target': 'score', action: 'click->score#click'} %>
   <% end %>

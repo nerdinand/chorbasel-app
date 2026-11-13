@@ -313,6 +313,12 @@ export default class extends Controller {
     this.initializeVerovio();
   }
 
+  trackswitchPlayerTargetConnected() {
+    this.trackswitchPlayerTarget.addEventListener('trackswitch-error', e => {
+      console.error('TrackSwitch error:', e.detail);
+    });
+  }
+
   hidePlayingMeasures() {
     let playingMeasures = this.scoreTarget.querySelectorAll(".playing");
     for (let playingMeasure of playingMeasures) playingMeasure.classList.remove("playing");
