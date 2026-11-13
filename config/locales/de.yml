@@ -547,15 +547,15 @@ de:
         timeframe_title: Statistiken von %{from} bis %{to}
         year_title: Chorjahr %{year}
     index:
-      alto: Alt
       attendance_statistics: Anwesenheitsstatistik
       attendance_tally: Anwesenheitquoten
-      bass: Bass
       name_guesses:
         title: Namen raten
-      soprano: Sopran
-      statistics_year: Chorjahr-Statistiken
-      tenor: Tenor
+      register:
+        alto: Alt
+        bass: Bass
+        soprano: Sopran
+        tenor: Tenor
       timestamp_tallies:
         title: Datensätze
       title: Statistiken

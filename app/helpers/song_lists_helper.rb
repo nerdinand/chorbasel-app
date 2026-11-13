@@ -2,6 +2,7 @@
 
 module SongListsHelper
   def song_list_status_options
+    # i18n-tasks-use t('activerecord.attributes.song_list.enums.status')
     SongList.statuses.values.map { |r| [t("activerecord.attributes.song_list.enums.status.#{r}"), r] }
   end
 

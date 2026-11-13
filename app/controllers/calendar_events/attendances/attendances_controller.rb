@@ -11,7 +11,8 @@ module CalendarEvents
         if result.success?
           perform_create(calendar_event)
         else
-          flash.alert = t(".#{result.error_symbol}")
+          # i18n-tasks-use t('calendar_events.attendances.attendances.create')
+          flash.alert = t("calendar_events.attendances.attendances.create.#{result.error_symbol}")
         end
         redirect_to dashboard_path
       end

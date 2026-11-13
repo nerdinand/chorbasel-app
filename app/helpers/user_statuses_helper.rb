@@ -8,6 +8,7 @@ module UserStatusesHelper
   }.freeze
 
   def users_status_options
+    # i18n-tasks-use t('activerecord.attributes.user_status.enums.status')
     UserStatus::STATUSES.map { |r| [t("activerecord.attributes.user_status.enums.status.#{r}"), r] }
   end
 

@@ -12,6 +12,7 @@
   <% UsersController::QUERY_PARAM_FILTER_VALUES.each do |value| %>
     <% if params[:filter] != value %>
       <%= link_to request.query_parameters.merge(filter: value), {class: 'mr-2'} do %>
+        <%# i18n-tasks-use t('users.index.filter') %>
         <%= icon_for_user_filter(value) %><%= t(".filter.#{value}") %>
       <% end %>
     <% else %>

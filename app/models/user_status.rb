@@ -45,6 +45,7 @@ class UserStatus < ApplicationRecord
   end
 
   def human_status
+    # i18n-tasks-use t('activerecord.attributes.user_status.enums.status')
     I18n.t("activerecord.attributes.user_status.enums.status.#{status}")
   end
 end
