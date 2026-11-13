@@ -27,7 +27,7 @@
   <table class="table-wide">
     <%= render 'table_header', attendance_table: @attendance_table %>
 
-    <% @attendance_table.canonical_register_users.each do |register, users| %>
+    <% @attendance_table.canonical_register_users.each do |_register, users| %>
       <% if users.any? %>
         <tbody class="border-r-2">
           <% users.each do |user| %>

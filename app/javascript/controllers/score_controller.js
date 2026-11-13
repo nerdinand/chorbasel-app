@@ -1,17 +1,168 @@
 import { Controller } from "@hotwired/stimulus"
 
+class Measure { // This represents a measure in the expanded score, meaning only number and repetition combined are unique
+  constructor(number, expandedNumber, domId, repetition, startSeconds) {
+    this.number = number
+    this.expandedNumber = expandedNumber
+    this.domId = domId
+    this.repetition = repetition
+    this.startSeconds = startSeconds
+    this.endSeconds = undefined
+  }
+
+  isTimeInRange(seconds) {
+    if (this.endSeconds === undefined) {
+      return this.startSeconds <= seconds
+    }
+    return this.startSeconds <= seconds && seconds < this.endSeconds
+  }
+
+  setEndSeconds(seconds) {
+    this.endSeconds = seconds
+  }
+}
+
+class ScoreSection {
+  constructor(fromMeasureNumber, toMeasureNumber, fromSecond, toSecond) {
+    this.fromMeasureNumber = fromMeasureNumber
+    this.toMeasureNumber = toMeasureNumber
+    this.fromSecond = fromSecond
+    this.toSecond = toSecond
+  }
+
+  calculateStartSeconds(measureNumber) {
+    return this.fromSecond + ((measureNumber - this.fromMeasureNumber) * this.#getSecondsDuration()) / this.#getMeasureCount()
+  }
+
+  #getMeasureCount() {
+    return this.toMeasureNumber - this.fromMeasureNumber
+  }
+
+  #getSecondsDuration() {
+    return this.toSecond - this.fromSecond
+  }
+}
+
+class ScoreMeasureList {
+  constructor(expandedMeasures, domIdList) {
+    this.expandedMeasures = expandedMeasures;
+    this.domIdList = domIdList
+  }
+
+  static build(secondsToMeasureNumberList) {
+    const domIdList = this.#buildDomIdList()    
+    const scoreSectionsList = this.#buildScoreSectionList(secondsToMeasureNumberList)
+    const expandedMeasures = this.#expandMeasures(scoreSectionsList, domIdList)
+        
+    return new ScoreMeasureList(expandedMeasures, domIdList)
+  }
+
+  static #expandMeasures(scoreSectionsList, domIdList) {
+    let measures = []
+    let expandedNumber = 0
+    let lastMeasureNumber = -1
+
+    let scoreMeasureCount = domIdList.length
+
+    let repetitionCount = Array(scoreMeasureCount).fill(0)
+
+    for (let scoreSection of scoreSectionsList) {
+      for (let measureNumber = scoreSection.fromMeasureNumber; measureNumber <= scoreSection.toMeasureNumber && measureNumber <= scoreMeasureCount; measureNumber++) {
+        if (measureNumber == lastMeasureNumber) {
+          continue
+        }
+
+        const rCount = repetitionCount[measureNumber - 1] += 1
+        expandedNumber += 1
+        let startSeconds = scoreSection.calculateStartSeconds(measureNumber)
+
+        if (measures.length > 0) {
+          measures.slice(-1)[0].setEndSeconds(startSeconds)
+        }
+
+        let measure = new Measure(measureNumber, expandedNumber, domIdList[measureNumber - 1], rCount, startSeconds)
+        measures.push(measure)
+        lastMeasureNumber = measureNumber
+      }
+    }
+
+    return measures
+  }
+
+  static #buildScoreSectionList(secondsToMeasureNumberList) {
+    let list = []
+
+    for (let i = 1; i < secondsToMeasureNumberList.length; i++) {
+      const from = secondsToMeasureNumberList[i - 1]
+      const to = secondsToMeasureNumberList[i]
+      const fromMeasureNumber = from[1]
+      const toMeasureNumber = to[1]
+
+      if (toMeasureNumber > fromMeasureNumber) {
+        const fromSecond = from[0]
+        const toSecond = to[0]
+        list.push(new ScoreSection(fromMeasureNumber, toMeasureNumber, fromSecond, toSecond))
+      }
+    }
+
+    return list
+  }
+
+  static #buildDomIdList() {
+    let i = 1
+    let lastMeasureId = null
+    let measures = []
+
+    while(true) {
+      let elements = document.toolkit.getElementsAtTime(i)
+      let currentMeasureId = elements.measure
+      
+      if (currentMeasureId === undefined) {
+        break
+      }
+
+      if (currentMeasureId != lastMeasureId) {
+        lastMeasureId = currentMeasureId
+        measures.push(currentMeasureId)
+      }
+      i += 100
+    }
+
+    return measures
+  }
+
+  getMeasureForTime(time) {
+    for (let measure of this.expandedMeasures) {
+      if (measure.isTimeInRange(time)) {
+        return measure
+      }
+    }
+
+    return undefined
+  }
+
+  getMeasureByDomId(domId) {
+    for (let measure of this.expandedMeasures) {
+      if (measure.domId === domId) {
+        return measure
+      }
+    }
+
+    return undefined
+  }
+}
+
 export default class extends Controller {
-  static targets = [ "audioTag", "score" ]
+  static targets = [ "trackswitchPlayer", "score" ]
   static values = {
     url: String,
     delayInMilliseconds: Number,
     metadata: Object,
-    measureList: Array,
-    secondsToMeasureNumberList: Array,
+    measureNumberToSecondsList: Array,
   }
 
   initializeVerovio() {
-    this.currentMeasureNumber = null;
+    this.currentMeasure = null;
 
     // Check if WebAssembly is supported
     if (typeof WebAssembly === 'undefined') {
@@ -111,6 +262,10 @@ export default class extends Controller {
   }
 
   setupToolkit() {
+    if (this.urlValue == "") {
+      return
+    }
+
     try {
       document.toolkit = new verovio.toolkit();
       
@@ -129,8 +284,6 @@ export default class extends Controller {
         expandNever: true
       });
 
-      this.secondsToMeasureNumberListValue = this.metadataValue["secondsToMeasureNumberList"];
-
       fetch(this.urlValue)
         .then((response) => {
           if (!response.ok) {
@@ -145,15 +298,14 @@ export default class extends Controller {
           }
           this.scoreTarget.innerHTML = svg;
         })
-        .then(() => this.buildMeasureList(this))
-        .then(() => {
-          setTimeout(this.updateAndSetTimeout(this), this.delayInMillisecondsValue);
+        .then(() => { 
+          this.scoreMeasureList = ScoreMeasureList.build(this.metadataValue["secondsToMeasureNumberList"]) 
         })
         .catch((error) => {
-          // Ignore fetch/render errors
+          console.log(error)
         });
     } catch (error) {
-      // Ignore toolkit creation errors
+      console.log(error)
     }
   }
 
@@ -161,60 +313,10 @@ export default class extends Controller {
     this.initializeVerovio();
   }
 
-  buildMeasureList(controller) {
-    let i = 1
-    let lastMeasureId = null
-    let measures = []
-
-    while(true) {
-      let elements = document.toolkit.getElementsAtTime(i)
-      let currentMeasureId = elements.measure
-      
-      if (currentMeasureId === undefined) {
-        break
-      }
-
-      if (currentMeasureId != lastMeasureId) {
-        lastMeasureId = currentMeasureId
-        measures.push([currentMeasureId, elements.page])
-      }
-      i += 500
-    }
-
-    controller.measureListValue = measures
-  }
-
-  getMeasureNumber(recordingTime) {
-    let biggerIndex = this.secondsToMeasureNumberListValue.findIndex((e) => e[0] > recordingTime)
-
-    if (biggerIndex == -1) {
-      return Math.max(...this.secondsToMeasureNumberListValue.map(e => e[1]))
-    }
-
-    if (biggerIndex == 0) {
-      // We're before the beginning of the song (score-wise), therefore, no measure yet
-      return undefined
-    }
-
-    let smallerIndex = biggerIndex - 1
-
-    let nextMeasureNumber = this.secondsToMeasureNumberListValue[biggerIndex][1]
-    let previousMeasureNumber = this.secondsToMeasureNumberListValue[smallerIndex][1]
-
-    if (nextMeasureNumber - previousMeasureNumber <= 1 || nextMeasureNumber <= previousMeasureNumber) {
-      // Either next measure is just one bigger or the same as the current, 
-      // or we going to a repetition in the next measure: Either way, no interpolation needed!
-      return previousMeasureNumber
-    }
-
-    let biggerTime = this.secondsToMeasureNumberListValue[biggerIndex][0]
-    let smallerTime = this.secondsToMeasureNumberListValue[smallerIndex][0]
-
-    let sectionTimeLength = biggerTime - smallerTime
-    let sectionMeasuresLength = nextMeasureNumber - previousMeasureNumber
-    let currentTimeInSection = recordingTime - smallerTime
-    let currentMeasureInSection = parseInt((currentTimeInSection * sectionMeasuresLength) / sectionTimeLength)
-    return previousMeasureNumber + currentMeasureInSection
+  trackswitchPlayerTargetConnected() {
+    this.trackswitchPlayerTarget.addEventListener('trackswitch-error', e => {
+      console.error('TrackSwitch error:', e.detail);
+    });
   }
 
   hidePlayingMeasures() {
@@ -222,34 +324,17 @@ export default class extends Controller {
     for (let playingMeasure of playingMeasures) playingMeasure.classList.remove("playing");
   }
 
-  showPlayingMeasure(measureNumber) {
-    let playingMeasure = this.getPlayingMeasure(measureNumber)
-
-    if (playingMeasure === null) {
-      return
-    }
-
+  showPlayingMeasure(measure) {
+    let playingMeasure = this.getDomMeasure(measure)
     playingMeasure.classList.add("playing")
   }
 
-  getPlayingMeasure(measureNumber) {
-    let measureListEntry = this.measureListValue[measureNumber - 1]
-
-    if (measureListEntry === undefined) {
-      return
-    }
-
-    var playingMeasure = document.getElementById(measureListEntry[0])
-
-    if (playingMeasure === null) {
-      this.scoreTarget.innerHTML = document.toolkit.renderToSVG(measureListEntry[1]);
-      playingMeasure = document.getElementById(measureListEntry[0])
-    }
-    return playingMeasure
+  getDomMeasure(measure) {
+    return document.getElementById(measure.domId)
   }
 
-  scrollToMeasure(measureNumber) {
-    const playingMeasure = this.getPlayingMeasure(measureNumber)
+  scrollToMeasure(measure) {
+    const playingMeasure = this.getDomMeasure(measure)
     const container = this.scoreTarget
 
     const viewPortWidth = window.visualViewport.width
@@ -263,34 +348,43 @@ export default class extends Controller {
     })
   }
 
-  updateAndSetTimeout(controller) {
-    controller.update()
-    setTimeout(() => controller.updateAndSetTimeout(controller), controller.delayInMillisecondsValue)
-  }
-
   update(event) {
-    // If called from an event (e.g., seeked event on audio tag), use and remember that audio element
-    // Otherwise use the last remembered audio element or fall back to the first audio tag target
-    if (event) {
-      this.currentAudioElement = event.target;
-    }
-    
-    const audioElement = this.currentAudioElement || this.audioTagTarget;
-    
-    if (!audioElement) {
-      return;
-    }
-    
-    this.hidePlayingMeasures()
-    let measureNumber = this.getMeasureNumber(audioElement.currentTime)
-    if (measureNumber === undefined) {
+    if (this.urlValue == "") {
       return
     }
-    this.showPlayingMeasure(measureNumber)
 
-    if (this.currentMeasureNumber != measureNumber) {
-      this.currentMeasureNumber = measureNumber
-      this.scrollToMeasure(measureNumber)
+    this.hidePlayingMeasures()
+
+    const measure = this.scoreMeasureList.getMeasureForTime(event.detail.position)
+
+    if (measure === undefined) {
+      return
+    }
+    this.showPlayingMeasure(measure)
+
+    if (this.currentMeasure != measure) {
+      this.currentMeasure = measure
+      this.scrollToMeasure(measure)
+    }
+  }
+
+  click(event) {
+    const x = event.clientX
+    const y = event.clientY
+
+    let clickedMeasureDomId = null
+    for (const measureDomId of this.scoreMeasureList.domIdList) {
+      const measureElement = document.getElementById(measureDomId)
+      const rect = measureElement.getBoundingClientRect()
+      if (rect.left <= x && x <= rect.right && rect.top <= y && y <= rect.bottom) {
+        clickedMeasureDomId = measureDomId
+        break
+      }
+    }
+
+    if (clickedMeasureDomId) {      
+      const measure = this.scoreMeasureList.getMeasureByDomId(clickedMeasureDomId)
+      this.trackswitchPlayerTarget.controller.seekTo(measure.startSeconds)
     }
   }
 }
