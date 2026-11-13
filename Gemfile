@@ -80,11 +80,11 @@ gem 'down', '~> 5.6'
 
 gem 'faker', '~> 3.8'
 
-gem 'aws-sdk-s3', '~> 1.234', require: false
+gem 'aws-sdk-s3', '~> 1.239', require: false
 
 gem 'image_processing', '~> 2.1'
 
-gem 'chartkick', '~> 5.2'
+gem 'chartkick', '~> 5.3'
 
 gem 'tabler_icons', '~> 0.1.1'
 
@@ -92,7 +92,7 @@ gem 'spreadsheet_architect', '~> 5.1'
 
 gem 'litestream', '~> 0.16.1'
 
-gem 'positioning', '~> 0.4.8'
+gem 'positioning', '~> 0.4.10'
 
 gem 'browser', '~> 6.2'
 
@@ -100,7 +100,7 @@ gem 'mission_control-jobs', '~> 1.3'
 
 gem 'ruby-vips', '~> 2.3'
 
-gem 'google-apis-drive_v3', '~> 0.88.0'
+gem 'google-apis-drive_v3', '~> 0.89.0'
 
 gem 'icalendar-recurrence', '~> 1.2'
 
