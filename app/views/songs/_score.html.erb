@@ -2,24 +2,13 @@
   <% score_url = url_for(song.score.file) if song.score&.file.present? %>
   <% metadata = song.score.metadata if song.score&.metadata.present? %>
   <%= content_tag :div, data: {controller: 'score', 'score-url-value': score_url, 'score-metadata-value': metadata, 'score-delay-in-milliseconds-value': 200} do %>
-    <% song.song_media.recording.ordered_by_register.each do |recording| %>
-      <div class="flex my-5">
-        <strong class="w-1/6">
-          <% if recording.register.present? %>
-            <%= human_register(recording.register) %>
-          <% else %>
-            <%= t('.all_registers') %>
-          <% end %>
-        </strong>
 
-        <% if recording.file.present? %>
-          <%= audio_tag url_for(recording.file), class: 'w-5/6', controls: true, preload: 'none', data: {'score-target': 'audioTag', 'action': 'timeupdate->score#update'} %>
-        <% else %>
-          <%= audio_tag song_song_medium_load_path(song_id: recording.song.id, song_medium_id: recording.id), class: 'w-5/6', controls: true, preload: 'none', data: {'score-target': 'audioTag', 'action': 'timeupdate->score#update'} %>
-        <% end %>
-      </div>
-    <% end %>
+    <trackswitch-player data-score-target="trackswitchPlayer" data-action="trackswitch-position->score#update">
+      <script type="application/json"> <%# herb:disable html-allowed-script-type %>
+        <%= raw trackswitch_config(song.song_media.recording.ordered_by_register).to_json %>
+      </script>
+    </trackswitch-player>
 
-    <%= content_tag :div, nil, class: "w-full overflow-x-auto score relative left-1/2 w-dvw max-w-none -translate-x-1/2", data: {'score-target': 'score'} %>
+    <%= content_tag :div, nil, class: "w-full overflow-x-auto score relative left-1/2 w-dvw max-w-none -translate-x-1/2", data: {'score-target': 'score', action: 'click->score#click'} %>
   <% end %>
 <% end %>
