@@ -5,7 +5,7 @@
 
     <trackswitch-player data-score-target="trackswitchPlayer" data-action="trackswitch-position->score#update">
       <script type="application/json"> <%# herb:disable html-allowed-script-type %>
-        <%= raw score_config.to_json %>
+        <%= raw trackswitch_config(song.song_media.recording.ordered_by_register).to_json %>
       </script>
     </trackswitch-player>
 

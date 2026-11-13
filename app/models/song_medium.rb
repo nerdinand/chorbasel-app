@@ -79,4 +79,12 @@ class SongMedium < ApplicationRecord
 
     file.attachment.try(:video?) || false
   end
+
+  def file_url
+    if file.present?
+      Rails.application.routes.url_helpers.rails_blob_path(file)
+    else
+      Rails.application.routes.url_helpers.song_song_medium_load_path(song_id: song.id, song_medium_id: id)
+    end
+  end
 end
