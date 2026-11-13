@@ -262,6 +262,10 @@ export default class extends Controller {
   }
 
   setupToolkit() {
+    if (this.urlValue == "") {
+      return
+    }
+
     try {
       document.toolkit = new verovio.toolkit();
       
@@ -338,7 +342,11 @@ export default class extends Controller {
     })
   }
 
-  update(event) {    
+  update(event) {
+    if (this.urlValue == "") {
+      return
+    }
+
     this.hidePlayingMeasures()
 
     const measure = this.scoreMeasureList.getMeasureForTime(event.detail.position)
