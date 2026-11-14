@@ -17,6 +17,10 @@ class SongPolicy < ApplicationPolicy
     true
   end
 
+  def markers?
+    show?
+  end
+
   def create?
     song_management?
   end

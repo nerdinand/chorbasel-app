@@ -53,6 +53,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       end
 
       resource :score, only: %i[new create edit update destroy]
+      get :markers
     end
 
     resources :name_guesses, only: %i[new create]
