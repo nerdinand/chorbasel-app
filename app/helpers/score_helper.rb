@@ -19,10 +19,8 @@ module ScoreHelper
       {
         type: 'navigationBar',
         controls: %w[playback globalVolume markerNavigation looping markerEditing timer]
-      },
-      { type: 'waveform', height: 50, tracks: 'audible', markerLayers: [{ sequence: 'markers' }] },
-      { type: 'trackList', tracks: recording_ids }
-    ]
+      }
+    ] + waveform_config + [{ type: 'trackList', tracks: recording_ids }]
   end
 
   def recording_map(recordings)
@@ -37,14 +35,39 @@ module ScoreHelper
     end
   end
 
+  def waveform_config
+    [{
+      type: 'waveform', height: 50, tracks: 'audible',
+      markerLayers: [{ sequence: 'segments' }]
+    },
+     {
+       type: 'waveform', height: 50, tracks: 'audible',
+       markerLayers: [{ sequence: 'measures', color: '#777' }]
+     }]
+  end
+
   def markers_config(song_id)
     {
-      markers: {
-        type: 'segments',
-        timeCol: 'time',
-        labelCol: 'label',
-        src: song_markers_path(song_id, format: 'csv')
-      }
+      segments: segments_markers_config(song_id),
+      measures: measures_markers_config(song_id)
+    }
+  end
+
+  def segments_markers_config(song_id)
+    {
+      type: 'segments',
+      timeCol: 'time',
+      labelCol: 'label',
+      src: segment_markers_song_score_path(song_id, format: :csv)
+    }
+  end
+
+  def measures_markers_config(song_id)
+    {
+      type: 'points',
+      timeCol: 'time',
+      labelCol: 'measure',
+      src: measure_markers_song_score_path(song_id, format: :csv)
     }
   end
 end

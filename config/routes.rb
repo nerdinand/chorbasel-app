@@ -52,8 +52,10 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
         get :load
       end
 
-      resource :score, only: %i[new create edit update destroy]
-      get :markers
+      resource :score, only: %i[new create edit update destroy] do
+        get :segment_markers
+        get :measure_markers
+      end
     end
 
     resources :name_guesses, only: %i[new create]

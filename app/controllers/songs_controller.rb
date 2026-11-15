@@ -60,17 +60,6 @@ class SongsController < ApplicationController
     end
   end
 
-  def markers
-    song = authorize Song.find(params.expect(:song_id))
-
-    respond_to do |format|
-      format.csv do
-        markers = song&.score&.markers
-        render csv: markers || 'time,label'
-      end
-    end
-  end
-
   private
 
   def song_params

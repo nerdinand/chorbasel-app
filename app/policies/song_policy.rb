@@ -17,7 +17,11 @@ class SongPolicy < ApplicationPolicy
     true
   end
 
-  def markers?
+  def segment_markers?
+    show?
+  end
+
+  def measure_markers?
     show?
   end
 

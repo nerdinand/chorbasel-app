@@ -39,7 +39,8 @@ de:
             thank_you_gifts: Dankegeschenk-Koordination
       score:
         file: MEI-Datei
-        metadata: Metadaten
+        measure_markers: Taktmarkierungen
+        segment_markers: Abschnittsbezeichnungen
       song:
         arranger: Arrangeur:in
         enums:

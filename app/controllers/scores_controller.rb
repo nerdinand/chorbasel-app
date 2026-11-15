@@ -33,9 +33,31 @@ class ScoresController < ApplicationController
     end
   end
 
+  def segment_markers
+    score = authorize Score.find_by(song_id: params[:song_id])
+
+    respond_to do |format|
+      format.csv do
+        markers = score&.segment_markers
+        render csv: markers || 'time,label'
+      end
+    end
+  end
+
+  def measure_markers
+    score = authorize Score.find_by(song_id: params[:song_id])
+
+    respond_to do |format|
+      format.csv do
+        markers = score&.measure_markers
+        render csv: markers || 'time,measure'
+      end
+    end
+  end
+
   private
 
   def score_params
-    params.expect(score: %i[song_id file metadata])
+    params.expect(score: %i[song_id file segment_markers measure_markers])
   end
 end

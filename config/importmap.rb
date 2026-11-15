@@ -14,3 +14,4 @@ pin "@stimulus-components/sortable", to: "@stimulus-components--sortable.js" # @
 pin "sortablejs" # @1.15.6
 pin "@stimulus-components/notification", to: "@stimulus-components--notification.js" # @3.0.0
 pin "stimulus-use" # @0.52.3
+pin "papaparse" # @5.7.1

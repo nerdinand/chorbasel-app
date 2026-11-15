@@ -1,7 +1,7 @@
 <% if song.song_media.recording.any? %>
   <% score_url = url_for(song.score.file) if song.score&.file.present? %>
-  <% metadata = song.score.metadata if song.score&.metadata.present? %>
-  <%= content_tag :div, data: {controller: 'score', 'score-url-value': score_url, 'score-metadata-value': metadata, 'score-delay-in-milliseconds-value': 200} do %>
+  <% measure_markers = song.score.measure_markers if song.score.present? %>
+  <%= content_tag :div, data: {controller: 'score', 'score-url-value': score_url, 'score-measure-markers-value': measure_markers, 'score-delay-in-milliseconds-value': 200} do %>
 
     <trackswitch-player data-score-target="trackswitchPlayer" data-action="trackswitch-position->score#update">
       <script type="application/json"> <%# herb:disable html-allowed-script-type %>

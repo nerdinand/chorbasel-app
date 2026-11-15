@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
+import Papa from 'papaparse'
 
 class Measure { // This represents a measure in the expanded score, meaning only number and repetition combined are unique
   constructor(number, expandedNumber, domId, repetition, startSeconds) {
@@ -49,9 +50,9 @@ class ScoreMeasureList {
     this.domIdList = domIdList
   }
 
-  static build(secondsToMeasureNumberList) {
+  static build(measureMarkers) {
     const domIdList = this.#buildDomIdList()    
-    const scoreSectionsList = this.#buildScoreSectionList(secondsToMeasureNumberList)
+    const scoreSectionsList = this.#buildScoreSectionList(measureMarkers)    
     const expandedMeasures = this.#expandMeasures(scoreSectionsList, domIdList)
         
     return new ScoreMeasureList(expandedMeasures, domIdList)
@@ -89,18 +90,18 @@ class ScoreMeasureList {
     return measures
   }
 
-  static #buildScoreSectionList(secondsToMeasureNumberList) {
+  static #buildScoreSectionList(measureMarkers) {
     let list = []
 
-    for (let i = 1; i < secondsToMeasureNumberList.length; i++) {
-      const from = secondsToMeasureNumberList[i - 1]
-      const to = secondsToMeasureNumberList[i]
-      const fromMeasureNumber = from[1]
-      const toMeasureNumber = to[1]
+    for (let i = 1; i < measureMarkers.length; i++) {
+      const from = measureMarkers[i - 1]
+      const to = measureMarkers[i]
+      const fromMeasureNumber = from.measure
+      const toMeasureNumber = to.measure
 
       if (toMeasureNumber > fromMeasureNumber) {
-        const fromSecond = from[0]
-        const toSecond = to[0]
+        const fromSecond = from.time
+        const toSecond = to.time
         list.push(new ScoreSection(fromMeasureNumber, toMeasureNumber, fromSecond, toSecond))
       }
     }
@@ -157,7 +158,7 @@ export default class extends Controller {
   static values = {
     url: String,
     delayInMilliseconds: Number,
-    metadata: Object,
+    measureMarkers: String,
     measureNumberToSecondsList: Array,
   }
 
@@ -299,7 +300,8 @@ export default class extends Controller {
           this.scoreTarget.innerHTML = svg;
         })
         .then(() => { 
-          this.scoreMeasureList = ScoreMeasureList.build(this.metadataValue["secondsToMeasureNumberList"]) 
+          const result = Papa.parse(this.measureMarkersValue, {header: true, dynamicTyping: true})
+          this.scoreMeasureList = ScoreMeasureList.build(result.data)
         })
         .catch((error) => {
           console.log(error)
