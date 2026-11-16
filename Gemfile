@@ -92,7 +92,7 @@ gem 'spreadsheet_architect', '~> 5.1'
 
 gem 'litestream', '~> 0.16.1'
 
-gem 'positioning', '~> 0.4.10'
+gem 'positioning', '~> 0.5.0'
 
 gem 'browser', '~> 6.2'
 
