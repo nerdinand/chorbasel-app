@@ -15,6 +15,7 @@ module ScoreHelper
 
   def trackswitch_config(song)
     recordings = song.song_media.recording.ordered_by_register
+
     {
       css: {},
       media: recording_map(recordings).to_h do |id, hash|
@@ -28,7 +29,7 @@ module ScoreHelper
   private
 
   def views_config(song, recording_ids)
-    admin_mode = policy(song.score).edit?
+    admin_mode = song.score && policy(song.score).edit?
 
     [
       {
@@ -67,7 +68,7 @@ module ScoreHelper
       type: 'segments',
       timeCol: 'time',
       labelCol: 'label',
-      src: segment_markers_song_score_path(song_id, format: :csv)
+      src: song_score_segment_markers_path(song_id, format: :csv)
     }
   end
 
@@ -76,7 +77,7 @@ module ScoreHelper
       type: 'points',
       timeCol: 'time',
       labelCol: 'measure',
-      src: measure_markers_song_score_path(song_id, format: :csv)
+      src: song_score_measure_markers_path(song_id, format: :csv)
     }
   end
 end
