@@ -110,23 +110,10 @@ class ScoreMeasureList {
   }
 
   static #buildDomIdList() {
-    let i = 1
-    let lastMeasureId = null
     let measures = []
-
-    while(true) {
-      let elements = document.toolkit.getElementsAtTime(i)
-      let currentMeasureId = elements.measure
-      
-      if (currentMeasureId === undefined) {
-        break
-      }
-
-      if (currentMeasureId != lastMeasureId) {
-        lastMeasureId = currentMeasureId
-        measures.push(currentMeasureId)
-      }
-      i += 100
+    
+    for (let measure of document.querySelectorAll('.measure')) {
+      measures.push(measure.id)
     }
 
     return measures

@@ -1,26 +1,42 @@
 # frozen_string_literal: true
 
 module ScoreHelper
-  def trackswitch_config(song_id, recordings)
+  ADMIN_CONTROLS = %w[markerEditing].freeze
+
+  SEGMENTS_WAVEFORM = {
+    type: 'waveform', height: 50, tracks: 'audible',
+    markerLayers: [{ sequence: 'segments' }]
+  }.freeze
+
+  MEASURES_WAVEFORM = {
+    type: 'waveform', height: 50, tracks: 'audible',
+    markerLayers: [{ sequence: 'measures', color: '#777' }]
+  }.freeze
+
+  def trackswitch_config(song)
+    recordings = song.song_media.recording.ordered_by_register
     {
       css: {},
       media: recording_map(recordings).to_h do |id, hash|
         [id, { type: 'audio', src: hash[:src], title: hash[:title] }]
       end,
-      views: views_config(recordings.pluck(:id).map(&:to_s)),
-      markers: markers_config(song_id)
+      views: views_config(song, recordings.pluck(:id).map(&:to_s)),
+      markers: markers_config(song.id)
     }
   end
 
   private
 
-  def views_config(recording_ids)
+  def views_config(song, recording_ids)
+    admin_mode = policy(song.score).edit?
+
     [
       {
         type: 'navigationBar',
-        controls: %w[playback globalVolume markerNavigation looping markerEditing timer]
+        controls: %w[playback globalVolume markerNavigation looping timer] +
+          (admin_mode ? ADMIN_CONTROLS : [])
       }
-    ] + waveform_config + [{ type: 'trackList', tracks: recording_ids }]
+    ] + waveform_config(admin_mode) + [{ type: 'trackList', tracks: recording_ids }]
   end
 
   def recording_map(recordings)
@@ -35,15 +51,8 @@ module ScoreHelper
     end
   end
 
-  def waveform_config
-    [{
-      type: 'waveform', height: 50, tracks: 'audible',
-      markerLayers: [{ sequence: 'segments' }]
-    },
-     {
-       type: 'waveform', height: 50, tracks: 'audible',
-       markerLayers: [{ sequence: 'measures', color: '#777' }]
-     }]
+  def waveform_config(admin_mode)
+    [SEGMENTS_WAVEFORM] + (admin_mode ? [MEASURES_WAVEFORM] : [])
   end
 
   def markers_config(song_id)
