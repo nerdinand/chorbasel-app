@@ -18,9 +18,7 @@ module ScoreHelper
 
     {
       css: {},
-      media: recording_map(recordings).to_h do |id, hash|
-        [id, { type: 'audio', src: hash[:src], title: hash[:title] }]
-      end,
+      media: recording_map(recordings),
       views: views_config(song, recordings.pluck(:id).map(&:to_s)),
       markers: markers_config(song.id)
     }
@@ -42,14 +40,16 @@ module ScoreHelper
 
   def recording_map(recordings)
     recordings.to_h do |recording|
-      title = if recording.register.present?
-                human_register(recording.register)
-              else
-                I18n.t('songs.score.all_registers')
-              end
-
-      [recording.id.to_s, { src: recording.file_url, title: }]
+      if recording.register.present?
+        recording_entry(recording, human_register(recording.register), false)
+      else
+        recording_entry(recording, I18n.t('songs.score.all_registers'), true)
+      end
     end
+  end
+
+  def recording_entry(recording, title, solo)
+    [recording.id.to_s, { type: :audio, src: recording.file_url, title:, solo: }]
   end
 
   def waveform_config(admin_mode)
