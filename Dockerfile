@@ -9,6 +9,8 @@
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
 ARG RUBY_VERSION=4.0
+# Pin the Node.js version used to build Vite assets (see .nvmrc)
+ARG NODE_VERSION=22
 FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 
 # Rails app lives here
@@ -25,8 +27,17 @@ ENV RAILS_ENV="production" \
     BUNDLE_PATH="/usr/local/bundle" \
     BUNDLE_WITHOUT="development"
 
+# Node.js stage is declared below the ARGs; see NODE_VERSION at the top
+FROM docker.io/library/node:${NODE_VERSION}-slim AS node
+
 # Throw-away build stage to reduce size of final image
 FROM base AS build
+
+# Copy Node.js into the build stage (only needed during build, not at runtime)
+COPY --from=node /usr/local/bin/node /usr/local/bin/node
+COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
+RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm && \
+    ln -s /usr/local/lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
@@ -39,14 +50,24 @@ RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
     bundle exec bootsnap precompile --gemfile
 
+# Install node dependencies in a separate layer to leverage Docker caching
+COPY package.json package-lock.json ./
+RUN npm ci --no-audit --no-fund
+
 # Copy application code
 COPY . .
+
+# npm dependencies are already installed above
+ENV VITE_RUBY_SKIP_ASSETS_PRECOMPILE_INSTALL="true"
 
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+
+# Node dependencies were only needed to build assets
+RUN rm -rf node_modules
 
 
 

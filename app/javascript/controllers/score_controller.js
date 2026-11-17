@@ -1,6 +1,21 @@
 import { Controller } from "@hotwired/stimulus"
 import Papa from 'papaparse'
 
+// Verovio WASM toolkit, loaded on demand when a score is rendered.
+const loadVerovio = async () => {
+  const [{ VerovioToolkit }, { default: createVerovioModule }] = await Promise.all([
+    import('verovio/esm'),
+    import('verovio/wasm'),
+  ])
+  return { VerovioToolkit, module: await createVerovioModule() }
+}
+
+// The trackswitch lib does not register its custom element on import.
+const loadTrackswitch = () => {
+  if (customElements.get('trackswitch-player')) return Promise.resolve()
+  return import('trackswitch').then(m => m.defineTrackswitchDefaultElement())
+}
+
 class Measure { // This represents a measure in the expanded score, meaning only number and repetition combined are unique
   constructor(number, expandedNumber, domId, repetition, startSeconds) {
     this.number = number
@@ -149,7 +164,7 @@ export default class extends Controller {
     measureNumberToSecondsList: Array,
   }
 
-  initializeVerovio() {
+  async initializeVerovio() {
     this.currentMeasure = null;
 
     // Check if WebAssembly is supported
@@ -157,107 +172,30 @@ export default class extends Controller {
       return;
     }
 
-    // Check if verovio object exists at all
-    if (typeof verovio === 'undefined') {
-      return;
-    }
-
-    // If toolkit already exists, we're already initialized
+    // If the toolkit already exists, we're already initialized
     if (document.toolkit) {
       this.setupToolkit();
       return;
     }
 
-    // If module exists, check if it's already initialized
-    if (verovio?.module) {
-      // In Emscripten, check if runtime is already initialized
-      // Different Verovio versions may use different properties
-      const isInitialized = verovio.module.calledRun || 
-                           verovio.module._initialized ||
-                           (typeof verovio.module._main === 'function' && verovio.module._main.length === 0) ||
-                           // Check if HEAP is available (WASM memory is initialized)
-                           (verovio.module.HEAPU8 && verovio.module.HEAPU8.length > 0) ||
-                           // Check if toolkit constructor exists (module is ready)
-                           (typeof verovio.module._vrvToolkit_constructor === 'function');
-      
-      if (isInitialized) {
-        this.setupToolkit();
-        return;
-      }
-      
-      // If module has a then() method (promise), use it
-      if (typeof verovio.module.then === 'function') {
-        verovio.module.then(() => {
-          this.setupToolkit();
-        });
-        return;
-      }
-      
-      // Set callback for when module initializes
-      const existingCallback = verovio.module.onRuntimeInitialized;
-      verovio.module.onRuntimeInitialized = () => {
-        if (existingCallback) {
-          try {
-            existingCallback();
-          } catch (e) {
-            // Ignore errors from existing callback
-          }
-        }
-        this.setupToolkit();
-      };
-      
-      // Safari/Chrome/Edge fix: Also try after a short delay in case module is already initialized
-      // but the callback doesn't fire when set after initialization
-      setTimeout(() => {
-        if (!document.toolkit) {
-          this.setupToolkit();
-        }
-      }, 100);
-      
-      return;
+    try {
+      const { VerovioToolkit, module } = await loadVerovio();
+      this.setupToolkit(new VerovioToolkit(module));
+    } catch (error) {
+      console.log(error);
     }
-
-    // Module not loaded yet, wait for it to appear
-    const interval = setInterval(() => {
-      if (verovio?.module) {
-        clearInterval(interval);
-        
-        // Check if already initialized
-        const isInitialized = verovio.module.calledRun || 
-                           verovio.module._initialized ||
-                           (verovio.module.HEAPU8 && verovio.module.HEAPU8.length > 0) ||
-                           (typeof verovio.module._vrvToolkit_constructor === 'function');
-        if (isInitialized) {
-          this.setupToolkit();
-          return;
-        }
-        
-        const existingCallback = verovio.module.onRuntimeInitialized;
-        verovio.module.onRuntimeInitialized = () => {
-          if (existingCallback) existingCallback();
-          this.setupToolkit();
-        };
-        if (document.toolkit) {
-          this.setupToolkit();
-        }
-      }
-    }, 50);
-    
-    // Prevent infinite waiting
-    setTimeout(() => {
-      clearInterval(interval);
-    }, 5000);
   }
 
-  setupToolkit() {
+  setupToolkit(toolkit) {
+    this.toolkit = toolkit
+    document.toolkit = this.toolkit
+
     if (this.urlValue == "") {
       return
     }
 
     try {
-      document.toolkit = new verovio.toolkit();
-      
-      document.toolkit.setOptions({
+      this.toolkit.setOptions({
         pageWidth: 100000,
         pageHeight: 100,
         scale: 50,
@@ -280,7 +218,7 @@ export default class extends Controller {
           return response.text();
         })
         .then((meiXML) => {
-          let svg = document.toolkit.renderData(meiXML, {});
+          let svg = this.toolkit.renderData(meiXML, {});
           if (!svg) {
             throw new Error('Rendered SVG is empty');
           }
@@ -306,6 +244,7 @@ export default class extends Controller {
     this.trackswitchPlayerTarget.addEventListener('trackswitch-error', e => {
       console.error('TrackSwitch error:', e.detail);
     });
+    loadTrackswitch()
   }
 
   hidePlayingMeasures() {
@@ -371,9 +310,9 @@ export default class extends Controller {
       }
     }
 
-    if (clickedMeasureDomId) {      
+    if (clickedMeasureDomId) {
       const measure = this.scoreMeasureList.getMeasureByDomId(clickedMeasureDomId)
-      this.trackswitchPlayerTarget.controller.seekTo(measure.startSeconds)
+      this.trackswitchPlayerTarget.controller?.seekTo(measure.startSeconds)
     }
   }
 }
