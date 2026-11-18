@@ -174,7 +174,7 @@ export default class extends Controller {
 
     // If the toolkit already exists, we're already initialized
     if (document.toolkit) {
-      this.setupToolkit();
+      this.setupToolkit(document.toolkit);
       return;
     }
 
