@@ -142,6 +142,7 @@ GEM
       addressable (~> 2.8)
       base64 (~> 0.3)
     drb (2.2.3)
+    dry-cli (1.4.1)
     ed25519 (1.4.0)
     erb (6.0.7)
     erubi (1.13.1)
@@ -315,6 +316,7 @@ GEM
       turbo-rails
     msgpack (1.8.7)
     multi_json (1.21.2)
+    mutex_m (0.3.0)
     net-http (0.10.0)
       net-protocol (>= 0.3.0)
       uri (>= 0.11.1)
@@ -385,6 +387,8 @@ GEM
     raabro (1.5.0)
     racc (1.8.1)
     rack (3.2.8)
+    rack-proxy (2.0.1)
+      rack (>= 2.0, < 4)
     rack-session (2.1.2)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
@@ -585,6 +589,15 @@ GEM
     unicode-emoji (4.3.0)
     uri (1.1.2)
     useragent (0.16.11)
+    vite_rails (3.11.1)
+      railties (>= 5.1, < 9)
+      vite_ruby (~> 3.0, >= 3.2.2)
+    vite_ruby (3.11.1)
+      dry-cli (>= 0.7, < 2)
+      logger (~> 1.6)
+      mutex_m
+      rack-proxy (>= 0.6.1)
+      zeitwerk (~> 2.2)
     web-console (4.3.0)
       actionview (>= 8.0.0)
       bindex (>= 0.4.0)
@@ -621,7 +634,6 @@ DEPENDENCIES
   icalendar (~> 2.12)
   icalendar-recurrence (~> 1.2)
   image_processing (~> 2.1)
-  importmap-rails
   json (~> 3)
   kamal (~> 2.12)
   letter_opener
@@ -656,6 +668,7 @@ DEPENDENCIES
   thruster
   turbo-rails
   tzinfo-data
+  vite_rails (~> 3.11)
   web-console
 
 RUBY VERSION

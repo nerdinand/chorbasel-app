@@ -4,7 +4,6 @@ ruby file: '.ruby-version'
 
 source 'https://rubygems.org'
 
-gem 'importmap-rails'
 gem 'propshaft'
 gem 'puma', '>= 5.0'
 gem 'rails', '~> 8.1'
@@ -106,6 +105,6 @@ gem 'icalendar-recurrence', '~> 1.2'
 
 gem 'multi_json', '~> 1.21'
 
-# FIXME: There seems to be an issue with activesupport being incompatible
-# with json > 2 (https://github.com/rails/rails/issues/58685) so we downgrade it from 3 to 2
 gem 'json', '~> 3'
+
+gem 'vite_rails', '~> 3.11'

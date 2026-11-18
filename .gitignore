@@ -38,3 +38,11 @@
 .DS_Store
 coverage
 erd.pdf
+
+# Vite Ruby
+/public/vite*
+node_modules
+# Vite uses dotenv and suggests to ignore local-only env files. See
+# https://vite.dev/guide/env-and-mode.html#env-files
+*.local
+
