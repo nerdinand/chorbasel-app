@@ -49,6 +49,8 @@ class SongMedium < ApplicationRecord
 
   scope :recording, -> { where(kind: [KIND_RECORDING_ALL, KIND_RECORDING_REGISTER]) }
   scope :ordered_by_register, -> { in_order_of(:register, REGISTERS_ORDER, filter: false) }
+  scope :sheet_music, -> { where(kind: KIND_SHEET_MUSIC) }
+  scope :recording_all, -> { where(kind: KIND_RECORDING_ALL) }
 
   def human_kind
     I18n.t("activerecord.attributes.song_medium.enums.kind.#{kind}")

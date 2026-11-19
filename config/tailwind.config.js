@@ -14,16 +14,16 @@ module.exports = {
         body: ['Open Sans'],
         heading: ['Afacad Flux']
       },
-    },
-    colors: {
-      "primary": "#4f8b8b",
-      "primary-dark": "#10375C",
-      "complementary": "#F3C623",
-      "complementary-dark": "#EB8317",
-      "contrast": "#F4F6FF",
-      "white": "white",
-      "success": "#6FE051",
-      "danger": "#CC0909",
+      colors: {
+        "primary": "#4f8b8b",
+        "primary-dark": "#10375C",
+        "complementary": "#F3C623",
+        "complementary-dark": "#EB8317",
+        "contrast": "#F4F6FF",
+        "white": "white",
+        "success": "#6FE051",
+        "danger": "#CC0909",
+      },
     },
   },
   plugins: [

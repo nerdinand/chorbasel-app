@@ -4,6 +4,10 @@
   <%= link_to t('.new'), new_song_path, class: 'btn btn-primary' %>
 <% end %>
 
+<% if policy(Song).edit? %>
+  <%= link_to t('.song_completeness'), songs_completeness_path %>
+<% end %>
+
 <%= form_with url: songs_path, method: :get do |form| %>
   <%= form.select :language, options_for_select(Song.distinct.pluck(:language).compact.sort, selected: params[:language]), { include_blank: t('.filter.languages.all') } %>
   <%= submit_tag t('.apply'), class: 'btn btn-primary' %>

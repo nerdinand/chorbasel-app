@@ -481,6 +481,13 @@ de:
       unchanged_entries: "%{count} unveränderte Einträge"
       updated_entries: "%{count} aktualisierte Einträge"
   songs:
+    completenesses:
+      show:
+        basics: Basics
+        edit: Lied bearbeiten
+        score: Partitur
+        song_media: Mediendateien
+        title: Titel
     create:
       error: Fehler beim Erstellen des Lieds.
       success: Lied erfolgreich erstellt.
@@ -499,6 +506,7 @@ de:
         languages:
           all: Alle Sprachen
       new: Neues Lied
+      song_completeness: Lieder-Vollständigkeit
       title: Lieder
     new:
       title: Neues Lied
