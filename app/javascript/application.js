@@ -6,11 +6,20 @@ import "Chart.bundle"
 
 // Chart text and grid lines in the page's colors, so they are readable in light and dark mode.
 // Chartkick draws its charts after this module ran, so the defaults apply to all charts.
+// When the color scheme changes, the defaults are updated and open charts are redrawn
+// (Chart.js caches resolved options, so a plain update would keep the old colors).
 const cssColor = (name) => `rgb(${getComputedStyle(document.documentElement).getPropertyValue(`--color-${name}`)})`
-window.Chart.defaults.color = cssColor('body')
-window.Chart.defaults.borderColor = cssColor('line')
+
+const applyChartTheme = () => {
+	window.Chart.defaults.color = cssColor('body')
+	window.Chart.defaults.borderColor = cssColor('line')
+	window.Chartkick.eachChart((chart) => chart.redraw())
+}
+
 window.Chart.defaults.font.family = getComputedStyle(document.body).fontFamily
 window.Chart.defaults.font.size = 13
+applyChartTheme()
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyChartTheme)
 
 if ('serviceWorker' in navigator) {
 	window.addEventListener('load', () => {
