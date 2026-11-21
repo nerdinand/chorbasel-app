@@ -1,7 +1,9 @@
-<% if flash.any? %>
+<%# Flashes and the page's own notices (content_for :notices) share one block above the header band %>
+<% if flash.any? || content_for?(:notices) %>
   <div class="page-width py-4 flex flex-col gap-2 [&>*]:my-0">
     <% flash.each do |type, message| %>
       <div class="<%= type %>"><%= message %></div>
     <% end %>
+    <%= content_for(:notices) %>
   </div>
 <% end %>
