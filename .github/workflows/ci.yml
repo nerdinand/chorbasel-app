@@ -42,7 +42,7 @@ jobs:
           bundler-cache: true
 
       - name: Scan for security vulnerabilities in JavaScript dependencies
-        run: bin/importmap audit
+        run: npm audit --omit=dev
 
   lint:
     runs-on: ubuntu-latest
@@ -80,6 +80,9 @@ jobs:
         with:
           ruby-version: .ruby-version
           bundler-cache: true
+
+      - name: Install JavaScript dependencies
+        run: npm ci --no-audit --no-fund
 
       - name: Run tests
         env:

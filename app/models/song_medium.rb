@@ -49,6 +49,8 @@ class SongMedium < ApplicationRecord
 
   scope :recording, -> { where(kind: [KIND_RECORDING_ALL, KIND_RECORDING_REGISTER]) }
   scope :ordered_by_register, -> { in_order_of(:register, REGISTERS_ORDER, filter: false) }
+  scope :sheet_music, -> { where(kind: KIND_SHEET_MUSIC) }
+  scope :recording_all, -> { where(kind: KIND_RECORDING_ALL) }
 
   def human_kind
     I18n.t("activerecord.attributes.song_medium.enums.kind.#{kind}")
@@ -78,5 +80,13 @@ class SongMedium < ApplicationRecord
     return song_media_storage_entry.type_video? if drive_file_present?
 
     file.attachment.try(:video?) || false
+  end
+
+  def file_url
+    if file.present?
+      Rails.application.routes.url_helpers.rails_blob_path(file, only_path: true)
+    else
+      Rails.application.routes.url_helpers.song_song_medium_load_path(song_id: song.id, song_medium_id: id)
+    end
   end
 end

@@ -36,6 +36,6 @@ class ScoresController < ApplicationController
   private
 
   def score_params
-    params.expect(score: %i[song_id file metadata])
+    params.expect(score: %i[song_id file segment_markers measure_markers])
   end
 end

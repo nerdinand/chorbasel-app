@@ -8,6 +8,10 @@ module UserStatusesHelper
   }.freeze
 
   def users_status_options
+    # FIXME: Fuck knows why, but here just specifying the parent element doesn't seem to work...
+    # i18n-tasks-use t('activerecord.attributes.user_status.enums.status.active')
+    # i18n-tasks-use t('activerecord.attributes.user_status.enums.status.paused')
+    # i18n-tasks-use t('activerecord.attributes.user_status.enums.status.inactive')
     UserStatus::STATUSES.map { |r| [t("activerecord.attributes.user_status.enums.status.#{r}"), r] }
   end
 

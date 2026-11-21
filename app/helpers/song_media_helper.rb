@@ -2,10 +2,15 @@
 
 module SongMediaHelper
   def song_media_kind_options
+    # i18n-tasks-use t('activerecord.attributes.song_medium.enums.kind.choreography_video')
+    # i18n-tasks-use t('activerecord.attributes.song_medium.enums.kind.recording_all')
+    # i18n-tasks-use t('activerecord.attributes.song_medium.enums.kind.recording_register')
+    # i18n-tasks-use t('activerecord.attributes.song_medium.enums.kind.sheet_music')
     SongMedium::KINDS.map { |r| [t("activerecord.attributes.song_medium.enums.kind.#{r}"), r] }
   end
 
   def song_media_register_options
+    # i18n-tasks-use t('activerecord.attributes.song.enums.register')
     Register::Song::REGISTERS.map { |r| [t("activerecord.attributes.song.enums.register.#{r}"), r] }
   end
 

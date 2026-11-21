@@ -39,7 +39,8 @@ de:
             thank_you_gifts: Dankegeschenk-Koordination
       score:
         file: MEI-Datei
-        metadata: Metadaten
+        measure_markers: Taktmarkierungen
+        segment_markers: Abschnittsbezeichnungen
       song:
         arranger: Arrangeur:in
         enums:
@@ -489,6 +490,13 @@ de:
       unchanged_entries: "%{count} unveränderte Einträge"
       updated_entries: "%{count} aktualisierte Einträge"
   songs:
+    completenesses:
+      show:
+        basics: Basics
+        edit: Lied bearbeiten
+        score: Partitur
+        song_media: Mediendateien
+        title: Titel
     create:
       error: Fehler beim Erstellen des Lieds.
       success: Lied erfolgreich erstellt.
@@ -505,6 +513,7 @@ de:
         languages:
           all: Alle Sprachen
       new: Neues Lied
+      song_completeness: Lieder-Vollständigkeit
       title: Lieder
     new:
       title: Neues Lied
@@ -555,15 +564,15 @@ de:
         timeframe_title: Statistiken von %{from} bis %{to}
         year_title: Chorjahr %{year}
     index:
-      alto: Alt
       attendance_statistics: Anwesenheitsstatistik
       attendance_tally: Anwesenheitquoten
-      bass: Bass
       name_guesses:
         title: Namen raten
-      soprano: Sopran
-      statistics_year: Chorjahr-Statistiken
-      tenor: Tenor
+      register:
+        alto: Alt
+        bass: Bass
+        soprano: Sopran
+        tenor: Tenor
       timestamp_tallies:
         title: Datensätze
       title: Statistiken

@@ -110,6 +110,7 @@ module Register
       end
 
       def human_name
+        # i18n-tasks-use t('activerecord.attributes.song.enums.register')
         I18n.t("activerecord.attributes.song.enums.register.#{@register}")
       end
 

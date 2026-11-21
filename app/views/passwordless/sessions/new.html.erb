@@ -5,7 +5,7 @@
 
 <div class="max-w-[440px] pt-4">
   <%= form_with(model: @session, url: url_for(action: 'new'), data: { turbo: 'false' }, class: 'flex flex-col gap-2.5') do |f| %>
-    <% email_field_name = :"passwordless[#{email_field}]" %> <%# herb:disable actionview-no-silent-helper %>
+    <% email_field_name = :"passwordless[#{email_field}]" %>
 
     <%= f.label email_field_name,
         t("passwordless.sessions.new.email.label"),

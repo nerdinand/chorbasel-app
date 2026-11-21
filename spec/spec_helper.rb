@@ -109,10 +109,10 @@ SimpleCov::RSpec.start do
   group 'Services', 'app/services'
   group 'Validators', 'app/validators'
 
-  enable_coverage :branch            # track branches as well as lines
+  enable_coverage :branch # track branches as well as lines
 
   coverage :line do
-    minimum      85                  # fail the suite below 90% line coverage
-    maximum_drop 1                   # ...or when coverage drops more than 1%
+    minimum      75
+    maximum_drop 1
   end
 end

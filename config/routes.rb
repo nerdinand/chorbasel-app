@@ -47,12 +47,19 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       resource :lyrics, only: :show
     end
 
+    namespace :songs do
+      resource :completeness, only: :show
+    end
+
     resources :songs do
       resources :song_media, only: %i[new create destroy] do
         get :load
       end
 
-      resource :score, only: %i[new create edit update destroy]
+      resource :score, only: %i[new create edit update destroy] do
+        resource :segment_markers, only: :show
+        resource :measure_markers, only: :show
+      end
     end
 
     resources :name_guesses, only: %i[new create]

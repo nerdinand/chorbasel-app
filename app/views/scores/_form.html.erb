@@ -13,10 +13,18 @@
 
   <div class="form-field">
     <p>
-      <%= f.label :metadata %> <%# i18n-tasks-use t('activerecord.attributes.score.metadata') %>
+      <%= f.label :segment_markers %> <%# i18n-tasks-use t('activerecord.attributes.score.segment_markers') %>
     </p>
 
-    <p><%= f.textarea :metadata %></p>
+    <p><%= f.textarea :segment_markers %></p>
+  </div>
+
+  <div class="form-field">
+    <p>
+      <%= f.label :measure_markers %> <%# i18n-tasks-use t('activerecord.attributes.score.measure_markers') %>
+    </p>
+
+    <p><%= f.textarea :measure_markers %></p>
   </div>
 
   <p>

@@ -6,6 +6,7 @@ class Role
   end
 
   def human_name
+    # i18n-tasks-use t('activerecord.attributes.role.enums.role')
     I18n.t("activerecord.attributes.role.enums.role.#{@role}")
   end
 

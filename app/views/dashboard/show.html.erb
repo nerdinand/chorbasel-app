@@ -82,6 +82,7 @@
 
         <div class="flex-[1_1_240px] min-w-0 text-[15px] text-muted">
           <% unless calendar_event.regular_practice? %>
+            <%# i18n-tasks-use t('dashboard.show.category') %>
             <span class="inline-block mb-1 px-2 py-0.5 bg-primary-dark text-on-primary font-heading font-semibold text-xs"><%= t(".category.#{calendar_event.category}") %></span>
           <% end %>
 

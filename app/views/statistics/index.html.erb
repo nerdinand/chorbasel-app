@@ -17,7 +17,8 @@
     <tbody>
       <% @attendance_tally_table.registers.each do |r| %>
         <tr>
-          <th scope="row"><%= t(".#{r}") %></th>
+          <%# i18n-tasks-use t('statistics.index.register') %>
+          <th scope="row"><%= t(".register.#{r}") %></th>
 
           <% @attendance_tally_table.calendar_events.each do |ce| %>
             <td>

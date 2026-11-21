@@ -23,7 +23,7 @@
       <% end %>
     <% end %>
 
-    <%= render 'score', song: @song %>
+    <%= render 'score', song: @song, score_config: @score_config %>
 
     <% if @song.lyrics.present? %>
       <h2><%= t('activerecord.attributes.song.lyrics') %></h2>

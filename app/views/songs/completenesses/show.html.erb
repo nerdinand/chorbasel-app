@@ -1,0 +1,69 @@
+<div class="table-scroll">
+  <table class="table-wide">
+    <thead>
+      <tr>
+        <th><%= t('.title') %></th>
+        <th><%= t('.basics') %></th>
+        <th><%= t('.song_media') %></th>
+        <th><%= t('.score') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @song_completenesses.each do |sc| %>
+        <tr>
+          <td>
+            <%= link_to sc.title, song_path(sc.song) %>
+          </td>
+
+          <td class="<%= sc.basics_complete? ? 'bg-green-200' : 'bg-red-200' %>">
+            <ul>
+              <% sc.missing_basics.each do |field| %>
+                <li>
+                  <%= t("activerecord.attributes.song.#{field}") %> <%# i18n-tasks-use t('activerecord.attributes.song') %>
+                </li>
+              <% end %>
+            </ul>
+          </td>
+
+          <td class="<%= sc.song_media_complete? ? 'bg-green-200' : 'bg-red-200' %>">
+            <ul>
+              <% unless sc.song_media_sheet_music_present? %>
+                <li>
+                  <%= t("activerecord.attributes.song_medium.enums.kind.sheet_music") %>
+                </li>
+              <% end %>
+
+              <% unless sc.song_media_recording_all_present? %>
+                <li>
+                  <%= t("activerecord.attributes.song_medium.enums.kind.recording_all") %>
+                </li>
+              <% end %>
+
+              <% sc.missing_song_media_registers.each do |register| %>
+                <li>
+                  <%= t("activerecord.attributes.song.enums.register.#{register}") %> <%# i18n-tasks-use t('activerecord.attributes.song.enums.register') %>
+                </li>
+              <% end %>
+            </ul>
+          </td>
+
+          <td class="<%= sc.score_complete? ? 'bg-green-200' : 'bg-red-200' %>">
+            <ul>
+              <% sc.missing_score.each do |field| %>
+                <li>
+                  <%= t("activerecord.attributes.score.#{field}") %> <%# i18n-tasks-use t('activerecord.attributes.score') %>
+                </li>
+              <% end %>
+            </ul>
+          </td>
+
+          <% if policy(sc.song).edit? %>
+            <td>
+              <%= link_to t('.edit'), edit_song_path(sc.song) %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

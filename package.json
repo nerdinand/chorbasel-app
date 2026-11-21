@@ -1,0 +1,25 @@
+{
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20.19"
+  },
+  "devDependencies": {
+    "vite": "^8.3.8",
+    "vite-plugin-ruby": "^5.2.6"
+  },
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo-rails": "^8.0.23",
+    "@rails/request.js": "^0.0.13",
+    "@stimulus-components/notification": "^3.0.0",
+    "@stimulus-components/sortable": "^5.0.3",
+    "chart.js": "^4.6.1",
+    "chartkick": "^5.0.1",
+    "papaparse": "^5.7.1",
+    "sortablejs": "^1.15.7",
+    "stimulus-use": "^0.53.1",
+    "trackswitch": "^2.1.1",
+    "verovio": "^6.4.1"
+  }
+}
