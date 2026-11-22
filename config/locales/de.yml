@@ -132,6 +132,7 @@ de:
       user: Benutzer:in
   application:
     search_form:
+      open: Suche öffnen
       query_placeholder: Suche
       submit: Suchen
   attendances:
@@ -144,6 +145,9 @@ de:
     index:
       excuse_requested:
         title: Zu bestätigende Abwesenheiten
+      next: Spätere Termine
+      no_register: Ohne Stimme
+      previous: Frühere Termine
       title: Anwesenheiten
     new:
       title: Anwesenheit eintragen
@@ -184,17 +188,22 @@ de:
         excuse_requested: Du hast eine Entschuldigung erfasst.
         excused: Du bist entschuldigt.
         unknown: Dein Anwesenheitsstatus ist unbekannt.
-      calendar:
-        title: Kalender
       calendar_events:
         attendance:
           new: Entschuldigung erfassen
           submit: Anwesenheit eintragen
         sync: Chorkalender importieren
+      category:
+        concert: Konzert
+        extra_practice: Extraprobe
+        other: Spezialtermin
       load_past: Vergangene Termine laden
       profile_completeness:
         link: Benutzerprofil vervollständigen
         message: Dein Benutzerprofil ist unvollständig. Bitte hilf uns indem du die fehlenden Informationen einträgst.
+      special_event: Konzert / Spezialtermin
+      title: Dashboard
+      today: Heute
       upcoming_birthdays:
         description: Diese Mitsänger:innen haben bald Geburtstag!
         title: Geburtstage
@@ -494,8 +503,6 @@ de:
     destroy:
       error: Fehler beim Löschen des Lieds.
       success: Lied erfolgreich gelöscht.
-    download_dropdown:
-      download: Herunterladen
     edit:
       title: Lied bearbeiten
     index:
@@ -512,17 +519,18 @@ de:
       title: Neues Lied
     score:
       all_registers: Alle Stimmen
+      title: Aufnahmen
     show:
       destroy: Lied löschen
+      details: Details
       edit: Lied bearbeiten
       score:
         edit: Partitur bearbeiten
         new: Partitur bearbeiten
       song_media:
         destroy: Mediendatei löschen
-        kind: Art
+        download: "%{name} herunterladen"
         new: Neue Mediendatei
-        register: Stimme
         title: Mediendateien
     update:
       error: Fehler beim Bearbeiten des Lieds.

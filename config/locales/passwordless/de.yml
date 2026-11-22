@@ -3,17 +3,28 @@ de:
   passwordless:
     sessions:
       new:
+        title: "Anmelden"
+        intro: "Der Mitgliederbereich für Termine, Anwesenheiten, Lieder und Übungsdateien."
         email:
           label: "E-Mail-Adresse"
-          placeholder: "user@example.com"
+          placeholder: "name@example.ch"
+          hint: "Die Adresse, die du dem Chor angegeben hast. Wir schicken dir einen Link und einen Code zum Einloggen – ohne Passwort."
         submit: "Einloggen"
+        trouble: "Probleme beim Einloggen?"
+        user_manual: "Zur Bedienungsanleitung"
+        not_a_member: "Noch nicht im Chor?"
+        website: "Zur Website"
       create:
         email_sent: "Wir haben dir eine E-Mail mit einem Code geschickt."
         not_found: "Wir konnten keinen Benutzer mit dieser E-Mail-Adresse finden."
         error: "Es ist ein Fehler aufgetreten"
       show:
+        title: "Schau in dein Postfach"
+        intro: "Wir haben dir eine E-Mail geschickt. Öffne den Link darin oder gib hier den Code ein."
+        spam_hint: "Nach einer Minute noch nichts da? Schau im Spam-Ordner nach."
         token: "Code"
         confirm: "Bestätigen"
+        other_email: "Andere E-Mail-Adresse verwenden"
       errors:
         invalid_token: "Der Code ist ungültig."
         session_expired: "Deine Sitzung ist abgelaufen, bitte logge dich neu ein."

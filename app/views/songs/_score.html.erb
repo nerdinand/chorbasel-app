@@ -2,6 +2,7 @@
   <% score_url = url_for(song.score.file) if song.score&.file.present? %>
   <% measure_markers = song.score.measure_markers if song.score.present? %>
   <%= content_tag :div, data: {controller: 'score', 'score-url-value': score_url, 'score-measure-markers-value': measure_markers, 'score-delay-in-milliseconds-value': 200} do %>
+    <h2><%= t('.title') %></h2>
 
     <trackswitch-player data-score-target="trackswitchPlayer" data-action="trackswitch-position->score#update">
       <script type="application/json"> <%# herb:disable html-allowed-script-type %>
@@ -9,6 +10,6 @@
       </script>
     </trackswitch-player>
 
-    <%= content_tag :div, nil, class: "w-full overflow-x-auto score relative left-1/2 w-dvw max-w-none -translate-x-1/2", data: {'score-target': 'score', action: 'click->score#click'} %>
+    <%= content_tag :div, nil, class: "w-full overflow-x-auto score mt-6", data: {'score-target': 'score', action: 'click->score#click'} %>
   <% end %>
 <% end %>

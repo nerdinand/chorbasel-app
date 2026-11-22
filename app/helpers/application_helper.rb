@@ -19,7 +19,7 @@ module ApplicationHelper
   end
 
   def human_register(register)
-    return '' if register.nil?
+    return '' if register.blank?
 
     # i18n-tasks-use t('activerecord.attributes.song.enums.register')
     I18n.t("activerecord.attributes.song.enums.register.#{register}")

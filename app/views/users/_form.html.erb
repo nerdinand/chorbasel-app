@@ -17,7 +17,7 @@
       <%# i18n-tasks-use t('activerecord.attributes.user.face_picture') %>
       <%= label_text %>
 
-      <p>
+      <p class="font-body font-normal text-body">
         <% if user.face_picture.present? %>
           <%= image_tag(user.face_picture.variant(:thumb), alt: "Face picture") %>
         <% else %>
@@ -25,7 +25,7 @@
         <% end %>
       </p>
 
-      <%= f.file_field :face_picture %>
+      <%= f.file_field :face_picture, class: 'font-body font-normal text-body' %>
     <% end %>
   </div>
 
@@ -34,7 +34,7 @@
       <%# i18n-tasks-use t('activerecord.attributes.user.profile_picture') %>
       <%= label_text %>
 
-      <p>
+      <p class="font-body font-normal text-body">
         <% if user.profile_picture.present? %>
           <%= image_tag(user.profile_picture.variant(:medium), alt: "Profile picture") %>
         <% else %>
@@ -42,7 +42,7 @@
         <% end %>
       </p>
 
-      <%= f.file_field :profile_picture %>
+      <%= f.file_field :profile_picture, class: 'font-body font-normal text-body' %>
     <% end %>
   </div>
 

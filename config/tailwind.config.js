@@ -1,5 +1,9 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
+// Colors are CSS variables (RGB channels) defined in application.tailwind.css,
+// so dark mode only has to swap the variables.
+const color = (name) => `rgb(var(--color-${name}) / <alpha-value>)`
+
 module.exports = {
   content: [
     './public/*.html',
@@ -11,19 +15,39 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
-        body: ['Open Sans'],
-        heading: ['Afacad Flux']
+        body: ['"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+        heading: ['Poppins', 'sans-serif']
       },
+      // Added to Tailwind's default palette
       colors: {
-        "primary": "#4f8b8b",
-        "primary-dark": "#10375C",
-        "complementary": "#F3C623",
-        "complementary-dark": "#EB8317",
-        "contrast": "#F4F6FF",
-        "white": "white",
-        "success": "#6FE051",
-        "danger": "#CC0909",
+        "primary": color("primary"),
+        "primary-dark": color("primary-dark"),
+        "primary-darker": color("primary-darker"),
+        "on-primary": color("on-primary"),
+        "complementary": color("complementary"),
+        "complementary-dark": color("complementary-dark"),
+        "contrast": color("contrast"),
+        "danger": color("danger"),
+        "bg": color("bg"),
+        "ink": color("ink"),
+        "body": color("body"),
+        "muted": color("muted"),
+        "line": color("line"),
+        "notice": color("notice"),
+        "notice-line": color("notice-line"),
       },
+    },
+    // The new design has square corners everywhere.
+    borderRadius: {
+      "none": "0",
+      "sm": "0",
+      "DEFAULT": "0",
+      "md": "0",
+      "lg": "0",
+      "xl": "0",
+      "2xl": "0",
+      "3xl": "0",
+      "full": "0",
     },
   },
   plugins: [
