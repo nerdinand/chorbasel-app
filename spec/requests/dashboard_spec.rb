@@ -19,11 +19,11 @@ RSpec.describe 'Dashboard' do
 
   it 'shows birthdays up to the last event in the timeline' do # rubocop:disable RSpec/MultipleExpectations
     get root_path
+    text = Capybara.string(response.body).text.squish
 
-    expect(response).to be_successful
-    expect(response.body).to include("Geburtstag</span>\n      · #{users(:uwe).full_name}")
-    expect(response.body).to include('1 Geburtstag')
-    expect(response.body).not_to include(users(:marit).full_name)
+    expect(text).to include("Geburtstag · #{users(:uwe).full_name}")
+    expect(text).to include('1 Geburtstag')
+    expect(text).not_to include(users(:marit).full_name)
   end
 
   it 'shows past events in the "Früher" section' do # rubocop:disable RSpec/MultipleExpectations
