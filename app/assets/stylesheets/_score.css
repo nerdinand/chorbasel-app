@@ -1,9 +1,23 @@
+/* Verovio draws in currentColor, so this follows the theme */
+.score svg {
+  color: rgb(var(--color-ink));
+  fill: currentColor;
+}
+
+/* Stems and notes turn red; staff lines, barlines, clefs, key and time signatures stay neutral */
+/* fill is repeated because Safari resolves an inherited currentColor where it was declared */
 .playing {
-  fill: crimson;
+  color: rgb(var(--color-danger));
+  fill: currentColor;
+}
+
+.playing :is(.staff > path, .barLine, .clef, .keySig, .meterSig) {
+  color: rgb(var(--color-ink));
+  fill: currentColor;
 }
 
 .score > svg {
-  @apply h-screen;
+  @apply h-[60svh];
   width: auto;
   display: block;
 }
