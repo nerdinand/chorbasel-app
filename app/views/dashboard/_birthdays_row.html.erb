@@ -1,0 +1,16 @@
+<div class="flex items-center gap-x-5 py-3 px-1 border-b border-line">
+  <div class="w-[52px] flex-none flex flex-col items-center">
+    <% if show_date %>
+      <span class="text-[13px] font-medium text-muted"><%= l(birthdays.date, format: '%a') %></span>
+      <span class="font-heading font-semibold text-[22px] leading-tight text-ink"><%= birthdays.date.day %></span>
+    <% end %>
+  </div>
+
+  <div class="flex-[1_1_240px] min-w-0 flex items-center gap-2.5">
+    <span class="flex text-primary"><%= tabler_icon :cake, classes: ['size-4'] %></span>
+    <p class="m-0 min-w-0">
+      <span class="font-medium"><%= t('dashboard.show.birthday_label', count: birthdays.users.size) %></span>
+      · <%= birthdays.users.map(&:full_name).to_sentence %>
+    </p>
+  </div>
+</div>

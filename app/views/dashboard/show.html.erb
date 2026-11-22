@@ -47,37 +47,28 @@
   <% end %>
 <% end %>
 
-<h2 class="mt-0"><%= t('.upcoming_birthdays.title') %></h2>
+<% @timeline_months.each do |timeline_month| %>
+  <section aria-label="<%= l(timeline_month.month, format: '%B %Y') %>">
+    <h2 class="sticky top-0 z-10 bg-bg mt-0 mb-0 pt-7 flex flex-wrap items-baseline justify-between gap-x-3">
+      <%= l(timeline_month.month, format: '%B %Y') %>
+      <span class="font-body text-sm font-normal text-muted"><%= month_counts(timeline_month) %></span>
+    </h2>
 
-<p><%= t('.upcoming_birthdays.description') %></p>
+    <% timeline_month.rows.each do |item, show_date| %>
+      <% if item.is_a?(DashboardTimeline::Birthdays) %>
+        <%= render 'birthdays_row', birthdays: item, show_date: %>
+        <% next %>
+      <% end %>
 
-<ul role="list" class="list-none p-0 mt-2 mb-0">
-  <% @upcoming_birthdays.each do |user, next_birthday| %>
-    <li class="flex items-center gap-2.5 py-1.5 px-1 border-b border-line">
-      <span class="flex text-primary"><%= tabler_icon :cake, classes: ['size-4'] %></span>
-      <span class="w-14 flex-none text-[13px] font-medium text-muted"><%= l(next_birthday, format: '%-d. %b') %></span>
-      <span class="min-w-0 truncate"><%= user.full_name %></span>
-    </li>
-  <% end %>
-</ul>
-
-<% if params[:load_past] != 'true' %>
-  <div class="mt-10">
-    <%= link_to t('.load_past'), {load_past: true} %>
-  </div>
-<% end %>
-
-<% @calendar_events.group_by { |e| e.starts_at.beginning_of_month }.each do |month, calendar_events| %>
-  <section aria-label="<%= l(month, format: '%B %Y') %>">
-    <h2 class="sticky top-0 z-10 bg-bg mt-0 mb-0 pt-7"><%= l(month, format: '%B %Y') %></h2>
-
-    <% calendar_events.each do |calendar_event| %>
+      <% calendar_event = item %>
       <% highlighted = calendar_event.today? || !calendar_event.regular_practice? %>
 
       <article class="flex flex-wrap items-start gap-x-5 gap-y-3 <%= highlighted ? 'mt-3 mb-1 py-4 pr-4 pl-1 bg-contrast' : 'py-4 px-1 border-b border-line' %>">
         <div class="w-[52px] flex-none flex flex-col items-center">
-          <span class="text-[13px] font-medium <%= highlighted ? 'text-primary-dark' : 'text-muted' %>"><%= l(calendar_event.starts_at, format: '%a') %></span>
-          <span class="font-heading font-semibold text-[22px] leading-tight <%= highlighted ? 'text-primary-dark' : 'text-ink' %>"><%= calendar_event.starts_at.day %></span>
+          <% if show_date %>
+            <span class="text-[13px] font-medium <%= highlighted ? 'text-primary-dark' : 'text-muted' %>"><%= l(calendar_event.starts_at, format: '%a') %></span>
+            <span class="font-heading font-semibold text-[22px] leading-tight <%= highlighted ? 'text-primary-dark' : 'text-ink' %>"><%= calendar_event.starts_at.day %></span>
+          <% end %>
         </div>
 
         <div class="flex-[1_1_240px] min-w-0 text-[15px] text-muted">
@@ -96,6 +87,28 @@
         <div class="max-w-full">
           <%= render 'attendance_status_and_action', attendance_check: @attendance_checks[calendar_event] %>
         </div>
+      </article>
+    <% end %>
+  </section>
+<% end %>
+
+<% if @past_calendar_events.any? %>
+  <section aria-labelledby="dashboard-past">
+    <h2 id="dashboard-past" class="mt-0 mb-0 pt-9 flex flex-wrap items-baseline justify-between gap-x-3">
+      <%= t('.past.title') %>
+      <span class="font-body text-sm font-normal text-muted"><%= t('.past.description', count: @past_calendar_events.size) %></span>
+    </h2>
+
+    <% @past_calendar_events.each do |calendar_event| %>
+      <% status = @attendance_checks[calendar_event].attendance.status %>
+
+      <article class="flex flex-wrap items-center gap-x-5 gap-y-1 py-3 px-1 border-b border-line">
+        <span class="w-24 flex-none text-sm font-medium text-muted"><%= l(calendar_event.starts_at, format: '%a, %-d. %b') %></span>
+        <span class="flex-[1_1_200px] min-w-0"><%= link_to_if policy(Attendance).index?, calendar_event.summary, calendar_event %></span>
+        <span class="flex items-center gap-2 text-[15px] font-medium">
+          <%= icon_for_status(status) %>
+          <%= t("activerecord.attributes.attendance.enums.status.#{status}") %>
+        </span>
       </article>
     <% end %>
   </section>
