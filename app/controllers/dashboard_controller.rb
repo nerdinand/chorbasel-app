@@ -24,8 +24,9 @@ class DashboardController < ApplicationController
     return {} if @calendar_events.empty?
 
     last_date = @calendar_events.last.starts_at.to_date
-    upcoming_birthdays_query.index_with { |user| Date.parse(user.next_birthday) }
-                            .select { |_user, date| date <= last_date }
+    # next_birthday is a select alias; the hash form would qualify it as users.next_birthday
+    upcoming_birthdays_query.where('next_birthday <= ?', last_date) # rubocop:disable Rails/WhereRange
+                            .index_with { |user| Date.parse(user.next_birthday) }
   end
 
   def upcoming_birthdays_query
