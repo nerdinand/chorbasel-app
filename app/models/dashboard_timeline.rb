@@ -11,7 +11,9 @@ class DashboardTimeline
     # [item, show_date] pairs; the date is shown only on the first row of a day
     def rows
       items.each_with_index.map do |item, index|
-        [item, index.zero? || DashboardTimeline.date_of(items[index - 1]) != DashboardTimeline.date_of(item)]
+        last_item_has_different_date = DashboardTimeline.date_of(items[index - 1]) != DashboardTimeline.date_of(item)
+        show_date = index.zero? || last_item_has_different_date
+        [item, show_date]
       end
     end
   end
