@@ -13,11 +13,28 @@ module ScoreHelper
     markerLayers: [{ sequence: 'measures', color: '#777' }]
   }.freeze
 
+  # The site palette (application.tailwind.css) for the player, so it follows light and dark mode
+  PLAYER_CSS = {
+    '--ts-font-ui': '"Inter var", ui-sans-serif, system-ui, sans-serif',
+    '--ts-color-text-primary': 'rgb(var(--color-ink))',
+    '--ts-color-text-secondary': 'rgb(var(--color-muted))',
+    '--ts-color-text-muted': 'rgb(var(--color-on-primary) / 0.8)', # control bar icons and every other track row
+    '--ts-color-surface-base': 'rgb(var(--color-contrast))',
+    '--ts-color-surface-raised-72': 'rgb(var(--color-bg) / 0.72)', # section labels on the waveform
+    '--ts-color-surface-raised-94': 'rgb(var(--color-bg) / 0.94)', # marker labels when editing
+    '--ts-color-surface-panel-dark': 'rgb(var(--color-primary))', # control bar
+    '--ts-color-surface-panel-dark-16': 'rgb(var(--color-primary) / 0.25)', # selected track row
+    '--ts-color-surface-control': 'rgb(255 255 255 / 0.35)', # slider tracks in the control bar
+    '--ts-color-border-mid': 'rgb(var(--color-line))',
+    '--ts-color-accent': 'rgb(var(--color-complementary))',
+    '--ts-focus-ring-color': 'rgb(var(--color-primary-dark))'
+  }.freeze
+
   def trackswitch_config(song)
     recordings = song.song_media.recording.ordered_by_register
 
     {
-      css: {},
+      css: PLAYER_CSS,
       media: recording_map(recordings),
       views: views_config(song, recordings.pluck(:id).map(&:to_s)),
       markers: markers_config(song.id)
