@@ -69,7 +69,7 @@ class ScoreMeasureList {
     const domIdList = this.#buildDomIdList()    
     const scoreSectionsList = this.#buildScoreSectionList(measureMarkers)    
     const expandedMeasures = this.#expandMeasures(scoreSectionsList, domIdList)
-        
+
     return new ScoreMeasureList(expandedMeasures, domIdList)
   }
 
@@ -111,14 +111,23 @@ class ScoreMeasureList {
     for (let i = 1; i < measureMarkers.length; i++) {
       const from = measureMarkers[i - 1]
       const to = measureMarkers[i]
-      const fromMeasureNumber = from.measure
-      const toMeasureNumber = to.measure
 
-      if (toMeasureNumber > fromMeasureNumber) {
-        const fromSecond = from.time
-        const toSecond = to.time
-        list.push(new ScoreSection(fromMeasureNumber, toMeasureNumber, fromSecond, toSecond))
+      if (to.measure.toString().startsWith('->')) { // to is a jump
+        continue
       }
+
+      let fromMeasureNumber
+      if (from.measure.toString().startsWith('->')) { // from is a jump
+        fromMeasureNumber = parseInt(from.measure.slice(2))
+      } else {
+        fromMeasureNumber = from.measure
+      }
+      let toMeasureNumber = to.measure
+      
+      let fromSecond = from.time
+      let toSecond = to.time
+
+      list.push(new ScoreSection(fromMeasureNumber, toMeasureNumber, fromSecond, toSecond))
     }
 
     return list
@@ -225,7 +234,7 @@ export default class extends Controller {
           this.scoreTarget.innerHTML = svg;
         })
         .then(() => { 
-          const result = Papa.parse(this.measureMarkersValue, {header: true, dynamicTyping: true})
+          const result = Papa.parse(this.measureMarkersValue, {header: true, dynamicTyping: true, skipEmptyLines: true})
           this.scoreMeasureList = ScoreMeasureList.build(result.data)
         })
         .catch((error) => {
