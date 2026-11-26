@@ -11,7 +11,7 @@ class DashboardController < ApplicationController
 
     @overview_calendar_events = CalendarEvent.where(starts_at: AttendancePagination.new.current_range)
     @timeline_months = DashboardTimeline.new(@calendar_events, upcoming_birthdays).months
-    @info = Info.newest_active.first
+    @infos = Info.newest_active
   end
 
   private
