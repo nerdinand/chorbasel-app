@@ -21,6 +21,15 @@
 
   <div class="form-field">
     <p>
+      <%= f.label :content %>
+      <%# i18n-tasks-use t('activerecord.attributes.info.content') %> *
+    </p>
+
+    <p><%= f.rich_textarea :content %></p>
+  </div>
+
+  <div class="form-field">
+    <p>
       <%= f.label :kind %> <%# i18n-tasks-use t('activerecord.attributes.info.kind') %>
     </p>
 

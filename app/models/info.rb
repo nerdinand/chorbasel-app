@@ -5,7 +5,9 @@ class Info < ApplicationRecord
   KIND_ALERT = 'alert'
   KINDS = [KIND_NOTICE, KIND_ALERT].freeze
 
-  validates :title, :description, :kind, presence: true
+  has_rich_text :content
+
+  validates :title, :content, :kind, presence: true
   validates :kind, inclusion: KINDS
 
   scope :newest, -> { order(updated_at: :desc) }
