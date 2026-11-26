@@ -188,6 +188,9 @@ de:
         excuse_requested: Du hast eine Entschuldigung erfasst.
         excused: Du bist entschuldigt.
         unknown: Dein Anwesenheitsstatus ist unbekannt.
+      birthday_label:
+        one: Geburtstag
+        other: "%{count} Geburtstage"
       calendar_events:
         attendance:
           new: Entschuldigung erfassen
@@ -197,16 +200,22 @@ de:
         concert: Konzert
         extra_practice: Extraprobe
         other: Spezialtermin
-      load_past: Vergangene Termine laden
+      month_counts:
+        birthdays:
+          one: 1 Geburtstag
+          other: "%{count} Geburtstage"
+        events:
+          one: 1 Termin
+          other: "%{count} Termine"
+      past:
+        description: letzte %{count} Termine
+        title: Früher
       profile_completeness:
         link: Benutzerprofil vervollständigen
         message: Dein Benutzerprofil ist unvollständig. Bitte hilf uns indem du die fehlenden Informationen einträgst.
       special_event: Konzert / Spezialtermin
       title: Dashboard
       today: Heute
-      upcoming_birthdays:
-        description: Diese Mitsänger:innen haben bald Geburtstag!
-        title: Geburtstage
   datetime:
     distance_in_words:
       ago_duration:

@@ -1,0 +1,15 @@
+<div class="flex items-center gap-x-5 py-2 px-1 border-b border-line text-sm text-muted">
+  <div class="w-[52px] flex-none text-center">
+    <% if show_date %>
+      <span class="font-medium"><%= l(birthdays.date, format: '%a %-d.') %></span>
+    <% end %>
+  </div>
+
+  <div class="flex-[1_1_240px] min-w-0 flex items-center gap-2">
+    <span class="flex"><%= tabler_icon :cake, classes: ['size-4'] %></span>
+    <p class="m-0 min-w-0">
+      <%= t('dashboard.show.birthday_label', count: birthdays.users.size) %>
+      · <%= birthdays.users.map(&:full_name).to_sentence %>
+    </p>
+  </div>
+</div>
