@@ -40,6 +40,6 @@ class InfosController < ApplicationController
   private
 
   def info_params
-    params.expect(info: %i[title description kind active])
+    params.expect(info: %i[title content kind active])
   end
 end

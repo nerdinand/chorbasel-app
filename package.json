@@ -11,6 +11,7 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.23",
+    "@rails/actiontext": "^8.1.401",
     "@rails/request.js": "^0.0.13",
     "@stimulus-components/notification": "^3.0.0",
     "@stimulus-components/sortable": "^5.0.3",
@@ -20,6 +21,7 @@
     "sortablejs": "^1.15.7",
     "stimulus-use": "^0.53.1",
     "trackswitch": "^2.1.1",
+    "trix": "^2.1.19",
     "verovio": "^6.4.1"
   }
 }

@@ -15,7 +15,7 @@ de:
         user: Benutzer:in
       info:
         active: Aktiv
-        description: Nachricht
+        content: Nachricht
         enums:
           kind:
             alert: Warnung

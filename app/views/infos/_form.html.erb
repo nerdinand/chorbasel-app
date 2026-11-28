@@ -12,11 +12,11 @@
 
   <div class="form-field">
     <p>
-      <%= f.label :description %>
-      <%# i18n-tasks-use t('activerecord.attributes.info.description') %> *
+      <%= f.label :content %>
+      <%# i18n-tasks-use t('activerecord.attributes.info.content') %> *
     </p>
 
-    <p><%= f.text_field :description %></p>
+    <p><%= f.rich_textarea :content %></p>
   </div>
 
   <div class="form-field">
