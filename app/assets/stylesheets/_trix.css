@@ -1,6 +1,19 @@
-trix-toolbar .trix-button {
-    background: #fff !important;
-    &.trix-active {
-        background: #d1d9e9 !important;
+@media (prefers-color-scheme: dark) {
+    trix-toolbar .trix-button {
+        filter: invert();
+    }
+
+    trix-editor {
+        color: white;
+    }
+
+    trix-toolbar .trix-button:disabled {
+        filter: invert() grayscale(1) brightness(2);
+    }
+    trix-toolbar .trix-button--icon::before {
+        opacity: 1;
+    }
+    trix-toolbar .trix-button--icon:disabled::before {
+        opacity: 0.5;
     }
 }
