@@ -1,4 +1,6 @@
-<figure class="attachment attachment--<%= blob.representable? ? "preview" : "file" %> attachment--<%= blob.filename.extension %>">
+<% classes = ['attachment', blob.representable? ? 'attachment--preview' : 'attachment--file', "attachment--#{blob.filename.extension}"] %>
+
+<figure class="<%= classes.join(' ') %>">
   <% if blob.representable? %>
     <%= image_tag blob.representation(resize_to_limit: local_assigns[:in_gallery] ? [ 800, 600 ] : [ 1024, 768 ]) %>
   <% end %>
