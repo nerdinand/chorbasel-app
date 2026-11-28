@@ -1,0 +1,6 @@
+trix-toolbar .trix-button {
+    background: #fff !important;
+    &.trix-active {
+        background: #d1d9e9 !important;
+    }
+}
